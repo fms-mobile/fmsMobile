@@ -1,0 +1,33 @@
+<ion-header>
+<ion-navbar color="primary">
+    <ion-title>상세조회</ion-title>
+</ion-navbar>
+</ion-header> 
+
+<ion-content padding>
+    <ion-list>
+        <ion-item> 
+            <ion-label stacked>F1</ion-label>
+            <ion-label text-wrap class="font_rem085">{{item.f1}}</ion-label>
+        </ion-item>
+        <ion-item> 
+            <ion-label stacked>F2</ion-label>
+            <ion-label text-wrap class="font_rem085">{{item.f2}}</ion-label>
+        </ion-item>
+        <ion-item> 
+            <ion-label stacked>F3</ion-label>
+            <ion-label text-wrap class="font_rem085">{{item.f3}}</ion-label>
+        </ion-item>
+    </ion-list>
+
+</ion-content>
+
+<ion-footer>
+    <ion-grid>
+    <ion-row>
+        <ion-col>
+        <button ion-button full icon-only (click)="goDel()">삭제</button>
+        </ion-col>
+    </ion-row>
+    </ion-grid>
+</ion-footer>

@@ -1,0 +1,20 @@
+page-login {
+    .tcenter { text-align:  center; }
+
+	.scroll-content {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.loginImg{
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	ion-label{
+		font-size: 12px;
+	}
+}
+

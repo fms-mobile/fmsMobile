@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-buttons left>
+            <button ion-button icon-only (click)="dismiss()"><ion-icon name="backspace"></ion-icon></button>
+        </ion-buttons>
+            
+        <ion-title>재물조사</ion-title>
+    </ion-navbar>
+</ion-header>
+    
+    
+<ion-content padding>
+    <ion-item>
+        <ion-input type="text" readonly [(ngModel)]="ui.asset_nm"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>자산위치</ion-label>
+        <ion-select [(ngModel)]="ui.dept_cd" okText="확인" cancelText="취소">
+            <div *ngFor="let dept of deptList">
+                <ion-option value="{{dept.code}}">{{dept.data}}</ion-option>
+            </div>
+        </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>자산상태</ion-label>
+        <ion-select [(ngModel)]="ui.insp_status" okText="확인" cancelText="취소">
+            <div *ngFor="let statCode of statCodeList">
+                <ion-option value="{{statCode.code1}}">{{statCode.data1}}</ion-option>
+            </div>
+        </ion-select>
+    </ion-item>
+    
+    <button ion-button block (click)="goAddList()">확인</button>
+</ion-content>

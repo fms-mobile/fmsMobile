@@ -1,0 +1,33 @@
+page-assets {
+    .nonAsset { 
+        font-size: 14px;
+    }
+    .asset {
+        font-size: 13px;
+        white-space: pre-wrap;
+    }
+
+    ion-list > div:nth-child(even) {
+        background-color: #efefef !important;
+    }
+    
+    ion-list > div:nth-child(odd) {
+        background-color: #ffffff !important;
+    }
+
+    ion-item {
+        padding-left: 0px !important;
+    }
+
+    .item, .list-md ion-item-sliding {
+        background-color: initial !important;
+    }
+
+    .item.item-block .item-inner {
+        padding-right: 0px !important;
+    }
+
+    .label {
+        margin: 8px 0px 8px 10px !important;
+    }
+}   

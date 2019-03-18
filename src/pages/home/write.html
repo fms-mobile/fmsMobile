@@ -1,0 +1,32 @@
+<ion-header>
+<ion-navbar color="primary">
+    <ion-title>신규등록</ion-title>
+</ion-navbar>
+</ion-header> 
+
+<ion-content padding>
+    <ion-list>
+        <ion-item> 
+            <ion-label stacked>F1</ion-label>
+            <ion-input clearInput [(ngModel)]="item.f1"></ion-input>
+        </ion-item>
+        <ion-item> 
+            <ion-label stacked>F2</ion-label>
+            <ion-input clearInput [(ngModel)]="item.f2"></ion-input>
+        </ion-item>
+        <ion-item> 
+            <ion-label stacked>F3</ion-label>
+            <ion-input clearInput [(ngModel)]="item.f3"></ion-input>
+        </ion-item>
+    </ion-list>
+
+</ion-content> 
+<ion-footer>
+    <ion-grid>
+    <ion-row>
+        <ion-col>
+        <button ion-button full icon-only (click)="goReg()">등록</button>
+        </ion-col>
+    </ion-row>
+    </ion-grid>
+</ion-footer>

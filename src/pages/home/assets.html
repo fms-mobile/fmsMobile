@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>재물조사</ion-title>
+
+    <ion-buttons right>
+      <button ion-button icon-only (click)="goLogout()"><ion-icon name="log-out"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <div *ngIf="assetList?.length == 0">
+        <ion-item class="nonAsset">[재물조사] 버튼을 클릭하세요.</ion-item>
+    </div>
+
+    <div *ngFor="let asset of assetList">
+        <ion-item-sliding>
+          <ion-item class="asset" (click)="assetEdit(asset)">
+            <div class="assetData">
+              <strong style="font-size:16px">{{asset.asset_nm}}</strong>
+              {{'  / ' + asset.upper_class_nm + '·' + asset.asset_class_nm}}
+            </div>
+
+            <div class="assetData">
+              <strong style="font-size:14px">{{'위치 : '}}</strong>{{asset.mng_dept_cd}}
+              <strong *ngIf="asset.mng_dept_cd != asset.cog_dept_nm" style="font-size: 14px">{{'  (당초 : ' + asset.cog_dept_nm + ')'}}</strong>
+            </div>
+            
+            <div class="assetData">
+              <strong style="font-size:14px">{{'상태 : '}}</strong>{{asset.insp_status}}
+            </div>
+          </ion-item>
+
+          <ion-item-options>
+            <button ion-button color="danger" icon-only (click)="assetRemove(asset)"><ion-icon name="trash"></ion-icon></button>
+          </ion-item-options>
+        </ion-item-sliding>       
+
+        <ion-item hidden>{{asset.barcode_no}}</ion-item>
+    </div>     
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button full icon-only (click)="goBarcodeScan()"><ion-icon name="barcode"></ion-icon>재물조사</button>
+      </ion-col>
+      
+      <ion-col>
+        <button ion-button full icon-only (click)="goBarcodeSave()"><ion-icon name="cloud-upload"></ion-icon>서버전송</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

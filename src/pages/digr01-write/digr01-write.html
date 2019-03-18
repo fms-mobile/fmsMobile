@@ -1,0 +1,35 @@
+<!--
+  Generated template for the Digr01Write page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>점검개요 등록</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content padding>
+    <ion-list>
+      <ion-item>
+        <ion-label color="primary">점검진단 구분</ion-label>
+        <ion-select [(ngModel)]="digr01.regular_gbn">
+          <ion-option *ngFor="let regular_gbn of regular_gbnList" value="{{regular_gbn.code1}}">{{regular_gbn.data1}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" stacked>점검진단 기간</ion-label>
+        <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="digr01.start_ymd"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="digr01.end_ymd"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary">작성자명</ion-label>
+        <ion-input [(ngModel)]="digr01.wrt_person" type="text" placeholder="내용을 입력하세요."></ion-input>
+      </ion-item>
+    </ion-list>
+  </ion-content>

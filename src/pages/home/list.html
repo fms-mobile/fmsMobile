@@ -1,0 +1,38 @@
+<ion-header>
+<ion-navbar color="primary">
+  <ion-title>테스트</ion-title>
+
+</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<ion-grid>
+	<ion-row>
+		<ion-col>
+			<strong>F1</strong> 
+		</ion-col>
+		<ion-col>
+			<strong>F2</strong>
+		</ion-col>
+		<ion-col>
+			<strong>F3</strong>
+		</ion-col>
+	</ion-row>
+	<ion-row *ngFor="let item of testList" (click)="goView(item)"> 
+		<ion-col>{{item.f1}}</ion-col>
+		<ion-col>{{item.f2}}</ion-col>
+		<ion-col>{{item.f3}}</ion-col>
+	</ion-row> 
+</ion-grid> 
+ 
+</ion-content>
+  <ion-footer>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button ion-button full icon-only (click)="goWrite()"><ion-icon name="barcode"></ion-icon>신규등록</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-footer>
+  
