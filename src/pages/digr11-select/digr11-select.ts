@@ -12,7 +12,7 @@ import { NavController, NavParams } from 'ionic-angular';
   selector: 'page-digr11-select',
   templateUrl: 'digr11-select.html',
 })
-export class Digr11Select {
+export class Digr11SelectPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }

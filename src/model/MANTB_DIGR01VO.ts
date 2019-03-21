@@ -2,25 +2,27 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class MANTB_DIGR01VO {
-    public facil_no : string = "";
-    public dign_seq : number = 0;
-    public project_no : string = "";
-    public report_yy : string = "";
-    public start_ymd : string = "";
-    public end_ymd : string = "";
-    public dign_gbn : string = "";
-    public regular_gbn : string = "";
-    public dign_corp_cd : string = "";
-    public dign_corp_nm : string = "";
-    public rep_engineer_nm : string = "";
-    public dign_amt : number = 0;
-    public state_grade : string = "";
-    public dign_content : string = "";
-    public amend_content : string = "";
-    public dign4_need_yn : string = "";
-    public wrt_ymd : string = "";
-    public wrt_person_nm : string = "";
-    public local_yn : string = "";
+    public facil_no : string;
+    public dign_seq : number;
+    public project_no : string;
+    public report_yy : string;
+    public start_ymd : string;
+    public end_ymd : string;
+    public dign_gbn : string;
+    public dign_gbn_nm : string;
+    public regular_gbn : string;
+    public regular_gbn_nm : string;
+    public dign_corp_cd : string;
+    public dign_corp_nm : string;
+    public rep_engineer_nm : string;
+    public dign_amt : number;
+    public state_grade : string;
+    public dign_content : string;
+    public amend_content : string;
+    public dign4_need_yn : string;
+    public wrt_ymd : string;
+    public wrt_person_nm : string;
+    public local_yn : string;
 
     constructor(){
         this.facil_no = "";
@@ -43,4 +45,6 @@ export class MANTB_DIGR01VO {
         this.wrt_person_nm = "";
         this.local_yn = "";
     }
+
+    
 }

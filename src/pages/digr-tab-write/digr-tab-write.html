@@ -13,8 +13,8 @@
 </ion-header>
 
 
-<ion-tabs #digrWriteTabs >
-  <ion-tab tabTitle="점검개요" [root]="digr01Write" ></ion-tab>
-  <ion-tab tabTitle="대상시설물" [root]="digr02List" ></ion-tab>
-  <ion-tab tabTitle="참여기술자정보" [root]="digr11List" ></ion-tab>
+<ion-tabs #digrWriteTabs tabsPlacement="top" >
+  <ion-tab tabTitle="점검개요" [root]="digr01WritePage" [rootParams]="digr01Group" ></ion-tab>
+  <ion-tab tabTitle="대상시설물" [root]="digr02ListPage" [rootParams]="digr01Group"></ion-tab>
+  <ion-tab tabTitle="참여기술자정보" [root]="digr11ListPage" [rootParams]="digr01Group"></ion-tab>
 </ion-tabs>

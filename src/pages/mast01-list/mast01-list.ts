@@ -1,8 +1,13 @@
 import { BASTB_MAST01VO } from './../../model/BASTB_MAST01VO';
-import { Digr02List } from './../digr02-list/digr02-list';
-import { Component, Renderer2, ElementRef } from '@angular/core';
+import { MANTB_DIGR01VO } from './../../model/MANTB_DIGR01VO';
+import { Digr02ListPage } from './../digr02-list/digr02-list';
+import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { GlobalVars } from '../../services/GlobalVars';
+import { DIGR01_GROUPVO } from '../../model/DIGR01_GROUPVO';
+import { MANTB_DIGR12VO } from '../../model/MANTB_DIGR12VO';
+import { MANTB_DIGR13VO } from '../../model/MANTB_DIGR13VO';
+import { UtilService } from '../../services/UtilService';
 
 /**
  * Generated class for the Mast01List page.
@@ -14,44 +19,56 @@ import { GlobalVars } from '../../services/GlobalVars';
   selector: 'page-mast01-list',
   templateUrl: 'mast01-list.html',
 })
-export class Mast01List {
-  public bastbMast01List : [BASTB_MAST01VO];
+export class Mast01ListPage {
+  public bastbMast01List : Array<BASTB_MAST01VO>;
   public numberOfItemsToDisplay : number = 10;
-  selectedList : [{}];
-
+  digr01Group : DIGR01_GROUPVO;
+  selectOptions : any = {};
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, public globalVars:GlobalVars
-    ,private renderer: Renderer2,private elementRef : ElementRef) {
-    this.goSearch();
+    , private elementRef : ElementRef, public utilService : UtilService,public renderer :Renderer2 ) {
+      this.digr01Group = navParams.data;
+      this.selectOptions["multiple"] = true;
+      this.goSearch();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Mast01List');
+  ionViewDidEnter() {
+    //console.log('ionViewDidLoad Mast01List');
+    this.selectOptions["AllItems"] = this.elementRef.nativeElement.querySelectorAll('ion-item');
   }
 
   goSearch(){
-    this.globalVars.db.bastbMast01.list001({pagCount:this.numberOfItemsToDisplay}, (res) => {
+    let selectedIds = this.createSelectedIds();
+    this.globalVars.db.bastbMast01.list001({"pagCount":this.numberOfItemsToDisplay,"selectedIds":selectedIds}, (res) => {
       this.bastbMast01List = res;
     });
+    /* this.globalVars.db.bastbMast01.list001({"pagCount":"","selectedIds":selectedIds}, (res) => {
+      this.bastbMast01List = res;
+    }); */
   }
 
-  selectMast01(event :any){
-    let ionItem = event.target.closest("ion-item");
+  createSelectedIds() : string {
+    let selectedIds : Array<string> = new Array<string>();
 
-    const selected = ionItem.classList.contains("selected");
+    let selectedList : Array<BASTB_MAST01VO> = this.digr01Group.selectedMast01List;
+    let i = 0;
+    let len = selectedList.length;
 
-    if(selected) {
-      this.renderer.removeClass(ionItem, "selected");
-    } else {
-      this.renderer.addClass(ionItem, "selected");
+    for(i;i<len;i++) {
+      let selectedMast01 = selectedList[i];
+      selectedIds.push("'"+selectedMast01.facil_no+"'");
     }
+    
+    return selectedIds.join(",");
   }
+
+  
 
   goSave(){
-    this.selectedList = this.elementRef.nativeElement.querySelectorAll('.selected');
     let itemList = this.elementRef.nativeElement.querySelectorAll('ion-item');
 
     let i = 0;
-    let selectMast01List = this.globalVars.selectedMast01List;
+    let selectMast01List = this.digr01Group.selectedMast01List;
     let item :any;
 
     for(i;i<itemList.length;i++) {
@@ -59,42 +76,19 @@ export class Mast01List {
 
       if(item.classList.contains("selected")) {
         let mast01Item : BASTB_MAST01VO =  this.bastbMast01List[i];
-        if(!this.matchMast01(mast01Item)) {
-          selectMast01List.push(this.bastbMast01List[i]);
+        if(!this.digr01Group.matchSelectedMast01List(mast01Item)) {
+          selectMast01List.push(mast01Item);
+          let digr02 = new MANTB_DIGR01VO();
+          digr02.facil_no = mast01Item.facil_no;
+          this.digr01Group.digr02List.push(digr02);
+          this.digr01Group.digr12Object[digr02.facil_no] = new Array<MANTB_DIGR12VO>();
+          this.digr01Group.digr13Object[digr02.facil_no] = new Array<MANTB_DIGR13VO>();
         }
       }
     }
 
-    this.navCtrl.push(Digr02List,selectMast01List);
+    this.navCtrl.push(Digr02ListPage,this.digr01Group);
   }
 
-  private matchMast01(item : any){
-    let isResult : Boolean = false; 
-    let selectMast01List = this.globalVars.selectedMast01List;
-    let len = selectMast01List.length;
-    let i = 0;
-
-    for (i;i<len;i++) {
-      let selectMast01 : BASTB_MAST01VO = selectMast01List[i];
-
-      switch (typeof item) {
-        case "string":
-          if(selectMast01.facil_no == item) {
-            isResult = true;
-            break;
-          }
-          break;
-        case "object":
-          if(selectMast01.facil_no == item.facil_no) {
-            isResult = true;
-            break;
-          }
-          break;
-        default:
-          break;
-      }
-    }
-
-    return isResult;
-  }
+  
 }

@@ -11,7 +11,7 @@ import { NavController, NavParams } from 'ionic-angular';
   selector: 'page-mast01-write',
   templateUrl: 'mast01-write.html',
 })
-export class Mast01Write {
+export class Mast01WritePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }

@@ -1,8 +1,10 @@
 import { GlobalVars } from './../../services/GlobalVars';
-import { Mast01List } from './../mast01-list/mast01-list';
+import { Mast01ListPage } from './../mast01-list/mast01-list';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Digr02Write } from '../digr02-write/digr02-write';
+import { Digr02WritePage } from '../digr02-write/digr02-write';
+import { DIGR01_GROUPVO } from '../../model/DIGR01_GROUPVO';
+import { BASTB_MAST01VO } from '../../model/BASTB_MAST01VO';
 
 /**
  * Generated class for the Digr02List page.
@@ -14,22 +16,24 @@ import { Digr02Write } from '../digr02-write/digr02-write';
   selector: 'page-digr02-list',
   templateUrl: 'digr02-list.html',
 })
-export class Digr02List {
-  selectedMast01List : any;
+export class Digr02ListPage {
+  selectedMast01List : Array<BASTB_MAST01VO>;
+  digr01Group : DIGR01_GROUPVO;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public globalVars:GlobalVars) {
-    this.selectedMast01List = this.globalVars.selectedMast01List;
+    this.digr01Group = navParams.data;
+    this.selectedMast01List = this.digr01Group.selectedMast01List;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Digr02List');
   }
 
-  goWrite(mast01 : any){
-    this.navCtrl.push(Digr02Write,mast01);
+  goWrite(digr01Group : DIGR01_GROUPVO, index: number){
+    this.navCtrl.push(Digr02WritePage,{"digr01Group":digr01Group,"index":index});
   }
 
   addMast01(){
-    this.navCtrl.push(Mast01List);
+    this.navCtrl.push(Mast01ListPage,this.digr01Group);
   }
 }

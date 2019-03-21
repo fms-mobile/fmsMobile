@@ -1,22 +1,33 @@
 import { MANTB_DIGR01VO } from './../model/MANTB_DIGR01VO';
 import { BASTB_MAST01VO } from './../model/BASTB_MAST01VO';
-import { Digr02Write } from './../pages/digr02-write/digr02-write';
-import { Digr02List } from './../pages/digr02-list/digr02-list';
-import { Mast01List } from './../pages/mast01-list/mast01-list';
+import { MANTB_DIGR11VO } from './../model/MANTB_DIGR11VO';
+import { MANTB_DIGR12VO } from './../model/MANTB_DIGR12VO';
+import { DIGR01_GROUPVO } from './../model/DIGR01_GROUPVO';
 
-import { Digr01Select } from './../pages/digr01-select/digr01-select';
-import { Digr01Write } from '../pages/digr01-write/digr01-write';
-import { Digr11List } from '../pages/digr11-list/digr11-list';
-import { Digr11Write } from './../pages/digr11-write/digr11-write';
-import { DigrTabWrite } from './../pages/digr-tab-write/digr-tab-write';
-import { DigrTabs } from './../pages/digr-tabs/digr-tabs';
-import { DigrGroup } from './../pages/digr-group/digr-group';
+import { Digr02WritePage } from './../pages/digr02-write/digr02-write';
+import { Digr02ListPage } from './../pages/digr02-list/digr02-list';
+import { Digr02ListModalPage } from './../pages/digr02-list-modal/digr02-list-modal';
+import { Mast01ListPage } from './../pages/mast01-list/mast01-list';
+import { Digr01SelectPage } from './../pages/digr01-select/digr01-select';
+import { Digr01WritePage } from '../pages/digr01-write/digr01-write';
+import { Digr11ListPage } from '../pages/digr11-list/digr11-list';
+import { Digr11WritePage } from './../pages/digr11-write/digr11-write';
+import { Digr12WriteModalPage } from './../pages/digr12-write-modal/digr12-write-modal';
+import { Digr13SelectModalPage } from './../pages/digr13-select-modal/digr13-select-modal';
+import { FacilPartSearchModalPage } from './../pages/facil-part-search-modal/facil-part-search-modal';
+import { SeriousDefectModalPage } from './../pages/serious-defect-modal/serious-defect-modal';
+import { DigrTabWritePage } from './../pages/digr-tab-write/digr-tab-write';
+import { DigrTabsPage } from './../pages/digr-tabs/digr-tabs';
+import { DigrGroupPage } from './../pages/digr-group/digr-group';
+
 import { NgModule, ErrorHandler } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler, IonicPageModule  } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { UUID } from 'angular2-uuid';
+import { CalendarModule } from "ion2-calendar";
 
 import { LoginPage } from '../pages/home/login';
 import { AssetsPage } from '../pages/home/assets';
@@ -26,6 +37,7 @@ import { WritePage } from '../pages/home/write';
 import { GlobalVars } from '../services/GlobalVars';
 import { UtilService } from '../services/UtilService';
 import { CustFilter } from '../services/CustFilter';
+import { TempDataManage } from '../services/TempDataManage';
 import { ModalPage } from '../pages/modal/modal';
 
 import { WebDataProvider } from '../providers/WebDataProvider';
@@ -40,7 +52,7 @@ import { Camera } from '@ionic-native/camera';
 import { Network } from '@ionic-native/network';
 import { IonicStorageModule } from '@ionic/storage';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
-
+import { CurrencyPipe } from '@angular/common';
  
 @NgModule({
   declarations: [
@@ -52,16 +64,21 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     WritePage,
     CustFilter,
     ModalPage,
-    Digr01Select,
-    DigrGroup,
-    DigrTabs,
-    DigrTabWrite,
-    Digr01Write,
-    Digr11List,
-    Digr11Write,
-    Mast01List,
-    Digr02List,
-    Digr02Write
+    Digr01SelectPage,
+    DigrGroupPage,
+    DigrTabsPage,
+    DigrTabWritePage,
+    FacilPartSearchModalPage,
+    SeriousDefectModalPage,
+    Digr01WritePage,
+    Digr11ListPage,
+    Digr11WritePage,
+    Digr12WriteModalPage,
+    Digr13SelectModalPage,
+    Mast01ListPage,
+    Digr02ListPage,
+    Digr02ListModalPage,
+    Digr02WritePage
   ],
   imports: [
     BrowserModule,
@@ -73,6 +90,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
       scrollAssist: false,
       autoFocusAssist: false
     }),
+    CalendarModule,
     IonicPageModule.forChild(ModalPage)
   ],
   bootstrap: [IonicApp],
@@ -84,16 +102,21 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     ViewPage,
     WritePage,
     ModalPage,
-    Digr01Select,
-    DigrGroup,
-    DigrTabs,
-    DigrTabWrite,
-    Digr01Write,
-    Digr11List,
-    Digr11Write,
-    Mast01List,
-    Digr02List,
-    Digr02Write
+    Digr01SelectPage,
+    DigrGroupPage,
+    DigrTabsPage,
+    DigrTabWritePage,
+    FacilPartSearchModalPage,
+    SeriousDefectModalPage,
+    Digr01WritePage,
+    Digr11ListPage,
+    Digr11WritePage,
+    Digr12WriteModalPage,
+    Digr13SelectModalPage,
+    Mast01ListPage,
+    Digr02ListPage,
+    Digr02WritePage,
+    Digr02ListModalPage
   ],
   providers: [
     StatusBar,
@@ -103,12 +126,18 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     Network,
     GlobalVars,
     UtilService,
+    TempDataManage,
     WebDataProvider,
     DbInit,
     DbInitData,
     ScreenOrientation,
     MANTB_DIGR01VO,
     BASTB_MAST01VO,
+    MANTB_DIGR11VO,
+    DIGR01_GROUPVO,
+    MANTB_DIGR12VO,
+    CurrencyPipe,
+    UUID,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

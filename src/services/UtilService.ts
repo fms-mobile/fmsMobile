@@ -1,8 +1,11 @@
+import { CurrencyPipe, registerLocaleData } from '@angular/common';
 import { AlertController, ToastController, LoadingController, Loading, ModalController, Events, Platform  } from 'ionic-angular';
-import { Injectable } from '@angular/core';
+import { Injectable, Renderer2 } from '@angular/core';
 import { Network } from '@ionic-native/network';
 
 import { GlobalVars } from '../services/GlobalVars';
+
+import localeKo from '@angular/common/locales/ko';
 
 @Injectable()
 export class UtilService {
@@ -14,6 +17,7 @@ export class UtilService {
                 public events: Events,
                 public platform: Platform,
                 public globalVars: GlobalVars) {
+        registerLocaleData(localeKo);
     }
 
     public showToast(toastCtrl: ToastController, msg: string, dismissCallBack: any) {
@@ -291,4 +295,34 @@ export class UtilService {
             return queryStr;
         }
     }
+
+    convertInputVal(event: any) {
+        let value = event.target.value;
+        let currencyPipe : CurrencyPipe = new CurrencyPipe("ko");
+
+        let numValue = value.replace(/[^0-9.]/g, "");
+        let res = currencyPipe.transform(numValue,"KRW","symbol","1.0-0","ko");
+
+        event.target.value = res;
+    }
+
+    selectItem(event :any ,renderer:Renderer2,options :any){
+        let ionItem = event.target.closest("ion-item");
+
+        const selected = ionItem.classList.contains("selected");
+
+        if(!options.multiple){
+            let AllItems = options.AllItems;
+            AllItems.forEach((cl) => {
+                renderer.removeClass(cl, "selected");
+             });
+        }
+
+        if(selected) {
+            renderer.removeClass(ionItem, "selected");
+        } else {
+            renderer.addClass(ionItem, "selected");
+        }
+    }
+    
 }

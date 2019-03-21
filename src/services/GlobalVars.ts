@@ -1,5 +1,3 @@
-import { BASTB_MAST01VO } from './../model/BASTB_MAST01VO';
-import { MANTB_DIGR01VO } from './../model/MANTB_DIGR01VO';
 import { Injectable } from '@angular/core';
 
 // import * as moment from 'moment';
@@ -18,8 +16,6 @@ export class GlobalVars {
 	public isLogin: boolean = false;  // 로그인여부 
 	public isScan: boolean = false; // 스캔여부
 	
-	public digr01 : MANTB_DIGR01VO = new MANTB_DIGR01VO();
-	public selectedMast01List : Array<BASTB_MAST01VO>;
 
     public userInfo = {
         corp_id     : "",
@@ -69,8 +65,5 @@ export class GlobalVars {
         this.userInfo.enc_pswd 	    = data.enc_pswd;
         this.userInfo.email_id      = data.email_id;
 	}
-
-	constructor(){
-		this.selectedMast01List = new Array<BASTB_MAST01VO>();
-	}
+	
 }

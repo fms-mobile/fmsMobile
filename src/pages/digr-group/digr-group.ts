@@ -1,8 +1,10 @@
-import { DigrTabWrite } from './../digr-tab-write/digr-tab-write';
-import { DigrTabs } from './../digr-tabs/digr-tabs';
+import { DigrTabWritePage } from './../digr-tab-write/digr-tab-write';
+import { DigrTabsPage } from './../digr-tabs/digr-tabs';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { GlobalVars } from '../../services/GlobalVars';
+import { TempDataManage } from '../../services/TempDataManage';
+import { DIGR01_GROUPVO } from '../../model/DIGR01_GROUPVO';
 
 /**
  * Generated class for the DigrGroup page.
@@ -14,13 +16,15 @@ import { GlobalVars } from '../../services/GlobalVars';
   selector: 'page-digr-group',
   templateUrl: 'digr-group.html',
 })
-export class DigrGroup {
+export class DigrGroupPage {
   public digrGroupList : [{}];
   public numberOfItemsToDisplay : number = 10;
+  digr01GroupList : Array<DIGR01_GROUPVO>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public globalVars: GlobalVars) {
-      this.goSearch();
+    public globalVars: GlobalVars, private tempDataManage : TempDataManage) {
+      this.digr01GroupList = tempDataManage.digr01GroupList;
+      //this.goSearch();
   }
 
   ionViewDidLoad() {
@@ -34,13 +38,14 @@ export class DigrGroup {
   }
 
   goView(item){
-    this.navCtrl.push(DigrTabs, item);
+    this.navCtrl.push(DigrTabWritePage, item);
   }
 
   goWrite(){
-    this.navCtrl.push(DigrTabWrite);
+    let digr01Group : DIGR01_GROUPVO = this.tempDataManage.createDigr01Group();
+    this.navCtrl.push(DigrTabWritePage,digr01Group);
   }
-
+  
   /* addMoreItem(infiniteScroll: any){
     if (this.digrGroupList.length > this.numberOfItemsToDisplay) {
       this.numberOfItemsToDisplay += 10; // load number of more items

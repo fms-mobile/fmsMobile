@@ -15,11 +15,17 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let bastbMast01 of bastbMast01List" (click)="selectMast01($event)" >
+    <ion-item *ngFor="let bastbMast01 of bastbMast01List" (click)="utilService.selectItem($event,renderer,selectOptions)" >
       <ion-label>{{bastbMast01.facil_nm}}</ion-label>
       <ion-input class="facil_no" type="hidden" value="{{bastbMast01.facil_no}}"></ion-input>
     </ion-item>
   </ion-list>
+  <!-- <ion-list [virtualScroll]="bastbMast01List">
+    <ion-item *virtualItem="let bastbMast01" (click)="selectMast01($event)" >
+      <ion-label>{{bastbMast01.facil_nm}}</ion-label>
+      <ion-input class="facil_no" type="hidden" value="{{bastbMast01.facil_no}}"></ion-input>
+    </ion-item>
+  </ion-list> -->
   <ion-buttons end>
     <button ion-button icon-start (click)="goSave()">
       <ion-icon name="save"></ion-icon>저장

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Digr11Write } from '../digr11-write/digr11-write';
+import { Digr11WritePage } from '../digr11-write/digr11-write';
 
 /**
  * Generated class for the Digr11List page.
@@ -12,7 +12,7 @@ import { Digr11Write } from '../digr11-write/digr11-write';
   selector: 'page-digr11-list',
   templateUrl: 'digr11-list.html',
 })
-export class Digr11List {
+export class Digr11ListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -22,6 +22,6 @@ export class Digr11List {
   }
 
   goWrite(){
-    this.navCtrl.push(Digr11Write);
+    this.navCtrl.push(Digr11WritePage);
   }
 }

@@ -21,12 +21,18 @@
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label color="primary" stacked>점검진단 기간</ion-label>
-        <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="digr01.start_ymd"></ion-datetime>
+        <ion-label color="primary">점검진단 시작일</ion-label>
+        <ion-input id="start_ymd" (click)="openCalendar()"></ion-input>
+        <!-- <ion-datetime #start_ymd displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="digr01.start_ymd"></ion-datetime> -->
       </ion-item>
       <ion-item>
-        <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="digr01.end_ymd"></ion-datetime>
+        <ion-label color="primary">점검진단 종료일</ion-label>
+        <ion-input id="end_ymd" (click)="openCalendar()"></ion-input>
       </ion-item>
+      <!-- <ion-item>
+        <ion-label color="primary" stacked></ion-label>
+        <ion-datetime #end_ymd displayFormat="YYYY-MM-DD"  pickerFormat="YYYY-MM-DD" [(ngModel)]="digr01.end_ymd"></ion-datetime>
+      </ion-item> -->
       <ion-item>
         <ion-label color="primary">작성자명</ion-label>
         <ion-input [(ngModel)]="digr01.wrt_person" type="text" placeholder="내용을 입력하세요."></ion-input>

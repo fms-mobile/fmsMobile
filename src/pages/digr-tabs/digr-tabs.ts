@@ -1,4 +1,4 @@
-import { Digr01Select } from './../digr01-select/digr01-select';
+import { Digr01SelectPage } from './../digr01-select/digr01-select';
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, Tabs } from 'ionic-angular';
 
@@ -12,9 +12,9 @@ import { NavController, NavParams, Tabs } from 'ionic-angular';
   selector: 'page-digr-tabs',
   templateUrl: 'digr-tabs.html',
 })
-export class DigrTabs {
+export class DigrTabsPage {
   selectDigr : any = {};
-  digr01_select = Digr01Select;
+  digr01SelectPage = Digr01SelectPage;
 
   @ViewChild('digrTabs') tabRef: Tabs;
 

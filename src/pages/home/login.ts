@@ -1,4 +1,4 @@
-import { DigrGroup } from './../digr-group/digr-group';
+import { DigrGroupPage } from './../digr-group/digr-group';
 import { Component } from '@angular/core';
 import { NavController, LoadingController, ToastController} from 'ionic-angular';
 import { HttpClient} from '@angular/common/http';
@@ -82,7 +82,7 @@ export class LoginPage {
       return;
     } 
  
-    this.navCtrl.setRoot(DigrGroup);
+    this.navCtrl.setRoot(DigrGroupPage);
     /*
     this.navCtrl.setRoot(AssetsPage);
     // 서버가 있을 경우 로그인 처리

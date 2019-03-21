@@ -11,7 +11,7 @@ import { NavController, NavParams } from 'ionic-angular';
   selector: 'page-digr11-write',
   templateUrl: 'digr11-write.html',
 })
-export class Digr11Write {
+export class Digr11WritePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }

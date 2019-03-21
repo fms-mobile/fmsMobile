@@ -1,14 +1,14 @@
-import { MANTB_DIGR01VO } from './../model/MANTB_DIGR01VO';
 import { Component } from '@angular/core';
 import { Platform, App, ViewController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+//import { SplashScreen } from '@ionic-native/splash-screen';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 import { LoginPage } from '../pages/home/login';
 
 import { UtilService } from '../services/UtilService';
 import { GlobalVars } from '../services/GlobalVars';
+import { TempDataManage } from '../services/TempDataManage';
 
 import { DbInit } from '../db/DbInit';
 
@@ -20,12 +20,12 @@ export class MyApp {
 
   constructor(platform: Platform,
               statusBar: StatusBar,
-              splashScreen: SplashScreen,
+              //splashScreen: SplashScreen,
               public utilService: UtilService,
               public globalVars: GlobalVars,
+              public tempDataManage: TempDataManage,
               public screenOrientation: ScreenOrientation,
               public dbInit : DbInit,
-              public digr01VO : MANTB_DIGR01VO,
               app: App) {
     
     // 화면 세로 고정
@@ -41,7 +41,7 @@ export class MyApp {
       // // // set status bar to white
       statusBar.backgroundColorByHexString('#488aff');
       
-      splashScreen.hide();
+      //splashScreen.hide();
     });
 
     platform.registerBackButtonAction(() => {

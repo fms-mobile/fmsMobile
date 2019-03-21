@@ -137,6 +137,10 @@ export class BASTB_MAST01 {
 			        + " where 1=1 "
 					;
 			
+			if(params.selectedIds != ""){
+				sqlMain += " and facil_no not in ("+this.utilService.nvl(params.selectedIds,'')+") ";
+			}		
+
 			if(params.pagCount != "") {
 				sqlMain += " LIMIT "+this.utilService.nvl(params.pagCount,'');
 			}		

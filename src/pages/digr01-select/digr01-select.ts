@@ -13,7 +13,7 @@ import { GlobalVars } from '../../services/GlobalVars';
   selector: 'page-digr01-select',
   templateUrl: 'digr01-select.html',
 })
-export class Digr01Select {
+export class Digr01SelectPage {
   digr01_select : any = {};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public globalVars: GlobalVars) {
