@@ -24,7 +24,7 @@ export class Digr13SelectModalPage {
   }
 
   goSave(){
-    
+    this.viewCtrl.dismiss(null);
   }
 
   dismiss(){

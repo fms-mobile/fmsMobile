@@ -4,24 +4,48 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
 
-  <ion-navbar>
-    <ion-title>대상시설물 목록</ion-title>
-  </ion-navbar>
+<div class="top-tit-area02">
+  <div>
+    <p>대상시설물 목록</p>
+    <ion-buttons end>
+      <button ion-button icon-only style="width:2rem;height:2rem;" (click)="addMast01()"><ion-icon name="add"></ion-icon></button>
+    </ion-buttons>    
+  </div>
+</div>
 
-</ion-header>
-
-
-<ion-content padding>
-  <ion-list>
-    <ion-item *ngFor="let mast01 of digr01Group.selectedMast01List; let i = index" (click)="goWrite(digr01Group,i)">
-      <ion-label>{{mast01.facil_nm}}</ion-label>
-    </ion-item>
-  </ion-list>
+<table class="form-01">
+    <thead>
+      <tr>
+        <th style="width:30vw; text-align:center;">시설물 명칭</th>
+        <th style="width:10vw; text-align:center;">종별</th>
+        <th style="width:20vw; text-align:center;">비용(천원)</th>
+        <th style="width:10vw; text-align:center; font-size:1.1rem;">이전<br>안전등급</th>
+        <th style="width:10vw; text-align:center; font-size:1.1rem;">상태평가<br>안전등급</th>
+        <th style="width:15vw; text-align:center;">정기점검표</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mast01 of digr01Group.selectedMast01List; let i = index;" (click)="goWrite(digr01Group,i)">
+        <th style="width:30vw;">{{mast01.facil_nm}}</th>
+        <td style="width:10vw;">{{mast01.facil_class}}</td>
+        <td style="width:20vw;">{{digr01Group.digr02List[i].dign_amt}}</td>
+        <td style="width:10vw;">{{mast01.stage_grade}}</td>
+        <td style="width:10vw;">{{digr01Group.digr02List[i].stage_grade}}</td>
+        <td style="width:15vw;">
+            <button ion-button icon-only style="width:6.5rem;height:2.5rem; font-size:1.2rem;" (click)="goDigr13($event,i)">정기점검표</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<!-- <ion-list>
+  <ion-list-header>
+    대상시설물 목록
+  </ion-list-header>
   <ion-buttons end>
-    <button ion-button icon-start (click)="addMast01()">
-      <ion-icon name="add" ></ion-icon>시설물 추가
-    </button>
+      <button ion-button icon-only (click)="addMast01()"><ion-icon name="add"></ion-icon></button>
   </ion-buttons>
-</ion-content>
+  <ion-item *ngFor="let mast01 of digr01Group.selectedMast01List; let i = index" (click)="goWrite(digr01Group,i)">
+    <ion-label>{{mast01.facil_nm}}</ion-label>
+  </ion-item>
+</ion-list> -->

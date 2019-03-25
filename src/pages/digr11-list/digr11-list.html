@@ -4,27 +4,47 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<div class="top-tit-area02">
+  <div>
+    <p>책임기술자 목록</p>
+    <ion-buttons end>
+      <button ion-button icon-only style="width:2rem;height:2rem;" (click)="addDigr11()"><ion-icon name="add"></ion-icon></button>
+    </ion-buttons>    
+  </div>
+</div>
 
-  <ion-navbar>
-    <ion-title>책임기술자 목록</ion-title>
-  </ion-navbar>
+<table class="form-01">
+    <thead>
+      <tr>
+        <th style="width:40vw; text-align:center;">참여기술자 명칭</th>
+        <th style="width:30vw; text-align:center;">생년월일</th>
+        <th style="width:20vw; text-align:center;">책임기술자<br>여부</th>
+        <th style="width:10vw; text-align:center; font-size:1.1rem;">기술등급</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let digr11 of digr01Group.digr11List; let i = index;" (click)="goWrite(i)">
+        <th style="width:40vw;">{{digr11.engineer_nm}}</th>
+        <td style="width:30vw;">{{digr11.birth_ymd}}</td>
+        <td style="width:20vw;">{{digr11.rep_yn}}</td>
+        <td style="width:10vw;">{{digr11.tech_grade}}</td>
+      </tr>
+    </tbody>
+  </table>
 
-</ion-header>
-
-
-<ion-content padding>
-  <ion-list>
-    <ion-item>
-      <ion-label>기술자1</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>기술자2</ion-label>
-    </ion-item>
-  </ion-list>
-  <ion-buttons end>
-    <button ion-button icon-start (click)="goWrite()">
-      <ion-icon name="add" ></ion-icon>기술자 추가
-    </button>
-  </ion-buttons>
-</ion-content>
+<!-- <ion-list>
+  <ion-list-header>
+    책임기술자 목록
+  </ion-list-header>
+  <ion-item>
+    <ion-label>기술자1</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>기술자2</ion-label>
+  </ion-item>
+</ion-list>
+<ion-buttons end>
+  <button ion-button icon-start (click)="goWrite()">
+    <ion-icon name="add" ></ion-icon>기술자 추가
+  </button>
+</ion-buttons> -->

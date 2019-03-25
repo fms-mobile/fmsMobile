@@ -1,19 +1,252 @@
-// http://ionicframework.com/docs/theming/
 
-
-// App Global Sass
-// --------------------------------------------------
-// Put style rules here that you want to apply globally. These
-// styles are for the entire app and not just one component.
-// Additionally, this file can be also used as an entry point
-// to import other Sass files to be included in the output CSS.
-//
-// Shared Sass variables, which can be used to adjust Ionic's
-// default Sass variables, belong in "theme/variables.scss".
-//
-// To declare rules for a specific mode, create a child rule
-// for the .md, .ios, or .wp mode classes. The mode class is
-// automatically applied to the <body> element in the app.
-html {
-    font-size: 12px;
+@mixin width-class($size) {
+    .w#{$size} {
+    width: $size * 1px;
+    }
 }
+
+@include width-class(160);
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: "나눔고딕",Droid Sans, arial, sans-serif;
+    vertical-align: baseline;
+    background: transparent;
+    list-style: none;
+    letter-spacing: -1px;
+    box-sizing: border-box;
+  }
+  
+  body {
+    line-height: 1;
+    -webkit-text-size-adjust: none;
+    font-family: "나눔고딕",Droid Sans, arial, sans-serif;
+    color: #221e1f;
+    font-size: 12px;
+  }
+  
+  article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+  }
+  
+  fieldset, img, abbr, acronym {
+    border: 0;
+  }
+  
+  ol, ul {
+    list-style: none;
+  }
+  
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 0;
+  }
+  
+  legend, caption {
+    font-size: 0;
+    overflow: hidden;
+    text-indent: -9999999px;
+    height: 0;
+    width: 0;
+    line-height: 0;
+    position: absolute;
+  }
+  
+  td, th {
+    word-break: break-all;
+  }
+  
+  input, select {
+    vertical-align: middle;
+    box-sizing: border-box;
+  }
+  
+  textarea {
+    padding: 1%;
+    font-family: "나눔고딕", Droid Sans, arial, sans-serif;
+    color: #666;
+    resize: none;
+  }
+  
+  em {
+    font-style: normal;
+  }
+  
+  a {
+    text-decoration: none;
+    &:link, &:visited, &:active {
+      text-decoration: none;
+    }
+  }
+  
+  input[type="button"] {
+    margin: 0;
+    padding: 0;
+    -webkit-border-radius: 1px !important;
+    -webkit-appearance: none !important;
+    font-family: "나눔고딕", Droid Sans, arial, sans-serif;
+  }
+  
+  button {
+    margin: 0;
+    padding: 0;
+    -webkit-border-radius: 1px !important;
+    -webkit-appearance: none !important;
+    font-family: "나눔고딕", Droid Sans, arial, sans-serif;
+    line-height: normal;
+    border: none;
+  }
+  
+  input {
+    &[type="reset"], &[type="button"], &[type="submit"] {
+      line-height: normal;
+      border: none;
+    }
+    &[type="text"], &[type="password"], &[type="number"], &[type="email"], &[type="tel"] {
+      padding: 6px 0 5px;
+      -webkit-appearance: none !important;
+      background: #fff;
+      font-family: "나눔고딕", Droid Sans, arial, sans-serif;
+      font-size: 17px;
+      color: #666;
+      text-indent: 10px !important;
+      outline: none;
+    }
+  }
+  
+  textarea {
+    background: #fff;
+    font-family: "나눔고딕", Droid Sans, arial, sans-serif;
+    font-size: 17px;
+    color: #666;
+    padding: 5px 10px 5px 10px;
+    border: 1px solid #c2c2c2;
+    border-radius: 4px;
+  }
+  
+  .form-01 {
+    width: 95vw;
+    margin: 10px auto 0;
+    tr {
+      display: block;
+      padding: 9px 0px 9px 0;
+      margin-top: 5px;
+      border: 1px solid #dcd9d9;
+      border-radius: 8px;
+      background: #f1f1f1;
+      &.pad-01 {
+        padding: 1px 10px 3px 0;
+      }
+      th {
+        padding-left: 12px;
+        font-size: 21px;
+        vertical-align: middle;
+        text-align: left;
+        color: #696969;
+        line-height: 120%;
+      }
+      td {
+        vertical-align: middle;
+        font-size: 21px;
+        color: #696969;
+        input[type="text"] {
+          height: 50px;
+          border: 1px solid #c2c2c2;
+          border-radius: 4px;
+          font-size: 17px;
+          color: #000;
+        }
+      }
+    }
+  }
+  
+  input {
+    &[type="password"], &[type="number"], &[type="email"], &[type="tel"] {
+      height: 50px;
+      /*border: 1px solid #c2c2c2;*/
+      border-radius: 4px;
+      font-size: 17px;
+      color: #000;
+    }
+  }
+  
+  .form-01 {
+    tr td {
+      span.tit {
+        display: inline-block;
+        border-left: 1px solid #ccc;
+        height: 45px;
+        line-height: 45px;
+        padding: 0 20px;
+        color: #696969;
+        font-size: 19px;
+        font-weight: bold;
+      }
+      .num {
+        margin: 0 20px 0 50px;
+      }
+    }
+    input {
+      &[type="checkbox"]:not(.cssbrowser) {
+        display: inline-block;
+        position: absolute;
+        top: 0px;
+        left: -100px;
+        + label {
+          display: inline-block;
+          border-radius: 8px !important;
+          height: 50px;
+          border: 1px solid #d5d5d5;
+          text-align: center;
+          line-height: 50px;
+          padding: 0;
+          font-size: 19px;
+          background: -webkit-linear-gradient(top, rgba(254, 254, 254, 1), rgba(224, 224, 224, 1));
+          color: #696969;
+          text-indent: 0;
+        }
+        &:checked + label {
+          background: -webkit-linear-gradient(top, #488aff, #002E8E);
+          border: 1px solid #317c51;
+          color: #fff;
+        }
+      }
+      &[type="radio"]:not(.cssbrowser) {
+        display: inline-block;
+        position: absolute;
+        top: 0px;
+        left: -100px;
+        + label {
+          border: 0;
+          display: inline-block;
+          border-radius: 8px !important;
+          height: 50px;
+          border: 1px solid #d5d5d5;
+          text-align: center;
+          line-height: 50px;
+          padding: 0;
+          font-size: 19px;
+          background: -webkit-linear-gradient(top, rgba(254, 254, 254, 1), rgba(224, 224, 224, 1));
+          color: #696969;
+          vertical-align: middle;
+          text-indent: 0;
+        }
+        &:checked + label {
+          background: -webkit-linear-gradient(top, #488aff, #002E8E);
+          border: 1px solid #002E8E;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+.top-tit-area02 {position:relative; height:101px; z-index:2; padding-top:35px; margin-bottom:-10px; background:#fff}
+.top-tit-area02:after { content:""; position:absolute; left:0; width:87px; height:48px; background:#488aff; } 
+.top-tit-area02 > div { position:relative; float:left; width:100%;background: -webkit-linear-gradient(top,rgba(255,255,255,1),rgba(238,238,238,1));box-shadow: 0px 3px 3px 0px rgba(158,158,158,0.8); border:1px solid #e3e3e3 } 
+.top-tit-area02 > div p {float:left; line-height:47px; padding-left:100px; font-size:19px;}
+.top-tit-area02 > div p span { color:#3a995d}
+

@@ -17,28 +17,36 @@
   <ion-list>
     <ion-item>
       <ion-label color="primary" stacked>성명</ion-label>
-      <ion-input type="text" placeholder="내용을 입력하세요."></ion-input>
+      <ion-input [(ngModel)]="digr11.engineer_nm" type="text" placeholder="내용을 입력하세요."></ion-input>
     </ion-item>
     <ion-item>
       <ion-label color="primary" stacked>생년월일</ion-label>
-      <ion-input type="text"  placeholder="내용을 입력하세요."></ion-input>
+      <ion-input [(ngModel)]="digr11.birth_ymd" type="text"  placeholder="내용을 입력하세요."></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label color="primary" stacked>시작/종료일</ion-label>
-      <ion-input type="text"  placeholder="내용을 입력하세요."></ion-input>~
-      <ion-input type="text" placeholder="내용을 입력하세요."></ion-input>
+      <ion-label color="primary" stacked>참여 시작일</ion-label>
+      <ion-input [(ngModel)]="digr11.start_ymd" type="text"  placeholder="내용을 입력하세요."></ion-input>~
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" stacked>참여 종료일</ion-label>
+      <ion-input [(ngModel)]="digr11.end_ymd" type="text" placeholder="내용을 입력하세요."></ion-input>
     </ion-item>
     <ion-item>
       <ion-label color="primary" stacked>일수</ion-label>
-      <ion-input type="text" placeholder="내용을 입력하세요."></ion-input>
+      <ion-input [(ngModel)]="digr11.parti_days" type="text" placeholder="내용을 입력하세요."></ion-input>
     </ion-item>
     <ion-item>
       <ion-label color="primary" stacked>참여율(%)</ion-label>
-      <ion-input type="text" placeholder="내용을 입력하세요."></ion-input>
+      <ion-input [(ngModel)]="digr11.parti_rate" type="text" placeholder="내용을 입력하세요."></ion-input>
     </ion-item>
     <ion-item>
       <ion-label color="primary" stacked>기술등급</ion-label>
-      <ion-input type="text" placeholder="내용을 입력하세요."></ion-input>
+      <ion-input [(ngModel)]="digr11.tech_grade" type="text" placeholder="내용을 입력하세요."></ion-input>
     </ion-item>
   </ion-list>
+  <ion-buttons end>
+    <button ion-button icon-start (click)="goSave()">
+      저장
+    </button>
+  </ion-buttons>
 </ion-content>

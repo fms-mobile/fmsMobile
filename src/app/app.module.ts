@@ -12,6 +12,7 @@ import { Digr01SelectPage } from './../pages/digr01-select/digr01-select';
 import { Digr01WritePage } from '../pages/digr01-write/digr01-write';
 import { Digr11ListPage } from '../pages/digr11-list/digr11-list';
 import { Digr11WritePage } from './../pages/digr11-write/digr11-write';
+import { Digr13WritePage } from './../pages/digr13-write/digr13-write';
 import { Digr12WriteModalPage } from './../pages/digr12-write-modal/digr12-write-modal';
 import { Digr13SelectModalPage } from './../pages/digr13-select-modal/digr13-select-modal';
 import { FacilPartSearchModalPage } from './../pages/facil-part-search-modal/facil-part-search-modal';
@@ -52,6 +53,7 @@ import { Camera } from '@ionic-native/camera';
 import { Network } from '@ionic-native/network';
 import { IonicStorageModule } from '@ionic/storage';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { Insomnia } from '@ionic-native/insomnia/ngx';
 import { CurrencyPipe } from '@angular/common';
  
 @NgModule({
@@ -73,6 +75,7 @@ import { CurrencyPipe } from '@angular/common';
     Digr01WritePage,
     Digr11ListPage,
     Digr11WritePage,
+    Digr13WritePage,
     Digr12WriteModalPage,
     Digr13SelectModalPage,
     Mast01ListPage,
@@ -111,6 +114,7 @@ import { CurrencyPipe } from '@angular/common';
     Digr01WritePage,
     Digr11ListPage,
     Digr11WritePage,
+    Digr13WritePage,
     Digr12WriteModalPage,
     Digr13SelectModalPage,
     Mast01ListPage,
@@ -121,6 +125,7 @@ import { CurrencyPipe } from '@angular/common';
   providers: [
     StatusBar,
     SplashScreen,
+    Insomnia,
     Camera,
     BarcodeScanner,
     Network,

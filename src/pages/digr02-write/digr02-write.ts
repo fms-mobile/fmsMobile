@@ -7,7 +7,7 @@ import { DIGR01_GROUPVO } from '../../model/DIGR01_GROUPVO';
 import { BASTB_MAST01VO } from '../../model/BASTB_MAST01VO';
 import { Digr02ListModalPage } from '../digr02-list-modal/digr02-list-modal';
 import { Digr12WriteModalPage } from '../digr12-write-modal/digr12-write-modal';
-import { Digr13SelectModalPage } from '../digr13-select-modal/digr13-select-modal';
+
 
 /**
  * Generated class for the Digr02Write page.
@@ -22,7 +22,7 @@ import { Digr13SelectModalPage } from '../digr13-select-modal/digr13-select-moda
 export class Digr02WritePage {
   selectIndex : number;
   state_gradeList : any = [];
-  check_resultList : any = [];
+  
   digr01Group : DIGR01_GROUPVO;
   selectMast01 : BASTB_MAST01VO;
   digr02 : MANTB_DIGR01VO;
@@ -34,7 +34,6 @@ export class Digr02WritePage {
 
       this.selectMast01 = this.digr01Group.selectedMast01List[this.selectIndex];
       this.digr02 = this.digr01Group.digr02List[this.selectIndex];
-      this.check_resultList = [0,1,2,3,4,5,6,7];
 
       globalVars.db.comtbCode02.list002({code_group:"state_grade",data5 :"1"}, (res) => {
         this.state_gradeList = res;
@@ -46,7 +45,7 @@ export class Digr02WritePage {
   }
 
   goSave(){
-
+    this.navCtrl.pop();
   }
 
   goDigr02ListModal() {
@@ -61,10 +60,6 @@ export class Digr02WritePage {
     });
   }
 
-  goDigr13SelectModal(index: number){
-    let digr13SelectModal = this.modalCtrl.create(Digr13SelectModalPage, {"digr01Group":this.digr01Group,"index":index});
-    digr13SelectModal.present();
-  }
 
   addDigr12WriteModal() {
     let digr12WriteModal = this.modalCtrl.create(Digr12WriteModalPage, {"digr01Group":this.digr01Group,"index":this.selectIndex});

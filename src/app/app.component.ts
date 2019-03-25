@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Platform, App, ViewController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
-//import { SplashScreen } from '@ionic-native/splash-screen';
+import { SplashScreen } from '@ionic-native/splash-screen';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { Insomnia } from '@ionic-native/insomnia/ngx';
 
 import { LoginPage } from '../pages/home/login';
 
@@ -20,16 +21,19 @@ export class MyApp {
 
   constructor(platform: Platform,
               statusBar: StatusBar,
-              //splashScreen: SplashScreen,
+              splashScreen: SplashScreen,
               public utilService: UtilService,
               public globalVars: GlobalVars,
               public tempDataManage: TempDataManage,
               public screenOrientation: ScreenOrientation,
               public dbInit : DbInit,
+              private insomnia: Insomnia,
               app: App) {
     
     // 화면 세로 고정
-    // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT_PRIMARY);
+    //this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT_PRIMARY);
+
+    let that = this;
 
     platform.ready().then(() => {
       console.log("platform ready");
@@ -41,7 +45,10 @@ export class MyApp {
       // // // set status bar to white
       statusBar.backgroundColorByHexString('#488aff');
       
-      //splashScreen.hide();
+      splashScreen.hide();
+
+      // 화면 꺼짐 방지
+      //that.insomnia.keepAwake();
     });
 
     platform.registerBackButtonAction(() => {

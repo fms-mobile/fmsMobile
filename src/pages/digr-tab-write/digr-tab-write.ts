@@ -21,8 +21,6 @@ export class DigrTabWritePage {
   digr02ListPage = Digr02ListPage;
   digr01Group : DIGR01_GROUPVO;
 
-  @ViewChild('digrWriteTabs') tabRef: Tabs;
-
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.digr01Group = navParams.data;
   }
@@ -32,7 +30,7 @@ export class DigrTabWritePage {
   }
 
   ionViewDidEnter(){
-    this.tabRef.select(0);
+    
   }
 
 }

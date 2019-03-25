@@ -2,7 +2,7 @@ import { BASTB_MAST01VO } from './../../model/BASTB_MAST01VO';
 import { MANTB_DIGR01VO } from './../../model/MANTB_DIGR01VO';
 import { Digr02ListPage } from './../digr02-list/digr02-list';
 import { Component, ElementRef, Renderer2 } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { GlobalVars } from '../../services/GlobalVars';
 import { DIGR01_GROUPVO } from '../../model/DIGR01_GROUPVO';
 import { MANTB_DIGR12VO } from '../../model/MANTB_DIGR12VO';
@@ -26,7 +26,7 @@ export class Mast01ListPage {
   selectOptions : any = {};
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public globalVars:GlobalVars
-    , private elementRef : ElementRef, public utilService : UtilService,public renderer :Renderer2 ) {
+    , private elementRef : ElementRef, public utilService : UtilService,public renderer :Renderer2,public viewCtrl: ViewController ) {
       this.digr01Group = navParams.data;
       this.selectOptions["multiple"] = true;
       this.goSearch();
@@ -62,7 +62,9 @@ export class Mast01ListPage {
     return selectedIds.join(",");
   }
 
-  
+  dismiss(){
+    this.viewCtrl.dismiss(null);
+  }
 
   goSave(){
     let itemList = this.elementRef.nativeElement.querySelectorAll('ion-item');
@@ -87,8 +89,7 @@ export class Mast01ListPage {
       }
     }
 
-    this.navCtrl.push(Digr02ListPage,this.digr01Group);
+    this.viewCtrl.dismiss(null);  
   }
-
   
 }

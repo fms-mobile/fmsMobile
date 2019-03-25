@@ -5,16 +5,13 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>정기안전점검 등록</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
-<ion-tabs #digrWriteTabs tabsPlacement="top" >
-  <ion-tab tabTitle="점검개요" [root]="digr01WritePage" [rootParams]="digr01Group" ></ion-tab>
-  <ion-tab tabTitle="대상시설물" [root]="digr02ListPage" [rootParams]="digr01Group"></ion-tab>
-  <ion-tab tabTitle="참여기술자정보" [root]="digr11ListPage" [rootParams]="digr01Group"></ion-tab>
-</ion-tabs>
+<ion-content padding>
+  <page-digr01-write ></page-digr01-write>
+  <page-digr02-list></page-digr02-list>
+  <page-digr11-list></page-digr11-list>
+</ion-content>
