@@ -81,7 +81,11 @@ export class COMTB_CODE02 {
                         + " where t1.code_group = '"+this.utilService.nvl(params.code_group,'')+"'"
                         + "   and t1.use_yn = 'Y' "
 
-                        if(params.data5 != "") {
+                        if(params.code1) {
+                            sqlMain += " and t1.code1 = '"+this.utilService.nvl(params.code1,'')+"' ";
+                        }
+
+                        if(params.data5) {
                             sqlMain += " and t1.data5 like '%"+this.utilService.nvl(params.data5,'')+"%' ";
                         }
 

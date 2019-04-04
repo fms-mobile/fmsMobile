@@ -52,6 +52,9 @@ export class DbInit {
             this.mantbDigr01 = new MANTB_DIGR01(globalVars, utilService, this.wsdb);
             this.bastbMast01 = new BASTB_MAST01(globalVars, utilService, this.wsdb);
             this.comtbCode02 = new COMTB_CODE02(globalVars, utilService, this.wsdb);
+            this.mantbDigr13 = new MANTB_DIGR13(globalVars, utilService, this.wsdb);
+            this.bastbMeta01 = new BASTB_META01(globalVars, utilService, this.wsdb);
+            this.comtbOrgn11 = new COMTB_ORGN11(globalVars, utilService, this.wsdb);
     }
     public createTables() {
         console.log("create tables");
@@ -323,6 +326,21 @@ export class DbInit {
             (transaction, resultSet) => {
             if (resultSet.rows.item(0).cnt == 0) {
                 this.dbInitData.insertMANTB_DIGR13(txn);
+            }
+            });
+            // 공통보고서
+            txn.executeSql(" create table if not exists COMTB_REPT01 "
+                    + "  ( "
+                    + "   rpt_no       integer, "
+                    + "   ref_pk       text, "
+                    + "   rpt_class    text, "
+                    + "   rpt_content  text "
+                    + "  ) ");
+
+            txn.executeSql("select count(*) as cnt from COMTB_REPT01", [],  
+            (transaction, resultSet) => {
+            if (resultSet.rows.item(0).cnt == 0) {
+                this.dbInitData.insertCOMTB_REPT01(txn);
             }
             });
         });

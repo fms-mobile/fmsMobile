@@ -16,16 +16,16 @@
 <table class="form-01">
     <thead>
       <tr>
-        <th style="width:40vw; text-align:center;">참여기술자 명칭</th>
-        <th style="width:30vw; text-align:center;">생년월일</th>
+        <th style="width:35vw; text-align:center;">참여기술자 명칭</th>
+        <th style="width:25vw; text-align:center;">생년월일</th>
         <th style="width:20vw; text-align:center;">책임기술자<br>여부</th>
         <th style="width:10vw; text-align:center; font-size:1.1rem;">기술등급</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let digr11 of digr01Group.digr11List; let i = index;" (click)="goWrite(i)">
-        <th style="width:40vw;">{{digr11.engineer_nm}}</th>
-        <td style="width:30vw;">{{digr11.birth_ymd}}</td>
+        <th style="width:35vw;">{{digr11.engineer_nm}}</th>
+        <td style="width:25vw;">{{digr11.birth_ymd}}</td>
         <td style="width:20vw;">{{digr11.rep_yn}}</td>
         <td style="width:10vw;">{{digr11.tech_grade}}</td>
       </tr>

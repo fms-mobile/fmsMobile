@@ -83,8 +83,6 @@ export class Mast01ListPage {
           let digr02 = new MANTB_DIGR01VO();
           digr02.facil_no = mast01Item.facil_no;
           this.digr01Group.digr02List.push(digr02);
-          this.digr01Group.digr12Object[digr02.facil_no] = new Array<MANTB_DIGR12VO>();
-          this.digr01Group.digr13Object[digr02.facil_no] = new Array<MANTB_DIGR13VO>();
         }
       }
     }

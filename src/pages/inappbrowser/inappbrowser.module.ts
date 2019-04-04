@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { LeftMenu } from './left-menu';
+import { Inappbrowser } from './inappbrowser';
 
 @NgModule({
   declarations: [
-    LeftMenu,
+    Inappbrowser,
   ],
   imports: [
-    IonicPageModule.forChild(LeftMenu),
+    IonicPageModule.forChild(Inappbrowser),
   ],
 })
-export class LeftMenuModule {}
+export class InappbrowserModule {}

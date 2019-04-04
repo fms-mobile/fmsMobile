@@ -31,12 +31,12 @@ export class Digr12WriteModalPage {
   }
 
   goFacilPartSerachModal(){
-    let facilPartSearchModalPage = this.modalCtrl.create(FacilPartSearchModalPage);
+    let facilPartSearchModalPage = this.modalCtrl.create(FacilPartSearchModalPage,{"digr01Group":this.digr01Group,"index":this.selectIndex});
     facilPartSearchModalPage.present();
   }
 
   goSeriousDefectModal(){
-    let seriousDefectModalPage = this.modalCtrl.create(SeriousDefectModalPage);
+    let seriousDefectModalPage = this.modalCtrl.create(SeriousDefectModalPage,{"digr01Group":this.digr01Group,"index":this.selectIndex});
     seriousDefectModalPage.present();
   }
 

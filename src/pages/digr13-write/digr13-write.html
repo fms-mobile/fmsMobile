@@ -11,190 +11,79 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-list-header>
+    <ion-title (click)="goDigr02ListModal()">{{selectMast01.facil_nm}}</ion-title>
+  </ion-list-header>
   <table class="table form-01">
     <thead>
       <tr>
-        <th style="width:30vw;">점검항목</th>
-        <th style="width:35vw;">점검결과</th>
+        <th style="width:35vw;" colspan="3">점검항목</th>
+        <th style="width:30vw;">점검결과</th>
         <th style="width:15vw;">보수<br>필요</th>
         <th style="width:15vw;">의견</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td style="width:30vw;" >용도변경</td>
-        <td style="width:35vw;">
-          <input type="radio" name="radio_0" id="check_result_0">
-          <label style="width:8vw;" for="check_result_0">양호</label>
-          <input type="radio" name="radio_0" id="check_result_1">
-          <label style="width:8vw;" for="check_result_1">보통</label>
-          <input type="radio" name="radio_0" id="check_result_2">
-          <label style="width:8vw;" for="check_result_2">불량</label>
-        </td>
-        <td style="width:15vw;">
-          <input type="checkbox" name="check_0" id="check_0">
-          <label style="width:13vw;" for="check_0">보수필요</label>
-        </td>
-        <td style="width:15vw;">
-          <input type="checkbox" name="content_0" id="content_0">
-          <label style="width:8vw;" for="content_0" (click)="goDigr13SelectModal(0)">의견</label>
-        </td>
-      </tr>
-      <tr>
-        <td style="width:30vw;"  >구조부재 변경</td>
-        <td style="width:35vw;">
-          <input type="radio" name="radio_1" id="check_result_4">
-          <label style="width:8vw;" for="check_result_4">양호</label>
-          <input type="radio" name="radio_1" id="check_result_5">
-          <label style="width:8vw;" for="check_result_5">보통</label>
-          <input type="radio" name="radio_1" id="check_result_6">
-          <label style="width:8vw;" for="check_result_6">불량</label>
-        </td>
-        <td style="width:15vw;">
-          <input type="checkbox" name="check_1" id="check_1">
-          <label style="width:13vw;" for="check_1">보수필요</label>
-        </td>
-        <td style="width:15vw;">
-          <input type="checkbox" name="content_1" id="content_1">
-          <label style="width:8vw;" for="content_1" (click)="goDigr13SelectModal(0)">의견</label>
-        </td>
-      </tr>
-      <tr>
-        <td style="width:30vw;"  >주변조건 변경</td>
-        <td style="width:35vw;">
-          <input type="radio" name="radio_2" id="check_result_7">
-          <label style="width:8vw;" for="check_result_7">양호</label>
-          <input type="radio" name="radio_2" id="check_result_8">
-          <label style="width:8vw;" for="check_result_8">보통</label>
-          <input type="radio" name="radio_2" id="check_result_9">
-          <label style="width:8vw;" for="check_result_9">불량</label>
-        </td>
-        <td style="width:15vw;">
-          <input type="checkbox" name="check_2" id="check_2">
-          <label style="width:13vw;" for="check_2">보수필요</label>
-        </td>
-        <td style="width:15vw;">
-          <input type="checkbox" name="content_2" id="content_2">
-          <label style="width:8vw;" for="content_2" (click)="goDigr13SelectModal(0)">의견</label>
-        </td>
-      </tr>
-      <tr>
-        <td style="width:30vw;"  >균열발생현황</td>
-        <td style="width:35vw;">
-          <input type="radio" name="radio_3" id="check_result_10">
-          <label style="width:8vw;" for="check_result_10">양호</label>
-          <input type="radio" name="radio_3" id="check_result_11">
-          <label style="width:8vw;" for="check_result_11">보통</label>
-          <input type="radio" name="radio_3" id="check_result_12">
-          <label style="width:8vw;" for="check_result_12">불량</label>
-        </td>
-        <td style="width:15vw;">
-          <input type="checkbox" name="check_3" id="check_3">
-          <label style="width:13vw;" for="check_3">보수필요</label>
-        </td>
-        <td style="width:15vw;">
-          <input type="checkbox" name="content_3" id="content_3">
-          <label style="width:8vw;" for="content_3" (click)="goDigr13SelectModal(0)">의견</label>
-        </td>
-      </tr>
-      <tr>
-        <td style="width:30vw;"  >누수·백태현황</td>
-        <td style="width:35vw;">
-          <input type="radio" name="radio_4" id="check_result_13">
-          <label style="width:8vw;" for="check_result_13">양호</label>
-          <input type="radio" name="radio_4" id="check_result_14">
-          <label style="width:8vw;" for="check_result_14">보통</label>
-          <input type="radio" name="radio_4" id="check_result_15">
-          <label style="width:8vw;" for="check_result_15">불량</label>
-        </td>
-        <td style="width:15vw;">
-          <input type="checkbox" name="check_4" id="check_4">
-          <label style="width:13vw;" for="check_4">보수필요</label>
-        </td>
-        <td style="width:15vw;">
-          <input type="checkbox" name="content_4" id="content_4">
-          <label style="width:8vw;" for="content_4" (click)="goDigr13SelectModal(0)">의견</label>
-        </td>
-      </tr>
-      <tr>
-        <td style="width:30vw;"  >철근노출 및 부식</td>
-        <td style="width:35vw;">
-          <input type="radio" name="radio_5" id="check_result_16">
-          <label style="width:8vw;" for="check_result_16">양호</label>
-          <input type="radio" name="radio_5" id="check_result_17">
-          <label style="width:8vw;" for="check_result_17">보통</label>
-          <input type="radio" name="radio_5" id="check_result_18">
-          <label style="width:8vw;" for="check_result_18">불량</label>
-        </td>
-        <td style="width:15vw;">
-          <input type="checkbox" name="check_5" id="check_5">
-          <label style="width:13vw;" for="check_5">보수필요</label>
-        </td>
-        <td style="width:15vw;">
-          <input type="checkbox" name="content_5" id="content_5">
-          <label style="width:8vw;" for="content_5" (click)="goDigr13SelectModal(0)">의견</label>
-        </td>
-      </tr>
-      <!-- <tr>
-        <td style="width:30vw;"  >철근노출 및 부식</td>
-        <td style="width:35vw;">
-          <input type="radio" name="radio_6" id="check_result_19">
-          <label style="width:8vw;" for="check_result_19">양호</label>
-          <input type="radio" name="radio_6" id="check_result_20">
-          <label style="width:8vw;" for="check_result_20">보통</label>
-          <input type="radio" name="radio_6" id="check_result_21">
-          <label style="width:8vw;" for="check_result_21">불량</label>
-        </td>
-        <td style="width:15vw;">
-          <input type="checkbox" name="check_6" id="check_6">
-          <label style="width:13vw;" for="check_6">보수필요</label>
-        </td>
-        <td style="width:15vw;">
-          <input type="checkbox" name="content_6" id="content_6">
-          <label style="width:8vw;" for="content_6" (click)="goDigr13SelectModal(0)">의견</label>
-        </td>
-      </tr> -->
-      <tr>
-        <td style="width:30vw;"  >강재구조 노후</td>
-        <td style="width:35vw;">
-          <input type="radio" name="radio_7" id="check_result_22">
-          <label style="width:8vw;" for="check_result_22">양호</label>
-          <input type="radio" name="radio_7" id="check_result_23">
-          <label style="width:8vw;" for="check_result_23">보통</label>
-          <input type="radio" name="radio_7" id="check_result_24">
-          <label style="width:8vw;" for="check_result_24">불량</label>
-        </td>
-        <td style="width:15vw;">
-          <input type="checkbox" name="check_7" id="check_7">
-          <label style="width:13vw;" for="check_7">보수필요</label>
-        </td>
-        <td style="width:15vw;">
-          <input type="checkbox" name="content_7" id="content_7">
-          <label style="width:8vw;" for="content_7" (click)="goDigr13SelectModal(0)">의견</label>
-        </td>
-      </tr>
-      <tr>
-        <td style="width:30vw;"  >마감재</td>
-        <td style="width:35vw;">
-          <input type="radio" name="radio_8" id="check_result_25">
-          <label style="width:8vw;" for="check_result_25">양호</label>
-          <input type="radio" name="radio_8" id="check_result_26">
-          <label style="width:8vw;" for="check_result_26">보통</label>
-          <input type="radio" name="radio_8" id="check_result_27">
-          <label style="width:8vw;" for="check_result_27">불량</label>
-        </td>
-        <td style="width:15vw;">
-          <input type="checkbox" name="check_8" id="check_8">
-          <label style="width:13vw;" for="check_8">보수필요</label>
-        </td>
-        <td style="width:15vw;">
-          <input type="checkbox" name="content_8" id="content_8">
-          <label style="width:8vw;" for="content_8" (click)="goDigr13SelectModal(0)">의견</label>
-        </td>
-      </tr>
+      <ng-container *ngIf="dign1_checklist?.length > 0; else addBlock">
+        <tr *ngFor="let dignChek of dign1_checklist; let i = index;">
+          <ng-container *ngIf="dignChek.check_nm3 == null; else elseBlock">
+            <ng-container *ngIf="dignChek.check_cd1 == 'xx'; else elseCd1">
+                <td class="cd1_{{dignChek.check_cd1}}" style="width:10vw;">
+                  <input type="text" placeholder="{{dignChek.check_nm1}}">
+                </td>
+            </ng-container>
+            <ng-template #elseCd1>
+              <td *ngIf="dignChek.check_cd1_rownum == 1" [attr.rowspan]="dignChek.cd1_len" class="cd1_{{dignChek.check_cd1}}" style="width:10vw;">{{dignChek.check_nm1}}</td>
+            </ng-template>
+            <ng-container *ngIf="dignChek.check_cd2 == 'xx'; else elseCd2">
+                <td class="cd2_{{dignChek.check_cd1}}{{dignChek.check_cd2}}" style="width:25vw;" colspan="2">
+                  <input type="text" placeholder="{{dignChek.check_nm2}}">
+                </td>
+            </ng-container>
+            <ng-template #elseCd2>
+                <td class="cd2_{{dignChek.check_cd1}}{{dignChek.check_cd2}}" style="width:25vw;" colspan="2">{{dignChek.check_nm2}}</td>
+            </ng-template>
+          </ng-container>
+          <ng-template #elseBlock>
+            <td *ngIf="dignChek.check_cd1_rownum == 1" [attr.rowspan]="dignChek.cd1_len" class="cd1_{{dignChek.check_cd1}}" style="width:10vw;">{{dignChek.check_nm1}}</td>
+            <td *ngIf="dignChek.check_cd2_rownum == 1" [attr.rowspan]="dignChek.cd2_len" class="cd2_{{dignChek.check_cd1}}{{dignChek.check_cd2}}" style="width:10vw;">{{dignChek.check_nm2}}</td>
+            <td class="cd3_{{dignChek.check_cd1}}{{dignChek.check_cd2}}{{dignChek.check_cd3}}" style="width:15vw;">{{dignChek.check_nm3}}</td>
+          </ng-template>
+          <td style="width:30vw;">
+            <input type="radio" [(ngModel)]="digr13Array[i].check_result" name="{{dignChek.check_cd}}" id="check_result_{{dignChek.check_cd}}_1" value="1" >
+            <label style="width:8vw;" for="check_result_{{dignChek.check_cd}}_1">양호</label>
+            <input type="radio" [(ngModel)]="digr13Array[i].check_result" name="{{dignChek.check_cd}}" id="check_result_{{dignChek.check_cd}}_2" value="2" >
+            <label style="width:8vw;" for="check_result_{{dignChek.check_cd}}_2">보통</label>
+            <input type="radio" [(ngModel)]="digr13Array[i].check_result" name="{{dignChek.check_cd}}" id="check_result_{{dignChek.check_cd}}_3" value="3" >
+            <label style="width:8vw;" for="check_result_{{dignChek.check_cd}}_3">불량</label>
+          </td>
+          <td style="width:15vw;">
+            <input type="checkbox" [(ngModel)]="digr13Array[i].amend_need_yn" name="amend_need_yn_{{i}}" id="amend_need_yn_{{i}}">
+            <label style="width:13vw;" for="amend_need_yn_{{i}}">보수필요</label>
+          </td>
+          <td style="width:15vw;">
+            <ng-container *ngIf="digr13Array[i].dign_opinion == ''; else elseOpinion">
+              <input type="checkbox" name="dign_opinion_{{i}}" id="dign_opinion_{{i}}">
+              <label style="width:8vw;" for="dign_opinion_{{i}}" (click)="goDigr13SelectModal(digr13Array[i])">의견</label>
+            </ng-container>
+            <ng-template #elseOpinion>
+              <input type="checkbox" name="dign_opinion_{{i}}" id="dign_opinion_{{i}}" checked="checked">
+              <label style="width:8vw;" for="dign_opinion_{{i}}" (click)="goDigr13SelectModal(digr13Array[i])">의견</label>
+            </ng-template>
+          </td>
+        </tr>
+      </ng-container>
+      <ng-template #addBlock>
+      </ng-template>
     </tbody>
   </table>
   <ion-buttons end>
+    <button ion-button icon-start (click)="goPrev()">
+      이전
+    </button>
+    <button ion-button icon-start (click)="goNext()">
+      다음
+    </button>
     <button ion-button icon-start (click)="goSave()">
       저장
     </button>

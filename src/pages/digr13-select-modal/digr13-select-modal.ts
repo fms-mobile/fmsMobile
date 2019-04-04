@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { DIGR01_GROUPVO } from '../../model/DIGR01_GROUPVO';
+import { MANTB_DIGR13VO } from '../../model/MANTB_DIGR13VO';
 
 /**
  * Generated class for the Digr13SelectModal page.
@@ -13,10 +15,13 @@ import { NavController, NavParams, ViewController, ModalController } from 'ionic
   templateUrl: 'digr13-select-modal.html',
 })
 export class Digr13SelectModalPage {
-  check_resultList : Array<number>;
+  digr01Group : DIGR01_GROUPVO;
+  digr13 : MANTB_DIGR13VO;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController) {
-    this.check_resultList = [0,1,2];
+    this.digr01Group = navParams.data.digr01Group;
+    this.digr13 = navParams.data.digr13;
+    
   }
 
   ionViewDidLoad() {

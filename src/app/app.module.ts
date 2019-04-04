@@ -3,6 +3,8 @@ import { BASTB_MAST01VO } from './../model/BASTB_MAST01VO';
 import { MANTB_DIGR11VO } from './../model/MANTB_DIGR11VO';
 import { MANTB_DIGR12VO } from './../model/MANTB_DIGR12VO';
 import { DIGR01_GROUPVO } from './../model/DIGR01_GROUPVO';
+import { COMTB_REPT01VO } from './../model/COMTB_REPT01VO';
+import { BASTB_META01VO } from './../model/BASTB_META01VO';
 
 import { Digr02WritePage } from './../pages/digr02-write/digr02-write';
 import { Digr02ListPage } from './../pages/digr02-list/digr02-list';
@@ -13,6 +15,7 @@ import { Digr01WritePage } from '../pages/digr01-write/digr01-write';
 import { Digr11ListPage } from '../pages/digr11-list/digr11-list';
 import { Digr11WritePage } from './../pages/digr11-write/digr11-write';
 import { Digr13WritePage } from './../pages/digr13-write/digr13-write';
+import { Orgn11ListPage } from './../pages/orgn11-list/orgn11-list';
 import { Digr12WriteModalPage } from './../pages/digr12-write-modal/digr12-write-modal';
 import { Digr13SelectModalPage } from './../pages/digr13-select-modal/digr13-select-modal';
 import { FacilPartSearchModalPage } from './../pages/facil-part-search-modal/facil-part-search-modal';
@@ -20,6 +23,9 @@ import { SeriousDefectModalPage } from './../pages/serious-defect-modal/serious-
 import { DigrTabWritePage } from './../pages/digr-tab-write/digr-tab-write';
 import { DigrTabsPage } from './../pages/digr-tabs/digr-tabs';
 import { DigrGroupPage } from './../pages/digr-group/digr-group';
+import { MainPage } from './../pages/main/main';
+import { Iframe } from './../pages/iframe/iframe';
+import { Inappbrowser } from './../pages/inappbrowser/inappbrowser';
 
 import { NgModule, ErrorHandler } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -29,6 +35,7 @@ import { IonicApp, IonicModule, IonicErrorHandler, IonicPageModule  } from 'ioni
 import { MyApp } from './app.component';
 import { UUID } from 'angular2-uuid';
 import { CalendarModule } from "ion2-calendar";
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 import { LoginPage } from '../pages/home/login';
 import { AssetsPage } from '../pages/home/assets';
@@ -55,6 +62,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { Insomnia } from '@ionic-native/insomnia/ngx';
 import { CurrencyPipe } from '@angular/common';
+// import { IonicTreeViewModule } from 'ionic-tree-view';
  
 @NgModule({
   declarations: [
@@ -66,6 +74,9 @@ import { CurrencyPipe } from '@angular/common';
     WritePage,
     CustFilter,
     ModalPage,
+    MainPage,
+    Inappbrowser,
+    Iframe,
     Digr01SelectPage,
     DigrGroupPage,
     DigrTabsPage,
@@ -81,7 +92,8 @@ import { CurrencyPipe } from '@angular/common';
     Mast01ListPage,
     Digr02ListPage,
     Digr02ListModalPage,
-    Digr02WritePage
+    Digr02WritePage,
+    Orgn11ListPage
   ],
   imports: [
     BrowserModule,
@@ -94,7 +106,8 @@ import { CurrencyPipe } from '@angular/common';
       autoFocusAssist: false
     }),
     CalendarModule,
-    IonicPageModule.forChild(ModalPage)
+    // IonicTreeViewModule.forRoot(),
+    IonicPageModule.forChild(ModalPage),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -105,6 +118,9 @@ import { CurrencyPipe } from '@angular/common';
     ViewPage,
     WritePage,
     ModalPage,
+    MainPage,
+    Inappbrowser,
+    Iframe,
     Digr01SelectPage,
     DigrGroupPage,
     DigrTabsPage,
@@ -120,7 +136,8 @@ import { CurrencyPipe } from '@angular/common';
     Mast01ListPage,
     Digr02ListPage,
     Digr02WritePage,
-    Digr02ListModalPage
+    Digr02ListModalPage,
+    Orgn11ListPage
   ],
   providers: [
     StatusBar,
@@ -137,12 +154,15 @@ import { CurrencyPipe } from '@angular/common';
     DbInitData,
     ScreenOrientation,
     MANTB_DIGR01VO,
+    COMTB_REPT01VO,
     BASTB_MAST01VO,
     MANTB_DIGR11VO,
     DIGR01_GROUPVO,
     MANTB_DIGR12VO,
+    BASTB_META01VO,
     CurrencyPipe,
     UUID,
+    InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

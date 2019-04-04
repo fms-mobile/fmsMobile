@@ -15,17 +15,8 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item (click)="utilService.selectItem($event,renderer,selectOptions)">
-      <ion-label color="primary">시설물기초의 세굴</ion-label>
-    </ion-item>
-    <ion-item (click)="utilService.selectItem($event,renderer,selectOptions)">
-      <ion-label color="primary">시설물의 철근콘크리트의 염해 또는 탄산화에 따른 내력 손실</ion-label>
-    </ion-item>
-    <ion-item (click)="utilService.selectItem($event,renderer,selectOptions)">
-      <ion-label color="primary">건축물의 기둥ㆍ보 또는 내력벽의 내력손실</ion-label>
-    </ion-item>
-    <ion-item (click)="utilService.selectItem($event,renderer,selectOptions)">
-      <ion-label color="primary">건축물 조립식 구조체의 연결부실로 인한 내력상실(2018.1.18. 이전)</ion-label>
+    <ion-item *ngFor="let serious_defect of serious_defectList; let i = index" (click)="utilService.selectItem($event,renderer,selectOptions)">
+      <ion-label color="primary">{{serious_defect.data2}}</ion-label>
     </ion-item>
   </ion-list>
   <ion-buttons end>

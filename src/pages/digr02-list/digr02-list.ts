@@ -31,7 +31,8 @@ export class Digr02ListPage {
   }
 
   goWrite(digr01Group : DIGR01_GROUPVO, index: number){
-    this.navCtrl.push(Digr02WritePage,{"digr01Group":this.digr01Group,"index":index});
+    let mast01ListPageModal = this.modalCtrl.create(Digr02WritePage, {"digr01Group":this.digr01Group,"index":index});
+    mast01ListPageModal.present();
   }
 
   addMast01(){

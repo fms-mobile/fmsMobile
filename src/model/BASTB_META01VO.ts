@@ -1,0 +1,36 @@
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class BASTB_META01VO {
+    public entity_id : string = ""; 
+    public entity_nm : string = ""; 
+    public abbr_nm : string = ""; 
+    public entity_type : string = ""; 
+    public input_yn : string = ""; 
+    public eval_entity : string = ""; 
+    public entity_lvl : number = 0;
+    public upper_id : string = ""; 
+    public struct_kind : string = ""; 
+    public object_key : string = ""; 
+    public search_key : string = ""; 
+    public weight : number = 0;
+    public sort_order : number = 0;
+    public use_yn : string = ""; 
+
+    constructor(){
+        this.entity_id = ""; 
+        this.entity_nm = ""; 
+        this.abbr_nm = ""; 
+        this.entity_type = ""; 
+        this.input_yn = ""; 
+        this.eval_entity = ""; 
+        this.entity_lvl = 0;
+        this.upper_id = ""; 
+        this.struct_kind = ""; 
+        this.object_key = ""; 
+        this.search_key = ""; 
+        this.weight = 0;
+        this.sort_order = 0;
+        this.use_yn = "";
+    }
+}

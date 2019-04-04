@@ -16,7 +16,7 @@
     <tr>
       <th class="w160">점검진단 구분</th>
       <td style="width:calc(95vw - 200px);">
-        <span *ngFor="let regular_gbn of regular_gbnList; let i=index" style="">
+        <span *ngFor="let regular_gbn of regular_gbnList; let i=index">
           <input type="radio" name="regular_gbn" id="regular_gbn_{{i}}" [(ngModel)]="digr01.regular_gbn" value="{{regular_gbn.code1}}">
           <label style="width:calc((95vw - 200px)/5 - 10px);" for="regular_gbn_{{i}}">{{regular_gbn.data1}}</label>
         </span>

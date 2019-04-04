@@ -1,1 +1,29 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-title>Custom Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item (click)="goMainPage()">메인화면</ion-item>
+      <ion-item (click)="goInappbrowserPage('https://www.fms.or.kr','FMS')">FMS</ion-item>
+      <ion-item (click)="goIframePage('https://www.fms.or.kr','FMS')">FMS</ion-item>
+      <ion-item (click)="goInappbrowserPage('http://112.171.195.152:28100/mobile.do','FMS 모바일')">(inappbrowser)FMS 모바일 웹</ion-item>
+      <ion-item (click)="goIframePage('http://112.171.195.152:28100/mobile.do','FMS 모바일')">(iframe)FMS 모바일 웹</ion-item>
+      <ion-item (click)="goDigrGroupPage()">정기안전점검</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{appTitle}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-nav #content [root]="rootPage"></ion-nav>

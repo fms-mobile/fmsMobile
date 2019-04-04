@@ -1,11 +1,16 @@
 page-digr13-write {
-    table {
-        th{
-            text-align:center;
+    .form-01 {
+        tr {
+            display: table-row;
+            th{
+                text-align:center;
+                padding-left: 0px;
+            }
+            td{
+                text-align:center;
+            }
         }
-        td{
-            text-align:center;
-        }
+        
     }
 
 }
