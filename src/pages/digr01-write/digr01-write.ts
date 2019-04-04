@@ -5,7 +5,7 @@ import { GlobalVars } from '../../services/GlobalVars';
 import { DIGR01_GROUPVO } from '../../model/DIGR01_GROUPVO';
 
 import { ModalController } from 'ionic-angular';
-import { CalendarModal, CalendarModalOptions, DayConfig, CalendarResult } from "ion2-calendar";
+import { CalendarModal, CalendarModalOptions, CalendarResult } from "ion2-calendar";
 
 /**
  * Generated class for the Digr01Write page.

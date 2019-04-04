@@ -64,7 +64,7 @@ export class COMTB_REPT01 {
 			        ;
 
             //console.log(sqlMain);
-            var rtn = txn.executeSql(sqlMain, [], (transaction, resultSet) => {
+            txn.executeSql(sqlMain, [], (transaction, resultSet) => {
                 var res = [];
                 for (var i=0; i < resultSet.rows.length; i++) {
                     res.push(resultSet.rows.item(i));

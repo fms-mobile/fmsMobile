@@ -1,8 +1,8 @@
 import { Digr02ListPage } from './../digr02-list/digr02-list';
 import { Digr11ListPage } from './../digr11-list/digr11-list';
 import { Digr01WritePage } from './../digr01-write/digr01-write';
-import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, Tabs } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
 import { DIGR01_GROUPVO } from '../../model/DIGR01_GROUPVO';
 
 /**

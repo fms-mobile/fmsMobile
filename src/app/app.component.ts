@@ -80,6 +80,10 @@ export class MyApp {
     this.menuCtrl.close();
   }
 
+  goEmbededPage(){
+    
+  }
+
   goIframePage(url :string, title : string){
     this.appTitle = title;
     this.nav.setRoot(Iframe,url);

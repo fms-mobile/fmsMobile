@@ -16,7 +16,7 @@ export class Inappbrowser {
   url : string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private iab: InAppBrowser) {
-    this.url = navParams.data;
+    this.url = "http://112.171.195.152:28100/mobile.do";
     const option : InAppBrowserOptions = {
       location: 'no',
       hideurlbar: 'yes',

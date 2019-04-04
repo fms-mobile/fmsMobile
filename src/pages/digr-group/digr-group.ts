@@ -1,5 +1,4 @@
 import { DigrTabWritePage } from './../digr-tab-write/digr-tab-write';
-import { DigrTabsPage } from './../digr-tabs/digr-tabs';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { GlobalVars } from '../../services/GlobalVars';

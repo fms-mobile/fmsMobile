@@ -34,7 +34,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler, IonicPageModule  } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { UUID } from 'angular2-uuid';
-import { CalendarModule } from "ion2-calendar";
+//import { CalendarModule } from "ion2-calendar";
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 import { LoginPage } from '../pages/home/login';
@@ -105,7 +105,7 @@ import { CurrencyPipe } from '@angular/common';
       scrollAssist: false,
       autoFocusAssist: false
     }),
-    CalendarModule,
+    //CalendarModule,
     // IonicTreeViewModule.forRoot(),
     IonicPageModule.forChild(ModalPage),
   ],

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ViewController  } from 'ionic-angular';
 import { DIGR01_GROUPVO } from '../../model/DIGR01_GROUPVO';
 import { MANTB_DIGR13VO } from '../../model/MANTB_DIGR13VO';
 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, MenuController } from 'ionic-angular';
+import { Inappbrowser } from './../inappbrowser/inappbrowser';
 
 /**
  * Generated class for the Main page.
@@ -12,8 +13,11 @@ import { NavController, NavParams, MenuController } from 'ionic-angular';
   templateUrl: 'main.html',
 })
 export class MainPage {
+  inappbrowser : Inappbrowser
+  url : string
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController) {
+    
   }
 
   ionViewDidLoad() {

@@ -1,7 +1,7 @@
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
+import { SafeResourceUrl } from '@angular/platform-browser';
 
 /**
  * Generated class for the Naver page.
@@ -17,7 +17,7 @@ export class Naver {
   url : string
   externalLink : SafeResourceUrl;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private iab: InAppBrowser,private domSanitizer: DomSanitizer) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private iab: InAppBrowser) {
     /* this.url = navParams.data;
     this.externalLink = this.domSanitizer.bypassSecurityTrustResourceUrl(this.url); */
     const option : InAppBrowserOptions = {

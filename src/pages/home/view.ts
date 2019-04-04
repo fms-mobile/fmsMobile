@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform, Events, NavController, NavParams, ToastController, ViewController, LoadingController, AlertController } from 'ionic-angular';
+import { Events, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { HttpClient} from '@angular/common/http';
 import { Storage } from '@ionic/storage';

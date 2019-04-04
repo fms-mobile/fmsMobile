@@ -1,12 +1,9 @@
 import { BASTB_MAST01VO } from './../../model/BASTB_MAST01VO';
 import { MANTB_DIGR01VO } from './../../model/MANTB_DIGR01VO';
-import { Digr02ListPage } from './../digr02-list/digr02-list';
 import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { GlobalVars } from '../../services/GlobalVars';
 import { DIGR01_GROUPVO } from '../../model/DIGR01_GROUPVO';
-import { MANTB_DIGR12VO } from '../../model/MANTB_DIGR12VO';
-import { MANTB_DIGR13VO } from '../../model/MANTB_DIGR13VO';
 import { UtilService } from '../../services/UtilService';
 
 /**

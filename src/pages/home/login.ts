@@ -8,7 +8,7 @@ import { GlobalVars } from '../../services/GlobalVars';
 import { UtilService } from '../../services/UtilService';
 import { WebDataProvider } from '../../providers/WebDataProvider';
 
-import { ListPage } from '../home/list';
+//import { ListPage } from '../home/list';
 
 
 @Component({
