@@ -29,7 +29,7 @@ export class AuthService {
     headers.append('Access-Control-Allow-Origin' , '*');
     headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
 
-    // this.url = globalVars.webUrl+"mobile";
+    this.url = globalVars.webUrl+"mobile";
     this.plt.ready().then(() => {
       this.checkToken();
     });

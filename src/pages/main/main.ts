@@ -20,8 +20,8 @@ export class MainPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController,public menuCtrl: MenuController
     ,public globalVars:GlobalVars) {
-    //this.webUrl = globalVars.serverUrl;
-    this.webUrl = 'http://localhost:8080/mobile';
+    this.webUrl = globalVars.webUrl+"mobile";
+    // this.webUrl = globalVars.serverUrl;
   }
 
   ionViewDidLoad() {
