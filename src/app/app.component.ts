@@ -23,6 +23,7 @@ import { TransmissionService } from '../services/transmisson-service';
 
 export class MyApp {
     @ViewChild(Nav) nav: Nav;
+    
 
     rootPage = "MainPage";
     pages: any;
