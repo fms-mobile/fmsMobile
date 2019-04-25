@@ -1,0 +1,83 @@
+<!--
+  Generated template for the Digr02List page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<div class="top-tit-area02">
+  <div>
+    <p>대상시설물 목록</p>
+    <ion-buttons end>
+      <button ion-button icon-only style="width:2rem;height:2rem;" (click)="addMast01()"><ion-icon name="add"></ion-icon></button>
+    </ion-buttons>    
+  </div>
+</div>
+
+<ion-list id="digr02List" nopadding>
+  <ion-list-header>
+    <ion-label col-4>시설물 명칭</ion-label>
+    <ion-label col-2>종별</ion-label>
+    <ion-label col-2>비용(천원)</ion-label>
+    <ion-label col-1>이전<br>안전등급</ion-label>
+    <ion-label col-1>상태평가<br>안전등급</ion-label>
+    <ion-label col-2>작성<br>상태</ion-label>
+  </ion-list-header>
+  <ion-item-sliding *ngFor="let mast01 of digr01Group.selectedMast01List; let i=index"> <!-- for loop here -->
+    <ion-item (click)="goWrite(digr01Group,i)">
+      <ion-grid>
+        <ion-row class="row">
+          <ion-col class="col" col-4 >{{mast01.facil_nm}}</ion-col>
+          <ion-col class="col" col-2 >{{mast01.facil_class_nm}}</ion-col>
+          <ion-col class="col" col-2 >{{digr01Group.digr02List[i].dign_amt}}</ion-col>
+          <ion-col class="col" col-1 >{{mast01.stage_grade}}</ion-col>
+          <ion-col class="col" col-1 >{{digr01Group.digr02List[i].stage_grade}}</ion-col>
+          <ion-col class="col" col-2 ></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item-options danger>
+        <button danger color="danger" class="danger" (click)="removeItem(mast01,i)"><ion-icon slot="icon-only" name="trash"></ion-icon> 삭제</button>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>
+
+<!-- <table class="form-01">
+  <thead>
+    <tr>
+      <th style="width:30vw; text-align:center;">시설물 명칭</th>
+      <th style="width:10vw; text-align:center;">종별</th>
+      <th style="width:20vw; text-align:center;">비용(천원)</th>
+      <th style="width:10vw; text-align:center; font-size:1.1rem;">이전<br>안전등급</th>
+      <th style="width:10vw; text-align:center; font-size:1.1rem;">상태평가<br>안전등급</th>
+      <th style="width:15vw; text-align:center;">작성상태</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let mast01 of digr01Group.selectedMast01List; let i = index;" (click)="goWrite(digr01Group,i)">
+      <ion-item-sliding>
+        <th style="width:30vw;">{{mast01.facil_nm}}</th>
+        <td style="width:10vw;">{{mast01.facil_class_nm}}</td>
+        <td style="width:20vw;">{{digr01Group.digr02List[i].dign_amt}}</td>
+        <td style="width:10vw;">{{mast01.stage_grade}}</td>
+        <td style="width:10vw;">{{digr01Group.digr02List[i].stage_grade}}</td>
+        <td style="width:15vw;">
+        </td>
+        <ion-item-options danger>
+          <button danger color="danger" class="danger"><ion-icon slot="icon-only" name="trash"></ion-icon> 삭제</button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </tr>
+  </tbody>
+</table> -->
+<!-- <ion-list>
+  <ion-list-header>
+    대상시설물 목록
+  </ion-list-header>
+  <ion-buttons end>
+      <button ion-button icon-only (click)="addMast01()"><ion-icon name="add"></ion-icon></button>
+  </ion-buttons>
+  <ion-item *ngFor="let mast01 of digr01Group.selectedMast01List; let i = index" (click)="goWrite(digr01Group,i)">
+    <ion-label>{{mast01.facil_nm}}</ion-label>
+  </ion-item>
+</ion-list> -->

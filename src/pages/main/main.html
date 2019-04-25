@@ -1,0 +1,41 @@
+<!--
+  Generated template for the Main page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!--Fist Screen-->
+<ion-header>
+  <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon class="icon-menu" name="menu"></ion-icon>
+      </button>
+      <!---Title-->
+      <ion-title >FMS 시설물통합정보시스템</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div class="main-visual"></div>
+    <div class="main-contents">
+        <div class="main-contents-box">
+          <div class="main-contents-title">주요서비스</div>
+          <ul class="main-app-btn">
+            <li (click)="goIframePage('/int01001.do','FMS 소개')"><a href="#">FMS 소개</a></li>
+            <li (click)="goIframePage('/pub01001.do','시설물안전등급 정보공개')"><a href="#">시설물안전등급 정보공개</a></li>
+            <li (click)="goIframePage('/dign_notify.do','점검진단도래시기 사전예고')"><a href="#">점검진단도래시기 사전예고</a></li>
+            <li (click)="goIframePage('/coe01001.do','안전진단전문기관 현황')"><a href="#">안전진단전문기관 현황</a></li>
+            <li (click)="goIframePage('/cof01001.do','시설물유지관리 업체현황')"><a href="#">시설물유지관리 업체현황</a></li>
+            <li (click)="goIframePage('/pub02001.do','3종시설물 지정/해제')"><a href="#">3종시설물 지정/해제</a></li>
+            <li (click)="goIframePage('/law01001.do','시설물 분류')"><a href="#">시설물 분류</a></li>
+            <li (click)="goIframePage('/eqk01001_agree.do','내진설계 대상여부확인')"><a href="#">내진설계 대상여부확인</a></li>
+          </ul>
+        </div>
+    </div>
+    <div class="footer footer-light">
+        <a href="#" class="footer-logo"></a>
+        <p class="small-text no-bottom center-text">Copyright ⓒ 2014 KISTEC. All Rights Reserved</p>
+        <p class="small-text no-bottom center-text">주소 : (우)52852 경상남도 진주시 충무공동 사들로 131 인재교육관 시설물정보 및 유지관리지원센터</p>
+        <p class="small-text no-bottom center-text">Tel : 055-771-1999 / Fax : 055-771-1950 / E-mail : kjlim@kistec.or.kr</p>
+    </div>
+</ion-content>

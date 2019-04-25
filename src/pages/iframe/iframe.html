@@ -1,0 +1,21 @@
+<!--
+  Generated template for the Iframe page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <!-- <div #test></div> -->
+  <!-- <embed *ngIf="externalLink" [src]="externalLink" width="100%" height="100%"> -->
+  <!-- <embed *ngIf="externalLink" src="http://112.171.195.152:28100/mobile.do" width="100%" height="100%" ></embed> -->
+  <iframe *ngIf="externalLink" [src]="externalLink" width="100%" height="100%" frameborder="0" ></iframe>
+</ion-content>

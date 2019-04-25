@@ -1,0 +1,63 @@
+<!--
+  Generated template for the Orgn11List page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+      <ion-buttons left>
+          <button ion-button icon-only (click)="dismiss()"><ion-icon name="backspace"></ion-icon></button>
+      </ion-buttons>
+      <ion-title>기술자 조회</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <!-- <table class="form-01">
+    <thead>
+      <tr>
+        <th style="width:35vw; text-align:center;">소속</th>
+        <th style="width:15vw; text-align:center;">성명</th>
+        <th style="width:25vw; text-align:center;">생년월일</th>
+        <th style="width:10vw; text-align:center;">직무분야</th>
+        <th style="width:10vw; text-align:center;">기술등급</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let orgn11 of comtbOrgn11List; let i = index;" (click)="select(orgn11)">
+        <td style="width:35vw; text-align:center;">{{orgn11.corp_nm}}</td>
+        <td style="width:15vw; text-align:center;">{{orgn11.member_nm}}</td>
+        <td style="width:25vw; text-align:center;">{{orgn11.birth_ymd}}</td>
+        <td style="width:10vw; text-align:center;">{{orgn11.certi_field_nm}}</td>
+        <td style="width:10vw; text-align:center;">{{orgn11.tech_grade_nm}}</td>
+      </tr>
+    </tbody>
+  </table> -->
+  <ion-list>
+    <ion-list-header>
+      <ion-label col-3>소속</ion-label>
+      <ion-label col-3>성명</ion-label>
+      <ion-label col-3>생년월일</ion-label>
+      <ion-label col-1>직무분야</ion-label>
+      <ion-label col-2>기술등급</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let orgn11 of comtbOrgn11List; let i = index;" (click)="select(orgn11)" >
+      <ion-grid>
+        <ion-row class="row">
+          <ion-col class="col" col-3 >{{orgn11.corp_nm}}</ion-col>
+          <ion-col class="col" col-3 >{{orgn11.member_nm}}</ion-col>
+          <ion-col class="col" col-3 >{{orgn11.birth_ymd}}</ion-col>
+          <ion-col class="col" col-1 >{{orgn11.certi_field_nm}}</ion-col>
+          <ion-col class="col" col-2 >{{orgn11.tech_grade_nm}}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="goSearch($event)" *ngIf="isPaging">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

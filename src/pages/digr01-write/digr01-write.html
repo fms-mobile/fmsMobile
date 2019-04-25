@@ -1,0 +1,71 @@
+<!--
+  Generated template for the Digr01Write page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<div class="top-tit-area02">
+  <div>
+    <p>점검개요</p>
+  </div>
+</div>
+
+<table class="form-01">
+  <tbody>
+    <tr>
+      <th class="w160">점검진단 구분</th>
+      <td style="width:calc(95vw - 200px);">
+        <span *ngFor="let regular_gbn of regular_gbnList; let i=index">
+          <input type="radio" name="regular_gbn" id="regular_gbn_{{i}}" [(ngModel)]="digr01.regular_gbn" value="{{regular_gbn.code1}}">
+          <label style="width:calc((95vw - 200px)/5 - 10px);" for="regular_gbn_{{i}}">{{regular_gbn.data1}}</label>
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <th class="w160">점검진단 시작일</th>
+      <td style="width:calc(95vw - 200px);">
+        <input type="text" style="width:40%;" maxlength="4">년 
+        <input type="text" style="width:20%;" maxlength="2">월 
+        <input type="text" style="width:20%;" maxlength="2">일
+      </td>
+    </tr>
+    <tr>
+      <th class="w160">점검진단 종료일</th>
+      <td style="width:calc(95vw - 200px);">
+        <input type="text" style="width:40%;" maxlength="4">년 
+        <input type="text" style="width:20%;" maxlength="2">월 
+        <input type="text" style="width:20%;" maxlength="2">일    
+      </td>
+    </tr>
+    <tr>
+      <th class="w160">작성자명</th>
+      <td style="width:calc(95vw - 200px);">
+          <input type="text" style="width:90%" class="form-control" placeholder="작성자명">
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- <ion-list>
+  <ion-list-header>점검개요</ion-list-header>
+  <ion-item>
+    <ion-label color="primary">점검진단 구분</ion-label>
+    <ion-select [(ngModel)]="digr01.regular_gbn">
+      <ion-option *ngFor="let regular_gbn of regular_gbnList" value="{{regular_gbn.code1}}">{{regular_gbn.data1}}
+      </ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary">점검진단 시작일</ion-label>
+    <ion-input id="start_ymd" (click)="openCalendar()"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary">점검진단 종료일</ion-label>
+    <ion-input id="end_ymd" (click)="openCalendar()"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary">작성자명</ion-label>
+    <ion-input [(ngModel)]="digr01.wrt_person" type="text" placeholder="내용을 입력하세요."></ion-input>
+  </ion-item>
+</ion-list> -->

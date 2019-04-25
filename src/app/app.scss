@@ -1,0 +1,238 @@
+// http://ionicframework.com/docs/v2/theming/
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+// Settings Style Main Meni
+[header-background-image] {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    @include darkening-blend-mode;
+
+    img {
+      padding-top: 40px;
+      margin: 0 auto;
+      display: block;
+      position: relative;
+      z-index: 9;
+      max-width: 60px;
+    }
+
+    [item-title] {
+      color: theme-colors('textColors', 'accent-first') !important;
+      position: relative;
+      z-index: 9;
+    }
+  }
+// Settings Icon Header
+ion-header {
+  [class^="icon-"]:before, [class*=" icon-"]:before {
+    width: auto !important;
+    margin-left: 0 !important;
+  }
+}
+
+  // Settings Main  Menu
+  [main-menu] {
+    button {
+      padding-left: 30px;
+    }
+
+    .item-inner {
+      margin-left: 0 !important;
+    }
+
+    [icon-small] {
+      margin-top: 18px !important;
+    }
+  }
+  // Settings Submenu
+
+  [submenu] {
+    ion-label {
+      padding-left: 30px !important;
+    }
+  }
+  .ion-page {}
+  .toolbar-title-md {
+    padding: 0 44px 0 12px;
+    text-align: center;
+  }
+  
+  .main-visual {
+    background:url(../assets/imgs/main_visual.png) no-repeat 50% 0%;
+    background-size:cover;
+    padding-top:5em;
+    padding-bottom:5em;
+  }
+  @media screen and (min-width: 640px) {
+    .mainVisual {
+        padding-top:9em;
+        padding-bottom:9em;
+    }
+  }
+  @media screen and (min-width: 900px) {
+    .mainVisual {
+        padding-top:15em;
+        padding-bottom:15em;
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    .mainVisual {
+        padding-top:22em;
+        padding-bottom:22em;
+    }
+  }
+  
+  ion-app.md [padding] page-main .scroll-content {
+    padding: 0em; 
+    background-color:#eaeaea;
+    margin-top: 5.6rem;
+  }
+  .main-contents {
+    margin-top:20px;
+  }
+  .main-contents-box {
+    border-top: 1px solid #d8d8d8; 
+    border-bottom: 1px solid #d8d8d8; 
+    background-color:#fff;
+  }
+  .main-contents-title {
+    padding:10px 16px;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  .main-app-btn {
+    padding:0px;
+    border-top: 1px solid #d8d8d8; 
+    display: table;
+    width: 100%;
+  }
+  .main-app-btn li {
+    border-top: 1px solid #d8d8d8;
+    border-left: 1px solid #d8d8d8;
+    width: 50%;
+    float: left;
+    font-size: 0.8rem;
+    padding: 0px 16px;
+    height: 3rem;
+    line-height: 3rem;
+    background: url(../assets/imgs/ico_main_category.png) no-repeat 100% 50%;
+  }
+  .main-app-btn li:nth-child(2n+1) {
+    border-left: 0px;
+  }
+  .main-app-btn li:nth-child(1),
+  .main-app-btn li:nth-child(2) {
+    border-top: 0px; 
+  }
+  .main-app-btn li a,
+  .main-app-btn li a:hover {
+    color: #000;
+  }
+  
+  .footer{
+    margin-bottom:0px!important;
+    padding:10px 30px 30px 30px;
+  }
+  
+  .footer a{
+    border:none!important;
+  }
+  
+  .footer a:hover{
+    border: 0px solid #cacaca;
+  }
+  
+  /*Footer Light*/
+  
+  .footer-light{
+    border-top:solid 1px #949494;
+    background-color:#fff;
+    margin-top:20px;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  
+  .footer-light .footer-logo{
+    margin-left:auto;
+    margin-right:auto;
+    background:url(../assets/imgs/logo_footer.png) no-repeat 50% 50%;
+    width:100px;
+    height:60px;
+    background-size:100px auto;
+    display:block;
+    margin-bottom:10px;
+  }
+  
+  .footer-dark .decoration{
+    background-color:rgba(255,255,255,0.07);
+  }
+  
+  .footer .small-text{
+    line-height: 1.2rem;
+  }
+  
+  .footer-socials{
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:20px;
+    /*margin-top:40px;*/
+  }
+  
+  .footer-socials a{
+    width:38px;
+    height:38px;
+    line-height:38px;
+    color:#FFFFFF!important;
+    text-align:center;
+    float:left;
+  }
+  
+  @media screen and (max-width:340px){
+    .footer-socials{
+        width:290px;
+    }
+  
+    .footer-socials a{
+        margin-left:3px;
+        margin-right:3px;
+    }
+  }
+  
+  @media screen and (min-width:340px){
+    .footer-socials{
+        width:200px;
+    }
+  
+    .footer-socials a{
+        margin-left:5px;
+        margin-right:5px;
+    }
+  }
+  
+  
+  ion-item-options[danger]{
+    button {
+      width: 120px;
+      background-color: red;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: white;
+      ion-icon {
+        font-size: 2.0rem;
+        color: white;
+      }
+    }
+  }
