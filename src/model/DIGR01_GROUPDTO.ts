@@ -31,7 +31,7 @@ export class DIGR01_GROUPDTO {
         this.selectedMast01List = new Array<BASTB_MAST01DTO>();
     }
     
-    public matchSelectedMast01List(bastbMast01DTO : BASTB_MAST01DTO){
+    matchSelectedMast01List(bastbMast01DTO : BASTB_MAST01DTO){
         let isResult : Boolean = false; 
         let selectedMast01List = this.selectedMast01List;
         let len = selectedMast01List.length;

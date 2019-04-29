@@ -1,6 +1,6 @@
 import { BASTB_MAST01DTO } from './../../model/BASTB_MAST01DTO';
 import { MANTB_DIGR01DTO } from './../../model/MANTB_DIGR01DTO';
-import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, IonicPage } from 'ionic-angular';
 import { GlobalVars } from '../../services/GlobalVars';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
@@ -19,23 +19,16 @@ import { UtilService } from '../../services/UtilService';
 })
 export class Mast01ListPage {
   public bastbMast01List : Array<any>;
-  public numberOfItemsToDisplay : number = 10;
+  public numberOfItemsToDisplay : number = 20;
   page : number = 0;
   digr01Group : DIGR01_GROUPDTO;
-  selectOptions : any = {};
   isPaging : boolean = true;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public globalVars:GlobalVars
-    , private elementRef : ElementRef, public utilService : UtilService,public renderer :Renderer2,public viewCtrl: ViewController ) {
+    , public utilService : UtilService,public viewCtrl: ViewController ) {
       this.digr01Group = navParams.data;
-      this.selectOptions["multiple"] = true;
       this.bastbMast01List = new Array<any>();
       this.goSearch(null);
-  }
-
-  ionViewDidEnter() {
-    //console.log('ionViewDidLoad Mast01List');
-    this.selectOptions["AllItems"] = this.elementRef.nativeElement.querySelectorAll('ion-item');
   }
 
   goSearch($event){
@@ -43,6 +36,11 @@ export class Mast01ListPage {
     let that = this;
     let event = $event;
     this.globalVars.db.bastbMast01.list001({"start":this.page,"pagCount":this.numberOfItemsToDisplay,"selectedIds":selectedIds}, (res) => {
+      // 임시 수정 코드
+      if(that.page == 2) {
+        event.enable(false);
+      }
+
       if(res.length > 0) {
         that.bastbMast01List.push(...res);
         that.page = that.page + 1;
@@ -54,12 +52,6 @@ export class Mast01ListPage {
         event.complete();
       }
     });
-
-
-    
-    /* this.globalVars.db.bastbMast01.list001({"pagCount":"","selectedIds":selectedIds}, (res) => {
-      this.bastbMast01List = res;
-    }); */
   }
 
   selectItem(bastbMast01: any){
@@ -86,16 +78,15 @@ export class Mast01ListPage {
   }
 
   goSave(){
-    let itemList = this.elementRef.nativeElement.querySelectorAll('ion-item');
-
     let i = 0;
+    let itemList = this.bastbMast01List;
     let selectMast01List = this.digr01Group.selectedMast01List;
     let item :any;
 
     for(i;i<itemList.length;i++) {
       item = itemList[i];
 
-      if(item.classList.contains("selected")) {
+      if(item.selected) {
         let mast01Item : BASTB_MAST01DTO =  this.bastbMast01List[i];
         if(!this.digr01Group.matchSelectedMast01List(mast01Item)) {
           selectMast01List.push(mast01Item);

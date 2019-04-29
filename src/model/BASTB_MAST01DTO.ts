@@ -24,8 +24,8 @@ export class BASTB_MAST01DTO {
     public next_dign_ymd4 : string = "";
     public next_dign_ymd5 : string = "";
     public state_grade : string = "";
-    public map_x : number = 0;
-    public map_y : number = 0;
+    public map_x : number = null;
+    public map_y : number = null;
     public facil_spec1 : string = "";
     public facil_spec2 : string = "";
     public facil_spec3 : string = "";
@@ -55,8 +55,8 @@ export class BASTB_MAST01DTO {
         this.next_dign_ymd4 = "";
         this.next_dign_ymd5 = "";
         this.state_grade = "";
-        this.map_x = 0;
-        this.map_y = 0;
+        this.map_x = null;
+        this.map_y = null;
         this.facil_spec1 = "";
         this.facil_spec2 = "";
         this.facil_spec3 = "";

@@ -74,12 +74,11 @@ export class MyApp {
     openPage(page) {
     // close the menu when clicking a link from the menu
     // navigate to the new page if it is not the current page
-    if (page.singlePage) {
+    if (page.iframe) {
         this.menu.open();
-        this.nav.push(this.getPageForOpen(page.theme), {
-          service: this.getServiceForPage(page.theme),
-          page: page,
-          componentName: page.theme
+        this.nav.push("Iframe", {
+          "url": this.globalVars.webUrl+ "mobile"+page.theme,
+          "title":this.getTitle(page.theme)
         });
     } else {
       this.nav.setRoot(this.getPageForOpen(page.theme), {
@@ -87,7 +86,7 @@ export class MyApp {
       });
     }
   }
-
+  
   getPageForOpen(value: string): any {
     return value;
   }
@@ -95,4 +94,41 @@ export class MyApp {
   getServiceForPage(value: string): IService {
     return null;
   }
+
+  getTitle(value) {
+    let title;
+
+    switch (value) {
+      case "/int01001.do":
+      title = "FMS 소개";
+      break;
+      case "/pub01001.do":
+      title = "시설물안전등급 정보공개";
+      break;  
+      case "/dign_notify.do":
+      title = "점검진단도래시기 사전예고";
+      break;
+      case "/coe01001.do":
+      title = "안전진단전문기관 현황";
+      break;
+      case "/cof01001.do":
+      title = "시설물유지관리 업체현황";
+      break;
+      case "/pub02001.do":
+      title = "3종시설물 지정/해제";
+      break;
+      case "/law01001.do":
+      title = "시설물 분류";
+      break;
+      case "/eqk01001_agree.do":
+      title = "내진설계 대상여부확인";
+      break;
+      
+      default:
+        title = "FMS 모바일";
+    }
+    return title;
+  }
+
+  
 }

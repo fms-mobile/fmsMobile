@@ -1,4 +1,4 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, ToastController, ViewController, IonicPage } from 'ionic-angular';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { MANTB_DIGR01DTO } from '../../model/MANTB_DIGR01DTO';
@@ -27,7 +27,7 @@ export class Digr13WritePage {
   dign1_checklist : [{}];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,public globalVars: GlobalVars
-    , public renderer :Renderer2,public utilService : UtilService,public toastCtrl: ToastController) {
+    ,public utilService : UtilService,public toastCtrl: ToastController) {
     this.digr01Group = navParams.data.digr01Group;
     this.index = navParams.data.index;
     this.digr02 = this.digr01Group.digr02List[this.index];

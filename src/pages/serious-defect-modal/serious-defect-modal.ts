@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, IonicPage } from 'ionic-angular';
 import { UtilService } from '../../services/UtilService';
 import { GlobalVars } from '../../services/GlobalVars';
@@ -20,7 +20,6 @@ import { MANTB_DIGR12DTO } from '../../model/MANTB_DIGR12DTO';
   templateUrl: 'serious-defect-modal.html',
 })
 export class SeriousDefectModalPage {
-  selectOptions : any = {};
   selectIndex : number;
   digr01Group : DIGR01_GROUPDTO;
   selectMast01 : BASTB_MAST01DTO;
@@ -30,8 +29,7 @@ export class SeriousDefectModalPage {
   serious_defectList : [{}];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController,public globalVars:GlobalVars,
-    private elementRef : ElementRef, public utilService : UtilService,public renderer :Renderer2) {
-    this.selectOptions["multiple"] = true;
+    public utilService : UtilService) {
 
     this.digr01Group = navParams.data.digr01Group;
     this.selectIndex = navParams.data.index;
@@ -50,7 +48,6 @@ export class SeriousDefectModalPage {
   }
 
   ionViewDidEnter() {
-    this.selectOptions["AllItems"] = this.elementRef.nativeElement.querySelectorAll('ion-item');
   }
 
   nodeClick(serious_defect) {

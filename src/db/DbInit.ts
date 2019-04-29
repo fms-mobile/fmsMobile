@@ -36,6 +36,7 @@ export class DbInit {
     public mantbDigr13 : MANTB_DIGR13;
     public loctbData01 : LOCTB_DATA01;
     public wsdb;
+
     constructor(public events: Events,
         public platform: Platform,
         public globalVars: GlobalVars,
@@ -62,17 +63,6 @@ export class DbInit {
     public createTables() {
         console.log("create tables");
         this.wsdb.transaction((txn) => {
-            txn.executeSql("create table if not exists COMTB_TEST01 "
-            + " (f1      	  text, "
-            + "  f2           text, "
-            + "  f3      	  text) ");
-
-            txn.executeSql("select count(*) as cnt from COMTB_TEST01", [],  
-            (transaction, resultSet) => {
-            if (resultSet.rows.item(0).cnt == 0) {
-                this.insertCOMTB_TEST01(txn);
-            }
-            });
             // 메타정보
 		    txn.executeSql(" create table BASTB_META01 "
                     + " ( "
@@ -362,15 +352,5 @@ export class DbInit {
                     + "    primary key(user_id,object_id)"
                     + "  ) ");
         });
-    } 
-
-
-    public insertCOMTB_TEST01(txn) {
-        txn.executeSql("insert into COMTB_TEST01(f1, f2, f3) values ('1', '테스트1', '테스트1 입니다.') ");
-        txn.executeSql("insert into COMTB_TEST01(f1, f2, f3) values ('2', '테스트2', '테스트2 입니다.') ");
-        txn.executeSql("insert into COMTB_TEST01(f1, f2, f3) values ('3', '테스트3', '테스트3 입니다.') ");
-        txn.executeSql("insert into COMTB_TEST01(f1, f2, f3) values ('4', '테스트4', '테스트4 입니다.') ");
-        txn.executeSql("insert into COMTB_TEST01(f1, f2, f3) values ('5', '테스트5', '테스트5 입니다.') ");
-        txn.executeSql("insert into COMTB_TEST01(f1, f2, f3) values ('6', '테스트6', '테스트6 입니다.') ");
     }
 }

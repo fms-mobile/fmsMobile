@@ -1,6 +1,6 @@
 import { CurrencyPipe, registerLocaleData } from '@angular/common';
 import { AlertController, ToastController, LoadingController, Loading, ModalController, Events, Platform  } from 'ionic-angular';
-import { Injectable, Renderer2 } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Network } from '@ionic-native/network';
 
 import { GlobalVars } from '../services/GlobalVars';

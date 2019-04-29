@@ -18,12 +18,10 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
   <ion-list>
     <ion-item *ngFor="let bastbMast01 of bastbMast01List" (click)="selectItem(bastbMast01)" [ngClass]="{'selected': bastbMast01.selected}" >
       <ion-label>{{bastbMast01.facil_nm}}</ion-label>
-      <ion-input class="facil_no" type="hidden" value="{{bastbMast01.facil_no}}"></ion-input>
     </ion-item>
   </ion-list>
   <ion-infinite-scroll threshold="100px" (ionInfinite)="goSearch($event)" *ngIf="isPaging">
@@ -32,11 +30,4 @@
       loadingText="Loading more data...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
-  <!-- <ion-list [virtualScroll]="bastbMast01List">
-    <ion-item *virtualItem="let bastbMast01" (click)="selectMast01($event)" >
-      <ion-label>{{bastbMast01.facil_nm}}</ion-label>
-      <ion-input class="facil_no" type="hidden" value="{{bastbMast01.facil_no}}"></ion-input>
-    </ion-item>
-  </ion-list> -->
-  
 </ion-content>

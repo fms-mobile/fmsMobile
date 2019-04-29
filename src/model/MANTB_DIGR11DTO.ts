@@ -18,16 +18,16 @@ export class MANTB_DIGR11DTO {
 
     constructor(){
         this.facil_no = "";
-        this.dign_seq = 0;
-        this.engineer_seq = 0;
+        this.dign_seq = null;
+        this.engineer_seq = null;
         this.engineer_nm = "";
         this.birth_ymd = "";
         this.sex = "";
         this.rep_yn = "";
         this.start_ymd = "";
         this.end_ymd = "";
-        this.parti_days = 0;
-        this.parti_rate = 0;
+        this.parti_days = null;
+        this.parti_rate = null;
         this.tech_grade = "";
         this.tech_grade_nm = "";
     }

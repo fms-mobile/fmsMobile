@@ -14,7 +14,44 @@
 
 
 <ion-content padding>
-  <table class="form-01">
+  <ion-grid>
+    <ion-row padding>
+      <ion-col col-12>
+        <ion-item no-lines box-shadow margin-bottom (click)="goOigr11List()">
+          <ion-input required no-margin type="text" placeholder="성명" [(ngModel)]="digr11.engineer_nm" readonly></ion-input>
+        </ion-item>
+        <ion-item no-lines box-shadow margin-bottom (click)="goOigr11List()">
+          <ion-input required no-margin type="text" placeholder="생년월일" [(ngModel)]="digr11.birth_ymd" readonly></ion-input>
+        </ion-item>
+        <ion-item no-lines box-shadow margin-bottom>
+          <ion-label floating>참여 시작일</ion-label>
+          <ion-input required no-margin type="date" placeholder="참여 시작일" ></ion-input>
+          <!-- <ion-label error-field color="secondary" no-margin *ngIf="!isUsernameValid">{{data.errorUser}}</ion-label> -->
+        </ion-item>
+        <ion-item no-lines box-shadow margin-bottom>
+          <ion-label floating>참여 종료일</ion-label>
+          <ion-datetime display-format="YYYY-MM-DD" picker-format="YYYY-MM-DD" [(ngModel)]="digr11.end_ymd" max="2080-10-30"></ion-datetime>
+        </ion-item>
+        <ion-item no-lines box-shadow margin-bottom>
+          <ion-input no-margin type="text" placeholder="일수" [(ngModel)]="digr11.parti_days"></ion-input>
+        </ion-item>
+        <ion-item no-lines box-shadow margin-bottom>
+          <ion-input no-margin type="text" placeholder="참여율(%)" [(ngModel)]="digr11.parti_rate"></ion-input>
+        </ion-item>
+        <ion-item no-lines box-shadow margin-bottom>
+          <ion-list radio-group [(ngModel)]="digr11.tech_grade">
+            <ion-item no-lines five-col *ngFor="let tech_grade of tech_gradeList; let i=index">
+              <ion-radio no-margin item-start value="{{tech_grade.code1}}" disabled="true"></ion-radio>
+              <!--Content Title-->
+              <ion-label no-margin item-title>{{tech_grade.data1}}</ion-label>
+              <!--Content Subtitle-->
+            </ion-item>
+          </ion-list>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- <table class="form-01">
     <tbody>
       <tr>
         <th class="w160">성명</th>
@@ -69,7 +106,7 @@
         </td>
       </tr>
     </tbody>
-  </table>
+  </table> -->
   <!-- <ion-list>
     <ion-item>
       <ion-label color="primary" stacked>성명</ion-label>

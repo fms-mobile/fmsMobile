@@ -13,8 +13,8 @@ export class MANTB_DIGR13DTO {
 
     constructor(){
         this.facil_no = "";
-        this.dign_seq = 0;
-        this.check_seq = 0;
+        this.dign_seq = null;
+        this.check_seq = null;
         this.check_cd = "";
         this.check_nm = "";
         this.check_result = "";

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.csform.ionic.blue" version="0.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Ionic3 UI Theme - Blue Light</name>
-    <description>Pre-designed UI elements for Ionic 3 framework..</description>
+    <name>FMS 모바일</name>
+    <description>FMS 모바일</description>
     <author email="dev@csform.com" href="http://csform.com/">CreativeForm</author>
     <content src="index.html" />
     <access origin="*" />

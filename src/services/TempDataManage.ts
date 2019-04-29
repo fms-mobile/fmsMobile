@@ -72,7 +72,9 @@ export class TempDataManage {
         let that = this;
         this.globalVars.db.loctbData01.list001({"user_id":user_id},(res) =>{
             res.forEach(loctbData01 => {
-                let digr01Group : DIGR01_GROUPDTO = JSON.parse(loctbData01.object_contents);
+                let digr01Group : DIGR01_GROUPDTO = new DIGR01_GROUPDTO();
+                let parseObject = JSON.parse(loctbData01.object_contents);
+                Object.assign(digr01Group,parseObject);
                 that.digr01GroupList.push(digr01Group);
             });
         });

@@ -8,10 +8,10 @@ import { map, catchError, retry } from "rxjs/operators";
 
 @Injectable()
 export class TransmissionService {
-    url : string ;
+    url : string;
 
     constructor(private http: HttpClient, private globalVars :GlobalVars, private authService:AuthService){
-        this.url = globalVars.serverUrl;
+        this.url = globalVars.webUrl+"mobile";
     }
 
     syncAllData(param : any){

@@ -17,7 +17,7 @@ export class LOCTB_DATA01DTO {
         this.user_id = "";
         this.object_id = "";
         this.object_contents = "";
-        this.sort_order = 0;
+        this.sort_order = null;
         this.send_yn = "";
         this.send_result = "";
         this.sys_reg_id = "";

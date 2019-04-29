@@ -39,4 +39,8 @@ export class MainPage {
     this.navCtrl.push("Iframe",{"url":fullUrl,"title":title});
     // this.menuCtrl.close();
   }
+
+  goDigrGroupPage() {
+    this.navCtrl.setRoot("LoginPage");
+  }
 }

@@ -1,9 +1,32 @@
 page-digr01-write {
-    ion-list {
-        ion-item:nth-child(2) {
-            ion-input {
-                width: 30%;
+    .scroll-content {
+        padding: 0 !important;
+    
+        ion-grid {
+          height: 100%;
+          padding: 0 !important;
+    
+          ion-row {
+            height: 100%;
+            padding: 0 !important;
+            [half-col] {
+              width: calc(50% - 8px);
+              display: inline-flex;
             }
+
+            [five-col] {
+                padding-left: 0;
+                padding-right: 1px;
+                width: calc(20%);
+                display: inline-flex;
+            }
+          }
         }
-    }
+      }
+    
+      .item.item-input.input-has-focus .item-inner,
+      .item.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+      }
 }

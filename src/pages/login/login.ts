@@ -22,8 +22,8 @@ import { UtilService } from '../../services/UtilService';
 export class LoginPage {
 
   ui: any = {
-    user_id: "",
-    pswd: "",
+    user_id: "admin",
+    pswd: "1",
   }; // 사용자 정보 
   chkAutoLogin: boolean = false;
   chkSaveUserId: boolean = false;

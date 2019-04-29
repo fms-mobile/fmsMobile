@@ -17,21 +17,15 @@ export class Iframe {
   url : string;
   title : string;
   externalLink : SafeResourceUrl;
-  /* @ViewChild("#test") test : any; */
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private domSanitizer: DomSanitizer) {
     this.url = navParams.get("url");
     this.title = navParams.get("title");
-    this.externalLink = this.domSanitizer.bypassSecurityTrustResourceUrl(this.url);
-
-    /* this.http.get(this.url).toPromise().then( data =>{
-      console.log(data.status);
-    }).catch(error => {
-      console.log(error.status);
-      console.log(error.error); // error message as string
-      console.log(error.headers);
-  
-    }); */
+    if(this.url) {
+      this.externalLink = this.domSanitizer.bypassSecurityTrustResourceUrl(this.url);
+    } else {
+      this.navCtrl.setRoot("MainPage");
+    }
   }
 
   ionViewDidLoad() {

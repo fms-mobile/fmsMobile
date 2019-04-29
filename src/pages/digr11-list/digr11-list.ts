@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, IonicPage } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, ItemSliding } from 'ionic-angular';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { MANTB_DIGR11DTO } from '../../model/MANTB_DIGR11DTO';
 import { UtilService } from './../../services/UtilService';
@@ -42,5 +42,9 @@ export class Digr11ListPage {
     },()=>{
 
     });
+  }
+
+  undo = (slidingItem: ItemSliding) => {
+    slidingItem.close();
   }
 }

@@ -7,15 +7,63 @@
 
 <div class="top-tit-area02">
   <div>
-    <p>대상시설물 목록</p>
+    <div class="title-components">대상시설물 목록</div>
     <ion-buttons end>
-      <button ion-button icon-only style="width:2rem;height:2rem;" (click)="addMast01()"><ion-icon name="add"></ion-icon></button>
+      <button ion-button icon-only style="width:36px;height:36px;" (click)="addMast01()"><ion-icon name="add"></ion-icon></button>
     </ion-buttons>    
   </div>
 </div>
 
-<ion-list id="digr02List" nopadding>
-  <ion-list-header>
+<ion-grid no-padding *ngIf="digr01Group.selectedMast01List != null">
+  <ion-row>
+    <ion-col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12>
+      <ion-list no-margin>
+        <ion-item-sliding *ngFor="let mast01 of digr01Group.selectedMast01List; let i = index;" #slidingItem>
+          <ion-item no-lines no-padding no-margina (click)="goWrite(digr01Group,i)">
+            <!-- Images -->
+            <ion-thumbnail no-margin item-start>
+              <img src="assets/imgs/fms_img_{{ i % 12 + 1 | number: '2.'}}.png">
+            </ion-thumbnail>
+            <!-- Title -->
+            <div item-top>
+              <h2 item-title padding-left>{{mast01.facil_nm}}</h2>
+            </div>
+            <!-- Description -->
+            <div item-bottom>
+              <p item-subtitle padding-left text-wrap>{{mast01.facil_class_nm}}</p>
+            </div>
+            <div social>
+              <ion-icon>
+                <i class="icon icon-heart"></i>
+              </ion-icon>
+              <ion-icon>
+                <i class="icon icon-share-variant" ></i>
+              </ion-icon>
+            </div>
+          </ion-item>
+          <ion-item-options no-lines>
+            <!-- Button delete -->
+            <button (click)="removeItem(mast01,i)" transparent>
+              <!-- Icon delete -->
+              <ion-icon icon-medium>
+                <i class="icon icon-delete"></i>
+              </ion-icon>
+            </button>
+            <!-- Button undo -->
+            <button (click)="undo(slidingItem)" transparent>
+              <!-- Icon undo -->
+              <ion-icon icon-medium>
+                <i class="icon icon-undo-variant"></i>
+              </ion-icon>
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+  <!-- <ion-list-header>
     <ion-label col-4>시설물 명칭</ion-label>
     <ion-label col-2>종별</ion-label>
     <ion-label col-2>비용(천원)</ion-label>
@@ -23,7 +71,7 @@
     <ion-label col-1>상태평가<br>안전등급</ion-label>
     <ion-label col-2>작성<br>상태</ion-label>
   </ion-list-header>
-  <ion-item-sliding *ngFor="let mast01 of digr01Group.selectedMast01List; let i=index"> <!-- for loop here -->
+  <ion-item-sliding *ngFor="let mast01 of digr01Group.selectedMast01List; let i=index">
     <ion-item (click)="goWrite(digr01Group,i)">
       <ion-grid>
         <ion-row class="row">
@@ -40,44 +88,4 @@
         <button danger color="danger" class="danger" (click)="removeItem(mast01,i)"><ion-icon slot="icon-only" name="trash"></ion-icon> 삭제</button>
     </ion-item-options>
   </ion-item-sliding>
-</ion-list>
-
-<!-- <table class="form-01">
-  <thead>
-    <tr>
-      <th style="width:30vw; text-align:center;">시설물 명칭</th>
-      <th style="width:10vw; text-align:center;">종별</th>
-      <th style="width:20vw; text-align:center;">비용(천원)</th>
-      <th style="width:10vw; text-align:center; font-size:1.1rem;">이전<br>안전등급</th>
-      <th style="width:10vw; text-align:center; font-size:1.1rem;">상태평가<br>안전등급</th>
-      <th style="width:15vw; text-align:center;">작성상태</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let mast01 of digr01Group.selectedMast01List; let i = index;" (click)="goWrite(digr01Group,i)">
-      <ion-item-sliding>
-        <th style="width:30vw;">{{mast01.facil_nm}}</th>
-        <td style="width:10vw;">{{mast01.facil_class_nm}}</td>
-        <td style="width:20vw;">{{digr01Group.digr02List[i].dign_amt}}</td>
-        <td style="width:10vw;">{{mast01.stage_grade}}</td>
-        <td style="width:10vw;">{{digr01Group.digr02List[i].stage_grade}}</td>
-        <td style="width:15vw;">
-        </td>
-        <ion-item-options danger>
-          <button danger color="danger" class="danger"><ion-icon slot="icon-only" name="trash"></ion-icon> 삭제</button>
-        </ion-item-options>
-      </ion-item-sliding>
-    </tr>
-  </tbody>
-</table> -->
-<!-- <ion-list>
-  <ion-list-header>
-    대상시설물 목록
-  </ion-list-header>
-  <ion-buttons end>
-      <button ion-button icon-only (click)="addMast01()"><ion-icon name="add"></ion-icon></button>
-  </ion-buttons>
-  <ion-item *ngFor="let mast01 of digr01Group.selectedMast01List; let i = index" (click)="goWrite(digr01Group,i)">
-    <ion-label>{{mast01.facil_nm}}</ion-label>
-  </ion-item>
 </ion-list> -->

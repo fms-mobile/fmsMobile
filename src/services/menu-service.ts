@@ -17,42 +17,50 @@ export class MenuService implements IService {
 
   getAllThemes = (): Array<any> => {
     return [
-      {"title" : "메인화면", "theme"  : "MainPage",  "icon" : "icon-format-align-justify", "listView" : false, "component": "", "singlePage":false},
-      {"title" : "정기안전점검", "theme"  : "LoginPage",  "icon" : "icon-format-align-justify", "listView" : false, "component": "", "singlePage":false},
-      /* {"title" : "List Views", "theme"  : "listViews",  "icon" : "icon-format-align-justify", "listView" : true, "component": "", "singlePage":false},
-      {"title" : "Parallax", "theme"  : "parallax",  "icon" : "icon-format-line-spacing", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "Login Pages", "theme"  : "login",  "icon" : "icon-lock-open-outline", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "Register Pages", "theme"  : "register",  "icon" : "icon-comment-account", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "Image Gallery", "theme"  : "imageGallery",  "icon" : "icon-apps", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "Splash Screen", "theme"  : "splashScreens",  "icon" : "icon-logout", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "Check Boxs", "theme"  : "checkBoxes",  "icon" : "icon-checkbox-marked", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "Search Bars", "theme"  : "searchBars",  "icon" : "icon-magnify", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "Typo + small components", "theme"  : "textViews",  "icon" : "icon-tumblr", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "Wizard", "theme"  : "wizard",  "icon" : "icon-cellphone-settings", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "Spinner", "theme"  : "spinner",  "icon" : "icon-image-filter-tilt-shift", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "Tabs", "theme"  : "tabs",  "icon" : "icon-view-array", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "Maps", "theme"  : "maps",  "icon" : "icon-google-maps", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "QRCode", "theme"  : "qrcode",  "icon" : "icon-qrcode", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "Timeline", "theme"  : "timeline",  "icon" : "icon-timer", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "Radio Button", "theme"  : "radioButton",  "icon" : "icon-radiobox-marked", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "Range", "theme"  : "range",  "icon" : "icon-toggle-switch-off", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "Forms", "theme"  : "form",  "icon" : "icon-content-paste", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "Toggle", "theme"  : "toggle",  "icon" : "icon-toggle-switch", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "Select", "theme"  : "select",  "icon" : "icon-menu-down", "listView" : true, "component":"", "singlePage":false},
-      {"title" : "Profile", "theme"  : "profile",  "icon" : "icon-account-outline", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "Comments", "theme"  : "comment",  "icon" : "icon-comment-outline", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "Payment", "theme"  : "payment",  "icon" : "icon-cash", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "Segment", "theme"  : "segment",  "icon" : "icon-timelapse", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "Action Sheet", "theme"  : "actionSheet",  "icon" : "icon-dots-horizontal", "listView" : false, "component":"", "singlePage":false},
-      {"title" : "Alert", "theme"  : "alert",  "icon" : "icon-alert", "listView" : false, "component":"", "singlePage":false}, */
+      {"title" : "메인화면", "theme"  : "MainPage",  "icon" : "icon-format-align-justify", "listView" : false, "component": "", "iframe":false},
+      {"title" : "FMS 소개", "theme"  : "/int01001.do",  "icon" : "icon-format-line-spacing", "listView" : false, "component": "", "iframe":true},
+      {"title" : "시설물안전등급 정보공개", "theme"  : "/pub01001.do",  "icon" : "icon-lock-open-outline", "listView" : false, "component": "", "iframe":true},
+      {"title" : "점검진단도래시기 사전예고", "theme"  : "/dign_notify.do",  "icon" : "icon-comment-account", "listView" : false, "component": "", "iframe":true},
+      {"title" : "안전진단전문기관 현황", "theme"  : "/coe01001.do",  "icon" : "icon-apps", "listView" : false, "component": "", "iframe":true},
+      {"title" : "시설물유지관리 업체현황", "theme"  : "/cof01001.do",  "icon" : "icon-logout", "listView" : false, "component": "", "iframe":true},
+      {"title" : "3종시설물 지정/해제", "theme"  : "/pub02001.do",  "icon" : "icon-checkbox-marked", "listView" : false, "component": "", "iframe":true},
+      {"title" : "시설물 분류", "theme"  : "/law01001.do",  "icon" : "icon-magnify", "listView" : false, "component": "", "iframe":true},
+      {"title" : "내진설계 대상여부확인", "theme"  : "/eqk01001_agree.do",  "icon" : "icon-tumblr", "listView" : false, "component": "", "iframe":true},
+      {"title" : "정기안전점검", "theme"  : "LoginPage",  "icon" : "icon-image-filter-tilt-shift", "listView" : false, "component": "", "iframe":false},
+      /* {"title" : "List Views", "theme"  : "listViews",  "icon" : "icon-format-align-justify", "listView" : true, "component": "", "iframe":false},
+      {"title" : "Parallax", "theme"  : "parallax",  "icon" : "icon-format-line-spacing", "listView" : false, "component":"", "iframe":false},
+      {"title" : "Login Pages", "theme"  : "login",  "icon" : "icon-lock-open-outline", "listView" : false, "component":"", "iframe":false},
+      {"title" : "Register Pages", "theme"  : "register",  "icon" : "icon-comment-account", "listView" : false, "component":"", "iframe":false},
+      {"title" : "Image Gallery", "theme"  : "imageGallery",  "icon" : "icon-apps", "listView" : false, "component":"", "iframe":false},
+      {"title" : "Splash Screen", "theme"  : "splashScreens",  "icon" : "icon-logout", "listView" : false, "component":"", "iframe":false},
+      {"title" : "Check Boxs", "theme"  : "checkBoxes",  "icon" : "icon-checkbox-marked", "listView" : false, "component":"", "iframe":false},
+      {"title" : "Search Bars", "theme"  : "searchBars",  "icon" : "icon-magnify", "listView" : false, "component":"", "iframe":false},
+      {"title" : "Typo + small components", "theme"  : "textViews",  "icon" : "icon-tumblr", "listView" : false, "component":"", "iframe":false},
+      {"title" : "Wizard", "theme"  : "wizard",  "icon" : "icon-cellphone-settings", "listView" : false, "component":"", "iframe":false},
+      {"title" : "Spinner", "theme"  : "spinner",  "icon" : "icon-image-filter-tilt-shift", "listView" : false, "component":"", "iframe":false},
+      {"title" : "Tabs", "theme"  : "tabs",  "icon" : "icon-view-array", "listView" : false, "component":"", "iframe":false},
+      {"title" : "Maps", "theme"  : "maps",  "icon" : "icon-google-maps", "listView" : false, "component":"", "iframe":false},
+      {"title" : "QRCode", "theme"  : "qrcode",  "icon" : "icon-qrcode", "listView" : false, "component":"", "iframe":false},
+      {"title" : "Timeline", "theme"  : "timeline",  "icon" : "icon-timer", "listView" : false, "component":"", "iframe":false},
+      {"title" : "Radio Button", "theme"  : "radioButton",  "icon" : "icon-radiobox-marked", "listView" : false, "component":"", "iframe":false},
+      {"title" : "Range", "theme"  : "range",  "icon" : "icon-toggle-switch-off", "listView" : false, "component":"", "iframe":false},
+      {"title" : "Forms", "theme"  : "form",  "icon" : "icon-content-paste", "listView" : false, "component":"", "iframe":false},
+      {"title" : "Toggle", "theme"  : "toggle",  "icon" : "icon-toggle-switch", "listView" : false, "component":"", "iframe":false},
+      {"title" : "Select", "theme"  : "select",  "icon" : "icon-menu-down", "listView" : true, "component":"", "iframe":false},
+      {"title" : "Profile", "theme"  : "profile",  "icon" : "icon-account-outline", "listView" : false, "component":"", "iframe":false},
+      {"title" : "Comments", "theme"  : "comment",  "icon" : "icon-comment-outline", "listView" : false, "component":"", "iframe":false},
+      {"title" : "Payment", "theme"  : "payment",  "icon" : "icon-cash", "listView" : false, "component":"", "iframe":false},
+      {"title" : "Segment", "theme"  : "segment",  "icon" : "icon-timelapse", "listView" : false, "component":"", "iframe":false},
+      {"title" : "Action Sheet", "theme"  : "actionSheet",  "icon" : "icon-dots-horizontal", "listView" : false, "component":"", "iframe":false},
+      {"title" : "Alert", "theme"  : "alert",  "icon" : "icon-alert", "listView" : false, "component":"", "iframe":false}, */
     ];
   };
 
   getDataForTheme = (menuItem: any) => {
     return {
-      "background": "assets/images/background/16.jpg",
+      "background": "assets/images/background/16.png",
       "image": "assets/images/logo/login-3.png",
-      "title": "Ionic3 UI Theme - Blue Light"
+      "title": "FMS 시설물통합정보시스템 메뉴"
     };
   };
 

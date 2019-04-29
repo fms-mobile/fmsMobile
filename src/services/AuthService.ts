@@ -22,12 +22,12 @@ export class AuthService {
  
   constructor(private http: HttpClient, private helper: JwtHelperService, private storage: Storage,
     private plt: Platform, private alertController: AlertController, private globalVars :GlobalVars) {
-    this.url = globalVars.serverUrl;
+    // this.url = globalVars.serverUrl;
     
     let headers = this.headers;
-    headers.append('Content-Type', 'application/json');
-    headers.append('Access-Control-Allow-Origin' , '*');
-    headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+    headers.set('Content-Type', 'application/json');
+    headers.set('Access-Control-Allow-Origin' , '*');
+    headers.set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
 
     this.url = globalVars.webUrl+"mobile";
     this.plt.ready().then(() => {

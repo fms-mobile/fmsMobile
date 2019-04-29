@@ -14,8 +14,8 @@ export class GlobalVars {
 	//public serverUrl : string = "http://61.252.208.165:8080/";
 	public serverUrl : string = "/mobile";
 
-	// public webUrl : string = "http://112.171.195.152:28100/";
-	public webUrl : string = "https://112.171.195.152:28443/";
+	public webUrl : string = "http://112.171.195.152:28080/";
+	// public webUrl : string = "https://112.171.195.152:28443/";
 
 	public isLogin: boolean = false;  // 로그인여부 
 	public isScan: boolean = false; // 스캔여부

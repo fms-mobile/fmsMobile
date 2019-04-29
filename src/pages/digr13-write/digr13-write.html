@@ -6,15 +6,17 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>정기점검표</ion-title>
+    <ion-title (click)="goDigr02ListModal()">{{selectMast01.facil_nm}} 정기점검표</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-list-header>
-    <ion-title (click)="goDigr02ListModal()">{{selectMast01.facil_nm}}</ion-title>
-  </ion-list-header>
-  <table class="table form-01">
+  <ion-grid>
+    <ion-row>
+      
+    </ion-row>
+  </ion-grid>
+  <!-- <table class="table form-01">
     <thead>
       <tr>
         <th style="width:35vw;" colspan="3">점검항목</th>
@@ -76,7 +78,7 @@
       <ng-template #addBlock>
       </ng-template>
     </tbody>
-  </table>
+  </table> -->
   <ion-buttons end>
     <button ion-button icon-start (click)="goPrev()">
       이전

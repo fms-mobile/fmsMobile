@@ -12,7 +12,7 @@ export class MANTB_DIGR12DTO {
 
     constructor(){
         this.facil_no = "";
-        this.dign_seq = 0;
+        this.dign_seq = null;
         this.defect_cd = "";
         this.object_no = "";
 

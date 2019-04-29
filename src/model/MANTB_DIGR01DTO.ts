@@ -41,7 +41,7 @@ export class MANTB_DIGR01DTO {
 
     constructor(){
         this.facil_no = "";
-        this.dign_seq = 0;
+        this.dign_seq = null;
         this.project_no = "";
         this.report_yy = "";
         this.start_ymd = "";
@@ -51,7 +51,7 @@ export class MANTB_DIGR01DTO {
         this.dign_corp_cd = "";
         this.dign_corp_nm = "";
         this.rep_engineer_nm = "";
-        this.dign_amt = 0;
+        this.dign_amt = null;
         this.state_grade = "";
         this.dign_content = "";
         this.amend_content = "";

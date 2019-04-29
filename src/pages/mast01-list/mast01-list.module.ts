@@ -9,7 +9,6 @@ import { Mast01ListPage } from './mast01-list';
   imports: [
     IonicPageModule.forChild(Mast01ListPage),
   ],
-  exports:[Mast01ListPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class Mast01ListPageModule {}

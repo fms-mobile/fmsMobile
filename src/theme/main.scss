@@ -963,3 +963,72 @@ $item-ios-divider-background: theme-colors('mainColors', 'accent');
       color: theme-colors('textColors', 'accent');
     }
   }
+
+
+  [header-background-image] img {
+    max-width: 110px !important;
+  }
+
+  .footer-light {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+  }
+
+  page-login .scroll-content {
+    background-color: #ffffff;
+  }
+
+  page-login .item-checkbox .item-inner {
+    border-bottom: 0px !important;
+  }
+
+  page-login .toolbar-title-md {
+    padding: 0px;
+  }
+
+  page-login .item-md {
+    padding: 0px;
+  }
+  page-login .button {
+    margin-top: 20px;
+  }
+  .main-ion-header .toolbar .toolbar-title {
+    height: 56px;
+    background: url(../assets/imgs/logo_top_w.png) no-repeat 50% 50%;
+    background-size: contain;
+  }
+  .main-app-btn li {
+    list-style-type: none;
+  }
+  .main-app-btn li a, 
+  .main-app-btn li a:hover {
+    text-decoration: none;
+  }
+  .main-app-btn li {
+    font-size: 2rem !important;
+    height: 5rem !important;
+    line-height: 5rem !important;
+  }
+  .main-app-btn {
+    margin-bottom: 0px;
+  }
+  .main-contents-title {
+    font-size: 2.5rem !important;
+  }
+  .footer-light {
+    font-size: 1.3rem !important;
+  }
+  .main-visual {
+    padding-top: 8em !important;
+    padding-bottom: 8em !important;
+  }
+  .main-contents {
+    margin-bottom: 187px;
+  }
+  .footer {
+    padding: 0px !important;
+  }
+  .footer .small-text {
+    padding: 0px 20px;
+  }

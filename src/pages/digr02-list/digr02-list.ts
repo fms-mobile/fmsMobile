@@ -1,7 +1,7 @@
 import { GlobalVars } from './../../services/GlobalVars';
 import { UtilService } from './../../services/UtilService';
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, IonicPage } from 'ionic-angular';
+import { NavController, NavParams, ModalController, IonicPage, ItemSliding } from 'ionic-angular';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { BASTB_MAST01DTO } from '../../model/BASTB_MAST01DTO';
 
@@ -19,6 +19,7 @@ import { BASTB_MAST01DTO } from '../../model/BASTB_MAST01DTO';
 export class Digr02ListPage {
   selectedMast01List : Array<BASTB_MAST01DTO>;
   digr01Group : DIGR01_GROUPDTO;
+  defaultImg : string = 'assets/images/avatar/17.jpg';
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public globalVars:GlobalVars, public utilService:UtilService,public modalCtrl: ModalController) {
     this.digr01Group = navParams.data;
@@ -55,5 +56,9 @@ export class Digr02ListPage {
     },()=>{
 
     });
+  }
+
+  undo = (slidingItem: ItemSliding) => {
+    slidingItem.close();
   }
 }

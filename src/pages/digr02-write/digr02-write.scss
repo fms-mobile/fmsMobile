@@ -1,18 +1,16 @@
 page-digr02-write {
-    .form-01 {
-        tr{
-            th{
-                font-size: 19px;
+    [textarea] {
+        height: calc(100% - 170px);
+        min-height: 280px;
+
+        ion-item {
+            height: 100%;
+            min-height: 280px;
+
+            textarea {
+                height: calc(100% - 30px);
+                padding-top: 10px;
             }
         }
-
-        input {
-            width: 100%;
-        }
-
-        textarea {
-            width: 100%;
-        }
     }
-    
 }
