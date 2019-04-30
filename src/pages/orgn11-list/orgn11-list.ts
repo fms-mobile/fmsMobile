@@ -5,6 +5,7 @@ import { GlobalVars } from '../../services/GlobalVars';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { BASTB_MAST01DTO } from '../../model/BASTB_MAST01DTO';
 import { MANTB_DIGR11DTO } from '../../model/MANTB_DIGR11DTO';
+import { AuthService } from '../../services/AuthService';
 
 /**
  * Generated class for the Orgn11List page.
@@ -28,7 +29,7 @@ export class Orgn11ListPage {
 
   comtbOrgn11List : Array<any>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public globalVars:GlobalVars) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public globalVars:GlobalVars, public authService : AuthService) {
     this.digr01Group = navParams.data.digr01Group;
     this.selectIndex = navParams.data.index;
     this.digr11 = this.digr01Group.digr11List[this.selectIndex];
@@ -40,7 +41,7 @@ export class Orgn11ListPage {
     //let selectedIds = this.createSelectedIds();
     let that = this;
     let event = $event;
-    this.globalVars.db.comtbOrgn11.list002({"group_cd":this.globalVars.userInfo.group_cd,"member_nm":""
+    this.globalVars.db.comtbOrgn11.list002({"group_cd":this.authService.user.group_cd,"member_nm":""
     ,"retire_yn":"Y","digr11List":this.digr01Group.digr11List, "start":this.page,"pagCount":this.numberOfItemsToDisplay
     }, (res) => {
       if(res.length > 0)  {

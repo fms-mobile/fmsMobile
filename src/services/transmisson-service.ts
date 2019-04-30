@@ -6,7 +6,6 @@ import { Observable, of } from "rxjs";
 import { map, catchError, retry } from "rxjs/operators";
 import { COMMON_DAO } from "../db/COMMON_DAO";
 
-
 @Injectable()
 export class TransmissionService {
     url : string;

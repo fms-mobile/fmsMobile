@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { DIGR01_GROUPDTO } from './../model/DIGR01_GROUPDTO';
 import { LOCTB_DATA01DTO } from './../model/LOCTB_DATA01DTO';
 import { GlobalVars } from './GlobalVars';
+import { AuthService } from './AuthService';
 
 @Injectable()
 export class TempDataManage {
@@ -19,10 +20,8 @@ export class TempDataManage {
      *  selectedMast01List Array<BASTB_MAST01DTO> => 선택 시설물 기본현황
      * }
      */
-
-    constructor(public globalVars : GlobalVars){
+    constructor(public globalVars : GlobalVars, public authService : AuthService){
         this.digr01GroupList = new Array<DIGR01_GROUPDTO>();
-        this.loadLoctbData01();
     }
     
     public createDigr01Group() : DIGR01_GROUPDTO {
@@ -70,9 +69,8 @@ export class TempDataManage {
 
             loctbData01.object_contents = jsonStr;
             loctbData01.object_id = digr01.uuid;
-            loctbData01.user_id = this.globalVars.userInfo.user_id;
+            loctbData01.user_id = this.authService.user.sub;
             // 
-            loctbData01.user_id = 'chonju';
             this.globalVars.db.loctbData01.insert(loctbData01,(res) =>{
 
             });
@@ -85,19 +83,17 @@ export class TempDataManage {
 
         loctbData01.object_contents = jsonStr;
         loctbData01.object_id = digr01.uuid;
-        loctbData01.user_id = this.globalVars.userInfo.user_id;
+        loctbData01.user_id = this.authService.user.sub;
 
         //
-        loctbData01.user_id = 'chonju';
         this.globalVars.db.loctbData01.delete(loctbData01,(res) =>{
 
         }); 
     }
 
     public loadLoctbData01() {
-        let user_id = this.globalVars.userInfo.user_id;
+        let user_id = this.authService.user.sub;
         //
-        user_id = 'chonju';
         let that = this;
         this.globalVars.db.loctbData01.list001({"user_id":user_id},(res) =>{
             res.forEach(loctbData01 => {

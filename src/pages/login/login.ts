@@ -7,6 +7,7 @@ import { ToastService } from '../../services/toast-service';
 import { TransmissionService } from '../../services/transmisson-service';
 import { UtilService } from '../../services/UtilService';
 import { GlobalVars } from '../../services/GlobalVars';
+import { TempDataManage } from '../../services/TempDataManage';
 
 /**
  * Generated class for the LoginPage page.
@@ -39,12 +40,14 @@ export class LoginPage {
     public transmissionService: TransmissionService,
     public utilService: UtilService,
     public globalVars:GlobalVars,
+    public tempDataManage : TempDataManage
   ) {
 
     if (this.authGuardService.canActivate()) {
       globalVars.db.comtbUser01.list001({"user_id":authService.user.sub},(res) => {
         globalVars.setUserInfo(res[0]);
       });
+      this.tempDataManage.loadLoctbData01();
       this.navCtrl.setRoot("DigrGroupPage");
     }
   }
@@ -81,9 +84,7 @@ export class LoginPage {
         if(that.utilService.isOnline) {
           that.transmissionService.syncAllData(null,res["token"]);
         }
-        this.globalVars.db.comtbUser01.list001({"user_id":this.authService.user.sub},(res) => {
-          this.globalVars.setUserInfo(res[0]);
-        });
+        that.tempDataManage.loadLoctbData01();
         that.navCtrl.setRoot("DigrGroupPage");
       }
     });
