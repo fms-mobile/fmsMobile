@@ -22,7 +22,7 @@ export class Orgn11ListPage {
   digr01Group : DIGR01_GROUPDTO;
   selectMast01 : BASTB_MAST01DTO;
   digr11 : MANTB_DIGR11DTO;
-  numberOfItemsToDisplay : number = 10;
+  numberOfItemsToDisplay : number = 20;
   page : number = 0;
   isPaging : boolean = true;
 
@@ -38,10 +38,9 @@ export class Orgn11ListPage {
 
   goSearch($event){
     //let selectedIds = this.createSelectedIds();
-    let group_cd = "A04780";
     let that = this;
     let event = $event;
-    this.globalVars.db.comtbOrgn11.list002({"group_cd":group_cd,"member_nm":""
+    this.globalVars.db.comtbOrgn11.list002({"group_cd":this.globalVars.userInfo.group_cd,"member_nm":""
     ,"retire_yn":"Y","digr11List":this.digr01Group.digr11List, "start":this.page,"pagCount":this.numberOfItemsToDisplay
     }, (res) => {
       if(res.length > 0)  {

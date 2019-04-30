@@ -27,7 +27,7 @@ export class Digr02WritePage {
   digr02 : MANTB_DIGR01DTO;
 
   constructor(public navCtrl: NavController, public navParams: NavParams
-    ,public globalVars:GlobalVars,public utilService : UtilService, public modalCtrl: ModalController,public toastCtrl: ToastController ) {
+    ,public globalVars:GlobalVars,public utilService : UtilService, public modalCtrl: ModalController,public toastCtrl: ToastController, public viewCtrl: ViewController ) {
       this.digr01Group = navParams.data.digr01Group;
       this.selectIndex = navParams.data.index;
 
@@ -44,11 +44,11 @@ export class Digr02WritePage {
   }
 
   dismiss(){
-    this.navCtrl.pop();
+    this.viewCtrl.dismiss();
   }
 
   goSave(){
-    this.navCtrl.pop();
+    this.viewCtrl.dismiss();
   }
 
   goDigr02ListModal() {

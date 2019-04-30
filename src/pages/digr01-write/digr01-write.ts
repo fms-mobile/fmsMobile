@@ -47,38 +47,22 @@ export class Digr01WritePage {
     this.end_ymd_input.value = this.digr01.end_ymd;
   }
 
-  openCalendar() {
-    /* const options: CalendarModalOptions = {
-      pickMode: 'range',
-      title: '점검진단 기간'
-    };
+  setReport_ymd(event){
+    let start_ymd : string = event.target.value;
+    this.digr01.report_yy = start_ymd.substr(0,4);
+  }
 
-    if(this.digr01.start_ymd != "" && this.digr01.end_ymd != "") {
-      options.defaultDateRange = {
-        "from" : new Date(this.digr01.start_ymd),
-        "to" : new Date(this.digr01.end_ymd)
-      };
+  setRegular_gbn(value){
+    let regular_gbn : string = value;
+    let regular_gbnList = this.regular_gbnList;
+
+    if(regular_gbnList) {
+      regular_gbnList.forEach((res : any) => {
+        if(res.code1 == regular_gbn) {
+          this.digr01.regular_gbn_nm = res.data1;
+        }
+      });
     }
-
-    let myCalendar = this.modalCtrl.create(CalendarModal, {
-      options: options
-    });
-
-    myCalendar.present();
-
-    let that = this;
-
-    myCalendar.onDidDismiss((date: { from: CalendarResult; to: CalendarResult }, type: string) => {
-      if(date) {
-        that.digr01Group.digr01.start_ymd = date.from.string;
-        that.digr01Group.digr01.end_ymd = date.to.string;
-        that.start_ymd_input.value = date.from.string;
-        that.end_ymd_input.value = date.to.string;
-      } else {
-        that.start_ymd_input.value = that.digr01Group.digr01.start_ymd;
-        that.end_ymd_input.value = that.digr01Group.digr01.end_ymd;
-      }
-    }); */
   }
 
 }

@@ -36,11 +36,6 @@ export class Mast01ListPage {
     let that = this;
     let event = $event;
     this.globalVars.db.bastbMast01.list001({"start":this.page,"pagCount":this.numberOfItemsToDisplay,"selectedIds":selectedIds}, (res) => {
-      // 임시 수정 코드
-      if(that.page == 2) {
-        event.enable(false);
-      }
-
       if(res.length > 0) {
         that.bastbMast01List.push(...res);
         that.page = that.page + 1;

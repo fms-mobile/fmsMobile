@@ -31,6 +31,20 @@ export class TempDataManage {
 
         return digr01Group;
     }
+
+    public checkDigr01GroupValidate(index : number): boolean {
+        let isChecked = true;
+        index ? "" : index = this.digr01GroupList.length - 1;
+
+        let digr01Group = this.digr01GroupList[index];
+
+        if(!digr01Group.digr01.start_ymd) isChecked = false;
+        if(!digr01Group.digr01.end_ymd) isChecked = false;
+        if(!digr01Group.digr01.regular_gbn) isChecked = false;
+        if(digr01Group.digr02List.length < 1) isChecked = false;
+
+        return isChecked;
+    }
     
     public indexDigr01Group(searchDigr01Group:DIGR01_GROUPDTO) : number {
         let index : number;
@@ -63,6 +77,21 @@ export class TempDataManage {
 
             });
         });
+    }
+
+    public localDelete(digr01) {
+        let loctbData01 : LOCTB_DATA01DTO = new LOCTB_DATA01DTO();
+        let jsonStr = JSON.stringify(digr01);
+
+        loctbData01.object_contents = jsonStr;
+        loctbData01.object_id = digr01.uuid;
+        loctbData01.user_id = this.globalVars.userInfo.user_id;
+
+        //
+        loctbData01.user_id = 'chonju';
+        this.globalVars.db.loctbData01.delete(loctbData01,(res) =>{
+
+        }); 
     }
 
     public loadLoctbData01() {

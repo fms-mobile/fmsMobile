@@ -101,18 +101,6 @@ export class Digr13WritePage {
   }
 
   goPrev(){
-    /* let prevIndex = this.index-1;
-    let prevSelectMast01 = this.digr01Group.selectedMast01List[prevIndex];
-    let prevDigr02 = this.digr01Group.digr02List[prevIndex];
-
-    if(prevSelectMast01 && prevDigr02) {
-      this.index = prevIndex;
-      this.selectMast01 = prevSelectMast01;
-      this.digr02 = prevDigr02;
-      this.searchList02();
-    } else {
-      this.utilService.showToast(this.toastCtrl, "처음 시설물입니다.",null);
-    } */
     this.navCtrl.pop();
   }
 

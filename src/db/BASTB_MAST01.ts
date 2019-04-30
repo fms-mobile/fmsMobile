@@ -1,8 +1,9 @@
 
 import { GlobalVars } from '../services/GlobalVars';
 import { UtilService } from '../services/UtilService';
+import { COMMON_DAO } from './COMMON_DAO';
 
-export class BASTB_MAST01 {
+export class BASTB_MAST01 implements COMMON_DAO {
     public wsdb : any;
     public utilService : UtilService;
     public globalVars : GlobalVars;
@@ -89,7 +90,21 @@ export class BASTB_MAST01 {
         this.wsdb.transaction((txn) =>{
             var sqlMain = "delete from BASTB_MAST01  "
             			+ " where 1=1 "
-				+ " and next_dign_ymd5 = '"+this.utilService.nvl(params.next_dign_ymd5,'')+"' "
+				+ " and facil_no = '"+this.utilService.nvl(params.facil_no,'')+"' "
+
+            //console.log(sqlMain);
+            txn.executeSql(sqlMain, [],
+                function(transaction, resultSet) {
+                    okFunction(true);
+            }, function (transaction, error) {
+                console.log(error);
+            });
+        });
+	}
+	
+	public deleteAll(params, okFunction) {
+        this.wsdb.transaction((txn) =>{
+            var sqlMain = "delete from BASTB_MAST01 "
 
             //console.log(sqlMain);
             txn.executeSql(sqlMain, [],
@@ -143,7 +158,7 @@ export class BASTB_MAST01 {
 			}		
 
 			if(params.page != "" && params.pagCount != "") {
-				let startCount = params.start * params.pagCount + 1;
+				let startCount = params.start * params.pagCount;
 				sqlMain += " LIMIT "+this.utilService.nvl(params.pagCount,'')+ " OFFSET "+this.utilService.nvl(String(startCount),'');
 			}
 

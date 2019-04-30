@@ -15,9 +15,9 @@
   <ion-grid>
     <ion-row padding>
       <ion-col col-12 align-self-start>
-        <ion-list radio-group [(ngModel)]="digr01.regular_gbn" style="margin-bottom: 16px;">
+        <ion-list radio-group [(ngModel)]="digr01.regular_gbn" style="margin-bottom: 16px;" (ionChange)="setRegular_gbn($event)">
           <ion-item no-lines five-col *ngFor="let regular_gbn of regular_gbnList;">
-            <ion-radio no-margin item-start value="{{regular_gbn.code1}}"></ion-radio>
+            <ion-radio no-margin item-start value="{{regular_gbn.code1}}" ></ion-radio>
             <!--Content Title-->
             <ion-label no-margin item-title>{{regular_gbn.data1}}</ion-label>
             <!--Content Subtitle-->
@@ -25,7 +25,7 @@
         </ion-list>
 
         <ion-item no-lines box-shadow margin-bottom>
-          <ion-input no-margin type="text" placeholder="점검진단 시작일" [(ngModel)]="digr01.start_ymd"></ion-input>
+          <ion-input no-margin type="text" placeholder="점검진단 시작일" [(ngModel)]="digr01.start_ymd" (change)="setReport_ymd($event)"></ion-input>
         </ion-item>
         <ion-item no-lines box-shadow margin-bottom>
           <ion-input no-margin type="text" placeholder="점검진단 종료일" [(ngModel)]="digr01.end_ymd"></ion-input>

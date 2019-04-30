@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, IonicPage, ItemSliding } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, ItemSliding, ModalController } from 'ionic-angular';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { MANTB_DIGR11DTO } from '../../model/MANTB_DIGR11DTO';
 import { UtilService } from './../../services/UtilService';
@@ -18,7 +18,7 @@ import { UtilService } from './../../services/UtilService';
 export class Digr11ListPage {
   digr01Group : DIGR01_GROUPDTO;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public utilService:UtilService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public utilService:UtilService,public modalCtrl: ModalController) {
     this.digr01Group = navParams.data;
   }
 
@@ -27,11 +27,13 @@ export class Digr11ListPage {
   }
 
   goWrite(index:number){
-    this.navCtrl.push("Digr11WritePage",{"digr01Group":this.digr01Group,"index":index});
+    let digr11WritePageeModal = this.modalCtrl.create("Digr11WritePage", {"digr01Group":this.digr01Group,"index":index});
+    digr11WritePageeModal.present();
   }
 
   addDigr11(){
-    this.navCtrl.push("Digr11WritePage",{"digr01Group":this.digr01Group});
+    let digr11WritePageeModal = this.modalCtrl.create("Digr11WritePage", {"digr01Group":this.digr01Group});
+    digr11WritePageeModal.present();
   }
 
   removeItem(digr11:MANTB_DIGR11DTO, i: number){

@@ -33,8 +33,8 @@ export class Digr02ListPage {
   goWrite(digr01Group : DIGR01_GROUPDTO, index: number){
     /* let mast01ListPageModal = this.modalCtrl.create(Digr02WritePage, {"digr01Group":this.digr01Group,"index":index});
     mast01ListPageModal.present(); */
-
-    this.navCtrl.push("Digr02WritePage",{"digr01Group":this.digr01Group,"index":index});
+    let digr02WritePageModal = this.modalCtrl.create("Digr02WritePage", {"digr01Group":this.digr01Group,"index":index});
+    digr02WritePageModal.present();
   }
 
   addMast01(){

@@ -36,6 +36,7 @@ export class DbInit {
     public mantbDigr13 : MANTB_DIGR13;
     public loctbData01 : LOCTB_DATA01;
     public wsdb;
+    public daoMap;
 
     constructor(public events: Events,
         public platform: Platform,
@@ -50,16 +51,26 @@ export class DbInit {
             }); 
             this.dbInitData;
             this.createTables(); 
-            this.comtbTest01 = new COMTB_TEST01(globalVars, utilService, this.wsdb);
             this.bastbMeta01 = new BASTB_META01(globalVars, utilService, this.wsdb);
             this.mantbDigr01 = new MANTB_DIGR01(globalVars, utilService, this.wsdb);
             this.bastbMast01 = new BASTB_MAST01(globalVars, utilService, this.wsdb);
             this.comtbCode02 = new COMTB_CODE02(globalVars, utilService, this.wsdb);
             this.mantbDigr13 = new MANTB_DIGR13(globalVars, utilService, this.wsdb);
             this.bastbMeta01 = new BASTB_META01(globalVars, utilService, this.wsdb);
+            this.comtbUser01 = new COMTB_USER01(globalVars, utilService, this.wsdb);
+            this.comtbOrgn01 = new COMTB_ORGN01(globalVars, utilService, this.wsdb);
             this.comtbOrgn11 = new COMTB_ORGN11(globalVars, utilService, this.wsdb);
             this.loctbData01 = new LOCTB_DATA01(globalVars, utilService, this.wsdb);
+
+            this.daoMap = {
+                "BASTB_META01" : this.bastbMeta01,
+                "COMTB_ORGN01" : this.comtbOrgn01,
+                "COMTB_ORGN11" : this.comtbOrgn11,
+                "BASTB_MAST01" : this.bastbMast01,
+                "COMTB_USER01" : this.comtbUser01,
+            }
     }
+
     public createTables() {
         console.log("create tables");
         this.wsdb.transaction((txn) => {
@@ -353,4 +364,6 @@ export class DbInit {
                     + "  ) ");
         });
     }
+
+    
 }

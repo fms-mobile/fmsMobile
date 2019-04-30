@@ -1,11 +1,9 @@
 
-import { Events, Platform  } from 'ionic-angular';
-import { Injectable, Component } from '@angular/core';
 import { GlobalVars } from '../services/GlobalVars';
 import { UtilService } from '../services/UtilService';
-import { global } from '@angular/core/src/util';
+import { COMMON_DAO } from './COMMON_DAO';
 
-export class LOCTB_DATA01 {
+export class LOCTB_DATA01 implements COMMON_DAO {
     public wsdb : any;
     public utilService : UtilService;
     public globalVars : GlobalVars;
@@ -56,6 +54,20 @@ export class LOCTB_DATA01 {
             			+ " where 1=1 "
                 + " and user_id = '"+this.utilService.nvl(params.user_id,'')+"' "
                 + " and object_id = '"+this.utilService.nvl(params.object_id,'')+"' "
+
+            //console.log(sqlMain);
+            txn.executeSql(sqlMain, [],
+                function(transaction, resultSet) {
+                    okFunction(true);
+            }, function (transaction, error) {
+                console.log(error);
+            });
+        });
+    }
+
+    public deleteAll(params, okFunction) {
+        this.wsdb.transaction((txn) =>{
+            var sqlMain = "delete from LOCTB_DATA01 "
 
             //console.log(sqlMain);
             txn.executeSql(sqlMain, [],

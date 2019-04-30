@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { COMTB_USER01DTO } from '../model/COMTB_USER01DTO';
+import { DbInit } from '../db/DbInit';
 
 // import * as moment from 'moment';
 
@@ -7,7 +8,7 @@ import { COMTB_USER01DTO } from '../model/COMTB_USER01DTO';
 export class GlobalVars {
     public isDev : string = "Y";    // 개발중여부 
     public appVersion : number = 3;
-    public db;    //   DB
+    public db : DbInit;    //   DB
      
     public appName : string = "";
     public mainCopyRight : string = "Copyright<span style='font-size:0.5rem;'>(C)</span> 2018 (주) 신진아이티컨설팅";

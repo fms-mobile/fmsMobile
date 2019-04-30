@@ -1,8 +1,9 @@
 
 import { GlobalVars } from '../services/GlobalVars';
 import { UtilService } from '../services/UtilService';
+import { COMMON_DAO } from './COMMON_DAO';
 
-export class BASTB_META01 {
+export class BASTB_META01 implements COMMON_DAO {
     public wsdb : any;
     public utilService : UtilService;
     public globalVars : GlobalVars;
@@ -59,7 +60,21 @@ export class BASTB_META01 {
         this.wsdb.transaction((txn) =>{
             var sqlMain = "delete from BASTB_META01  "
             			+ " where 1=1 "
-				+ " and sort_order = '"+this.utilService.nvl(params.sort_order,'')+"' "
+				+ " and entity_id = '"+this.utilService.nvl(params.entity_id,'')+"' "
+
+            //console.log(sqlMain);
+            txn.executeSql(sqlMain, [],
+                function(transaction, resultSet) {
+                    okFunction(true);
+            }, function (transaction, error) {
+                console.log(error);
+            });
+        });
+    }
+
+    public deleteAll(params, okFunction) {
+        this.wsdb.transaction((txn) =>{
+            var sqlMain = "delete from BASTB_META01 "
 
             //console.log(sqlMain);
             txn.executeSql(sqlMain, [],

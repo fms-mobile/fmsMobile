@@ -1,7 +1,8 @@
 import { GlobalVars } from '../services/GlobalVars';
 import { UtilService } from '../services/UtilService';
+import { COMMON_DAO } from './COMMON_DAO';
  
-export class COMTB_CODE02 {
+export class COMTB_CODE02 implements COMMON_DAO {
     public wsdb : any;
     public utilService : UtilService;
     public globalVars : GlobalVars;
@@ -50,6 +51,20 @@ export class COMTB_CODE02 {
             });
         });
     } 
+
+    public deleteAll(params, okFunction) {
+        this.wsdb.transaction((txn) =>{
+            var sqlMain = "delete from COMTB_CODE02 "
+
+            //console.log(sqlMain);
+            txn.executeSql(sqlMain, [],
+                function(transaction, resultSet) {
+                    okFunction(true);
+            }, function (transaction, error) {
+                console.log(error);
+            });
+        });
+    }
 
     public list001(params, okFunction) {
         this.wsdb.transaction((txn) =>{

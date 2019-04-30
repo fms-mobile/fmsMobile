@@ -15,14 +15,27 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item-sliding *ngFor="let digrGroup of digr01GroupList; let i = index" >
+    <ion-item-sliding *ngFor="let digrGroup of digr01GroupList; let i = index" #slidingItem>
       <ion-item (click)="goView(digrGroup)">
         <ion-label *ngIf="digrGroup.digr01.report_yy != ''; else elseBlock" >{{digrGroup.digr01.report_yy}}년도 {{digrGroup.digr01.regular_gbn_nm}} {{digrGroup.digr01.dign_gbn_nm}}</ion-label>
         <ng-template #elseBlock><ion-label>임시 점검 데이터_{{i+1}}</ion-label></ng-template>
       </ion-item>
 
-      <ion-item-options danger>
-        <button danger color="danger" class="danger" (click)="removeItem(digrGroup,i)" ><ion-icon slot="icon-only" name="trash"></ion-icon> 삭제</button>
+      <ion-item-options no-lines>
+        <!-- Button delete -->
+        <button (click)="removeItem(digrGroup,i)" transparent>
+          <!-- Icon delete -->
+          <ion-icon icon-medium>
+            <i class="icon icon-delete"></i>
+          </ion-icon>
+        </button>
+        <!-- Button undo -->
+        <button (click)="undo(slidingItem)" transparent>
+          <!-- Icon undo -->
+          <ion-icon icon-medium>
+            <i class="icon icon-undo-variant"></i>
+          </ion-icon>
+        </button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>

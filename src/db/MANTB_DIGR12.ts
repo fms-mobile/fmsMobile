@@ -1,8 +1,9 @@
 
 import { GlobalVars } from '../services/GlobalVars';
 import { UtilService } from '../services/UtilService';
+import { COMMON_DAO } from './COMMON_DAO';
 
-export class MANTB_DIGR12 {
+export class MANTB_DIGR12 implements COMMON_DAO {
     public wsdb : any;
     public utilService : UtilService;
     public globalVars : GlobalVars;
@@ -40,6 +41,20 @@ export class MANTB_DIGR12 {
             var sqlMain = "delete from MANTB_DIGR12  "
             			+ " where 1=1 "
 				+ " and object_no = '"+this.utilService.nvl(params.object_no,'')+"' "
+
+            //console.log(sqlMain);
+            txn.executeSql(sqlMain, [],
+                function(transaction, resultSet) {
+                    okFunction(true);
+            }, function (transaction, error) {
+                console.log(error);
+            });
+        });
+    }
+
+    public deleteAll(params, okFunction) {
+        this.wsdb.transaction((txn) =>{
+            var sqlMain = "delete from MANTB_DIGR12 "
 
             //console.log(sqlMain);
             txn.executeSql(sqlMain, [],

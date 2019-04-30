@@ -6,6 +6,7 @@ import { AuthGuardService } from '../../services/AuthGuardService';
 import { ToastService } from '../../services/toast-service';
 import { TransmissionService } from '../../services/transmisson-service';
 import { UtilService } from '../../services/UtilService';
+import { GlobalVars } from '../../services/GlobalVars';
 
 /**
  * Generated class for the LoginPage page.
@@ -22,7 +23,8 @@ import { UtilService } from '../../services/UtilService';
 export class LoginPage {
 
   ui: any = {
-    user_id: "admin",
+    //user_id: "chonju",
+    user_id: 'arch2team',
     pswd: "1",
   }; // 사용자 정보 
   chkAutoLogin: boolean = false;
@@ -36,9 +38,13 @@ export class LoginPage {
     public authGuardService: AuthGuardService,
     public transmissionService: TransmissionService,
     public utilService: UtilService,
+    public globalVars:GlobalVars,
   ) {
 
     if (this.authGuardService.canActivate()) {
+      globalVars.db.comtbUser01.list001({"user_id":authService.user.sub},(res) => {
+        globalVars.setUserInfo(res[0]);
+      });
       this.navCtrl.setRoot("DigrGroupPage");
     }
   }
@@ -73,12 +79,13 @@ export class LoginPage {
     this.authService.login(that.ui).subscribe(res => {
       if (that.authGuardService.canActivate()) {
         if(that.utilService.isOnline) {
-          that.transmissionService.syncAllData(null);
+          that.transmissionService.syncAllData(null,res["token"]);
         }
+        this.globalVars.db.comtbUser01.list001({"user_id":this.authService.user.sub},(res) => {
+          this.globalVars.setUserInfo(res[0]);
+        });
         that.navCtrl.setRoot("DigrGroupPage");
       }
     });
-
   }
-
 }

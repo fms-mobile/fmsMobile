@@ -1,8 +1,9 @@
 
 import { GlobalVars } from '../services/GlobalVars';
 import { UtilService } from '../services/UtilService';
+import { COMMON_DAO } from './COMMON_DAO';
 
-export class COMTB_ORGN01 {
+export class COMTB_ORGN01 implements COMMON_DAO {
     public wsdb : any;
     public utilService : UtilService;
     public globalVars : GlobalVars;
@@ -46,6 +47,20 @@ export class COMTB_ORGN01 {
             var sqlMain = "delete from COMTB_ORGN01  "
             			+ " where 1=1 "
 				+ " and group_nm = '"+this.utilService.nvl(params.group_nm,'')+"' "
+
+            //console.log(sqlMain);
+            txn.executeSql(sqlMain, [],
+                function(transaction, resultSet) {
+                    okFunction(true);
+            }, function (transaction, error) {
+                console.log(error);
+            });
+        });
+    }
+
+    public deleteAll(params, okFunction) {
+        this.wsdb.transaction((txn) =>{
+            var sqlMain = "delete from COMTB_ORGN01 "
 
             //console.log(sqlMain);
             txn.executeSql(sqlMain, [],

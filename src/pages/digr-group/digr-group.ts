@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, IonicPage } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, ItemSliding } from 'ionic-angular';
 import { GlobalVars } from '../../services/GlobalVars';
 import { UtilService } from '../../services/UtilService';
 import { TempDataManage } from '../../services/TempDataManage';
@@ -52,6 +52,7 @@ export class DigrGroupPage {
     const alertMessage = "선택한 정기안전점검을 삭제 하시겠습니까?";
 
     this.utilService.alertConfirm(alertTile,alertMessage,() => {
+      this.tempDataManage.localDelete(digrGroup);
       this.digr01GroupList.splice(i, 1);
     },()=>{
 
@@ -59,7 +60,10 @@ export class DigrGroupPage {
   }
   
   syncdata(){
-    this.transmissionService.syncAllData(null);
+    this.transmissionService.syncAllData(null,null);
   }
 
+  undo = (slidingItem: ItemSliding) => {
+    slidingItem.close();
+  }
 }

@@ -1,7 +1,8 @@
 import { GlobalVars } from '../services/GlobalVars';
 import { UtilService } from '../services/UtilService';
+import { COMMON_DAO } from './COMMON_DAO';
 
-export class COMTB_ORGN11 {
+export class COMTB_ORGN11 implements COMMON_DAO {
     public wsdb : any;
     public utilService : UtilService;
     public globalVars : GlobalVars;
@@ -83,6 +84,20 @@ export class COMTB_ORGN11 {
                 console.log(error);
             });
         });
+	}
+	
+	public deleteAll(params, okFunction) {
+        this.wsdb.transaction((txn) =>{
+            var sqlMain = "delete from COMTB_ORGN11 "
+
+            //console.log(sqlMain);
+            txn.executeSql(sqlMain, [],
+                function(transaction, resultSet) {
+                    okFunction(true);
+            }, function (transaction, error) {
+                console.log(error);
+            });
+        });
     }
 
     public list001(params, okFunction) {
@@ -143,7 +158,7 @@ export class COMTB_ORGN11 {
 					;
 
 					if(params.page != "" && params.pagCount != "") {
-						let startCount = params.start * params.pagCount + 1;
+						let startCount = params.start * params.pagCount;
 						sqlMain += " LIMIT "+this.utilService.nvl(params.pagCount,'')+ " OFFSET "+this.utilService.nvl(String(startCount),'');
 					}
 

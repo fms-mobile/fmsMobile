@@ -7,6 +7,9 @@
 <ion-header>
 
   <ion-navbar>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="dismiss()"><ion-icon name="backspace"></ion-icon></button>
+    </ion-buttons>
     <ion-title>참여기술자 정보 등록</ion-title>
   </ion-navbar>
 
@@ -16,11 +19,18 @@
 <ion-content padding>
   <ion-grid>
     <ion-row padding>
-      <ion-col col-12>
-        <ion-item no-lines box-shadow margin-bottom (click)="goOigr11List()">
+      <ion-col col-10>
+        <ion-item no-lines box-shadow margin-bottom>
           <ion-input required no-margin type="text" placeholder="성명" [(ngModel)]="digr11.engineer_nm" readonly></ion-input>
         </ion-item>
-        <ion-item no-lines box-shadow margin-bottom (click)="goOigr11List()">
+      </ion-col>
+      <ion-col col-2>
+        <ion-buttons right>
+          <button ion-button icon-only (click)="goOigr11List()"><ion-icon name="search"></ion-icon></button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col col-12>
+        <ion-item no-lines box-shadow margin-bottom>
           <ion-input required no-margin type="text" placeholder="생년월일" [(ngModel)]="digr11.birth_ymd" readonly></ion-input>
         </ion-item>
         <ion-item no-lines box-shadow margin-bottom>

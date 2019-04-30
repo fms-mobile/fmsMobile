@@ -19,7 +19,7 @@
     <ion-col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12>
       <ion-list no-margin>
         <ion-item-sliding *ngFor="let mast01 of digr01Group.selectedMast01List; let i = index;" #slidingItem>
-          <ion-item no-lines no-padding no-margina (click)="goWrite(digr01Group,i)">
+          <ion-item no-lines no-padding margin-top (click)="goWrite(digr01Group,i)">
             <!-- Images -->
             <ion-thumbnail no-margin item-start>
               <img src="assets/imgs/fms_img_{{ i % 12 + 1 | number: '2.'}}.png">

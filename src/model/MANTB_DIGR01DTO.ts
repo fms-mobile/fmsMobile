@@ -46,7 +46,8 @@ export class MANTB_DIGR01DTO {
         this.report_yy = "";
         this.start_ymd = "";
         this.end_ymd = "";
-        this.dign_gbn = "";
+        this.dign_gbn = "100";
+        this.dign_gbn_nm = "정기점검";
         this.regular_gbn = "";
         this.dign_corp_cd = "";
         this.dign_corp_nm = "";

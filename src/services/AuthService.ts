@@ -17,17 +17,11 @@ export class AuthService {
  
   url : string ;
   user = null;
-  headers : HttpHeaders = new HttpHeaders();
   authenticationState = new BehaviorSubject(false);
  
   constructor(private http: HttpClient, private helper: JwtHelperService, private storage: Storage,
     private plt: Platform, private alertController: AlertController, private globalVars :GlobalVars) {
     // this.url = globalVars.serverUrl;
-    
-    let headers = this.headers;
-    headers.set('Content-Type', 'application/json');
-    headers.set('Access-Control-Allow-Origin' , '*');
-    headers.set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
 
     this.url = globalVars.webUrl+"mobile";
     this.plt.ready().then(() => {
@@ -61,18 +55,8 @@ export class AuthService {
   }
  
   login(credentials) {
-    /* return this.http.post(`${this.url}/api/login.do`, credentials,{ headers: headers }).subscribe(
-        res => {
-            this.storage.set(TOKEN_KEY, res['token']);
-            this.user = this.helper.decodeToken(res['token']);
-            this.authenticationState.next(true);
-        },
-        e => {
-            this.showAlert(e.error.resultMsg);
-        }
-    ) */
-
-    let headers = this.headers;
+    let headers = new HttpHeaders();
+    headers = this.setHeader(headers);
 
     return this.http.post(`${this.url}/api/login.do`, credentials,{ headers }).pipe(
       retry(3),
@@ -81,7 +65,6 @@ export class AuthService {
           this.showAlert('서버의 응답이 없습니다.');            
         } else {
           this.storage.set(TOKEN_KEY, res['token']);
-          headers.append('Authorization',res['token']);
           this.user = this.helper.decodeToken(res['token']);
           this.authenticationState.next(true);
         }
@@ -131,7 +114,20 @@ export class AuthService {
     return this.storage.get(TOKEN_KEY);
   }
 
-  authHeader() : HttpHeaders {
-    return this.headers;
+  setHeader(headers : HttpHeaders) {
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Access-Control-Allow-Origin' , '*');
+    headers = headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+    return headers;
+  }
+
+  async authHeader() : Promise<HttpHeaders> {
+    let headers = new HttpHeaders();
+    const token = await this.getToken();
+
+    headers = this.setHeader(headers);
+    headers = headers.append('Authorization', "Bearer "+token);
+
+    return headers;
   }
 }
