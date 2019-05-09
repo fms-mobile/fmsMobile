@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Storage } from '@ionic/storage';
-import { map, tap, catchError , retry} from 'rxjs/operators';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { map, catchError , retry} from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 import { of } from 'rxjs/observable/of';
 import { GlobalVars } from './GlobalVars';
  
@@ -126,6 +126,18 @@ export class AuthService {
     const token = await this.getToken();
 
     headers = this.setHeader(headers);
+    headers = headers.append('Authorization', "Bearer "+token);
+
+    return headers;
+  }
+
+  async authFormHeader() : Promise<HttpHeaders> {
+    let headers = new HttpHeaders();
+    const token = await this.getToken();
+
+    // headers = this.setHeader(headers);
+    // headers = headers.set('Content-Type', 'application/x-www-form-urlencoded');
+    // headers = headers.set('Content-Type', 'multipart/form-data');
     headers = headers.append('Authorization', "Bearer "+token);
 
     return headers;

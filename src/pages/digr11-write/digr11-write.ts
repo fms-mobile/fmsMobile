@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, IonicPage, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, IonicPage, ViewController, ToastController } from 'ionic-angular';
 import { GlobalVars } from '../../services/GlobalVars';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { MANTB_DIGR11DTO } from '../../model/MANTB_DIGR11DTO';
@@ -24,7 +24,7 @@ export class Digr11WritePage {
   isOigr11 : boolean = false; 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,globalVars: GlobalVars, 
-    public utilService:UtilService,public modalCtrl: ModalController,public viewCtrl: ViewController) {
+    public utilService:UtilService,public modalCtrl: ModalController,public viewCtrl: ViewController ,private toastCtrl :ToastController) {
      
     this.digr01Group = navParams.data.digr01Group;
     this.index = navParams.data.index;
@@ -33,8 +33,7 @@ export class Digr11WritePage {
 
     if(this.digr11 === undefined) {
       this.digr11 = new MANTB_DIGR11DTO();
-      this.digr01Group.digr11List.push(this.digr11);
-      this.index = this.digr01Group.digr11List.length;
+      
     }
 
     globalVars.db.comtbCode02.list002({code_group:"tech_grade",}, (res) => {
@@ -68,13 +67,22 @@ export class Digr11WritePage {
   }
 
   goSave(){
+    if(!this.validateDigr11()) {
+      const alertTile = "알림";
+      const alertMessage = "기술자 필수정보를 입력하지 않았습니다.";
+      this.utilService.showToast(this.toastCtrl,alertMessage,() =>{
+      });
+      return ;
+    }
+    this.digr01Group.digr11List.push(this.digr11);
+    this.index = this.digr01Group.digr11List.length;
     this.viewCtrl.dismiss(null);
   }
 
-  async ionViewCanLeave() {
+  /* async ionViewCanLeave() {
     const shouldLeave = await this.confirmLeave();
     return shouldLeave;
-  }
+  } */
 
   confirmLeave(){
     let resolveLeaving;

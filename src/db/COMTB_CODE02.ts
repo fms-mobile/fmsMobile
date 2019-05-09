@@ -6,6 +6,7 @@ export class COMTB_CODE02 implements COMMON_DAO {
     public wsdb : any;
     public utilService : UtilService;
     public globalVars : GlobalVars;
+
     constructor(public gv : GlobalVars,
                 public us : UtilService, 
                 public db : any) {

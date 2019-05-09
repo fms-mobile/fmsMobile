@@ -1,17 +1,21 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { GlobalVars } from "./GlobalVars";
 import { AuthService } from "./AuthService";
 import { Observable, of } from "rxjs";
 import { map, catchError, retry } from "rxjs/operators";
 import { COMMON_DAO } from "../db/COMMON_DAO";
+import { DIGR01_GROUPDTO } from "../model/DIGR01_GROUPDTO";
+import { COMTB_FILE01DTO } from "../model/COMTB_FILE01DTO";
+import { File, FileEntry } from "@ionic-native/file";
+import { FilePath } from "@ionic-native/file-path";
 
 @Injectable()
 export class TransmissionService {
     url : string;
     tableMap : {};
 
-    constructor(private http: HttpClient, private globalVars :GlobalVars, private authService:AuthService){
+    constructor(private http: HttpClient, private globalVars :GlobalVars, private authService:AuthService,public file:File ,public filePath : FilePath){
         this.url = globalVars.webUrl+"mobile";
     }
 
@@ -53,5 +57,55 @@ export class TransmissionService {
             }
         });
 
+    }
+
+    saveData(digr01Group: DIGR01_GROUPDTO) {
+        let param = digr01Group.convertServerObject();
+        let formData = new FormData();
+        formData.append('jsondata',JSON.stringify(param));
+
+        let file01List : Array<COMTB_FILE01DTO> = param["COMTB_FILE01"];
+        const file_len = file01List.length;
+        let file_cnt = 0;
+
+
+        if(file_len > 0) {
+            file01List.forEach((file01)=>{
+                let that = this;
+                this.file.resolveLocalFilesystemUrl(file01.img_data).then(entry => {
+                    let _formData = formData;
+                    ( < FileEntry > entry).file(file => {
+                        const reader = new FileReader();
+                        reader.onloadend = () => {
+                            const imgBlob = new Blob([reader.result], {
+                                type: file.type
+                            });
+                            _formData.append('files', imgBlob, file.name);
+                            file_cnt += 1;
+                            if( file_cnt == file_len) {
+                                that.saveDataRequest(_formData);
+                            }
+                        };
+                        reader.readAsArrayBuffer(file);
+                    });
+                })
+            });
+        } else {
+            this.saveDataRequest(formData);
+        }
+    }
+
+    saveDataRequest(formData : FormData) {
+        this.authService.authFormHeader().then(headers => {
+            this.sendPost('/api/saveData.do',formData,headers).pipe(
+                map(res => {
+                    if (!res) {
+                    } else {
+                    }
+                    return res;
+                }),
+                catchError(err => of([]))
+            ).subscribe()
+        });
     }
 }

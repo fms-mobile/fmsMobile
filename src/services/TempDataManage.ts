@@ -5,6 +5,8 @@ import { DIGR01_GROUPDTO } from './../model/DIGR01_GROUPDTO';
 import { LOCTB_DATA01DTO } from './../model/LOCTB_DATA01DTO';
 import { GlobalVars } from './GlobalVars';
 import { AuthService } from './AuthService';
+import { Storage } from '@ionic/storage';
+import { LoadingService } from './loading-service';
 
 @Injectable()
 export class TempDataManage {
@@ -20,7 +22,7 @@ export class TempDataManage {
      *  selectedMast01List Array<BASTB_MAST01DTO> => 선택 시설물 기본현황
      * }
      */
-    constructor(public globalVars : GlobalVars, public authService : AuthService){
+    constructor(public globalVars : GlobalVars, public authService : AuthService, private storage: Storage,private loadingService: LoadingService){
         this.digr01GroupList = new Array<DIGR01_GROUPDTO>();
     }
     
@@ -63,7 +65,7 @@ export class TempDataManage {
     }
 
     public localSave(){
-        this.digr01GroupList.forEach(digr01 => {
+        /* this.digr01GroupList.forEach(digr01 => {
             let loctbData01 : LOCTB_DATA01DTO = new LOCTB_DATA01DTO();
             let jsonStr = JSON.stringify(digr01);
 
@@ -71,37 +73,48 @@ export class TempDataManage {
             loctbData01.object_id = digr01.uuid;
             loctbData01.user_id = this.authService.user.sub;
             // 
-            this.globalVars.db.loctbData01.insert(loctbData01,(res) =>{
-
-            });
+            
+        }); */
+        this.loadingService.show();
+        this.storage.set(this.authService.user.sub,JSON.stringify(this.digr01GroupList)).then(res => {
+            this.loadingService.hide();
         });
     }
 
     public localDelete(digr01) {
-        let loctbData01 : LOCTB_DATA01DTO = new LOCTB_DATA01DTO();
+        /* let loctbData01 : LOCTB_DATA01DTO = new LOCTB_DATA01DTO();
         let jsonStr = JSON.stringify(digr01);
 
         loctbData01.object_contents = jsonStr;
         loctbData01.object_id = digr01.uuid;
-        loctbData01.user_id = this.authService.user.sub;
+        loctbData01.user_id = this.authService.user.sub; */
 
         //
-        this.globalVars.db.loctbData01.delete(loctbData01,(res) =>{
+        /* this.globalVars.db.loctbData01.delete(loctbData01,(res) =>{
 
-        }); 
+        });  */
+        this.localSave();
     }
 
     public loadLoctbData01() {
         let user_id = this.authService.user.sub;
         //
+        this.digr01GroupList = new Array<DIGR01_GROUPDTO>();
         let that = this;
-        this.globalVars.db.loctbData01.list001({"user_id":user_id},(res) =>{
-            res.forEach(loctbData01 => {
-                let digr01Group : DIGR01_GROUPDTO = new DIGR01_GROUPDTO();
-                let parseObject = JSON.parse(loctbData01.object_contents);
-                Object.assign(digr01Group,parseObject);
-                that.digr01GroupList.push(digr01Group);
-            });
+
+        this.loadingService.show();
+        this.storage.get(this.authService.user.sub).then((res : string) => {
+            if(res) {
+                let parseArray : Array<DIGR01_GROUPDTO> = JSON.parse(res);
+
+                parseArray.forEach(loctbData01 => {
+                    let digr01Group : DIGR01_GROUPDTO = new DIGR01_GROUPDTO();
+                    Object.assign(digr01Group,loctbData01);
+                    that.digr01GroupList.push(digr01Group);
+                });
+            }
+            that.loadingService.hide();
         });
+
     }
 }

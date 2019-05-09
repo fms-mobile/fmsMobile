@@ -100,14 +100,17 @@
         <ion-checkbox [(ngModel)]="digr02.dign4_need_yn" ></ion-checkbox>
       </ion-item>
     </ion-list> -->
-  <ion-item-divider></ion-item-divider>
   <ion-list>
-    <ion-item>
+    <ion-list-header>
       <ion-label>중대결함</ion-label>
       <button ion-button outline item-right (click)="addDigr12WriteModal()">
         <ion-icon name="add">추가</ion-icon>
       </button>
-    </ion-item>
+    </ion-list-header>
+    <ion-item-sliding *ngFor="let digr12 of digr02.digr12Object; let i = index;" #slidingItem>
+      <ion-item>
+      </ion-item>
+    </ion-item-sliding>
   </ion-list>
   <ion-buttons end>
     <button ion-button icon-start (click)="goNext()">

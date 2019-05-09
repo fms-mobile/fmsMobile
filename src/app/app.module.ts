@@ -17,7 +17,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { File } from '@ionic-native/file';
+import { Transfer } from '@ionic-native/transfer';
+import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { Storage, IonicStorageModule } from '@ionic/storage';
 import { AuthGuardService } from '../services/AuthGuardService';
@@ -42,7 +46,7 @@ export function jwtOptionsFactory(storage) {
 @NgModule({
     declarations: [MyApp],
     providers: [
-        StatusBar, SplashScreen, BarcodeScanner, Camera, Network,
+        StatusBar, SplashScreen, BarcodeScanner, Camera, Network, File, FilePath, Transfer, WebView,
         DbInit, DbInitData,
         ToastService, LoadingService, AuthService, AuthGuardService, GlobalVars, UtilService, TempDataManage, TransmissionService,
         { provide: ErrorHandler, useClass: IonicErrorHandler },

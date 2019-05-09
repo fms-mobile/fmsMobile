@@ -52,8 +52,8 @@ export class DigrGroupPage {
     const alertMessage = "선택한 정기안전점검을 삭제 하시겠습니까?";
 
     this.utilService.alertConfirm(alertTile,alertMessage,() => {
-      this.tempDataManage.localDelete(digrGroup);
       this.digr01GroupList.splice(i, 1);
+      this.tempDataManage.localDelete(digrGroup);
     },()=>{
 
     });

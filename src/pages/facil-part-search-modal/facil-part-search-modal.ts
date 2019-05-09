@@ -39,7 +39,7 @@ export class FacilPartSearchModalPage {
     this.digr01Group = navParams.data.digr01Group;
     this.selectIndex = navParams.data.index;
     this.digr12 = navParams.data.digr12;
-    this.selectFacilPart = this.digr12.facilPart;
+    this.selectFacilPart = this.digr12.facilPart ? this.digr12.facilPart : {};
     (typeof this.selectFacilPart.part_detail !== "undefined" ) ? this.part_detail = this.selectFacilPart.part_detail : this.part_detail = "";
     this.digr02 = this.digr01Group.digr02List[this.selectIndex];
     let facil_gbn = this.digr01Group.selectedMast01List[this.selectIndex].facil_gbn;

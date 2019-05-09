@@ -26,7 +26,7 @@ export class SeriousDefectModalPage {
   digr02 : MANTB_DIGR01DTO;
   digr12 : MANTB_DIGR12DTO;
 
-  serious_defectList : [{}];
+  serious_defectList : [any];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController,public globalVars:GlobalVars,
     public utilService : UtilService) {
@@ -40,6 +40,7 @@ export class SeriousDefectModalPage {
 
     globalVars.db.comtbCode02.list002({"code_group":"serious_defect","code1" :facil_gbn}, (res) => {
       this.serious_defectList = res;
+      Object.assign(this.serious_defectList, this.digr12.seriousDefectList);
     });
   }
 
@@ -55,13 +56,16 @@ export class SeriousDefectModalPage {
   }
   
   goSave(){
+    this.digr12.seriousDefectList = [];
     this.serious_defectList.forEach(serious_defect => {
-      this.digr12.seriousDefectList.push(serious_defect);
+      if(serious_defect.selected) {
+        this.digr12.seriousDefectList.push(serious_defect);
+      }
     });
-    this.viewCtrl.dismiss(null);
+    this.viewCtrl.dismiss(this.digr12);
   }
 
   dismiss(){
-    this.viewCtrl.dismiss(null);
+    this.viewCtrl.dismiss(this.digr12);
   }
 }

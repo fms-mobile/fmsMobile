@@ -8,6 +8,7 @@ import { TransmissionService } from '../../services/transmisson-service';
 import { UtilService } from '../../services/UtilService';
 import { GlobalVars } from '../../services/GlobalVars';
 import { TempDataManage } from '../../services/TempDataManage';
+import { LoadingService } from '../../services/loading-service';
 
 /**
  * Generated class for the LoginPage page.
@@ -40,7 +41,8 @@ export class LoginPage {
     public transmissionService: TransmissionService,
     public utilService: UtilService,
     public globalVars:GlobalVars,
-    public tempDataManage : TempDataManage
+    public tempDataManage : TempDataManage,
+    public loadingService :LoadingService
   ) {
 
     if (this.authGuardService.canActivate()) {
@@ -78,7 +80,7 @@ export class LoginPage {
 
     this.ui.chkAutoLogin = this.chkAutoLogin;
     let that = this;
-
+    
     this.authService.login(that.ui).subscribe(res => {
       if (that.authGuardService.canActivate()) {
         if(that.utilService.isOnline) {

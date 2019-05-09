@@ -3,6 +3,7 @@ import { NavController, NavParams, IonicPage, Platform } from 'ionic-angular';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { TempDataManage } from '../../services/TempDataManage';
 import { UtilService } from '../../services/UtilService';
+import { TransmissionService } from '../../services/transmisson-service';
 
 /**
  * Generated class for the DigrTabWrite page.
@@ -18,7 +19,8 @@ import { UtilService } from '../../services/UtilService';
 export class DigrTabWritePage {
   digr01Group : DIGR01_GROUPDTO;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public tempDataManage: TempDataManage, public utilService: UtilService, plaform :Platform ) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public tempDataManage: TempDataManage
+    , public utilService: UtilService, plaform :Platform,public transmissionService:TransmissionService ) {
     this.digr01Group = navParams.data;
   }
 
@@ -52,5 +54,10 @@ export class DigrTabWritePage {
 
   goSave(){
     this.tempDataManage.localSave();
+  }
+
+  goSend(){
+    this.tempDataManage.localSave();
+    this.transmissionService.saveData(this.digr01Group);
   }
 }

@@ -93,7 +93,8 @@ export class LOCTB_DATA01 implements COMMON_DAO {
 			    		+ "  , t1.sys_upd_id "
 			    		+ "  , t1.sys_upd_date "
 			            + "  from LOCTB_DATA01 t1 "
-			        + " where 1=1 "
+                    + " where 1=1 "
+                    + " and user_id = '"+this.utilService.nvl(params.user_id,'')+"' "
 			        ;
 
             //console.log(sqlMain);

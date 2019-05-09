@@ -5,28 +5,93 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-    <ion-navbar color="primary">
-        <ion-buttons left>
-            <button ion-button icon-only (click)="dismiss()"><ion-icon name="backspace"></ion-icon></button>
-        </ion-buttons>
-        <ion-title>중대결함</ion-title>
-    </ion-navbar>
-  </ion-header>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="backspace"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>중대결함</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-start (click)="goSave()">
+        확인
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <ion-item (click)="goFacilPartSerachModal()">
-      <ion-label color="primary" stacked>부위/부재</ion-label>
-      <ion-input type="text" placeholder="내용을 입력하세요." ></ion-input>
-    </ion-item>
-    <ion-item (click)="goSeriousDefectModal()" >
-      <ion-label color="primary" stacked>중대결함</ion-label>
-      <ion-input type="text" placeholder="내용을 입력하세요."></ion-input>
-    </ion-item>
-  </ion-list>
-  <ion-buttons end>
-    <button ion-button icon-start (click)="goSave()">
-      확인
-    </button>
-  </ion-buttons>
+  <ion-grid>
+    <ion-row padding>
+      <ion-col col-10>
+        <ion-item no-lines box-shadow margin-bottom>
+          <ion-label>부위/부재</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col col-2>
+        <ion-buttons right>
+          <button ion-button icon-only (click)="goFacilPartSerachModal()">
+            <ion-icon name="search"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-col>
+      <ng-container *ngIf="digr12.facilPart">
+        <ion-col col-8>
+          <ion-label item-title>첨부 사진</ion-label>
+          <ion-list>
+            <ion-item *ngFor="let comtbFile01 of digr02.comtbFile01Array">
+              <ion-thumbnail slot="start">
+                <img [src]="comtbFile01.img_path">
+              </ion-thumbnail>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-button icon-only (click)="takePhoto(camera.PictureSourceType.CAMERA);"><ion-icon name="camera"></ion-icon></button>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-button icon-only (click)="takePhoto(camera.PictureSourceType.PHOTOLIBRARY);"><ion-icon name="search"></ion-icon></button>
+        </ion-col>
+      </ng-container>
+    </ion-row>
+    <ion-row padding>
+      <ion-col col-10>
+        <ion-item no-lines box-shadow margin-bottom>
+          <ion-label>중대결함</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col col-2>
+        <ion-buttons right>
+          <button ion-button icon-only (click)="goSeriousDefectModal()">
+            <ion-icon name="search"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-list>
+        <ion-item-sliding *ngFor="let seriousDefect of digr12.seriousDefectList; let i = index;" #slidingSeriousDefect>
+          <ion-item box-shadow margin-top no-lines>
+            <ion-label>{{seriousDefect.data2}}</ion-label>
+          </ion-item>
+          <ion-item-options no-lines>
+            <!-- Button delete -->
+            <button (click)="removeSeriousDefectItem(seriousDefect,i)" transparent>
+              <!-- Icon delete -->
+              <ion-icon icon-medium>
+                <i class="icon icon-delete"></i>
+              </ion-icon>
+            </button>
+            <!-- Button undo -->
+            <button (click)="undo(slidingSeriousDefect)" transparent>
+              <!-- Icon undo -->
+              <ion-icon icon-medium>
+                <i class="icon icon-undo-variant"></i>
+              </ion-icon>
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </ion-row>
+  </ion-grid>
 </ion-content>

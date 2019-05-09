@@ -6,10 +6,15 @@
 -->
 <ion-header>
   <ion-navbar color="primary">
-      <ion-buttons left>
-          <button ion-button icon-only (click)="dismiss()"><ion-icon name="backspace"></ion-icon></button>
-      </ion-buttons>
-      <ion-title>중대결함 선택</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="dismiss()"><ion-icon name="backspace"></ion-icon></button>
+    </ion-buttons>
+    <ion-title>중대결함 선택</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-start (click)="goSave()">
+        확인
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -19,9 +24,4 @@
       <ion-label color="primary">{{serious_defect.data2}}</ion-label>
     </ion-item>
   </ion-list>
-  <ion-buttons end>
-    <button ion-button icon-start (click)="goSave()">
-      확인
-    </button>
-  </ion-buttons>
 </ion-content>

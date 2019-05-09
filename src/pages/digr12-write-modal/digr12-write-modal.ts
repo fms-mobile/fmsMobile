@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, ModalController, IonicPage } from 'ionic-angular';
+import { NavController, NavParams, ViewController, ModalController, IonicPage, ItemSliding } from 'ionic-angular';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { MANTB_DIGR01DTO } from '../../model/MANTB_DIGR01DTO';
 import { MANTB_DIGR12DTO } from '../../model/MANTB_DIGR12DTO';
+import { UtilService } from '../../services/UtilService';
 
 /**
  * Generated class for the Digr12WriteModal page.
@@ -21,7 +22,7 @@ export class Digr12WriteModalPage {
   digr02 : MANTB_DIGR01DTO;
   digr12 :MANTB_DIGR12DTO;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController,public utilService:UtilService) {
     this.digr01Group = navParams.data.digr01Group;
     this.selectIndex = navParams.data.index;
     this.digr02 = this.digr01Group.digr02List[this.selectIndex];
@@ -41,6 +42,12 @@ export class Digr12WriteModalPage {
   goSeriousDefectModal(){
     let seriousDefectModalPage = this.modalCtrl.create("SeriousDefectModalPage",{"digr01Group":this.digr01Group,"index":this.selectIndex,"digr12":this.digr12});
     seriousDefectModalPage.present();
+
+    seriousDefectModalPage.onWillDismiss((data: MANTB_DIGR12DTO) => {
+      if(data != null){
+        this.digr12 = data;
+      }
+    });
   }
 
   dismiss(){
@@ -48,7 +55,21 @@ export class Digr12WriteModalPage {
   }
 
   goSave(){
+    this.digr02.digr12Object.push(this.digr12);
+  }
 
+  removeSeriousDefectItem(seriousDefect:any, i: number){
+    const alertTile = "삭제 알림";
+    const alertMessage = "선택한 중대결함 정보를 삭제 하시겠습니까?";
+    this.utilService.alertConfirm(alertTile,alertMessage,() => {
+      this.digr12.seriousDefectList.splice(i,1);
+    },()=>{
+
+    });
+  }
+
+  undo = (slidingItem: ItemSliding) => {
+    slidingItem.close();
   }
 
 }

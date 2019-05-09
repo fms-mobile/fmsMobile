@@ -5,7 +5,12 @@ import { NavController, NavParams, ModalController, ToastController, ViewControl
 import { UtilService } from '../../services/UtilService';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { BASTB_MAST01DTO } from '../../model/BASTB_MAST01DTO';
-
+import { CameraOptions, Camera } from '@ionic-native/camera';
+import { COMTB_FILE01DTO } from '../../model/COMTB_FILE01DTO';
+import { DomSanitizer } from '@angular/platform-browser';
+import { FilePath } from '@ionic-native/file-path';
+import { File } from '@ionic-native/file';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 /**
  * Generated class for the Digr02Write page.
@@ -18,6 +23,7 @@ import { BASTB_MAST01DTO } from '../../model/BASTB_MAST01DTO';
   selector: 'page-digr02-write',
   templateUrl: 'digr02-write.html',
 })
+
 export class Digr02WritePage {
   selectIndex : number;
   state_gradeList : any = [];
@@ -25,9 +31,13 @@ export class Digr02WritePage {
   digr01Group : DIGR01_GROUPDTO;
   selectMast01 : BASTB_MAST01DTO;
   digr02 : MANTB_DIGR01DTO;
+  private win: any = window;
 
   constructor(public navCtrl: NavController, public navParams: NavParams
-    ,public globalVars:GlobalVars,public utilService : UtilService, public modalCtrl: ModalController,public toastCtrl: ToastController, public viewCtrl: ViewController ) {
+    ,public globalVars:GlobalVars,public utilService : UtilService
+    ,public modalCtrl: ModalController,public toastCtrl: ToastController
+    , public viewCtrl: ViewController, public camera: Camera, public domSanitizer: DomSanitizer
+    , private filePath :FilePath, private file: File, public webview: WebView ) {
       this.digr01Group = navParams.data.digr01Group;
       this.selectIndex = navParams.data.index;
 
@@ -86,18 +96,66 @@ export class Digr02WritePage {
   }
 
   goNext(){
-    /* let nextIndex = this.selectIndex+1;
-    let nextSelectMast01 = this.digr01Group.selectedMast01List[nextIndex];
-    let nextDigr02 = this.digr01Group.digr02List[nextIndex];
-
-    if(nextSelectMast01 && nextDigr02) {
-      this.selectIndex = nextIndex;
-      this.selectMast01 = nextSelectMast01;
-      this.digr02 = nextDigr02;
-    } else {
-      this.utilService.showToast(this.toastCtrl, "마지막 시설물입니다.",null);
-    } */
     let thisView : ViewController = this.navCtrl.last();
     this.navCtrl.push("Digr13WritePage",{"digr01Group":this.digr01Group,"index":this.selectIndex,"prevView":thisView});
+  }
+
+  pathForImage(img) {
+    if (img === null) {
+      return '';
+    } else {
+      let converted = this.win.Ionic.WebView.convertFileSrc(img);
+      return converted;
+    }
+  }
+
+  createFileName() {
+    var d = new Date(),
+        n = d.getTime(),
+        newFileName = n + ".jpg";
+    return newFileName;
+  }
+
+  takePhoto(sourceType) {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType:sourceType,
+      saveToPhotoAlbum: false,
+      correctOrientation: true
+    }
+
+    this.camera.getPicture(options).then((imagePath : string) => {
+     // imageData is either a base64 encoded string or a file URI
+     // If it's base64 (DATA_URL):
+      // let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.filePath.resolveNativePath(imagePath)
+      .then(filePath => {
+        let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
+        // let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
+        let currentName: string = '';
+
+        if(imagePath.includes('?')) {
+          currentName = imagePath.substring(0, imagePath.lastIndexOf('?')).replace(correctPath,'');
+        } else{
+          currentName = imagePath.replace(correctPath,'');
+        }
+
+        let that = this;
+        that.file.copyFile(correctPath, currentName, this.file.dataDirectory, this.createFileName()).then(success => {
+          // this.updateStoredImages(newFileName);
+          let comtbFile01 : COMTB_FILE01DTO = new COMTB_FILE01DTO();
+          comtbFile01.img_data = imagePath;
+          comtbFile01.img_path = that.pathForImage(success.nativeURL);
+          that.digr02.comtbFile01Array.push(comtbFile01);
+        }, error => {
+            // this.presentToast('Error while storing file.');
+        });
+      });
+    }, (err) => {
+     // Handle error
+    });
   }
 }

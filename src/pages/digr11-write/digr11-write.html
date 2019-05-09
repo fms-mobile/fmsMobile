@@ -11,8 +11,12 @@
       <button ion-button icon-only (click)="dismiss()"><ion-icon name="backspace"></ion-icon></button>
     </ion-buttons>
     <ion-title>참여기술자 정보 등록</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-start (click)="goSave()">
+        저장
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
@@ -148,9 +152,5 @@
       <ion-input [(ngModel)]="digr11.tech_grade_nm" type="text" placeholder="내용을 입력하세요."></ion-input>
     </ion-item>
   </ion-list> -->
-  <ion-buttons end>
-    <button ion-button icon-start (click)="goSave()">
-      저장
-    </button>
-  </ion-buttons>
+  
 </ion-content>

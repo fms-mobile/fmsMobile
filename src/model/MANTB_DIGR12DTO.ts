@@ -17,6 +17,6 @@ export class MANTB_DIGR12DTO {
         this.object_no = "";
 
         this.seriousDefectList = Array<any>();
-        this.facilPart = {};
+        this.facilPart = null;
     }
 }
