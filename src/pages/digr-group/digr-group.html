@@ -13,45 +13,56 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-list>
-    <ion-item-sliding *ngFor="let digrGroup of digr01GroupList; let i = index" #slidingItem>
-      <ion-item (click)="goView(digrGroup)">
-        <ion-label *ngIf="digrGroup.digr01.report_yy != ''; else elseBlock" >{{digrGroup.digr01.report_yy}}년도 {{digrGroup.digr01.regular_gbn_nm}} {{digrGroup.digr01.dign_gbn_nm}}</ion-label>
-        <ng-template #elseBlock><ion-label>임시 점검 데이터_{{i+1}}</ion-label></ng-template>
-      </ion-item>
-
-      <ion-item-options no-lines>
-        <!-- Button delete -->
-        <button (click)="removeItem(digrGroup,i)" transparent>
-          <!-- Icon delete -->
-          <ion-icon icon-medium>
-            <i class="icon icon-delete"></i>
-          </ion-icon>
-        </button>
-        <!-- Button undo -->
-        <button (click)="undo(slidingItem)" transparent>
-          <!-- Icon undo -->
-          <ion-icon icon-medium>
-            <i class="icon icon-undo-variant"></i>
-          </ion-icon>
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
-  <!-- <ion-infinite-scroll on-infinite="addMoreItem()" ng-if="digrList.length > numberOfItemsToDisplay"></ion-infinite-scroll>  -->
-  <ion-buttons end>
-    <button ion-button icon-start (click)="goWrite()">
-      <ion-icon name="add" ></ion-icon>점검추가
-    </button>
-    <button ion-button icon-start (click)="syncdata()">
-      <ion-icon name="" ></ion-icon>동기화 테스트
-    </button>
-  </ion-buttons>
-  <!-- fab placed to the (vertical) center and end -->
-  <!-- <ion-fab>
-    <button ion-fab color="primary">
-      <ion-icon name="add"></ion-icon>
-    </button>  
-  </ion-fab> -->
+<!-- Theme Search Bars - Simple -->
+<ion-content>
+    <ion-grid no-padding>
+        <ion-row *ngIf="menuObject != null">
+          <!-- Header -->
+          <ion-col col-12>
+            <div background-size [ngStyle]="{'background-image': 'url(' + menuObject.headerImage + ')'}" *ngIf="menuObject.headerImage != null">
+              <h2 parallax-title="" text-center="">정기안전점검 목록</h2>
+              <h2 parallax-subtitle="" text-center="">정기안전점검 목록을 검색하여 확인할 수 있습니다.</h2>
+              <ion-searchbar [(ngModel)]="searchTerm" ></ion-searchbar>
+            </div>
+          </ion-col>
+          <!-- List -->
+          <ion-col col-12>
+            <ion-list no-margin>
+              <ion-item-sliding *ngFor="let digrGroup of digr01GroupList; let i = index" #slidingItem>
+                <ion-item class="ion-line-item" (click)="goView(digrGroup)">
+                  <ion-icon item-end>
+                    <i class="icon icon-arrow-right-bold-circle"></i>
+                  </ion-icon>
+                  <h1 item-title *ngIf="digrGroup.digr01.report_yy != ''; else elseBlock">{{digrGroup.digr01.report_yy}}년도 {{digrGroup.digr01.regular_gbn_nm}} {{digrGroup.digr01.dign_gbn_nm}}</h1>
+                  <ng-template #elseBlock><h1 item-title>정기안전점검 리스트 {{i+1}}</h1></ng-template>
+                  <h2 item-subtitle>{{digrGroup.digr01.start_ymd}} ~ {{digrGroup.digr01.end_ymd}}</h2>
+                  <h2 item-subtitle>{{digrGroup.digr01.regular_gbn_nm}} / {{digrGroup.digr01.wrt_person_nm}}</h2>
+                </ion-item>
+                <ion-item-options no-lines>
+                  <!-- Button delete -->
+                  <button (click)="removeItem(digrGroup,i)" transparent>
+                    <!-- Icon delete -->
+                    <ion-icon icon-medium>
+                      <i class="icon icon-delete"></i>
+                    </ion-icon>
+                  </button>
+                  <!-- Button undo -->
+                  <button (click)="undo(slidingItem)" transparent>
+                    <!-- Icon undo -->
+                    <ion-icon icon-medium>
+                      <i class="icon icon-undo-variant"></i>
+                    </ion-icon>
+                  </button>
+                </ion-item-options>
+              </ion-item-sliding>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
+<!-- Fab Button -->
+<ion-fab #fab bottom right>
+    <button button-ion-fab ion-fab (click)="goWrite()">
+        <ion-icon name="add"></ion-icon>
+    </button>
+</ion-fab>

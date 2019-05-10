@@ -4,84 +4,53 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<div class="top-tit-area02">
-  <div>
-    <div class="title-components">책임기술자 목록</div>
-    <ion-buttons end>
-      <button ion-button icon-only style="width:36px;height:36px;" (click)="addDigr11()"><ion-icon name="add"></ion-icon></button>
-    </ion-buttons>    
+<div padding class="title-components">
+  <span>책입기술자 목록</span>
+  <div class="block-insert">
+    <button button-clear-outline outline round ion-button (click)="addDigr11()">추가</button>
   </div>
 </div>
 
-<ion-list id="digr11List" nopadding>
-  <ion-grid>
-    <ion-col col-12>
-      <ion-list>
-        <ion-item-sliding *ngFor="let digr11 of digr01Group.digr11List; let i = index;" #slidingItem>
-          <ion-item box-shadow margin-top no-lines (click)="goWrite(i)">
-            <!-- Avatar -->
-            <ion-avatar item-start>
-              <img src="assets/imgs/fms_avatar_01.png">
-            </ion-avatar>
-            <!-- Title -->
-            <h2 item-title style="margin-top: 0px;">{{digr11.engineer_nm}}</h2>
-            <p>생년월일 : {{digr11.birth_ymd}}</p>
-            <!-- Description -->
-            <h3 text-wrap margin-top>
-                기술자등급 : {{digr11.tech_grade_nm}}
-            </h3>
-            <div social>
-              <ion-icon>
-                  <i class="icon icon-heart"></i>
-              </ion-icon>
-              <ion-icon>
-                  <i class="icon icon-share-variant" ></i>
-              </ion-icon>
+<ion-list padding-bottom>
+  <ion-row padding-bottom>
+    <ion-col col-12 col-md-12 col-lg-6 *ngFor="let digr11 of digr01Group.digr11List; let i = index;">
+      <ion-item-sliding #slidingItem>
+        <ion-item no-lines no-padding>
+          <ion-card padding box-shadow text-right class="card" (click)="goWrite(i)">
+            <!--Card images-->
+            <div float-left class="card-img">
+              <img images-filter src="assets/imgs/fms_avatar_01.png" />
             </div>
-          </ion-item>
-          <ion-item-options no-lines>
-            <!-- Button delete -->
-            <button (click)="removeItem(digr11,i)" transparent>
+            <!--Card-content-->
+            <ion-card-content>
+              <ion-card-title no-padding>
+                <!--Card title-->
+                <h1 card-title>{{digr11.engineer_nm}}</h1>
+              </ion-card-title>
+              <!--Description-->
+              <h3 card-subtitle>참여일수 : <span class="example-h3">{{digr11.parti_days}} 일</span></h3>
+              <h3 card-subtitle>참여율 : <span class="example-h3">{{digr11.parti_rate}} %</span></h3>
+              <h3 card-subtitle>기술등급 : <span class="example-h3">{{digr11.tech_grade_nm}}</span></h3>
+            </ion-card-content>
+          </ion-card>
+        </ion-item>
+        <ion-item-options no-lines>
+          <!-- Button delete -->
+          <button (click)="removeItem(digr11,i)" transparent>
             <!-- Icon delete -->
             <ion-icon icon-medium>
               <i class="icon icon-delete"></i>
             </ion-icon>
-            </button>
-            <!-- Button undo -->
-            <button (click)="undo(slidingItem)" transparent>
-              <!-- Icon undo -->
-              <ion-icon icon-medium>
-                <i class="icon icon-undo-variant"></i>
-              </ion-icon>
-            </button>
-          </ion-item-options>
-        </ion-item-sliding>
-      </ion-list>
+          </button>
+          <!-- Button undo -->
+          <button (click)="undo(slidingItem)" transparent>
+            <!-- Icon undo -->
+            <ion-icon icon-medium>
+              <i class="icon icon-undo-variant"></i>
+            </ion-icon>
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
     </ion-col>
-  </ion-grid>
+  </ion-row>
 </ion-list>
-
-
-<!-- <ion-list id="digr11List" nopadding>
-  <ion-list-header>
-    <ion-label col-4>참여기술자 명칭</ion-label>
-    <ion-label col-3>생년월일</ion-label>
-    <ion-label col-2>책임기술자<br>여부</ion-label>
-    <ion-label col-3>기술등급</ion-label>
-  </ion-list-header>
-  <ion-item-sliding *ngFor="let digr11 of digr01Group.digr11List; let i = index;">
-    <ion-item (click)="goWrite(i)">
-      <ion-grid>
-        <ion-row class="row">
-          <ion-col class="col" col-4 >{{digr11.engineer_nm}}</ion-col>
-          <ion-col class="col" col-3 >{{digr11.birth_ymd}}</ion-col>
-          <ion-col class="col" col-2 >{{digr11.rep_yn}}</ion-col>
-          <ion-col class="col" col-3 >{{digr11.tech_grade}}</ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
-    <ion-item-options danger>
-        <button danger color="danger" class="danger" (click)="removeItem(digr11,i)"><ion-icon slot="icon-only" name="trash"></ion-icon> 삭제</button>
-    </ion-item-options>
-  </ion-item-sliding>
-</ion-list> -->

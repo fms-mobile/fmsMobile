@@ -1,0 +1,485 @@
+<!--- Theme Parallax Basic -->
+<!--- Header Big Image-->
+<ion-content>
+    
+    <!-- Content -->
+    <ion-grid no-padding *ngIf="data != null">
+
+        <div padding class="title-components">사면손상 상태조사</div>
+        
+        <ion-row>
+            <ion-col col-12 col-sm-12 col-md-6 col-lg-6 class="col-set">
+
+                <div padding-left class="example-h1">파괴징후</div>
+                <ion-card padding margin-bottom box-shadow class="card">
+                    <ion-grid no-padding *ngIf="data.radioLayout1 != null">
+                        <ion-list radio-group [(ngModel)]="data.radioLayout1.selectedItem">
+                            
+                            <h2 padding-top header-title text-capitalize>점검결과</h2>
+                            <ion-row>
+                                <ion-col col-4 col-sm-4 col-md-4 col-lg-4 *ngFor="let item of data.radioLayout1.items; let i= index">
+                                    <!--Content -->
+                                    <ion-item no-lines box-shadow class="item-sm">
+                                        <ion-radio item-start [value]="item.id" (ionSelect)="onEvent('onSelect',item)"></ion-radio>
+                                        <!--Content Title-->
+                                        <ion-label item-title>{{item.title}}</ion-label>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+
+                            <h2 padding-top header-title text-capitalize>보수여부</h2>
+                            <ion-row>
+                                <ion-col col-12>
+                                    <ion-list>
+                                        <ion-item no-lines box-shadow class="item-sm" *ngFor="let item of data.checkLayout1.items" (tap)="onEvent('onButton', item)">
+                                            <!-- Content Title -->
+                                            <ion-label item-title>{{item.title}}</ion-label>
+                                            <ion-checkbox [checked]="item.favorite"></ion-checkbox>
+                                        </ion-item>
+                                    </ion-list>
+                                </ion-col>
+                            </ion-row>
+
+                            <h2 padding-top header-title text-capitalize>의견</h2>
+                            <ion-row>
+                                    <ion-col col-12 textarea>
+                                        <ion-item no-lines box-shadow>
+                                            <ion-textarea no-margin [placeholder]="data.description" [(ngModel)]="description"></ion-textarea>
+                                        </ion-item>
+                                    </ion-col>
+                            </ion-row>
+
+                        </ion-list>
+                    </ion-grid>
+                </ion-card>
+
+            </ion-col>
+            <ion-col col-12 col-sm-12 col-md-6 col-lg-6 class="col-set">
+
+                <div padding-left class="example-h1">파괴징후</div>
+                <ion-card padding margin-bottom box-shadow class="card">
+                    <ion-grid no-padding *ngIf="data.radioLayout1 != null">
+                        <ion-list radio-group [(ngModel)]="data.radioLayout1.selectedItem">
+                            
+                            <h2 padding-top header-title text-capitalize>점검결과</h2>
+                            <ion-row>
+                                <ion-col col-4 *ngFor="let item of data.radioLayout1.items; let i= index">
+                                    <!--Content -->
+                                    <ion-item no-lines box-shadow class="item-sm">
+                                        <ion-radio item-start [value]="item.id" (ionSelect)="onEvent('onSelect',item)"></ion-radio>
+                                        <!--Content Title-->
+                                        <ion-label item-title>{{item.title}}</ion-label>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+
+                            <h2 padding-top header-title text-capitalize>보수여부</h2>
+                            <ion-row>
+                                <ion-col col-12>
+                                    <ion-list>
+                                        <ion-item no-lines box-shadow class="item-sm" *ngFor="let item of data.checkLayout1.items" (tap)="onEvent('onButton', item)">
+                                            <!-- Content Title -->
+                                            <ion-label item-title>{{item.title}}</ion-label>
+                                            <ion-checkbox [checked]="item.favorite"></ion-checkbox>
+                                        </ion-item>
+                                    </ion-list>
+                                </ion-col>
+                            </ion-row>
+
+                            <h2 padding-top header-title text-capitalize>의견</h2>
+                            <ion-row>
+                                    <ion-col col-12 textarea>
+                                        <ion-item no-lines box-shadow>
+                                            <ion-textarea no-margin [placeholder]="data.description" [(ngModel)]="description"></ion-textarea>
+                                        </ion-item>
+                                    </ion-col>
+                            </ion-row>
+
+                        </ion-list>
+                    </ion-grid>
+                </ion-card>
+
+            </ion-col>
+        </ion-row>
+
+        <div padding class="title-components">사면파괴 요인조사</div>
+        
+        <ion-row>
+            <ion-col col-12 col-sm-12 col-md-6 col-lg-6 class="col-set">
+
+                <div padding-left class="example-h1">지반상태</div>
+
+                <ion-card padding margin-bottom box-shadow class="card">
+                    <ion-grid no-padding *ngIf="data.radioLayout1 != null">
+                        <ion-list radio-group [(ngModel)]="data.radioLayout1.selectedItem">
+                            
+                            <div span-medium>구성물질</div>
+                            <h2 padding-top header-title text-capitalize>점검결과</h2>
+                            <ion-row>
+                                <ion-col col-4 col-sm-4 col-md-4 col-lg-4 *ngFor="let item of data.radioLayout1.items; let i= index">
+                                    <!--Content -->
+                                    <ion-item no-lines box-shadow class="item-sm">
+                                        <ion-radio item-start [value]="item.id" (ionSelect)="onEvent('onSelect',item)"></ion-radio>
+                                        <!--Content Title-->
+                                        <ion-label item-title>{{item.title}}</ion-label>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+
+                            <h2 padding-top header-title text-capitalize>보수여부</h2>
+                            <ion-row>
+                                <ion-col col-12>
+                                    <ion-list>
+                                        <ion-item no-lines box-shadow class="item-sm" *ngFor="let item of data.checkLayout1.items" (tap)="onEvent('onButton', item)">
+                                            <!-- Content Title -->
+                                            <ion-label item-title>{{item.title}}</ion-label>
+                                            <ion-checkbox [checked]="item.favorite"></ion-checkbox>
+                                        </ion-item>
+                                    </ion-list>
+                                </ion-col>
+                            </ion-row>
+
+                            <h2 padding-top header-title text-capitalize>의견</h2>
+                            <ion-row>
+                                    <ion-col col-12 textarea>
+                                        <ion-item no-lines box-shadow>
+                                            <ion-textarea no-margin [placeholder]="data.description" [(ngModel)]="description"></ion-textarea>
+                                        </ion-item>
+                                    </ion-col>
+                            </ion-row>
+
+                        </ion-list>
+                    </ion-grid>
+                </ion-card>
+
+                <ion-card padding margin-bottom box-shadow class="card">
+                    <ion-grid no-padding *ngIf="data.radioLayout1 != null">
+                        <ion-list radio-group [(ngModel)]="data.radioLayout1.selectedItem">
+                            
+                            <div span-medium>풍화도</div>
+                            <h2 padding-top header-title text-capitalize>점검결과</h2>
+                            <ion-row>
+                                <ion-col col-4 col-sm-4 col-md-4 col-lg-4 *ngFor="let item of data.radioLayout1.items; let i= index">
+                                    <!--Content -->
+                                    <ion-item no-lines box-shadow class="item-sm">
+                                        <ion-radio item-start [value]="item.id" (ionSelect)="onEvent('onSelect',item)"></ion-radio>
+                                        <!--Content Title-->
+                                        <ion-label item-title>{{item.title}}</ion-label>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+
+                            <h2 padding-top header-title text-capitalize>보수여부</h2>
+                            <ion-row>
+                                <ion-col col-12>
+                                    <ion-list>
+                                        <ion-item no-lines box-shadow class="item-sm" *ngFor="let item of data.checkLayout1.items" (tap)="onEvent('onButton', item)">
+                                            <!-- Content Title -->
+                                            <ion-label item-title>{{item.title}}</ion-label>
+                                            <ion-checkbox [checked]="item.favorite"></ion-checkbox>
+                                        </ion-item>
+                                    </ion-list>
+                                </ion-col>
+                            </ion-row>
+
+                            <h2 padding-top header-title text-capitalize>의견</h2>
+                            <ion-row>
+                                    <ion-col col-12 textarea>
+                                        <ion-item no-lines box-shadow>
+                                            <ion-textarea no-margin [placeholder]="data.description" [(ngModel)]="description"></ion-textarea>
+                                        </ion-item>
+                                    </ion-col>
+                            </ion-row>
+
+                        </ion-list>
+                    </ion-grid>
+                </ion-card>
+
+                <ion-card padding margin-bottom box-shadow class="card">
+                    <ion-grid no-padding *ngIf="data.radioLayout1 != null">
+                        <ion-list radio-group [(ngModel)]="data.radioLayout1.selectedItem">
+                            
+                            <div span-medium>배수공</div>
+                            <h2 padding-top header-title text-capitalize>점검결과</h2>
+                            <ion-row>
+                                <ion-col col-4 col-sm-4 col-md-4 col-lg-4 *ngFor="let item of data.radioLayout1.items; let i= index">
+                                    <!--Content -->
+                                    <ion-item no-lines box-shadow class="item-sm">
+                                        <ion-radio item-start [value]="item.id" (ionSelect)="onEvent('onSelect',item)"></ion-radio>
+                                        <!--Content Title-->
+                                        <ion-label item-title>{{item.title}}</ion-label>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+
+                            <h2 padding-top header-title text-capitalize>보수여부</h2>
+                            <ion-row>
+                                <ion-col col-12>
+                                    <ion-list>
+                                        <ion-item no-lines box-shadow class="item-sm" *ngFor="let item of data.checkLayout1.items" (tap)="onEvent('onButton', item)">
+                                            <!-- Content Title -->
+                                            <ion-label item-title>{{item.title}}</ion-label>
+                                            <ion-checkbox [checked]="item.favorite"></ion-checkbox>
+                                        </ion-item>
+                                    </ion-list>
+                                </ion-col>
+                            </ion-row>
+
+                            <h2 padding-top header-title text-capitalize>의견</h2>
+                            <ion-row>
+                                    <ion-col col-12 textarea>
+                                        <ion-item no-lines box-shadow>
+                                            <ion-textarea no-margin [placeholder]="data.description" [(ngModel)]="description"></ion-textarea>
+                                        </ion-item>
+                                    </ion-col>
+                            </ion-row>
+
+                        </ion-list>
+                    </ion-grid>
+                </ion-card>
+
+            </ion-col>
+            <ion-col col-12 col-sm-12 col-md-6 col-lg-6 class="col-set">
+
+                <div padding-left class="example-h1">배수상태</div>
+
+                <ion-card padding margin-bottom box-shadow class="card">
+                    <ion-grid no-padding *ngIf="data.radioLayout1 != null">
+                        <ion-list radio-group [(ngModel)]="data.radioLayout1.selectedItem">
+                            
+                            <div span-medium>배수공</div>
+                            <h2 padding-top header-title text-capitalize>점검결과</h2>
+                            <ion-row>
+                                <ion-col col-4 *ngFor="let item of data.radioLayout1.items; let i= index">
+                                    <!--Content -->
+                                    <ion-item no-lines box-shadow class="item-sm">
+                                        <ion-radio item-start [value]="item.id" (ionSelect)="onEvent('onSelect',item)"></ion-radio>
+                                        <!--Content Title-->
+                                        <ion-label item-title>{{item.title}}</ion-label>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+
+                            <h2 padding-top header-title text-capitalize>보수여부</h2>
+                            <ion-row>
+                                <ion-col col-12>
+                                    <ion-list>
+                                        <ion-item no-lines box-shadow class="item-sm" *ngFor="let item of data.checkLayout1.items" (tap)="onEvent('onButton', item)">
+                                            <!-- Content Title -->
+                                            <ion-label item-title>{{item.title}}</ion-label>
+                                            <ion-checkbox [checked]="item.favorite"></ion-checkbox>
+                                        </ion-item>
+                                    </ion-list>
+                                </ion-col>
+                            </ion-row>
+
+                            <h2 padding-top header-title text-capitalize>의견</h2>
+                            <ion-row>
+                                    <ion-col col-12 textarea>
+                                        <ion-item no-lines box-shadow>
+                                            <ion-textarea no-margin [placeholder]="data.description" [(ngModel)]="description"></ion-textarea>
+                                        </ion-item>
+                                    </ion-col>
+                            </ion-row>
+
+                        </ion-list>
+                    </ion-grid>
+                </ion-card>
+                
+                <ion-card padding margin-bottom box-shadow class="card">
+                    <ion-grid no-padding *ngIf="data.radioLayout1 != null">
+                        <ion-list radio-group [(ngModel)]="data.radioLayout1.selectedItem">
+                            
+                            <div span-medium>배수조건</div>
+                            <h2 padding-top header-title text-capitalize>점검결과</h2>
+                            <ion-row>
+                                <ion-col col-4 *ngFor="let item of data.radioLayout1.items; let i= index">
+                                    <!--Content -->
+                                    <ion-item no-lines box-shadow class="item-sm">
+                                        <ion-radio item-start [value]="item.id" (ionSelect)="onEvent('onSelect',item)"></ion-radio>
+                                        <!--Content Title-->
+                                        <ion-label item-title>{{item.title}}</ion-label>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+
+                            <h2 padding-top header-title text-capitalize>보수여부</h2>
+                            <ion-row>
+                                <ion-col col-12>
+                                    <ion-list>
+                                        <ion-item no-lines box-shadow class="item-sm" *ngFor="let item of data.checkLayout1.items" (tap)="onEvent('onButton', item)">
+                                            <!-- Content Title -->
+                                            <ion-label item-title>{{item.title}}</ion-label>
+                                            <ion-checkbox [checked]="item.favorite"></ion-checkbox>
+                                        </ion-item>
+                                    </ion-list>
+                                </ion-col>
+                            </ion-row>
+
+                            <h2 padding-top header-title text-capitalize>의견</h2>
+                            <ion-row>
+                                    <ion-col col-12 textarea>
+                                        <ion-item no-lines box-shadow>
+                                            <ion-textarea no-margin [placeholder]="data.description" [(ngModel)]="description"></ion-textarea>
+                                        </ion-item>
+                                    </ion-col>
+                            </ion-row>
+
+                        </ion-list>
+                    </ion-grid>
+                </ion-card>
+                
+                <ion-card padding margin-bottom box-shadow class="card">
+                    <ion-grid no-padding *ngIf="data.radioLayout1 != null">
+                        <ion-list radio-group [(ngModel)]="data.radioLayout1.selectedItem">
+                            
+                            <div span-medium>결빙 또는 누수상태</div>
+                            <h2 padding-top header-title text-capitalize>점검결과</h2>
+                            <ion-row>
+                                <ion-col col-4 *ngFor="let item of data.radioLayout1.items; let i= index">
+                                    <!--Content -->
+                                    <ion-item no-lines box-shadow class="item-sm">
+                                        <ion-radio item-start [value]="item.id" (ionSelect)="onEvent('onSelect',item)"></ion-radio>
+                                        <!--Content Title-->
+                                        <ion-label item-title>{{item.title}}</ion-label>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+
+                            <h2 padding-top header-title text-capitalize>보수여부</h2>
+                            <ion-row>
+                                <ion-col col-12>
+                                    <ion-list>
+                                        <ion-item no-lines box-shadow class="item-sm" *ngFor="let item of data.checkLayout1.items" (tap)="onEvent('onButton', item)">
+                                            <!-- Content Title -->
+                                            <ion-label item-title>{{item.title}}</ion-label>
+                                            <ion-checkbox [checked]="item.favorite"></ion-checkbox>
+                                        </ion-item>
+                                    </ion-list>
+                                </ion-col>
+                            </ion-row>
+
+                            <h2 padding-top header-title text-capitalize>의견</h2>
+                            <ion-row>
+                                    <ion-col col-12 textarea>
+                                        <ion-item no-lines box-shadow>
+                                            <ion-textarea no-margin [placeholder]="data.description" [(ngModel)]="description"></ion-textarea>
+                                        </ion-item>
+                                    </ion-col>
+                            </ion-row>
+
+                        </ion-list>
+                    </ion-grid>
+                </ion-card>
+
+            </ion-col>
+        </ion-row>
+
+        <div padding class="title-components">기타</div>
+        
+        <ion-row>
+            <ion-col col-12 col-sm-12 col-md-6 col-lg-6 class="col-set">
+
+                <div padding-left class="example-h1">보호시설</div>
+                <ion-card padding margin-bottom box-shadow class="card">
+                    <ion-grid no-padding *ngIf="data.radioLayout1 != null">
+                        <ion-list radio-group [(ngModel)]="data.radioLayout1.selectedItem">
+                            
+                            <h2 padding-top header-title text-capitalize>점검결과</h2>
+                            <ion-row>
+                                <ion-col col-4 col-sm-4 col-md-4 col-lg-4 *ngFor="let item of data.radioLayout1.items; let i= index">
+                                    <!--Content -->
+                                    <ion-item no-lines box-shadow class="item-sm">
+                                        <ion-radio item-start [value]="item.id" (ionSelect)="onEvent('onSelect',item)"></ion-radio>
+                                        <!--Content Title-->
+                                        <ion-label item-title>{{item.title}}</ion-label>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+
+                            <h2 padding-top header-title text-capitalize>보수여부</h2>
+                            <ion-row>
+                                <ion-col col-12>
+                                    <ion-list>
+                                        <ion-item no-lines box-shadow class="item-sm" *ngFor="let item of data.checkLayout1.items" (tap)="onEvent('onButton', item)">
+                                            <!-- Content Title -->
+                                            <ion-label item-title>{{item.title}}</ion-label>
+                                            <ion-checkbox [checked]="item.favorite"></ion-checkbox>
+                                        </ion-item>
+                                    </ion-list>
+                                </ion-col>
+                            </ion-row>
+
+                            <h2 padding-top header-title text-capitalize>의견</h2>
+                            <ion-row>
+                                    <ion-col col-12 textarea>
+                                        <ion-item no-lines box-shadow>
+                                            <ion-textarea no-margin [placeholder]="data.description" [(ngModel)]="description"></ion-textarea>
+                                        </ion-item>
+                                    </ion-col>
+                            </ion-row>
+
+                        </ion-list>
+                    </ion-grid>
+                </ion-card>
+
+            </ion-col>
+            <ion-col col-12 col-sm-12 col-md-6 col-lg-6 class="col-set">
+
+                <div padding-left class="example-h1">점검로</div>
+                <ion-card padding margin-bottom box-shadow class="card">
+                    <ion-grid no-padding *ngIf="data.radioLayout1 != null">
+                        <ion-list radio-group [(ngModel)]="data.radioLayout1.selectedItem">
+                            
+                            <h2 padding-top header-title text-capitalize>점검결과</h2>
+                            <ion-row>
+                                <ion-col col-4 *ngFor="let item of data.radioLayout1.items; let i= index">
+                                    <!--Content -->
+                                    <ion-item no-lines box-shadow class="item-sm">
+                                        <ion-radio item-start [value]="item.id" (ionSelect)="onEvent('onSelect',item)"></ion-radio>
+                                        <!--Content Title-->
+                                        <ion-label item-title>{{item.title}}</ion-label>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+
+                            <h2 padding-top header-title text-capitalize>보수여부</h2>
+                            <ion-row>
+                                <ion-col col-12>
+                                    <ion-list>
+                                        <ion-item no-lines box-shadow class="item-sm" *ngFor="let item of data.checkLayout1.items" (tap)="onEvent('onButton', item)">
+                                            <!-- Content Title -->
+                                            <ion-label item-title>{{item.title}}</ion-label>
+                                            <ion-checkbox [checked]="item.favorite"></ion-checkbox>
+                                        </ion-item>
+                                    </ion-list>
+                                </ion-col>
+                            </ion-row>
+
+                            <h2 padding-top header-title text-capitalize>의견</h2>
+                            <ion-row>
+                                    <ion-col col-12 textarea>
+                                        <ion-item no-lines box-shadow>
+                                            <ion-textarea no-margin [placeholder]="data.description" [(ngModel)]="description"></ion-textarea>
+                                        </ion-item>
+                                    </ion-col>
+                            </ion-row>
+
+                        </ion-list>
+                    </ion-grid>
+                </ion-card>
+
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col col-12 text-right>
+
+                <button ion-button medium >이전</button>
+                <button ion-button medium margin>저장</button>
+
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+</ion-content>

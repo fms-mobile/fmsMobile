@@ -31,6 +31,13 @@ export class Digr02WritePage {
   digr01Group : DIGR01_GROUPDTO;
   selectMast01 : BASTB_MAST01DTO;
   digr02 : MANTB_DIGR01DTO;
+  placeholder : Object ={
+    dign_content: "주요 점검진단결과 입력",
+    amend_content: "주요 보수보강(안) 입력",
+    dign_amt : "비용 입력",
+    dign4_need_yn : "정밀안전진단 필요",
+  };
+
   private win: any = window;
 
   constructor(public navCtrl: NavController, public navParams: NavParams

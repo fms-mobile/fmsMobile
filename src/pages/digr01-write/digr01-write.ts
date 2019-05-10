@@ -24,6 +24,11 @@ export class Digr01WritePage {
   digr01Group : DIGR01_GROUPDTO;
   start_ymd_input : any;
   end_ymd_input : any;
+  placeholder : Object ={
+    start_ymd:"점검진단기간 시작일 입력",
+    end_ymd:"점검진단기간 종료일 입력",
+    wrt_person_nm:"작성자 이름 입력",
+  };
 
   constructor(public navCtrl: NavController, public navParams: NavParams , globalVars: GlobalVars, public modalCtrl: ModalController,private elementRef : ElementRef
     ) {

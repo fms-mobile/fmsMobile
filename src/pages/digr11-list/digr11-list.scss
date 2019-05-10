@@ -1,8 +1,8 @@
 page-digr11-list {
-    [social] {
-        @include social;
-        position: absolute;
-        right: 10px;
-        bottom: 10px;
+    .item-md {
+        background-color: transparent;
+    }
+    .label-md {
+        margin: 0;
     }
 }

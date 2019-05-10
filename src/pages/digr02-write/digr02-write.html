@@ -7,114 +7,99 @@
 <ion-header>
   <ion-navbar>
     <ion-buttons left>
-        <button ion-button icon-only (click)="dismiss()"><ion-icon name="backspace"></ion-icon></button>
-      </ion-buttons>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="backspace"></ion-icon>
+      </button>
+    </ion-buttons>
     <!---Title-->
     <ion-title (click)="goDigr02ListModal()">{{selectMast01.facil_nm}} 점검 정보 등록</ion-title>
   </ion-navbar>
 </ion-header>
 
+<!-- Content -->
 <ion-content>
-  <ion-grid>
-    <ion-row padding>
-      <ion-col col-12 textarea>
-        <ion-item no-lines box-shadow margin-bottom>
-          <ion-textarea no-margin type="text" placeholder="주요 점검진단결과" [(ngModel)]="digr02.dign_content"></ion-textarea>
-        </ion-item>
-      </ion-col>
-      <ion-col col-12 textarea>
-        <ion-item no-lines box-shadow margin-bottom>
-          <ion-textarea no-margin type="text" placeholder="주요 보수보강(안)" [(ngModel)]="digr02.amend_content"></ion-textarea>
-        </ion-item>
-      </ion-col>
+  <ion-grid no-padding>
+    <ion-row>
       <ion-col col-12>
-        <ion-item-group *ngIf="'TU|AR|UC'.indexOf(selectMast01.facil_gbn) > -1 ">
-          <ion-item-divider>환기구(덥개)</ion-item-divider>
-          <ion-item>
-            <ion-label item-title>존재여부</ion-label>
-            <ion-checkbox item-end></ion-checkbox>
-          </ion-item>
-          <ion-item>
-            <ion-input no-margin type="text" placeholder="의견"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label item-title>보수필요여부</ion-label>
-            <ion-checkbox item-end></ion-checkbox>
-          </ion-item>
-          <ion-item-divider></ion-item-divider>
-        </ion-item-group>
+        <ion-card padding box-shadow class="card">
+          <ion-grid no-padding>
+
+            <h2 padding-top header-title text-capitalize>주요 점검진단결과</h2>
+            <ion-row>
+              <ion-col col-12>
+                <ion-item no-lines box-shadow>
+                  <ion-textarea no-margin type="text" [placeholder]="placeholder.dign_content"
+                    [(ngModel)]="digr02.dign_content" rows="12"></ion-textarea>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <h2 padding-top header-title text-capitalize>주요 보수보강(안)</h2>
+            <ion-row>
+              <ion-col col-12>
+                <ion-item no-lines box-shadow>
+                  <ion-textarea no-margin type="text" [placeholder]="placeholder.amend_content"
+                    [(ngModel)]="digr02.amend_content" rows="12"></ion-textarea>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <h2 padding-top header-title text-capitalize>비용(천원)</h2>
+            <ion-row>
+              <ion-col col-12>
+                <ion-item no-lines box-shadow>
+                  <ion-input no-margin type="text" [placeholder]="placeholder.dign_amt" [(ngModel)]="digr02.dign_amt">
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <h2 padding-top header-title text-capitalize>안전등급</h2>
+            <ion-list radio-group [(ngModel)]="digr02.state_grade">
+              <ion-row>
+                <ion-col col-6 col-md-4 col-lg-3 *ngFor="let state_grade of state_gradeList; let i= index">
+                  <!--Content -->
+                  <ion-item no-lines box-shadow>
+                    <ion-radio item-start [value]="state_grade.code1"></ion-radio>
+                    <!--Content Title-->
+                    <ion-label item-title>{{state_grade.data1}}</ion-label>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-list>
+
+            <h2 padding-top header-title text-capitalize>정밀안전진단 필요</h2>
+            <ion-row>
+              <ion-col col-12>
+                <ion-item no-lines box-shadow class="item-sm">
+                  <!-- Content Title -->
+                  <ion-label item-title>{{placeholder.dign4_need_yn}}</ion-label>
+                  <ion-checkbox [(ngModel)]="digr02.dign4_need_yn"></ion-checkbox>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+          </ion-grid>
+        </ion-card>
       </ion-col>
+    </ion-row>
+    <div padding class="title-components">
+      <span>중대결함</span>
+      <div class="block-insert">
+        <button button-clear-outline outline round ion-button (click)="addDigr12WriteModal()">추가</button>
+      </div>
+    </div>
+    <ion-row>
       <ion-col col-12>
-        <ion-item no-lines box-shadow margin-bottom>
-          <ion-input no-margin type="text" placeholder="비용(천원)" [(ngModel)]="digr02.dign_amt"></ion-input>
-        </ion-item>
-        <ion-item no-lines box-shadow margin-bottom>
-          <ion-input no-margin type="text" placeholder="안전등급" [(ngModel)]="digr02.state_grade"></ion-input>
-        </ion-item>
-        <ion-item no-lines box-shadow margin-bottom>
-          <ion-label item-title>정밀안전진단 필요</ion-label>
-          <ion-checkbox item-end [checked]="digr02.dign4_need_yn"></ion-checkbox>
-        </ion-item>
+        <ion-grid>
+          
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 text-right>
+        <button ion-button medium margin (click)="goNext()">다음</button>
       </ion-col>
     </ion-row>
   </ion-grid>
-
-  <!-- <ion-list>
-      <ion-item-divider></ion-item-divider>
-      <ion-item>
-        <ion-label color="primary" stacked>주요 점검진단결과</ion-label>
-        <ion-textarea [(ngModel)]="digr02.dign_content" rows="6" placeholder="내용을 입력하세요."></ion-textarea>
-      </ion-item>
-      <ion-item>
-        <ion-label color="primary" stacked>주요 보수보강(안)</ion-label>
-        <ion-textarea [(ngModel)]="digr02.amend_content" rows="6" placeholder="내용을 입력하세요."></ion-textarea>
-      </ion-item>
-      <ion-item-group *ngIf="'TU|AR|UC'.indexOf(selectMast01.facil_gbn) > -1 ">
-        <ion-item-divider>환기구(덥개)</ion-item-divider>
-        <ion-item>
-          <ion-label color="primary">존재여부</ion-label>
-          <ion-toggle ></ion-toggle>
-        </ion-item>
-        <ion-item>
-            <ion-label color="primary">의견</ion-label>
-            <ion-input type="text" placeholder="내용을 입력하세요."></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label color="primary">보수필요여부</ion-label>
-            <ion-input type="text" placeholder="내용을 입력하세요."></ion-input>
-        </ion-item>
-        <ion-item-divider></ion-item-divider>
-      </ion-item-group>
-      <ion-item>
-        <ion-label color="primary">비용(천원)</ion-label>
-        <ion-input [(ngModel)]="digr02.dign_amt" type="text" (keyup)="utilService.convertInputVal($event)" placeholder="내용을 입력하세요."></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label color="primary">안전등급</ion-label>
-        <ion-select [(ngModel)]="digr02.state_grade">
-          <ion-option *ngFor="let state_grade of state_gradeList" value="{{state_grade.code1}}">{{state_grade.data1}}</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label>정밀안전진단 필요</ion-label>
-        <ion-checkbox [(ngModel)]="digr02.dign4_need_yn" ></ion-checkbox>
-      </ion-item>
-    </ion-list> -->
-  <ion-list>
-    <ion-list-header>
-      <ion-label>중대결함</ion-label>
-      <button ion-button outline item-right (click)="addDigr12WriteModal()">
-        <ion-icon name="add">추가</ion-icon>
-      </button>
-    </ion-list-header>
-    <ion-item-sliding *ngFor="let digr12 of digr02.digr12Object; let i = index;" #slidingItem>
-      <ion-item>
-      </ion-item>
-    </ion-item-sliding>
-  </ion-list>
-  <ion-buttons end>
-    <button ion-button icon-start (click)="goNext()">
-      다음
-    </button>
-  </ion-buttons>
 </ion-content>

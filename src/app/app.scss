@@ -26,7 +26,7 @@
       display: block;
       position: relative;
       z-index: 9;
-      max-width: 60px;
+      max-width: 100px;
     }
 
     [item-title] {
@@ -35,6 +35,12 @@
       z-index: 9;
     }
   }
+
+
+ion-item-options {
+  border: transparent !important;
+}
+
 // Settings Icon Header
 ion-header {
   [class^="icon-"]:before, [class*=" icon-"]:before {
@@ -64,186 +70,135 @@ ion-header {
       padding-left: 30px !important;
     }
   }
-  .ion-page {}
-  .toolbar-title-md {
-    padding: 0 44px 0 12px;
-    text-align: center;
-  }
-  
-  .main-visual {
-    background:url(../assets/imgs/main_visual.png) no-repeat 50% 0%;
-    background-size:cover;
-    padding-top:5em;
-    padding-bottom:5em;
-  }
-  @media screen and (min-width: 640px) {
-    .mainVisual {
-        padding-top:9em;
-        padding-bottom:9em;
-    }
-  }
-  @media screen and (min-width: 900px) {
-    .mainVisual {
-        padding-top:15em;
-        padding-bottom:15em;
-    }
-  }
-  @media screen and (min-width: 1200px) {
-    .mainVisual {
-        padding-top:22em;
-        padding-bottom:22em;
-    }
-  }
-  
-  ion-app.md [padding] page-main .scroll-content {
-    padding: 0em; 
-    background-color:#eaeaea;
-    margin-top: 5.6rem;
-  }
-  .main-contents {
-    margin-top:20px;
-  }
-  .main-contents-box {
-    border-top: 1px solid #d8d8d8; 
-    border-bottom: 1px solid #d8d8d8; 
-    background-color:#fff;
-  }
-  .main-contents-title {
-    padding:10px 16px;
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-  .main-app-btn {
-    padding:0px;
-    border-top: 1px solid #d8d8d8; 
-    display: table;
-    width: 100%;
-  }
-  .main-app-btn li {
-    border-top: 1px solid #d8d8d8;
-    border-left: 1px solid #d8d8d8;
-    width: 50%;
-    float: left;
-    font-size: 0.8rem;
-    padding: 0px 16px;
-    height: 3rem;
-    line-height: 3rem;
-    background: url(../assets/imgs/ico_main_category.png) no-repeat 100% 50%;
-  }
-  .main-app-btn li:nth-child(2n+1) {
-    border-left: 0px;
-  }
-  .main-app-btn li:nth-child(1),
-  .main-app-btn li:nth-child(2) {
-    border-top: 0px; 
-  }
-  .main-app-btn li a,
-  .main-app-btn li a:hover {
-    color: #000;
-  }
-  
-  .footer{
-    margin-bottom:0px!important;
-    padding:10px 30px 30px 30px;
-  }
-  
-  .footer a{
-    border:none!important;
-  }
-  
-  .footer a:hover{
-    border: 0px solid #cacaca;
-  }
-  
-  /*Footer Light*/
-  
-  .footer-light{
-    border-top:solid 1px #949494;
-    background-color:#fff;
-    margin-top:20px;
-    font-size: 0.8rem;
-    text-align: center;
-  }
-  
-  .footer-light .footer-logo{
-    margin-left:auto;
-    margin-right:auto;
-    background:url(../assets/imgs/logo_footer.png) no-repeat 50% 50%;
-    width:100px;
-    height:60px;
-    background-size:100px auto;
-    display:block;
-    margin-bottom:10px;
-  }
-  
-  .footer-dark .decoration{
-    background-color:rgba(255,255,255,0.07);
-  }
-  
-  .footer .small-text{
-    line-height: 1.2rem;
-  }
-  
-  .footer-socials{
-    margin-left:auto;
-    margin-right:auto;
-    margin-bottom:20px;
-    /*margin-top:40px;*/
-  }
-  
-  .footer-socials a{
-    width:38px;
-    height:38px;
-    line-height:38px;
-    color:#FFFFFF!important;
-    text-align:center;
-    float:left;
-  }
-  
-  @media screen and (max-width:340px){
-    .footer-socials{
-        width:290px;
-    }
-  
-    .footer-socials a{
-        margin-left:3px;
-        margin-right:3px;
-    }
-  }
-  
-  @media screen and (min-width:340px){
-    .footer-socials{
-        width:200px;
-    }
-  
-    .footer-socials a{
-        margin-left:5px;
-        margin-right:5px;
-    }
-  }
-  
-  
-  ion-item-options[danger]{
-    button {
-      width: 120px;
-      background-color: red;
-      font-size: 1.4rem;
-      font-weight: bold;
-      color: white;
-      ion-icon {
-        font-size: 2.0rem;
-        color: white;
-      }
-    }
+
+  .ion-line-item {
+    padding-left: 0px;
   }
 
-  .title-components {
-    color: #0091d2;
-    font-size: 16px;
-    font-weight: normal;
-    clear: both;
-    display: block;
-    margin: 15px 0;
-    text-transform: uppercase;
-    border-bottom: 1px solid #0091d2;
+  .ion-line-item .item-inner {
+    padding-left: 16px;
   }
+
+
+  [span-large], [span-medium] {
+    color:#00c0e8;
+  }
+  [span-medium] {
+    font-size: 18px !important;
+  }
+  .card [span-medium] {
+    border-bottom: 1px solid #dedede;
+    padding-bottom: 10px;
+  } 
+  ::placeholder {
+    color: #a0a0a0 !important;
+  }
+  .item-sm {
+    padding-left: 4px;
+  }
+  .item-sm .label-md {
+    margin: 0px;
+  }
+  .item-sm.item-md .radio-md[item-left], 
+  .item-sm.item-md .radio-md[item-start] {
+    margin: 11px 10px 10px 4px;
+  }
+  .item-sm.item.item-md .checkbox-md {
+    margin: 9px 10px 9px 4px;
+  }
+  .item-sm .item-inner {
+    padding-right: 4px;
+  }
+  .example-h1 {
+    font-size: 18px !important;
+    font-weight: bold !important;
+  }
+  .example-h2 {
+    font-size: 16px !important;
+    font-weight: bold !important;
+  }
+  .title-components {
+    font-size: 20px !important;
+    font-weight: bold !important;
+  }
+  [header-title] {
+    color: #222 !important;
+  }
+  .col.col-set {
+    background-color: #efeeee;
+    padding-top: 10px !important;
+    border: 1px solid #dedede;
+  }
+
+  .default-background {
+    background-color: #fff !important;
+  }
+  
+  
+  .title-components{
+      color: theme-colors('mainColors', 'secondary-first');
+      font-size: 16px;
+      font-weight: normal;
+      clear: both;
+      display: block;
+      margin: 15px 0;
+      text-transform: uppercase;
+      border-bottom: 1px solid theme-colors('mainColors', 'secondary-first');
+  }
+  
+  span.compomets {
+    display: block;
+    clear: both;
+    color: theme-colors('mainColors', 'secondary-first');
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+  .block-insert {
+      display: block;
+      float: left;
+      margin-bottom: 10px;
+      margin-right: 50px;
+  }
+  
+  .example-h1 {
+     font-size: $h1-font-size;
+     color: theme-colors('textColors', 'primary');
+     font-weight: 300;
+   }
+  
+   .example-h2 {
+     font-size: $h2-font-size;
+     color: theme-colors('textColors', 'primary');
+     font-weight: 300;
+   }
+  
+   .example-h3 {
+     font-size: $h3-font-size;
+     color: theme-colors('textColors', 'primary');
+     font-weight: 300;
+   }
+  
+   .example-h4 {
+     font-size: $h4-font-size;
+     color: theme-colors('textColors', 'primary');
+     font-weight: 300;
+   }
+  
+   .example-h5 {
+     font-size: $h5-font-size;
+     color: theme-colors('textColors', 'primary');
+     font-weight: 300;
+   }
+  
+   .example-h6 {
+     font-size: $h6-font-size;
+     color: theme-colors('textColors', 'primary');
+     font-weight: 300;
+   }
+  
+   .example-p {
+     font-size: $text-font-size;
+     color: theme-colors('textColors', 'primary');
+     font-weight: 300;
+   }
+  

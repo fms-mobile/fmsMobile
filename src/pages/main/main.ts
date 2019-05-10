@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { GlobalVars } from '../../services/GlobalVars';
+import { MenuService } from '../../services/menu-service';
 
 /**
  * Generated class for the Main page.
@@ -12,15 +13,17 @@ import { GlobalVars } from '../../services/GlobalVars';
 @Component({
   selector: 'page-main',
   templateUrl: 'main.html',
-  providers: [GlobalVars],
+  providers: [GlobalVars,MenuService],
 })
 export class MainPage {
   url : string;
   webUrl : string;
+  mainPageMenu : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController,public menuCtrl: MenuController
-    ,public globalVars:GlobalVars) {
+    ,public globalVars:GlobalVars, private menuService: MenuService) {
     this.webUrl = globalVars.webUrl+"mobile";
+    this.mainPageMenu = menuService.getMainPageMenu();
     // this.webUrl = globalVars.serverUrl;
   }
 

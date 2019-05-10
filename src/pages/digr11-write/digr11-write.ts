@@ -21,7 +21,16 @@ export class Digr11WritePage {
   index : number;
   digr11 : MANTB_DIGR11DTO;
   tech_gradeList: Array<any>;
-  isOigr11 : boolean = false; 
+  isOigr11 : boolean = false;
+  isCreate : boolean = false;
+  placeholder : Object = {
+    engineer_nm:"성명 입력",
+    birth_ymd:"생년월일 입력",
+    start_ymd:"참여 시작일 입력",
+    end_ymd:"참여 종료일 입력",
+    parti_days:"참여일수 입력",
+    parti_rate:"참여율 입력",
+  };
 
   constructor(public navCtrl: NavController, public navParams: NavParams,globalVars: GlobalVars, 
     public utilService:UtilService,public modalCtrl: ModalController,public viewCtrl: ViewController ,private toastCtrl :ToastController) {
@@ -32,8 +41,8 @@ export class Digr11WritePage {
     this.digr11 = this.digr01Group.digr11List[this.index];
 
     if(this.digr11 === undefined) {
+      this.isCreate = true;
       this.digr11 = new MANTB_DIGR11DTO();
-      
     }
 
     globalVars.db.comtbCode02.list002({code_group:"tech_grade",}, (res) => {
@@ -74,8 +83,10 @@ export class Digr11WritePage {
       });
       return ;
     }
-    this.digr01Group.digr11List.push(this.digr11);
-    this.index = this.digr01Group.digr11List.length;
+    if(this.isCreate) {
+      this.digr01Group.digr11List.push(this.digr11);
+      this.index = this.digr01Group.digr11List.length;
+    }
     this.viewCtrl.dismiss(null);
   }
 

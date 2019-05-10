@@ -26,6 +26,7 @@ export class Orgn11ListPage {
   numberOfItemsToDisplay : number = 20;
   page : number = 0;
   isPaging : boolean = true;
+  searchTerm : any = "";
 
   comtbOrgn11List : Array<any>;
 

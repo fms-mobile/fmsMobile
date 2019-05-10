@@ -15,7 +15,53 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<!--- Theme Parallax Frends -->
+<ion-content elastic-header *ngIf="mainPageMenu != null" class="fms-main">
+  <div background-size id="elastic-header" [ngStyle]="{'background-image': 'url(' + mainPageMenu.headerImage + ')'}">
+  </div>
+  <!--Content-->
+  <ion-grid no-padding *ngIf="mainPageMenu != null">
+    <div padding class="title-components">FMS 정기안전점검 주요기능</div>
+    <ion-list margin>
+      <ion-row>
+        <ion-col col-12 col-md-12 col-lg-6>
+          <button default-button round ion-button block text-capitalizen (click)="goDigrGroupPage()">정기안전점검 목록 바로가기</button>
+        </ion-col>
+        <ion-col col-12 col-md-12 col-lg-6>
+          <button default-button round ion-button block text-capitalizen (click)="goDigrGroupPage()">정기안전점검 등록 바로가기</button>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+    <div padding class="title-components">FMS 시스템 소개</div>
+    <ion-row>
+      <ion-col col-12>
+        <ion-list margin>
+          <ion-row>
+            <ion-col col-12 col-md-6 col-lg-4 *ngFor="let item of mainPageMenu.menus;let i = index">
+              <ion-item no-lines box-shadow margin-top (click)="goIframePage(item.url,item.title)">
+                <!--Content Title-->
+                <h2 item-title>{{item.title}}</h2>
+                <!--Content Subtitle-->
+                <ion-icon icon-medium item-end>
+                  <i class="icon icon-arrow-right-bold-circle"></i>
+                </ion-icon>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<!-- Fab Button -->
+<ion-fab #fab bottom right>
+    <button button-ion-fab ion-fab (click)="onEvent('onFab', data, $event)">
+    <ion-icon name="add"></ion-icon>
+  </button>
+</ion-fab>
+
+
+<!-- <ion-content>
     <div class="main-visual"></div>
     <div class="main-contents">
         <div class="main-contents-box">
@@ -42,4 +88,4 @@
     <p class="small-text no-bottom center-text">주소 : (우)52852 경상남도 진주시 충무공동 사들로 131 인재교육관 시설물정보 및 유지관리지원센터</p>
     <p class="small-text no-bottom center-text">Tel : 055-771-1999 / Fax : 055-771-1950 / E-mail : kjlim@kistec.or.kr</p>
   </div>
-</ion-footer>
+</ion-footer> -->

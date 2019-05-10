@@ -1,0 +1,145 @@
+<!--- Theme Parallax Basic -->
+<!--- Header Big Image-->
+<ion-content>
+    
+    <!-- Content -->
+    <ion-grid no-padding *ngIf="data != null">
+        
+        <!-- <ion-row>
+            <ion-col col-12>
+                <ion-list *ngIf="data.selectedLayout1 != null">
+                    <ion-item no-lines margin-bottom *ngIf="data.selectedLayout1 != null">
+                        <ion-label>{{data.selectedLayout1.title}}</ion-label>
+                        <ion-select [(ngModel)]="data.selectedLayout1.selectedItem" multiple="false" interface="action-sheet">
+                            <ion-option *ngFor="let item of data.selectedLayout1.items; let i= index" [value]="item.id">{{item.title}}</ion-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-list>
+            </ion-col>
+        </ion-row> -->
+
+        <div padding class="title-components">점검개요</div>
+        <ion-row>
+            <ion-col col-12>
+                <ion-card padding box-shadow class="card">  
+                    <ion-grid no-padding *ngIf="data.radioLayout1 != null">
+                        <ion-list radio-group [(ngModel)]="data.radioLayout1.selectedItem">
+                            <!-- Header Title Top -->
+                            <h2 padding-top header-title text-capitalize>기간구분</h2>
+                            <ion-row>
+                                <ion-col col-6 col-md-4 col-lg-3 *ngFor="let item of data.radioLayout1.items; let i= index">
+                                    <!--Content -->
+                                    <ion-item no-lines box-shadow>
+                                        <ion-radio item-start [value]="item.id" (ionSelect)="onEvent('onSelect',item)"></ion-radio>
+                                        <!--Content Title-->
+                                        <ion-label item-title>{{item.title}}</ion-label>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                            <!-- Header Title Top -->
+                            <h2 padding-top header-title text-capitalize>점검진단기간</h2>
+                            <ion-row>
+                                <ion-col col-6>
+                                    <!-- 시작일 -->
+                                    <ion-item no-lines box-shadow>
+                                        <ion-input no-margin type="text" [placeholder]="data.startDate" [(ngModel)]="startDate"></ion-input>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col col-6>
+                                    <!-- 종료일 -->
+                                    <ion-item no-lines box-shadow>
+                                        <ion-input no-margin type="text" [placeholder]="data.endDate" [(ngModel)]="endDate"></ion-input>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                            <h2 padding-top header-title text-capitalize>작성자명</h2>
+                            <ion-row>
+                                <ion-col col-12>
+                                    <!-- 시작일 -->
+                                    <ion-item no-lines box-shadow>
+                                        <ion-input no-margin type="text" [placeholder]="data.userName" [(ngModel)]="userName"></ion-input>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                        </ion-list>
+                    </ion-grid>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+        <div padding class="title-components">
+            <span>대상시설물 목록</span>
+            <div class="block-insert">
+                <button button-clear-outline outline round ion-button>추가</button>
+            </div>
+        </div>
+        
+        <ion-row>
+            <ion-col col-12 col-md-12 col-lg-6 *ngFor="let item of data.facilItems;let i = index">
+                <ion-card padding box-shadow text-right class="card" (click)="onEvent('onItemClick', item.title, $event)">
+                    <!--Card images-->
+                    <div float-left class="card-img">
+                        <img src="{{item.image}}" />
+                    </div>
+                    <!--Card-content-->
+                    <ion-card-content>
+                        <ion-card-title no-padding>
+                            <!--Card title-->
+                            <h1 card-title>{{item.title}}</h1>
+                        </ion-card-title>
+                        <!--Description-->
+                        <h3 card-subtitle>비용: <span class="example-h3">{{item.description}} 천원</span></h3>
+                        <h3 card-subtitle>안전등급: <span class="example-h3">{{item.shortDescription}}</span></h3>
+                        <h3 card-subtitle>정밀인전진단 필요여부 : <span class="example-h3">{{item.longDescription}}</span></h3>
+                        <!-- <p card-body-text>{{item.longDescription}}</p> -->
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+        <div padding class="title-components">
+            <span>책입기술자 목록</span>
+            <div class="block-insert">
+                <button button-clear-outline outline round ion-button>추가</button>
+            </div>
+        </div>
+        
+        <ion-row padding-bottom>
+            <ion-col col-12 col-md-12 col-lg-6 *ngFor="let item of data.userItems;let i = index">
+                <ion-card padding box-shadow text-right class="card" (click)="onEvent('onItemClick', item.title, $event)">
+                    <!--Card images-->
+                    <div float-left class="card-img">
+                        <img images-filter src="{{item.image}}" />
+                    </div>
+                    <!--Card-content-->
+                    <ion-card-content>
+                        <ion-card-title no-padding>
+                            <!--Card title-->
+                            <h1 card-title>{{item.title}}</h1>
+                        </ion-card-title>
+                        <!--Description-->
+                        <h3 card-subtitle>참여일수 : <span class="example-h3">{{item.description}} 일</span></h3>
+                        <h3 card-subtitle>참여율 : <span class="example-h3">{{item.shortDescription}} %</span></h3>
+                        <h3 card-subtitle>기술등급 : <span class="example-h3">{{item.longDescription}}</span></h3>
+                        <!-- <p card-body-text>{{item.longDescription}}</p> -->
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col col-12 text-right>
+
+                <button ion-button medium margin>제출</button>
+
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+</ion-content>
+<!-- Fab Button -->
+<ion-fab #fab bottom right>
+    <button button-ion-fab ion-fab (click)="onEvent('onFab', data, $event)">
+    <ion-icon name="add"></ion-icon>
+  </button>
+</ion-fab>

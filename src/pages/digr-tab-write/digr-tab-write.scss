@@ -1,3 +1,59 @@
 page-digr-tab-write {
+    ion-card img {
+        width: 100px;
+    }
+    [card-title] {
+        font-size: 16px !important;
+    }
+    [card-subtitle] {
+        font-size: 13px !important;
+        font-weight: 400 !important;
+    }
+    .example-h3 {
+        font-size: 13px !important;
+        font-weight: 400 !important;
+    }
+    .title-components {
+        position: relative;
+    }
+    .block-insert {
+        position: absolute;
+        right: 10px;
+        margin: 0px;
+        top: 6px;
+    }
 
+    .grid[no-padding] {
+        padding : 0;
+        > page-digr01-write {
+            > .row {
+                padding : 0;
+                > .col {
+                    padding : 0;
+                }
+            }
+        }
+
+        > page-digr02-list {
+            > .list {
+                > .row {
+                    padding : 0;
+                    > .col {
+                        padding : 0;
+                    }
+                }
+            }
+        }
+
+        > page-digr11-list {
+            > .list {
+                > .row {
+                    padding : 0;
+                    > .col {
+                        padding : 0;
+                    }
+                }
+            }
+        }
+    }
 }

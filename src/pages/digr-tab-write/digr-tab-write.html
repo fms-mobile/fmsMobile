@@ -10,17 +10,18 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <page-digr01-write></page-digr01-write>
-  <page-digr02-list></page-digr02-list>
-  <page-digr11-list></page-digr11-list>
+<ion-content>
+  <!-- Content -->
+  <ion-grid no-padding>
+    <page-digr01-write></page-digr01-write>
+    <page-digr02-list></page-digr02-list>
+    <page-digr11-list></page-digr11-list>
 
-  <ion-buttons end>
-    <button ion-button icon-start (click)="goSave()">
-      저장
-    </button>
-    <button ion-button icon-start (click)="goSend()">
-      제출
-    </button>
-  </ion-buttons>
+    <ion-row>
+      <ion-col col-12 text-right>
+        <button ion-button medium (click)="goSave()">저장</button>
+        <button ion-button medium margin (click)="goSend()">제출</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

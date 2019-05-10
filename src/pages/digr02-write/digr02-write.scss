@@ -1,16 +1,11 @@
 page-digr02-write {
-    [textarea] {
-        height: calc(100% - 170px);
-        min-height: 280px;
-
-        ion-item {
-            height: 100%;
-            min-height: 280px;
-
-            textarea {
-                height: calc(100% - 30px);
-                padding-top: 10px;
-            }
-        }
+    .title-components {
+        position: relative;
+    }
+    .block-insert {
+        position: absolute;
+        right: 10px;
+        margin: 0px;
+        top: 6px;
     }
 }

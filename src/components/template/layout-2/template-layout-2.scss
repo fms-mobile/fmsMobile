@@ -1,0 +1,33 @@
+/*  #Style Search Bars - Simple
+===========================================*/
+template-layout-2 {
+  [background-size] {
+    padding-top: 40px;
+    height: 160px;
+    @include darkening-blend-mode;
+  }
+  [parallax-title] {
+    z-index: 9;
+    padding-bottom: 2px;
+    display: block;
+    position: relative;
+    margin: 0 45px;
+  }
+  [parallax-subtitle] {
+    z-index: 9;
+    padding-bottom: 14px;
+    display: block;
+    position: relative;
+    margin: 0 45px;
+  }
+  ion-item-divider {
+    .searchbar-input {
+      background-color: transparent;
+      @extend .box-shadow;
+      color: theme-colors('textColors', 'primary') !important;
+    }
+    ion-label {
+      margin: 0 !important;
+    }
+  }
+}

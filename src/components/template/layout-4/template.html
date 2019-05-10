@@ -1,0 +1,87 @@
+<!--- Theme Parallax Basic -->
+<!--- Header Big Image-->
+<ion-content>
+    
+    <!-- Content -->
+    <ion-grid no-padding *ngIf="data != null">
+
+        <ion-row>
+            <ion-col col-12>
+                <ion-card padding box-shadow class="card">
+                    <ion-grid no-padding *ngIf="data.radioLayout1 != null">
+                        <ion-list radio-group [(ngModel)]="data.radioLayout1.selectedItem">
+
+                            <h2 padding-top header-title text-capitalize>성명</h2>
+                            <ion-row>
+                                <ion-col col-12>
+                                    <!-- 시작일 -->
+                                    <ion-item no-lines box-shadow>
+                                        <ion-input no-margin type="text" [placeholder]="data.userName" [(ngModel)]="userName"></ion-input>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                            
+                            <h2 padding-top header-title text-capitalize>생년월일</h2>
+                            <ion-row>
+                                <ion-col col-12>
+                                    <ion-item no-lines box-shadow>
+                                        <ion-input no-margin type="text" [placeholder]="data.userDate" [(ngModel)]="userDate"></ion-input>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                            
+                            <h2 padding-top header-title text-capitalize>참여기간</h2>
+                            <ion-row>
+                                <ion-col col-6>
+                                    <!-- 시작일 -->
+                                    <ion-item no-lines box-shadow>
+                                        <ion-input no-margin type="text" [placeholder]="data.startDate" [(ngModel)]="startDate"></ion-input>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col col-6>
+                                    <!-- 종료일 -->
+                                    <ion-item no-lines box-shadow>
+                                        <ion-input no-margin type="text" [placeholder]="data.endDate" [(ngModel)]="endDate"></ion-input>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                            
+                            <h2 padding-top header-title text-capitalize>참여일수</h2>
+                            <ion-row>
+                                <ion-col col-12>
+                                    <ion-item no-lines box-shadow>
+                                        <ion-input no-margin type="text" [placeholder]="data.partDate" [(ngModel)]="partDate"></ion-input>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                            
+                            <h2 padding-top header-title text-capitalize>참여율(%)</h2>
+                            <ion-row>
+                                <ion-col col-12>
+                                    <ion-item no-lines box-shadow>
+                                        <ion-input no-margin type="text" [placeholder]="data.partRate" [(ngModel)]="partRate"></ion-input>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                            
+                            <h2 padding-top header-title text-capitalize>기술등급</h2>
+                            <ion-row>
+                                <ion-col col-6 col-md-4 col-lg-3 *ngFor="let item of data.radioLayout1.items; let i= index">
+                                    <!--Content -->
+                                    <ion-item no-lines box-shadow>
+                                        <ion-radio item-start [value]="item.id" (ionSelect)="onEvent('onSelect',item)"></ion-radio>
+                                        <!--Content Title-->
+                                        <ion-label item-title>{{item.title}}</ion-label>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+
+                        </ion-list>
+                    </ion-grid>
+                </ion-card>
+                <button ion-button margin medium float-right >저장</button>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+</ion-content>

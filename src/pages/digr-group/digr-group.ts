@@ -5,6 +5,7 @@ import { UtilService } from '../../services/UtilService';
 import { TempDataManage } from '../../services/TempDataManage';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { TransmissionService } from '../../services/transmisson-service';
+import { MenuService } from '../../services/menu-service';
 
 /**
  * Generated class for the DigrGroup page.
@@ -21,10 +22,14 @@ export class DigrGroupPage {
   public digrGroupList : [{}];
   public numberOfItemsToDisplay : number = 10;
   digr01GroupList : Array<DIGR01_GROUPDTO>;
+  menuObject : Object;
+  searchTerm: any = "";
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public globalVars: GlobalVars, public utilService: UtilService, private tempDataManage : TempDataManage, private transmissionService : TransmissionService) {
+    public globalVars: GlobalVars, public utilService: UtilService, private tempDataManage : TempDataManage,
+    private transmissionService : TransmissionService, private menuService : MenuService) {
       this.digr01GroupList = tempDataManage.digr01GroupList;
+      this.menuObject = menuService.getDigrGroupMenu();
       //this.goSearch();
   }
 

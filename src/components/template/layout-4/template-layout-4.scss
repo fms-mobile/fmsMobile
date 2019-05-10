@@ -1,0 +1,18 @@
+/*  #Style Parallax Location Details
+===========================================*/
+template-layout-4 {
+  ion-card img {
+    width: 100px;
+  }
+  [card-title] {
+      font-size: 16px !important;
+  }
+  [card-subtitle] {
+      font-size: 13px !important;
+      font-weight: 400 !important;
+  }
+  .example-h3 {
+      font-size: 13px !important;
+      font-weight: 400 !important;
+  }
+}
