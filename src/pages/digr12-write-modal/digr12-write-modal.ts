@@ -4,6 +4,13 @@ import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { MANTB_DIGR01DTO } from '../../model/MANTB_DIGR01DTO';
 import { MANTB_DIGR12DTO } from '../../model/MANTB_DIGR12DTO';
 import { UtilService } from '../../services/UtilService';
+import { COMTB_FILE01DTO } from '../../model/COMTB_FILE01DTO';
+import { CameraOptions, Camera } from '@ionic-native/camera';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { DomSanitizer } from '@angular/platform-browser';
+import { FilePath } from '@ionic-native/file-path';
+import { File } from '@ionic-native/file';
+import { BASTB_MAST01DTO } from '../../model/BASTB_MAST01DTO';
 
 /**
  * Generated class for the Digr12WriteModal page.
@@ -21,13 +28,22 @@ export class Digr12WriteModalPage {
   selectIndex : number;
   digr02 : MANTB_DIGR01DTO;
   digr12 :MANTB_DIGR12DTO;
+  selectMast01 : BASTB_MAST01DTO;
+  isCreate : boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public modalCtrl: ModalController,public utilService:UtilService) {
+  private win: any = window;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController
+    , public modalCtrl: ModalController,public utilService:UtilService
+    , public camera: Camera, public domSanitizer: DomSanitizer
+    , private filePath :FilePath, private file: File, public webview: WebView) {
     this.digr01Group = navParams.data.digr01Group;
-    this.selectIndex = navParams.data.index;
-    this.digr02 = this.digr01Group.digr02List[this.selectIndex];
-    this.digr12 = new MANTB_DIGR12DTO();
-    this.digr12.facil_no = this.digr02.facil_no;
+    this.selectIndex = (navParams.data.index) ? navParams.data.index : null;
+    this.digr02 = navParams.data.digr02;
+    this.selectMast01 = navParams.data.selectMast01;
+    this.digr12 = (navParams.data.digr12) ? navParams.data.digr12 : new MANTB_DIGR12DTO();
+    (navParams.data.digr12) ? null : this.isCreate = true;
+    this.digr12.facil_no = (this.digr12.facil_no) ? null : this.digr02.facil_no;
   }
 
   ionViewDidLoad() {
@@ -35,12 +51,24 @@ export class Digr12WriteModalPage {
   }
 
   goFacilPartSerachModal(){
-    let facilPartSearchModalPage = this.modalCtrl.create("FacilPartSearchModalPage",{"digr01Group":this.digr01Group,"index":this.selectIndex,"digr12":this.digr12});
+    let facilPartSearchModalPage = this.modalCtrl.create("FacilPartSearchModalPage",{
+      "digr01Group":this.digr01Group,
+      "index":this.selectIndex,
+      "digr02":this.digr02,
+      "digr12":this.digr12,
+      "selectMast01":this.selectMast01,
+    });
     facilPartSearchModalPage.present();
   }
 
   goSeriousDefectModal(){
-    let seriousDefectModalPage = this.modalCtrl.create("SeriousDefectModalPage",{"digr01Group":this.digr01Group,"index":this.selectIndex,"digr12":this.digr12});
+    let seriousDefectModalPage = this.modalCtrl.create("SeriousDefectModalPage",{
+      "digr01Group":this.digr01Group,
+      "index":this.selectIndex,
+      "digr02":this.digr02,
+      "digr12":this.digr12,
+      "selectMast01":this.selectMast01,
+    });
     seriousDefectModalPage.present();
 
     seriousDefectModalPage.onWillDismiss((data: MANTB_DIGR12DTO) => {
@@ -55,7 +83,10 @@ export class Digr12WriteModalPage {
   }
 
   goSave(){
-    this.digr02.digr12Object.push(this.digr12);
+    if(this.isCreate) {
+      this.digr02.digr12Array.push(this.digr12);
+    }
+    this.viewCtrl.dismiss(null);
   }
 
   removeSeriousDefectItem(seriousDefect:any, i: number){
@@ -72,4 +103,62 @@ export class Digr12WriteModalPage {
     slidingItem.close();
   }
 
+  pathForImage(img) {
+    if (img === null) {
+      return '';
+    } else {
+      let converted = this.win.Ionic.WebView.convertFileSrc(img);
+      return converted;
+    }
+  }
+
+  createFileName() {
+    var d = new Date(),
+        n = d.getTime(),
+        newFileName = n + ".jpg";
+    return newFileName;
+  }
+
+  takePhoto(sourceType) {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType:sourceType,
+      saveToPhotoAlbum: false,
+      correctOrientation: true
+    }
+
+    this.camera.getPicture(options).then((imagePath : string) => {
+     // imageData is either a base64 encoded string or a file URI
+     // If it's base64 (DATA_URL):
+      // let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.filePath.resolveNativePath(imagePath)
+      .then(filePath => {
+        let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
+        // let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
+        let currentName: string = '';
+
+        if(imagePath.includes('?')) {
+          currentName = imagePath.substring(0, imagePath.lastIndexOf('?')).replace(correctPath,'');
+        } else{
+          currentName = imagePath.replace(correctPath,'');
+        }
+
+        let that = this;
+        that.file.copyFile(correctPath, currentName, this.file.dataDirectory, this.createFileName()).then(success => {
+          // this.updateStoredImages(newFileName);
+          let comtbFile01 : COMTB_FILE01DTO = new COMTB_FILE01DTO();
+          comtbFile01.img_data = imagePath;
+          comtbFile01.img_path = that.pathForImage(success.nativeURL);
+          that.digr12.comtbFile01Array.push(comtbFile01);
+        }, error => {
+            // this.presentToast('Error while storing file.');
+        });
+      });
+    }, (err) => {
+     // Handle error
+    });
+  }
 }

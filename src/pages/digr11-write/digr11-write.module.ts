@@ -1,6 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { Digr11WritePage } from './digr11-write';
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { Digr11WritePage } from './digr11-write';
   ],
   imports: [
     IonicPageModule.forChild(Digr11WritePage),
+    PipesModule,
   ],
   exports:[Digr11WritePage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

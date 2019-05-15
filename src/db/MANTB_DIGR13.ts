@@ -118,6 +118,7 @@ export class MANTB_DIGR13 implements COMMON_DAO {
                         + " from COMTB_CODE02 t1 "
                         + " where t1.code_group = 'dign1_checklist' "
                         + " and t1.code1 = substr('"+this.utilService.nvl(params.facil_no,'')+"',1,2) "
+                        + " and t1.code3 like '%"+this.utilService.nvl(params.facil_class,'')+"%' "
                         + " and ifnull(t1.use_yn,'Y') = 'Y' "
                         + " ) "
                         + " , t as ( "
@@ -146,7 +147,9 @@ export class MANTB_DIGR13 implements COMMON_DAO {
             txn.executeSql(sqlMain, [], (transaction, resultSet) => {
                 var res = [];
                 for (var i=0; i < resultSet.rows.length; i++) {
-                    res.push(resultSet.rows.item(i));
+                    let rowItem = resultSet.rows.item(i);
+                    rowItem["index"] = i;
+                    res.push(rowItem);
                 }
                 if (okFunction) {
                     okFunction(res);

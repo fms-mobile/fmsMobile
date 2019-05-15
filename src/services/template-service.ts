@@ -21,7 +21,8 @@ export class TemplateService implements IService {
             { "title": "정기안전점검 - 목록", "theme": "layout2" },
             { "title": "정기안전점검 - 등록", "theme": "layout3" },
             { "title": "참여기술자 정보 등록", "theme": "layout4" },
-            { "title": "정기점검표", "theme": "layout5" }
+            { "title": "정기점검표 - 작성", "theme": "layout5" },
+            { "title": "정기점검표 - 작성목록", "theme": "layout6" }
         ];
     };
 
@@ -33,10 +34,12 @@ export class TemplateService implements IService {
         ]();
     };
 
+    // Set Data For Parallax - FRIENDS
     getDataForLayout1 = (): any => {
         return {
             "headerImage": "assets/images/background/main_visual.png",
-            "title": "FMS 메뉴",
+            "toolBarTitle": "Parallax-title",
+            "title": "Playlist Name",
             "iconLike": "icon-thumb-up",
             "iconFavorite": "icon-heart",
             "iconShare": "icon-share-variant",
@@ -44,14 +47,20 @@ export class TemplateService implements IService {
                 {
                     "id": 1,
                     "title": "FMS 소개",
-                    "url": "/int01001.do",
+                    "description": "Graciela Mitchell",
+                    "image": "assets/images/avatar/0.jpg",
+                    "imageAlt": "avatar",
                     "icon": "icon-cloud-download",
+                    "duration": "3:42"
                 },
                 {
-                    "id": 1,
+                    "id": 2,
                     "title": "시설물안전등급 정보공개",
-                    "url": "/pub01001.do",
+                    "description": "Sherry Hale",
+                    "image": "assets/images/avatar/1.jpg",
+                    "imageAlt": "avatar",
                     "icon": "icon-cloud-download",
+                    "duration": "3:42"
                 },
                 {
                     "id": 3,
@@ -420,30 +429,78 @@ export class TemplateService implements IService {
         };
     };
 
+    // Set Data For Parallax - LOCATION DETAILS
+    getDataForLayout6 = (): any => {
+        return {
+            "toolBarTitle": "Simple",
+            "headerImage": "assets/images/background/9.jpg",
+            "items": [
+                {
+                    "title": "정기정검표 리스트 01",
+                },
+                {
+                    "title": "정기정검표 리스트 02",
+                },
+                {
+                    "title": "정기정검표 리스트 03",
+                },
+                {
+                    "title": "정기정검표 리스트 04",
+                },
+                {
+                    "title": "정기정검표 리스트 05",
+                },
+                {
+                    "title": "정기정검표 리스트 06",
+                },
+                {
+                    "title": "정기정검표 리스트 07",
+                },
+                {
+                    "title": "정기정검표 리스트 08",
+                }
+            ]
+        };
+    };
+    
+    // Set Data For Splash Screen - DOWN + KEN BURNS
+    getDataForLayout7 = (): any => {
+        return {
+            //"duration": 10000,
+            "backgroundImage": 'assets/images/background/intro.png',
+            "logo": 'assets/images/logo/login-3.png',
+            "title": "정기안전점검"
+        };
+    };
+
+
     getEventsForTheme = (menuItem: any): any => {
         var that = this;
         return {
             'onLike': function (item: any) {
-                  that.toastCtrl.presentToast("Like");
+                that.toastCtrl.presentToast("Like");
             },
             'onFavorite': function (item: any) {
                 item.favorite = !item.favorite;
                 that.toastCtrl.presentToast("Favorite");
             },
             'onShare': function (item: any) {
-                  that.toastCtrl.presentToast("Share");
+                that.toastCtrl.presentToast("Share");
             },
             'onFab': function (item: any) {
-                  that.toastCtrl.presentToast("Fab");
+                that.toastCtrl.presentToast("Fab");
             },
             'onRates': function (index: number) {
-                  that.toastCtrl.presentToast("Rates " + (index + 1));
+                that.toastCtrl.presentToast("Rates " + (index + 1));
             },
             'onItemClick': function (item: any) {
-                  that.toastCtrl.presentToast(item.title);
+                that.toastCtrl.presentToast(item.title);
             },
             'onTextChange': function (text: any) {
                 that.toastCtrl.presentToast(text);
+            },
+            'onSelect': function(item: any) {
+                that.toastCtrl.presentToast(JSON.stringify(item));
             },
         };
     };

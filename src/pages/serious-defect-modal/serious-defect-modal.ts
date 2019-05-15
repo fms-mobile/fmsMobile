@@ -34,9 +34,10 @@ export class SeriousDefectModalPage {
     this.digr01Group = navParams.data.digr01Group;
     this.selectIndex = navParams.data.index;
     this.digr12 = navParams.data.digr12;
-    this.digr02 = this.digr01Group.digr02List[this.selectIndex];
-
-    let facil_gbn = this.digr01Group.selectedMast01List[this.selectIndex].facil_gbn;
+    this.digr02 = navParams.data.digr02;
+     
+    this.selectMast01 = navParams.data.selectMast01;
+    let facil_gbn = this.selectMast01.facil_no.slice(0,2);
 
     globalVars.db.comtbCode02.list002({"code_group":"serious_defect","code1" :facil_gbn}, (res) => {
       this.serious_defectList = res;

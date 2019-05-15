@@ -3,48 +3,40 @@ import { IonicPage, Content, FabButton } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'template-layout-4',
-  templateUrl: 'template.html'
+    selector: 'template-layout-4',
+    templateUrl: 'template.html'
 })
 export class TemplateLayout4 implements OnChanges, AfterViewInit {
-  @Input() data: any;
-  @Input() events: any;
-  @ViewChild(Content)
-  content: Content;
-  @ViewChild(FabButton)
-  fabButton: FabButton;
+    @Input() data: any;
+    @Input() events: any;
+    @ViewChild(Content)
+    content: Content;
+    @ViewChild(FabButton)
+    fabButton: FabButton;
+    headerImage: string;
+    constructor() { }
 
-  constructor() { }
-
-  onEvent(event: string, item: any, e: any) {
-    if (e) {
-      e.stopPropagation();
+    onEvent(event: string, item: any, e: any) {
+        if (e) {
+            e.stopPropagation();
+        }
+        if (this.events[event]) {
+            this.events[event](item);
+        }
     }
-    if (this.events[event]) {
-      this.events[event](item);
+    ngOnChanges(changes: { [propKey: string]: any }) {
+       this.subscribeToIonScroll();
     }
-  }
 
-  onStarClass(items: any, index: number, e: any) {
-    for (var i = 0; i < items.length; i++) {
-      items[i].isActive = i <= index;
+    ngAfterViewInit() {
+        this.subscribeToIonScroll();
     }
-    this.onEvent("onRates", index, e);
-  };
 
-  ngOnChanges(changes: { [propKey: string]: any }) {
-    this.subscribeToIonScroll();
-  }
-
-  ngAfterViewInit() {
-    this.subscribeToIonScroll();
-  }
-
-  subscribeToIonScroll() {
-    if (this.content != null && this.content.ionScroll != null) {
-      this.content.ionScroll.subscribe((d) => {
-        this.fabButton.setElementClass("fab-button-out", d.directionY == "down");
-      });
+    subscribeToIonScroll() {
+        if (this.content != null && this.content.ionScroll != null) {
+            this.content.ionScroll.subscribe((d) => {
+                this.fabButton.setElementClass("fab-button-out", d.directionY == "down");
+            });
+        }
     }
-  }
 }

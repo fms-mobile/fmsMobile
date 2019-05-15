@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { COMTB_USER01DTO } from '../model/COMTB_USER01DTO';
 import { DbInit } from '../db/DbInit';
+import { DatePicker, DatePickerOptions } from '@ionic-native/date-picker';
+
 
 // import * as moment from 'moment';
 
@@ -30,4 +32,16 @@ export class GlobalVars {
         this.userInfo = data;
 	}
 	
+}
+
+export class DatePickerCustomOptions implements DatePickerOptions {
+	mode;
+	date;
+	androidTheme;
+
+	constructor() {
+		this.date = new Date();
+		this.mode = "date";
+		this.androidTheme = new DatePicker().ANDROID_THEMES.THEME_HOLO_LIGHT;
+	}
 }

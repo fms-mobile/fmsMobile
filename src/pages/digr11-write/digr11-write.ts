@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, IonicPage, ViewController, ToastController } from 'ionic-angular';
-import { GlobalVars } from '../../services/GlobalVars';
+import { NavController, NavParams, ModalController, IonicPage, ViewController, ToastController, Platform } from 'ionic-angular';
+import { GlobalVars, DatePickerCustomOptions } from '../../services/GlobalVars';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { MANTB_DIGR11DTO } from '../../model/MANTB_DIGR11DTO';
 import { UtilService } from '../../services/UtilService';
+import { DatePickerOptions, DatePicker } from '@ionic-native/date-picker';
+import { DateFormatPipe } from '../../pipes/date-format/date-format';
 
 /**
  * Generated class for the Digr11Write page.
@@ -23,9 +25,11 @@ export class Digr11WritePage {
   tech_gradeList: Array<any>;
   isOigr11 : boolean = false;
   isCreate : boolean = false;
+  datePickerOptions : DatePickerOptions;
   placeholder : Object = {
     engineer_nm:"성명 입력",
     birth_ymd:"생년월일 입력",
+    rep_yn:"책임기술자 여부",
     start_ymd:"참여 시작일 입력",
     end_ymd:"참여 종료일 입력",
     parti_days:"참여일수 입력",
@@ -33,7 +37,10 @@ export class Digr11WritePage {
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams,globalVars: GlobalVars, 
-    public utilService:UtilService,public modalCtrl: ModalController,public viewCtrl: ViewController ,private toastCtrl :ToastController) {
+    public utilService:UtilService,public modalCtrl: ModalController
+    ,public viewCtrl: ViewController ,private toastCtrl :ToastController
+    ,private datePicker : DatePicker, private platform : Platform, private dateFormatPipe : DateFormatPipe,
+    ) {
      
     this.digr01Group = navParams.data.digr01Group;
     this.index = navParams.data.index;
@@ -44,6 +51,8 @@ export class Digr11WritePage {
       this.isCreate = true;
       this.digr11 = new MANTB_DIGR11DTO();
     }
+
+    this.datePickerOptions = new DatePickerCustomOptions();
 
     globalVars.db.comtbCode02.list002({code_group:"tech_grade",}, (res) => {
       this.tech_gradeList = res;
@@ -121,5 +130,67 @@ export class Digr11WritePage {
     }
 
     return isValidate;
+  }
+
+  pickStart_ymd() {
+    let datePickerOptions = this.datePickerOptions;    
+    datePickerOptions.minDate = null;
+    datePickerOptions.maxDate = null;
+
+    datePickerOptions.date = (this.digr11.start_ymd) ? this.dateFormatPipe.returnDate(this.digr11.start_ymd,'YYYYMMDD') : new Date();
+
+    if(this.digr11.end_ymd){
+      let maxDate = this.dateFormatPipe.returnDate(this.digr11.end_ymd,'YYYYMMDD');
+      if(this.platform.is('ios')){
+        datePickerOptions.maxDate = maxDate;
+      } else if(this.platform.is('android')) {
+        datePickerOptions.maxDate = maxDate.valueOf();
+      }
+    }
+
+    this.datePicker.show(datePickerOptions).then(
+      (date : Date) => {
+        let dateString = this.dateFormatPipe.superTransform(date,'yyyyMMdd');
+        this.digr11.start_ymd = dateString;
+        this.calcParti_days();
+      },
+      err => console.log(err)
+    );
+  }
+
+  pickEnd_ymd() {
+    let datePickerOptions = this.datePickerOptions;    
+    datePickerOptions.minDate = null;
+    datePickerOptions.maxDate = null;
+    
+    datePickerOptions.date = (this.digr11.end_ymd) ? this.dateFormatPipe.returnDate(this.digr11.end_ymd,'YYYYMMDD') : new Date();
+    if(this.digr11.start_ymd) {
+      let minDate = this.dateFormatPipe.returnDate(this.digr11.start_ymd,'YYYYMMDD');
+      
+      if(this.platform.is('ios')){
+        datePickerOptions.minDate = minDate;
+      } else if(this.platform.is('android')) {
+        datePickerOptions.minDate = minDate.valueOf();
+      }
+    }
+
+    this.datePicker.show(datePickerOptions).then(
+      (date : Date) => {
+        let dateString = this.dateFormatPipe.superTransform(date,'yyyyMMdd');
+        this.digr11.end_ymd = dateString;
+        this.calcParti_days();
+      },
+      err => console.log(err)
+    );
+  }
+
+  calcParti_days() {
+    if(this.digr11.start_ymd && this.digr11.end_ymd) {
+      let startYmd : Date = this.dateFormatPipe.returnDate(this.digr11.start_ymd,'YYYYMMDD');
+      let endYmd : Date = this.dateFormatPipe.returnDate(this.digr11.end_ymd,'YYYYMMDD');
+      let diff = endYmd.valueOf() - startYmd.valueOf();
+      const diffDays = Math.ceil(diff / (1000 * 60 * 60 * 24));
+      this.digr11.parti_days = diffDays;
+    }
   }
 }

@@ -26,5 +26,7 @@ template-layout-5 {
       }
     }
   }
-  
+  [item-title] {
+    text-overflow: unset;
+  }
 }

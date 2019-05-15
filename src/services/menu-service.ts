@@ -34,7 +34,7 @@ export class MenuService implements IService {
     return {
       "background": "assets/images/background/16.png",
       "image": "assets/images/logo/login-3.png",
-      "title": "FMS 시설물통합정보시스템 메뉴"
+      "title": "FMS 정기안전점검 메뉴"
     };
   };
 

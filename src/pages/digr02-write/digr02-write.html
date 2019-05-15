@@ -12,7 +12,12 @@
       </button>
     </ion-buttons>
     <!---Title-->
-    <ion-title (click)="goDigr02ListModal()">{{selectMast01.facil_nm}} 점검 정보 등록</ion-title>
+    <ion-title (click)="goDigr02ListModal()">정기안전 점검 정보 등록</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-start (click)="goNext()">
+          다음
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -20,6 +25,9 @@
 <ion-content>
   <ion-grid no-padding>
     <ion-row>
+      <ion-col col-12>
+        <div padding class="title-components">{{selectMast01.facil_nm}}</div>
+      </ion-col>
       <ion-col col-12>
         <ion-card padding box-shadow class="card">
           <ion-grid no-padding>
@@ -29,7 +37,7 @@
               <ion-col col-12>
                 <ion-item no-lines box-shadow>
                   <ion-textarea no-margin type="text" [placeholder]="placeholder.dign_content"
-                    [(ngModel)]="digr02.dign_content" rows="12"></ion-textarea>
+                    [(ngModel)]="digr02.dign_content" rows="6"></ion-textarea>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -39,10 +47,12 @@
               <ion-col col-12>
                 <ion-item no-lines box-shadow>
                   <ion-textarea no-margin type="text" [placeholder]="placeholder.amend_content"
-                    [(ngModel)]="digr02.amend_content" rows="12"></ion-textarea>
+                    [(ngModel)]="digr02.amend_content" rows="6"></ion-textarea>
                 </ion-item>
               </ion-col>
             </ion-row>
+
+            
 
             <h2 padding-top header-title text-capitalize>비용(천원)</h2>
             <ion-row>
@@ -60,7 +70,7 @@
                 <ion-col col-6 col-md-4 col-lg-3 *ngFor="let state_grade of state_gradeList; let i= index">
                   <!--Content -->
                   <ion-item no-lines box-shadow>
-                    <ion-radio item-start [value]="state_grade.code1"></ion-radio>
+                    <ion-radio item-start [value]="state_grade.code1" (ionSelect)="state_gradeChange($event,state_grade)"></ion-radio>
                     <!--Content Title-->
                     <ion-label item-title>{{state_grade.data1}}</ion-label>
                   </ion-item>
@@ -81,25 +91,47 @@
 
           </ion-grid>
         </ion-card>
+
+        <ng-container *ngIf="'TU|AR|UC'.indexOf(selectMast01.facil_no.slice(0,2)) > -1 ">
+          <ion-card margin-top padding box-shadow class="card">
+            <ion-grid>
+              <ion-item no-lines>
+                <ion-label span-medium item-start>환기구(덮개)</ion-label>
+                <ion-toggle item-end [(ngModel)]="digr02.vent_yn" (ionChange)="ventChange($event)"></ion-toggle>
+              </ion-item>
+
+              <ng-container *ngIf="digr02.vent_yn">
+                <h2 padding-top header-title text-capitalize>보수 필요 여부</h2>
+                <ion-list radio-group [(ngModel)]="digr02.vent_amend_yn">
+                  <ion-row>
+                    <ion-col col-6 col-md-4 col-lg-3 *ngFor="let vent_amend_yn of vent_amend_ynList;">
+                      <!--Content -->
+                      <ion-item no-lines box-shadow>
+                        <ion-radio item-start [value]="vent_amend_yn.value"></ion-radio>
+                        <!--Content Title-->
+                        <ion-label item-title>{{vent_amend_yn.text}}</ion-label>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                </ion-list>
+  
+                <h2 padding-top header-title text-capitalize>점검 결과</h2>
+                <ion-row>
+                  <ion-col col-12>
+                    <ion-item no-lines box-shadow>
+                      <ion-input no-margin type="text" [placeholder]="placeholder.vent_chk_result" [(ngModel)]="digr02.vent_chk_result">
+                      </ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ng-container>
+              
+            </ion-grid>
+          </ion-card>
+        </ng-container>
+
       </ion-col>
     </ion-row>
-    <div padding class="title-components">
-      <span>중대결함</span>
-      <div class="block-insert">
-        <button button-clear-outline outline round ion-button (click)="addDigr12WriteModal()">추가</button>
-      </div>
-    </div>
-    <ion-row>
-      <ion-col col-12>
-        <ion-grid>
-          
-        </ion-grid>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-12 text-right>
-        <button ion-button medium margin (click)="goNext()">다음</button>
-      </ion-col>
-    </ion-row>
+    <page-digr12-list></page-digr12-list>
   </ion-grid>
 </ion-content>

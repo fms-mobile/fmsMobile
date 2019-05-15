@@ -33,7 +33,7 @@
             <!--Card-content-->
             <h1 item-title>{{orgn11.corp_nm}}</h1>
             <h2 item-subtitle>{{orgn11.member_nm}}</h2>
-            <h2 item-subtitle>{{orgn11.birth_ymd}}</h2>
+            <h2 item-subtitle>{{orgn11.birth_ymd | dateFormatPipe:'YYYYMMDD':'longDate'}}</h2>
             <h2 item-subtitle>{{orgn11.certi_field_nm}}</h2>
             <h2 item-subtitle>{{orgn11.tech_grade_nm}}</h2>
           </ion-item>

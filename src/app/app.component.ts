@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController, Nav, ModalController } from 'ionic-angular';
+import { Platform, MenuController, Nav, ModalController, ToastController } from 'ionic-angular';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -15,6 +15,7 @@ import { AuthService } from '../services/AuthService';
 import { AuthGuardService } from '../services/AuthGuardService';
 import { TempDataManage } from '../services/TempDataManage';
 import { TransmissionService } from '../services/transmisson-service';
+import { LoadingService } from '../services/loading-service';
 
 @Component({
     templateUrl: 'app.html',
@@ -24,7 +25,6 @@ import { TransmissionService } from '../services/transmisson-service';
 export class MyApp {
     @ViewChild(Nav) nav: Nav;
     
-
     rootPage = "MainPage";
     pages: any;
     params:any;
@@ -44,6 +44,8 @@ export class MyApp {
         public authService: AuthService,
         public authGuardService: AuthGuardService,
         public transmissionService: TransmissionService,
+        private toastCntrl :ToastController,
+        private loadingService: LoadingService,
         ) {
         this.initializeApp();
         this.pages = menuService.getAllThemes();
@@ -130,5 +132,21 @@ export class MyApp {
     return title;
   }
 
-  
+  logout(){
+    const title = "로그 아웃";
+    const content = "로그 아웃 하시겠습니까?";
+    this.utilService.alertConfirm(title,content,()=>{
+      this.loadingService.show();
+      this.authService.logout().then(()=>{
+        this.loadingService.hide();
+        this.nav.setRoot(this.rootPage);
+      });
+    },()=>{
+
+    });
+  }
+
+  login(){
+    this.nav.setRoot("LoginPage");
+  }
 }

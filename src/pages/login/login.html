@@ -4,25 +4,23 @@
       <ion-icon class="icon-menu" name="menu"></ion-icon>
     </button>
     <!---Title-->
-    <ion-title ></ion-title>
+    <ion-title></ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-title>
-      <ion-img style="width: 300px; height: 60px; background:white;" src="assets/imgs/logo_login.png"></ion-img>
-    </ion-title>
+    <div background-size [ngStyle]="{'background-image': 'url(' + 'assets/images/logo/logo_top.png' + ')', 'height' : '80px'}"></div>
 
     <ion-item>
       <ion-input type="text" placeholder="Username" [hidden]="isAutoLogin" [(ngModel)]="ui.user_id"></ion-input>
     </ion-item>
-  
+
     <ion-item>
       <ion-input type="password" placeholder="Password" [hidden]="isAutoLogin" [(ngModel)]="ui.pswd"></ion-input>
     </ion-item>
 
-    <button ion-button block  (click)="goLogin()">Login</button>
+    <button ion-button block (click)="goLogin()">Login</button>
 
     <ion-grid>
       <ion-row>
@@ -31,8 +29,8 @@
             <ion-label>자동로그인</ion-label>
             <ion-checkbox [(ngModel)]="chkAutoLogin" (ionChange)="chgAutoLogin()"></ion-checkbox>
           </ion-item>
-        </ion-col> 
-         
+        </ion-col>
+
         <ion-col>
           <ion-item>
             <ion-label>ID저장</ion-label>

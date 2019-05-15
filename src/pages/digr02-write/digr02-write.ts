@@ -5,12 +5,6 @@ import { NavController, NavParams, ModalController, ToastController, ViewControl
 import { UtilService } from '../../services/UtilService';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { BASTB_MAST01DTO } from '../../model/BASTB_MAST01DTO';
-import { CameraOptions, Camera } from '@ionic-native/camera';
-import { COMTB_FILE01DTO } from '../../model/COMTB_FILE01DTO';
-import { DomSanitizer } from '@angular/platform-browser';
-import { FilePath } from '@ionic-native/file-path';
-import { File } from '@ionic-native/file';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 /**
  * Generated class for the Digr02Write page.
@@ -26,7 +20,12 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 export class Digr02WritePage {
   selectIndex : number;
-  state_gradeList : any = [];
+  state_gradeList : Array<any> = [];
+  vent_amend_ynList :Array<any> = [
+    {text:'보수필요',value:'Y'},
+    {text:'보수불필요',value:'N'},
+    {text:'해당없음',value:'X'},
+  ];
   
   digr01Group : DIGR01_GROUPDTO;
   selectMast01 : BASTB_MAST01DTO;
@@ -36,28 +35,33 @@ export class Digr02WritePage {
     amend_content: "주요 보수보강(안) 입력",
     dign_amt : "비용 입력",
     dign4_need_yn : "정밀안전진단 필요",
+    vent_amend_yn : "환기구 보수 필요 여부",
+    vent_chk_result : "환기구 점검 결과 입력",
   };
-
-  private win: any = window;
+  
 
   constructor(public navCtrl: NavController, public navParams: NavParams
     ,public globalVars:GlobalVars,public utilService : UtilService
     ,public modalCtrl: ModalController,public toastCtrl: ToastController
-    , public viewCtrl: ViewController, public camera: Camera, public domSanitizer: DomSanitizer
-    , private filePath :FilePath, private file: File, public webview: WebView ) {
+    , public viewCtrl: ViewController, ) {
       this.digr01Group = navParams.data.digr01Group;
       this.selectIndex = navParams.data.index;
 
       this.selectMast01 = this.digr01Group.selectedMast01List[this.selectIndex];
       this.digr02 = this.digr01Group.digr02List[this.selectIndex];
 
-      globalVars.db.comtbCode02.list002({code_group:"state_grade",data5 :"1"}, (res) => {
+      // 기존 로직에서 등급 구분 방식 적용
+      let data5 : any = "";
+      if(this.digr02.dign_gbn.substring(0,1) == '2' || this.digr02.dign_gbn.substring(0,1) == '3' || this.selectMast01.facil_class == '3') {
+        data5 = '2';
+      } else if(this.digr02.dign_gbn.substring(0,1) == '1' || this.digr02.dign_gbn.substring(0,1) == '9') {
+        data5 = '1';
+      } else {
+      }
+      globalVars.db.comtbCode02.list002({code_group:"state_grade",data5 :data5}, (res) => {
         this.state_gradeList = res;
       });
-  }
-  
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Digr02Write');
+      
   }
 
   dismiss(){
@@ -83,6 +87,18 @@ export class Digr02WritePage {
     });
   }
 
+  state_gradeChange(event,state_grade){
+    this.digr02.state_grade_nm = state_grade.data1
+  }
+
+  ventChange(event){
+    if(!event.checked) {
+      this.digr02.vent_amend_yn = 'X';
+      this.digr02.vent_chk_result = '';
+      this.digr02.vent_content = '';
+    }
+  }
+
   addDigr12WriteModal() {
     let digr12WriteModal = this.modalCtrl.create("Digr12WriteModalPage", {"digr01Group":this.digr01Group,"index":this.selectIndex});
     digr12WriteModal.present();
@@ -104,65 +120,7 @@ export class Digr02WritePage {
 
   goNext(){
     let thisView : ViewController = this.navCtrl.last();
-    this.navCtrl.push("Digr13WritePage",{"digr01Group":this.digr01Group,"index":this.selectIndex,"prevView":thisView});
+    this.navCtrl.push("Digr13_1ListPage",{"digr01Group":this.digr01Group,"index":this.selectIndex,"prevView":thisView});
   }
-
-  pathForImage(img) {
-    if (img === null) {
-      return '';
-    } else {
-      let converted = this.win.Ionic.WebView.convertFileSrc(img);
-      return converted;
-    }
-  }
-
-  createFileName() {
-    var d = new Date(),
-        n = d.getTime(),
-        newFileName = n + ".jpg";
-    return newFileName;
-  }
-
-  takePhoto(sourceType) {
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      sourceType:sourceType,
-      saveToPhotoAlbum: false,
-      correctOrientation: true
-    }
-
-    this.camera.getPicture(options).then((imagePath : string) => {
-     // imageData is either a base64 encoded string or a file URI
-     // If it's base64 (DATA_URL):
-      // let base64Image = 'data:image/jpeg;base64,' + imageData;
-      this.filePath.resolveNativePath(imagePath)
-      .then(filePath => {
-        let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-        // let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
-        let currentName: string = '';
-
-        if(imagePath.includes('?')) {
-          currentName = imagePath.substring(0, imagePath.lastIndexOf('?')).replace(correctPath,'');
-        } else{
-          currentName = imagePath.replace(correctPath,'');
-        }
-
-        let that = this;
-        that.file.copyFile(correctPath, currentName, this.file.dataDirectory, this.createFileName()).then(success => {
-          // this.updateStoredImages(newFileName);
-          let comtbFile01 : COMTB_FILE01DTO = new COMTB_FILE01DTO();
-          comtbFile01.img_data = imagePath;
-          comtbFile01.img_path = that.pathForImage(success.nativeURL);
-          that.digr02.comtbFile01Array.push(comtbFile01);
-        }, error => {
-            // this.presentToast('Error while storing file.');
-        });
-      });
-    }, (err) => {
-     // Handle error
-    });
-  }
+  
 }

@@ -1,7 +1,7 @@
 import { GlobalVars } from './../../services/GlobalVars';
 import { UtilService } from './../../services/UtilService';
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, IonicPage, ItemSliding } from 'ionic-angular';
+import { NavController, NavParams, ModalController, IonicPage, ItemSliding, ModalOptions } from 'ionic-angular';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { BASTB_MAST01DTO } from '../../model/BASTB_MAST01DTO';
 
@@ -37,9 +37,12 @@ export class Digr02ListPage {
     digr02WritePageModal.present();
   }
 
-  addMast01(){
-    let mast01ListPageModal = this.modalCtrl.create("Mast01ListPage", this.digr01Group);
-    mast01ListPageModal.present();
+  async addMast01(){
+    const modalOptions = {
+      cssClass: 'test'
+    }
+    const mast01ListPageModal = await this.modalCtrl.create("Mast01ListPage", this.digr01Group,modalOptions);
+    return await mast01ListPageModal.present();
   }
 
   goDigr13(event:any,index: number){

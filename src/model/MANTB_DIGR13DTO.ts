@@ -8,7 +8,7 @@ export class MANTB_DIGR13DTO {
     public check_cd : string;
     public check_nm : string;
     public check_result : string;
-    public amend_need_yn : string;
+    public amend_need_yn : boolean;
     public dign_opinion : string;
 
     constructor(){
@@ -18,7 +18,7 @@ export class MANTB_DIGR13DTO {
         this.check_cd = "";
         this.check_nm = "";
         this.check_result = "";
-        this.amend_need_yn = "";
+        this.amend_need_yn = false;
         this.dign_opinion = "";
     }
 }

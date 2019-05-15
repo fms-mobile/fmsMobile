@@ -1,16 +1,27 @@
 page-digr13-write {
-    .form-01 {
-        tr {
-            display: table-row;
-            th{
-                text-align:center;
-                padding-left: 0px;
-            }
-            td{
-                text-align:center;
-            }
+    ion-card img {
+        width: 100px;
+      }
+      [card-title] {
+          font-size: 16px !important;
+      }
+      [card-subtitle] {
+          font-size: 13px !important;
+          font-weight: 400 !important;
+      }
+      .example-h3 {
+          font-size: 13px !important;
+          font-weight: 400 !important;
+      }
+      [textarea] {
+        height: 100px;
+        ion-item {
+          height: 100%;
+    
+          textarea {
+            height: calc(100% - 30px);
+            padding-top: 10px;
+          }
         }
-        
-    }
-
+      }
 }

@@ -33,9 +33,9 @@
                   <ion-icon item-end>
                     <i class="icon icon-arrow-right-bold-circle"></i>
                   </ion-icon>
-                  <h1 item-title *ngIf="digrGroup.digr01.report_yy != ''; else elseBlock">{{digrGroup.digr01.report_yy}}년도 {{digrGroup.digr01.regular_gbn_nm}} {{digrGroup.digr01.dign_gbn_nm}}</h1>
+                  <h1 item-title *ngIf="digrGroup.digr01.regular_gbn_nm != ''; else elseBlock">{{digrGroup.digr01.regular_gbn_nm}} {{digrGroup.digr01.dign_gbn_nm}}</h1>
                   <ng-template #elseBlock><h1 item-title>정기안전점검 리스트 {{i+1}}</h1></ng-template>
-                  <h2 item-subtitle>{{digrGroup.digr01.start_ymd}} ~ {{digrGroup.digr01.end_ymd}}</h2>
+                  <h2 item-subtitle>{{digrGroup.digr01.start_ymd | dateFormatPipe:'YYYYMMDD':'longDate'}} ~ {{digrGroup.digr01.end_ymd | dateFormatPipe:'YYYYMMDD':'longDate'}}</h2>
                   <h2 item-subtitle>{{digrGroup.digr01.regular_gbn_nm}} / {{digrGroup.digr01.wrt_person_nm}}</h2>
                 </ion-item>
                 <ion-item-options no-lines>

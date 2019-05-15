@@ -25,10 +25,13 @@
     <ion-list margin>
       <ion-row>
         <ion-col col-12 col-md-12 col-lg-6>
-          <button default-button round ion-button block text-capitalizen (click)="goDigrGroupPage()">정기안전점검 목록 바로가기</button>
+          <button ion-button round outline block size="large" (click)="goDigrGroupPage()">목록 바로가기</button>
         </ion-col>
         <ion-col col-12 col-md-12 col-lg-6>
-          <button default-button round ion-button block text-capitalizen (click)="goDigrGroupPage()">정기안전점검 등록 바로가기</button>
+          <button ion-button round outline block size="large" (click)="goWriteGroupPage()">등록 바로가기</button>
+        </ion-col>
+        <ion-col col-12 col-md-12 col-lg-6>
+          <button ion-button round outline block size="large" (click)="transmissionService.syncAllData(null,null)">데이터 동기화</button>
         </ion-col>
       </ion-row>
     </ion-list>
@@ -54,11 +57,11 @@
   </ion-grid>
 </ion-content>
 <!-- Fab Button -->
-<ion-fab #fab bottom right>
+<!-- <ion-fab #fab bottom right>
     <button button-ion-fab ion-fab (click)="onEvent('onFab', data, $event)">
     <ion-icon name="add"></ion-icon>
   </button>
-</ion-fab>
+</ion-fab> -->
 
 
 <!-- <ion-content>

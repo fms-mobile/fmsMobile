@@ -7,15 +7,21 @@
         position: relative;
     }
 
-    @media screen and (max-width:500px){
+    @media screen and (max-width:820px){
         [background-size] {
-            height: 140px;
+            height: 200px;
         }
     }
 
     @media screen and (max-width:768px){
         [background-size] {
             height: 200px;
+        }
+    }
+
+    @media screen and (max-width:500px){
+        [background-size] {
+            height: 140px;
         }
     }
 

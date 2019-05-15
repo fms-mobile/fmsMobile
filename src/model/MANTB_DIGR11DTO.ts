@@ -8,7 +8,7 @@ export class MANTB_DIGR11DTO {
     public engineer_nm : string;
     public birth_ymd : string;
     public sex : string;
-    public rep_yn : string;
+    public rep_yn : boolean;
     public start_ymd : string;
     public end_ymd : string;
     public parti_days : number;
@@ -23,7 +23,7 @@ export class MANTB_DIGR11DTO {
         this.engineer_nm = "";
         this.birth_ymd = "";
         this.sex = "";
-        this.rep_yn = "";
+        this.rep_yn = false;
         this.start_ymd = "";
         this.end_ymd = "";
         this.parti_days = null;

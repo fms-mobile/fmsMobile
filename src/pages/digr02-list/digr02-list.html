@@ -20,7 +20,11 @@
           <ion-card padding box-shadow text-right class="card" (click)="goWrite(digr01Group,i)">
             <!--Card images-->
             <div float-left class="card-img">
-              <img src="assets/imgs/fms_img_{{ i % 12 + 1 | number: '2.'}}.png" />
+              <!-- <img *ngIf="digr01Group.digr02List[i].comtbFile01Array.length > 0; else elseBlock" [src]="digr02.comtbFile01Array[0].img_path" />
+              <ng-template #elseBlock>
+                <img src="assets/images/avatar/fms_img_no.png" />
+              </ng-template> -->
+              <img src="assets/images/avatar/fms_img_no.png" />
             </div>
             <!--Card-content-->
             <ion-card-content>
@@ -29,9 +33,9 @@
                 <h1 card-title>{{mast01.facil_nm}}</h1>
               </ion-card-title>
               <!--Description-->
-              <h3 card-subtitle>비용: <span class="example-h3">{{mast01.dign_amt}} 천원</span></h3>
-              <h3 card-subtitle>안전등급: <span class="example-h3">{{mast01.state_grade}}</span></h3>
-              <h3 card-subtitle>정밀인전진단 필요여부 : <span class="example-h3">{{mast01.dign4_need_yn}}</span></h3>
+              <h3 card-subtitle>비용: <span class="example-h3">{{digr01Group.digr02List[i].dign_amt}} 천원</span></h3>
+              <h3 card-subtitle>안전등급: <span class="example-h3">{{digr01Group.digr02List[i].state_grade_nm}}</span></h3>
+              <h3 card-subtitle>정밀인전진단 필요여부 : <span class="example-h3">{{digr01Group.digr02List[i].dign4_need_yn | questionableBooleanPipe}}</span></h3>
             </ion-card-content>
           </ion-card>
         </ion-item>

@@ -22,10 +22,6 @@ export class Digr11ListPage {
     this.digr01Group = navParams.data;
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Digr11List');
-  }
-
   goWrite(index:number){
     let digr11WritePageeModal = this.modalCtrl.create("Digr11WritePage", {"digr01Group":this.digr01Group,"index":index});
     digr11WritePageeModal.present();

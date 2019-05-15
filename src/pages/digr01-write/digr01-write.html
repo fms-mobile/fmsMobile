@@ -9,80 +9,50 @@
 <ion-row>
   <ion-col col-12>
     <ion-card padding box-shadow class="card">
-      <ion-grid no-padding>
-        <ion-list radio-group [(ngModel)]="digr01.regular_gbn" (ionChange)="setRegular_gbn($event)">
-          <!-- Header Title Top -->
-          <h2 padding-top header-title text-capitalize>기간구분</h2>
+      <ion-grid>
+        <!-- Header Title Top -->
+        <h2 padding-top header-title text-capitalize>기간구분</h2>
+        <ion-list radio-group [(ngModel)]="digr01.regular_gbn" >
           <ion-row>
             <ion-col col-6 col-md-4 col-lg-3 *ngFor="let regular_gbn of regular_gbnList; let i= index">
               <!--Content -->
               <ion-item no-lines box-shadow>
-                <ion-radio item-start [value]="regular_gbn.code1"></ion-radio>
+                <ion-radio item-start [value]="regular_gbn.code1" (ionSelect)="setRegular_gbn($event,regular_gbn)"></ion-radio>
                 <!--Content Title-->
                 <ion-label item-title>{{regular_gbn.data1}}</ion-label>
               </ion-item>
             </ion-col>
           </ion-row>
-          <!-- Header Title Top -->
-          <h2 padding-top header-title text-capitalize>점검진단기간</h2>
-          <ion-row>
-            <ion-col col-6>
-              <!-- 시작일 -->
-              <ion-item no-lines box-shadow>
-                <ion-input no-margin type="text" [placeholder]="placeholder.start_ymd" [(ngModel)]="digr01.start_ymd"></ion-input>
-              </ion-item>
-            </ion-col>
-            <ion-col col-6>
-              <!-- 종료일 -->
-              <ion-item no-lines box-shadow>
-                <ion-input no-margin type="text" [placeholder]="placeholder.end_ymd" [(ngModel)]="digr01.end_ymd"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-          <h2 padding-top header-title text-capitalize>작성자명</h2>
-          <ion-row>
-            <ion-col col-12>
-              <!-- 시작일 -->
-              <ion-item no-lines box-shadow>
-                <ion-input no-margin type="text" [placeholder]="placeholder.wrt_person_nm" [(ngModel)]="digr01.wrt_person_nm"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
         </ion-list>
+
+        <!-- Header Title Top -->
+        <h2 padding-top header-title text-capitalize>점검진단기간</h2>
+        <ion-row>
+          <ion-col col-6>
+            <!-- 시작일 -->
+            <ion-item no-lines box-shadow>
+              <ion-input no-margin type="text" [placeholder]="placeholder.start_ymd" value="{{digr01.start_ymd | dateFormatPipe:'YYYYMMDD':'longDate'}}" (ionFocus)="pickStart_ymd()"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <!-- 종료일 -->
+            <ion-item no-lines box-shadow>
+              <ion-input no-margin type="text" [placeholder]="placeholder.end_ymd" value="{{digr01.end_ymd | dateFormatPipe:'YYYYMMDD':'longDate'}}" (ionFocus)="pickEnd_ymd()"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <h2 padding-top header-title text-capitalize>작성자명</h2>
+        <ion-row>
+          <ion-col col-12>
+            <!-- 시작일 -->
+            <ion-item no-lines box-shadow>
+              <ion-input no-margin type="text" [placeholder]="placeholder.wrt_person_nm" [(ngModel)]="digr01.wrt_person_nm"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
       </ion-grid>
     </ion-card>
   </ion-col>
 </ion-row>
-
-<!-- <div class="top-tit-area02">
-  <div>
-    <div class="title-components">점검개요</div>
-  </div>
-</div>
-
-<ion-content style="height: 273px;">
-  <ion-grid>
-    <ion-row padding>
-      <ion-col col-12 align-self-start>
-        <ion-list radio-group [(ngModel)]="digr01.regular_gbn" style="margin-bottom: 16px;"
-          (ionChange)="setRegular_gbn($event)">
-          <ion-item no-lines five-col *ngFor="let regular_gbn of regular_gbnList;">
-            <ion-radio no-margin item-start value="{{regular_gbn.code1}}"></ion-radio>
-            <ion-label no-margin item-title>{{regular_gbn.data1}}</ion-label>
-          </ion-item>
-        </ion-list>
-
-        <ion-item no-lines box-shadow margin-bottom>
-          <ion-input no-margin type="text" placeholder="점검진단 시작일" [(ngModel)]="digr01.start_ymd"
-            (change)="setReport_ymd($event)"></ion-input>
-        </ion-item>
-        <ion-item no-lines box-shadow margin-bottom>
-          <ion-input no-margin type="text" placeholder="점검진단 종료일" [(ngModel)]="digr01.end_ymd"></ion-input>
-        </ion-item>
-        <ion-item no-lines box-shadow margin-bottom>
-          <ion-input no-margin type="text" placeholder="작성자명" [(ngModel)]="digr01.wrt_person_nm"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-content> -->

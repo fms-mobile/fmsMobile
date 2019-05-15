@@ -6,80 +6,88 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title (click)="goDigr02ListModal()">{{selectMast01.facil_nm}} 정기점검표</ion-title>
+    <ion-title>정기점검표</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-start (click)="goSave()">
+        확인
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <table class="table form-01">
-    <thead>
-      <tr>
-        <th style="width:35vw;" colspan="3">점검항목</th>
-        <th style="width:30vw;">점검결과</th>
-        <th style="width:15vw;">보수<br>필요</th>
-        <th style="width:15vw;">의견</th>
-      </tr>
-    </thead>
-    <tbody>
-      <ng-container *ngIf="dign1_checklist?.length > 0; else addBlock">
-        <tr *ngFor="let dignChek of dign1_checklist; let i = index;">
-          <ng-container *ngIf="dignChek.check_nm3 == null; else elseBlock">
-            <ng-container *ngIf="dignChek.check_cd1 == 'xx'; else elseCd1">
-                <td class="cd1_{{dignChek.check_cd1}}" style="width:10vw;">
-                  <input type="text" placeholder="{{dignChek.check_nm1}}">
-                </td>
-            </ng-container>
-            <ng-template #elseCd1>
-              <td *ngIf="dignChek.check_cd1_rownum == 1" [attr.rowspan]="dignChek.cd1_len" class="cd1_{{dignChek.check_cd1}}" style="width:10vw;">{{dignChek.check_nm1}}</td>
-            </ng-template>
-            <ng-container *ngIf="dignChek.check_cd2 == 'xx'; else elseCd2">
-                <td class="cd2_{{dignChek.check_cd1}}{{dignChek.check_cd2}}" style="width:25vw;" colspan="2">
-                  <input type="text" placeholder="{{dignChek.check_nm2}}">
-                </td>
-            </ng-container>
-            <ng-template #elseCd2>
-                <td class="cd2_{{dignChek.check_cd1}}{{dignChek.check_cd2}}" style="width:25vw;" colspan="2">{{dignChek.check_nm2}}</td>
-            </ng-template>
+<ion-content>
+  <!-- Content -->
+  <ion-grid no-padding *ngIf="dign1_checkObject != null">
+    <ng-template #cardBlock let-dign1_code>
+      <ion-card padding margin-bottom box-shadow class="card">
+        <ion-grid no-padding >
+
+          <div span-medium *ngIf="dign1_code.check_nm4">{{dign1_code.check_nm4}}</div>
+          
+          <h2 padding-top header-title text-capitalize>점검결과</h2>
+          <ion-list radio-group [(ngModel)]="digr13Array[dign1_code.index].check_result">
+            <ion-row>
+              <ion-col col-4 *ngFor="let check_result of check_resultList;">
+                <!--Content -->
+                <ion-item no-lines box-shadow class="item-sm">
+                  <ion-radio item-start [value]="check_result.value"></ion-radio>
+                  <!--Content Title-->
+                  <ion-label item-title>{{check_result.name}}</ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-list>
+
+          <h2 padding-top header-title text-capitalize>보수여부</h2>
+          <ion-row>
+            <ion-col col-12>
+              <ion-list>
+                <ion-item no-lines box-shadow class="item-sm">
+                  <!-- Content Title -->
+                  <ion-label item-title>{{placeholder.amend_need_yn}}</ion-label>
+                  <ion-checkbox [(ngModel)]="digr13Array[dign1_code.index].amend_need_yn"></ion-checkbox>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+
+          <h2 padding-top header-title text-capitalize>의견</h2>
+          <ion-row>
+            <ion-col col-12 textarea>
+              <ion-item no-lines box-shadow>
+                <ion-textarea no-margin [placeholder]="placeholder.dign_opinion" [(ngModel)]="digr13Array[dign1_code.index].dign_opinion"></ion-textarea>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </ng-template>
+
+    <ng-container *ngIf="dign1_checkObject[codeMap.depth] == 2; else else_depth3">
+      <div padding class="title-components">{{dign1_checkObject[codeMap.data][0].check_nm1}}</div>
+  
+        <ion-row>
+          <ng-container *ngFor="let code2 of dign1_checkObject[codeMap.array]; let i = index;">
+            <ion-col col-12 col-sm-12 col-md-6 col-lg-6 class="col-set">
+              <div padding-left class="example-h1">{{dign1_checkObject[codeMap.data][i].check_nm2}}</div>
+              
+              <ng-container *ngTemplateOutlet="cardBlock; context:{ $implicit: dign1_checkObject[codeMap.data][i] }"></ng-container>
+            </ion-col>
           </ng-container>
-          <ng-template #elseBlock>
-            <td *ngIf="dignChek.check_cd1_rownum == 1" [attr.rowspan]="dignChek.cd1_len" class="cd1_{{dignChek.check_cd1}}" style="width:10vw;">{{dignChek.check_nm1}}</td>
-            <td *ngIf="dignChek.check_cd2_rownum == 1" [attr.rowspan]="dignChek.cd2_len" class="cd2_{{dignChek.check_cd1}}{{dignChek.check_cd2}}" style="width:10vw;">{{dignChek.check_nm2}}</td>
-            <td class="cd3_{{dignChek.check_cd1}}{{dignChek.check_cd2}}{{dignChek.check_cd3}}" style="width:15vw;">{{dignChek.check_nm3}}</td>
-          </ng-template>
-          <td style="width:30vw;">
-            <input type="radio" [(ngModel)]="digr13Array[i].check_result" name="{{dignChek.check_cd}}" id="check_result_{{dignChek.check_cd}}_1" value="1" >
-            <label style="width:8vw;" for="check_result_{{dignChek.check_cd}}_1">양호</label>
-            <input type="radio" [(ngModel)]="digr13Array[i].check_result" name="{{dignChek.check_cd}}" id="check_result_{{dignChek.check_cd}}_2" value="2" >
-            <label style="width:8vw;" for="check_result_{{dignChek.check_cd}}_2">보통</label>
-            <input type="radio" [(ngModel)]="digr13Array[i].check_result" name="{{dignChek.check_cd}}" id="check_result_{{dignChek.check_cd}}_3" value="3" >
-            <label style="width:8vw;" for="check_result_{{dignChek.check_cd}}_3">불량</label>
-          </td>
-          <td style="width:15vw;">
-            <input type="checkbox" [(ngModel)]="digr13Array[i].amend_need_yn" name="amend_need_yn_{{i}}" id="amend_need_yn_{{i}}">
-            <label style="width:13vw;" for="amend_need_yn_{{i}}">보수필요</label>
-          </td>
-          <td style="width:15vw;">
-            <ng-container *ngIf="digr13Array[i].dign_opinion == ''; else elseOpinion">
-              <input type="checkbox" name="dign_opinion_{{i}}" id="dign_opinion_{{i}}">
-              <label style="width:8vw;" for="dign_opinion_{{i}}" (click)="goDigr13SelectModal(digr13Array[i])">의견</label>
-            </ng-container>
-            <ng-template #elseOpinion>
-              <input type="checkbox" name="dign_opinion_{{i}}" id="dign_opinion_{{i}}" checked="checked">
-              <label style="width:8vw;" for="dign_opinion_{{i}}" (click)="goDigr13SelectModal(digr13Array[i])">의견</label>
-            </ng-template>
-          </td>
-        </tr>
-      </ng-container>
-      <ng-template #addBlock>
-      </ng-template>
-    </tbody>
-  </table>
-  <ion-buttons end>
-    <button ion-button icon-start (click)="goPrev()">
-      이전
-    </button>
-    <button ion-button icon-start (click)="goSave()">
-      확인
-    </button>
-  </ion-buttons>
+      </ion-row>
+    </ng-container>
+    <ng-template #else_depth3 >
+      <div padding class="title-components">{{dign1_checkObject[codeMap.data][0].check_nm2}}</div>
+
+      <ion-row>
+        <ng-container *ngFor="let code3 of dign1_checkObject[codeMap.array]; let i = index;">
+          <ion-col col-12 col-sm-12 col-md-6 col-lg-6 class="col-set">
+            <div padding-left class="example-h1">{{dign1_checkObject[codeMap.data][i].check_nm3}}</div>
+            
+            <ng-container *ngTemplateOutlet="cardBlock; context:{ $implicit: dign1_checkObject[codeMap.data][i] }"></ng-container>
+          </ion-col>
+        </ng-container>
+    </ion-row>
+    </ng-template>
+  </ion-grid>
 </ion-content>

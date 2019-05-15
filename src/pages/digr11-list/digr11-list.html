@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 <div padding class="title-components">
-  <span>책입기술자 목록</span>
+  <span>참여기술자 목록</span>
   <div class="block-insert">
     <button button-clear-outline outline round ion-button (click)="addDigr11()">추가</button>
   </div>
@@ -19,7 +19,7 @@
           <ion-card padding box-shadow text-right class="card" (click)="goWrite(i)">
             <!--Card images-->
             <div float-left class="card-img">
-              <img images-filter src="assets/imgs/fms_avatar_01.png" />
+              <img images-filter src="assets/images/avatar/fms_avatar_01.png" />
             </div>
             <!--Card-content-->
             <ion-card-content>
@@ -28,6 +28,7 @@
                 <h1 card-title>{{digr11.engineer_nm}}</h1>
               </ion-card-title>
               <!--Description-->
+              <h3 card-subtitle>책임기술자 여부 : <span class="example-h3">{{digr11.rep_yn | questionableBooleanPipe}}</span></h3>
               <h3 card-subtitle>참여일수 : <span class="example-h3">{{digr11.parti_days}} 일</span></h3>
               <h3 card-subtitle>참여율 : <span class="example-h3">{{digr11.parti_rate}} %</span></h3>
               <h3 card-subtitle>기술등급 : <span class="example-h3">{{digr11.tech_grade_nm}}</span></h3>

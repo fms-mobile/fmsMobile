@@ -16,6 +16,16 @@
                   </ion-icon>
                   {{p.title}}
                 </button>
+                <ion-row wrap padding class="menu-user">
+                  <ion-col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12>
+                    <button ion-button round outline block *ngIf="!authGuardService.canActivate()" (click)="login()">로그인</button>
+                  </ion-col>
+                  <ion-col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12>
+                    <button ion-button round outline block *ngIf="authGuardService.canActivate()" (click)="logout()">
+                      로그아웃
+                    </button>
+                  </ion-col>
+                </ion-row>
             </ion-list>
         </ion-content>
     </ion-menu>

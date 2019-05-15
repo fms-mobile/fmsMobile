@@ -1,0 +1,29 @@
+<!-- Theme Search Bars - Simple -->
+<ion-content>
+    <ion-grid no-padding>
+        <div padding class="title-components">
+            <span>정기정검표 작성 목록 선택</span>
+            <div class="block-insert">
+                <button button-clear-outline outline round ion-button>신규 추가</button>
+            </div>
+        </div>
+        <ion-row *ngIf="data != null">
+            <!-- List -->
+            <ion-col col-12>
+                <ion-list no-margin>
+                    <ion-item class="ion-line-item" *ngFor="let item of data.items;" (click)="onEvent('onItemClick', item)">
+                        <h1 item-title class="item-title-big">{{item.title}}</h1>
+                        <ion-badge margin-right color="primary">작성완료 11 건</ion-badge>
+                        <ion-badge margin-right color="danger">미작성 11 건</ion-badge>
+                        <ion-icon item-end>
+                            <i class="icon icon-arrow-right-bold-circle"></i>
+                        </ion-icon>
+                        
+                    </ion-item>
+                    
+                </ion-list>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+  
