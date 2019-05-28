@@ -37,12 +37,12 @@ export class Digr12WriteModalPage {
     , public modalCtrl: ModalController,public utilService:UtilService
     , public camera: Camera, public domSanitizer: DomSanitizer
     , private filePath :FilePath, private file: File, public webview: WebView) {
-    this.digr01Group = navParams.data.digr01Group;
-    this.selectIndex = (navParams.data.index) ? navParams.data.index : null;
-    this.digr02 = navParams.data.digr02;
-    this.selectMast01 = navParams.data.selectMast01;
-    this.digr12 = (navParams.data.digr12) ? navParams.data.digr12 : new MANTB_DIGR12DTO();
-    (navParams.data.digr12) ? null : this.isCreate = true;
+    this.digr01Group = navParams.get('digr01Group');
+    this.selectIndex = (navParams.get('index')) ? navParams.get('index') : null;
+    this.digr02 = navParams.get('digr02');
+    this.selectMast01 = navParams.get('selectMast01');
+    this.digr12 = (navParams.get('digr12')) ? navParams.get('digr12') : new MANTB_DIGR12DTO();
+    (navParams.get('digr12')) ? null : this.isCreate = true;
     this.digr12.facil_no = (this.digr12.facil_no) ? null : this.digr02.facil_no;
   }
 
@@ -134,24 +134,25 @@ export class Digr12WriteModalPage {
      // imageData is either a base64 encoded string or a file URI
      // If it's base64 (DATA_URL):
       // let base64Image = 'data:image/jpeg;base64,' + imageData;
+
+      let correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+      // let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
+      let currentName: string = '';
+
+      if(imagePath.includes('?')) {
+        currentName = imagePath.substring(0, imagePath.lastIndexOf('?')).replace(correctPath,'');
+      } else{
+        currentName = imagePath.replace(correctPath,'');
+      }
+
       this.filePath.resolveNativePath(imagePath)
       .then(filePath => {
-        let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-        // let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
-        let currentName: string = '';
-
-        if(imagePath.includes('?')) {
-          currentName = imagePath.substring(0, imagePath.lastIndexOf('?')).replace(correctPath,'');
-        } else{
-          currentName = imagePath.replace(correctPath,'');
-        }
-
         let that = this;
         that.file.copyFile(correctPath, currentName, this.file.dataDirectory, this.createFileName()).then(success => {
-          // this.updateStoredImages(newFileName);
           let comtbFile01 : COMTB_FILE01DTO = new COMTB_FILE01DTO();
           comtbFile01.img_data = imagePath;
           comtbFile01.img_path = that.pathForImage(success.nativeURL);
+          comtbFile01.file_nm = currentName;
           that.digr12.comtbFile01Array.push(comtbFile01);
         }, error => {
             // this.presentToast('Error while storing file.');

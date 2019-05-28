@@ -7,302 +7,350 @@
 <ion-header>
   <ion-navbar color="primary">
       <ion-buttons left>
-          <button ion-button icon-only (click)="dismiss()"><ion-icon name="backspace"></ion-icon></button>
+        <button ion-button icon-only (click)="dismiss()"><ion-icon name="backspace"></ion-icon></button>
       </ion-buttons>
       <ion-title>부위부재 선택</ion-title>
+      <ion-buttons end>
+        <button ion-button icon-start (click)="goSave()">
+          확인
+        </button>
+      </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-list class="facilPart accodrdion-list">
-    <ng-template #recursiveList let-list>
-      <ng-container *ngFor="let facil_part of list;">
-        <ion-item (click)="nodeClick(facil_part)" [ngClass]="{'selected': facil_part.selected}">
-          <ng-container *ngIf="facil_part.children.length > 0">
-            <ion-icon item-left name="arrow-dropright" md="md-arrow-dropright" *ngIf="!facil_part.open" ></ion-icon>
-            <ion-icon item-left name="arrow-dropdown" md="md-arrow-dropdown" *ngIf="facil_part.open" ></ion-icon>
+<ion-content>
+  <ion-grid no-padding >
+
+    <div padding class="title-components">부위부재 종류 선택 <span class="text-red">*</span></div>
+
+    <ion-list radio-group [(ngModel)]="selectFacilPart.part_cd">
+      <ion-card padding box-shadow class="card">  
+        <ion-grid *ngIf="inputYList.length > 0;">
+          <ion-list class="selected-group">
+            <ion-row class="row">
+              <ng-container *ngFor="let facil_part of inputYList;">
+                <ion-col col-6 col-md-4 col-lg-3>
+                  <ion-item no-lines box-shadow class="item-sm">
+                    <ion-radio item-start [value]="facil_part.part_cd" (ionSelect)="selectFacilPartBind(facil_part)"></ion-radio>
+                    <ion-label item-title>{{facil_part.part_nm}}</ion-label>
+                  </ion-item>
+                </ion-col>
+              </ng-container>
+            </ion-row>
+          </ion-list>
+        </ion-grid>
+
+        <ng-template #recursiveList let-facil_part>
+          <ion-list-header class="ios hydrated selected-header selected-dep{{ facil_part.ranking }}">
+            <ion-icon *ngIf="(facil_part.ranking ) > 1" name="return-right"></ion-icon>
+            {{facil_part.part_nm}}
+          </ion-list-header>
+          <ng-container *ngIf="!facil_part.isLastListNode && !facil_part.isOk; else elseBlock;">
+            <ng-container *ngFor="let facil_part_child of facil_part.children;">
+              <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: facil_part_child }"></ng-container>
+            </ng-container>
           </ng-container>
-          {{facil_part.part_nm}}
-        </ion-item>
-
-        <ion-list *ngIf="facil_part.children.length > 0 && facil_part.open">
-          <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: facil_part.children }"></ng-container>
-        </ion-list>
-      </ng-container>
-    </ng-template>
-    
-    <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: facil_partList }"></ng-container>
-
-    <ion-item (click)="nodeClick()">
-      직접입력
-    </ion-item>
-  </ion-list>
-  <ion-item-divider></ion-item-divider>
-  <table class="table form-01">
-    <tbody>
-      <ng-container *ngIf="facil_gbn == 'AR';else BR">
-        <tr>
-          <th class="w160">위치구분</th>
-          <td style="width:calc(95vw - 200px);">
-            <input type="radio" name="part_class1" id="part_class1_G" value="G">
-            <label style="width:calc((95vw - 200px)/8 - 10px);" for="part_class1_G">지상</label>
-            
-            <input type="radio" name="part_class1" id="part_class1_B" value="B">
-            <label style="width:calc((95vw - 200px)/8 - 10px);" for="part_class1_B">지하</label>
-
-            <input type="radio" name="part_class1" id="part_class1_T" value="T">
-            <label style="width:calc((95vw - 200px)/8 - 10px);" for="part_class1_T">옥탑</label>
-
-            <input type="radio" name="part_class1" id="part_class1_R" value="R">
-            <label style="width:calc((95vw - 200px)/8 - 10px);" for="part_class1_R">지붕층</label>
-
-            <input type="radio" name="part_class1" id="part_class1_S" value="S">
-            <label style="width:calc((95vw - 200px)/8 - 10px);" for="part_class1_S">옥상층</label>
-
-            <input type="radio" name="part_class1" id="part_class1_U" value="U">
-            <label style="width:calc((95vw - 200px)/8 - 10px);" for="part_class1_U">외부</label>
-
-            <input type="radio" name="part_class1" id="part_class1_O" value="O">
-            <label style="width:calc((95vw - 200px)/8 - 10px);" for="part_class1_O">지반/기초</label>
-
-            <input type="radio" name="part_class1" id="part_class1_E" value="E">
-            <label style="width:calc((95vw - 200px)/8 - 10px);" for="part_class1_E">기타</label>
-          </td>
-        </tr>
-        <tr>
-          <th class="w160">층</th>
-          <td style="width:calc(95vw - 200px);">
-            <input type="text" name="part_class2" value="" maxlength="3" title="층번호" />
-          </td>
-        </tr>
-      </ng-container>
-      <ng-template #BR>
-        <ng-container *ngIf="facil_gbn == 'BR';else DA">
-            <tr>
-              <th class="w160">경간(지점)번호</th>
-              <td style="width:calc(95vw - 200px);">
-                <input type="text" name="part_class2" value="" maxlength="3" title="경간(지점)번호"> 
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2" style="width: 95vw; text-align: center;">
-                <input type="radio" name="part_class1" id="part_class1_S" value="S">
-                <label style="width:calc( 95vw/3 - 10px);" for="part_class1_S">경간(S)</label>
-                
-                <input type="radio" name="part_class1" id="part_class1_A" value="A">
-                <label style="width:calc( 95vw/3 - 10px);" for="part_class1_A">지점(A)</label>
-                
-                <input type="radio" name="part_class1" id="part_class1_P" value="P">
-                <label style="width:calc( 95vw/3 - 10px);" for="part_class1_P">지점(P)</label>
-              </td>
-            </tr>
+          <ng-template #elseBlock>
+            <ion-row class="selected-list-dep{{ facil_part.ranking }} row">
+              <ng-container *ngFor="let facil_part_child of facil_part.children;">
+                <ion-col col-6 col-md-4 col-lg-3>
+                  <ion-item no-lines box-shadow class="item-sm">
+                    <ion-radio item-start [value]="facil_part.part_cd" (ionSelect)="selectFacilPartBind(facil_part)"></ion-radio>
+                    <ion-label item-title>{{facil_part_child.part_nm}}</ion-label>
+                  </ion-item>
+                </ion-col>
+              </ng-container>
+            </ion-row>
+          </ng-template>
+        </ng-template>
+        
+        <ng-container *ngIf="inputNList.length > 0;">
+          <ng-container *ngFor="let facil_part of inputNList;let i = index;">
+            <ion-grid>
+              <ion-list class="selected-group">
+                <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: facil_part}"></ng-container>
+              </ion-list>
+            </ion-grid>
           </ng-container>
-      </ng-template>
-      <ng-template #DA>
-        <ng-container *ngIf="facil_gbn == 'DA';else ED">
-          <tr>
-            <td colspan="2" style="width: 95vw; text-align: center;">
-              <ng-container *ngIf="struct_kind != 'C';else DA_C">
-                <input type="radio" name="part_class" id="part_class_A" value="A">
-                <label style="width:calc( 95vw/6 - 10px);" for="part_class_A">댐체</label>
-              </ng-container> 
-              <ng-template #DA_C>
-                <input type="radio" name="part_class" id="part_class_B" value="B">
-                <label style="width:calc( 95vw/6 - 10px);" for="part_class_B">여수로</label>
-              </ng-template>
+        </ng-container>
 
-              <ng-container *ngIf="struct_kind != 'P';">
-                <input type="radio" name="part_class" id="part_class_C" value="C">
-                <label style="width:calc( 95vw/6 - 10px);" for="part_class_C">비월류부</label>
+      </ion-card>
+      <ion-card padding box-shadow class="card">  
+        <ion-grid >
+          <ion-list class="selected-group">
+            <ion-row class="row">
+              <ng-container>
+                <ion-col col-12>
+                  <ion-item no-lines box-shadow class="item-sm">
+                    <ion-radio item-start value="new" (ionSelect)="selectFacilPartBind('new')"></ion-radio>
+                    <ion-label item-title>직접입력</ion-label>
+                  </ion-item>
+                </ion-col>
+              </ng-container>
+            </ion-row>
+          </ion-list>
+        </ion-grid>
+      </ion-card>
+    </ion-list>
 
-                <input type="radio" name="part_class" id="part_class_D" value="D">
-                <label style="width:calc( 95vw/6 - 10px);" for="part_class_D">월류부</label>
-              </ng-container> 
+
+    <div padding class="title-components">
+      <span>부위부재 세부사항</span>
+    </div>
+
+    <ion-row>
+      <ion-col col-12>
+        <ion-card padding box-shadow class="card">
+          <ng-container *ngIf="isPartNmUser">
+            <h2 padding-top header-title text-capitalize>직접입력 <span class="text-red">*</span></h2>
+            <ion-row>
+              <ion-col col-12>
+                <ion-item no-lines box-shadow>
+                  <ion-input no-margin type="text" placeholder="직접입력" [(ngModel)]="part_nm_user"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ng-container>
+
+          <ng-container *ngIf="facil_gbn == 'AR';else BR">
+
+              <h2 padding-top header-title>위치구분 <span class="text-red">*</span></h2>
+              <ion-grid no-padding>
+                <ion-list radio-group [(ngModel)]="part_class1">
+                    <ion-row>
+                        <ion-col col-6 col-md-4 col-lg-3 *ngFor="let code of part_codeList[facil_gbn]['part_class1'].codeList; let i= index">
+                            <ion-item no-lines box-shadow>
+                                <ion-radio item-start [value]="code.value"></ion-radio>
+                                <ion-label item-title>{{code.text}}</ion-label>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </ion-list>
+              </ion-grid>
+
+              <ng-container *ngIf="part_class1 != '' && 'G,B,T'.indexOf(part_class1) >= 0">
+                <h2 padding-top header-title>층 <span class="text-red">*</span></h2>
+                <ion-row>
+                  <ion-col col-12>
+                    <ion-item no-lines box-shadow>
+                        <ion-input no-margin type="number" [placeholder]="part_codeList[facil_gbn]['part_class2'].text" [(ngModel)]="part_class2"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ng-container>
               
-              <input type="radio" name="part_class" id="part_class_E" value="E">
-              <label style="width:calc( 95vw/6 - 10px);" for="part_class_E">기타시설</label>
+            </ng-container>
+            <ng-template #BR>
+              <ng-container *ngIf="facil_gbn == 'BR';else DA">
+
+                <h2 padding-top header-title>경간(지점)번호</h2>
+                <ion-row>
+                  <ion-col col-12>
+                    <ion-item no-lines box-shadow>
+                        <ion-input no-margin type="text" [placeholder]="part_codeList[facil_gbn]['part_class2'].text" [(ngModel)]="part_class2"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+
+                <ion-grid no-padding>
+                  <ion-list radio-group [(ngModel)]="part_class1">
+                      <ion-row>
+                          <ion-col col-6 col-md-4 col-lg-3 *ngFor="let code of part_codeList[facil_gbn]['part_class1'].codeList; let i= index">
+                              <ion-item no-lines box-shadow>
+                                  <ion-radio item-start [value]="code.value"></ion-radio>
+                                  <ion-label item-title>{{code.text}}</ion-label>
+                              </ion-item>
+                          </ion-col>
+                      </ion-row>
+                  </ion-list>
+                </ion-grid>
+
+              </ng-container>
+            </ng-template>
+            <ng-template #DA>
+              <ng-container *ngIf="facil_gbn == 'DA';else ED">
+
+                <ion-grid no-padding>
+                  <ion-list radio-group [(ngModel)]="part_class">
+                      <ion-row>
+                          <ion-col col-6 col-md-4 col-lg-3 *ngFor="let code of part_codeList[facil_gbn]['part_class'].codeList; let i= index">
+                              <ion-item no-lines box-shadow>
+                                  <ion-radio item-start [value]="code.value"></ion-radio>
+                                  <ion-label item-title>{{code.text}}</ion-label>
+                              </ion-item>
+                          </ion-col>
+                      </ion-row>
+                  </ion-list>
+                </ion-grid>
+
+              </ng-container>
+            </ng-template>
+            <ng-template #ED>
+              <ng-container *ngIf="facil_gbn == 'ED';else HL">
+
+                <ion-grid no-padding>
+                  <ion-list radio-group [(ngModel)]="part_class">
+                      <ion-row>
+                          <ion-col col-6 col-md-4 col-lg-3 *ngFor="let code of part_codeList[facil_gbn]['part_class'].codeList; let i= index">
+                              <ion-item no-lines box-shadow>
+                                  <ion-radio item-start [value]="code.value"></ion-radio>
+                                  <ion-label item-title>{{code.text}}</ion-label>
+                              </ion-item>
+                          </ion-col>
+                      </ion-row>
+                  </ion-list>
+                </ion-grid>
+
+              </ng-container>
+            </ng-template>
+            <ng-template #HL>
+              <ng-container *ngIf="facil_gbn == 'HL';else RW">
+
+                <ion-grid no-padding>
+                  <ion-list radio-group [(ngModel)]="part_class">
+                    <ion-row>
+                      <ion-col col-6 col-md-4 col-lg-3 *ngFor="let code of part_codeList[facil_gbn]['part_class'].codeList; let i= index">
+                        <ion-item no-lines box-shadow>
+                            <ion-radio item-start [value]="code.value"></ion-radio>
+                            <ion-label item-title>{{code.text}}</ion-label>
+                        </ion-item>
+                      </ion-col>
+                    </ion-row>
+                  </ion-list>
+                </ion-grid>
+
+              </ng-container>
+            </ng-template>
+            <ng-template #RW>
+              <ng-container *ngIf="facil_gbn == 'RW';else SL">
+
+                <ion-row>
+                  <ion-col col-12>
+                    <ion-item no-lines box-shadow>
+                      <ion-input no-margin type="text" [placeholder]="part_codeList[facil_gbn]['part_class2'].text" [(ngModel)]="part_class2"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+
+              </ng-container>
+            </ng-template>
+            <ng-template #SL>
+              <ng-container *ngIf="facil_gbn == 'SL';else ST">
+
+                <ion-row>
+                  <ion-col col-12>
+                    <ion-item no-lines box-shadow>
+                      <ion-input no-margin type="text" [placeholder]="part_codeList[facil_gbn]['part_class2'].text" [(ngModel)]="part_class2"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+
+              </ng-container>
+            </ng-template>
+            <ng-template #ST>
+              <ng-container *ngIf="facil_gbn == 'ST';else TU">
+
+                <ion-grid no-padding>
+                  <ion-list radio-group [(ngModel)]="part_class">
+                    <ion-row>
+                      <ion-col col-6 col-md-4 col-lg-3 *ngFor="let code of part_codeList[facil_gbn]['part_class'].codeList; let i= index">
+                        <ion-item no-lines box-shadow>
+                            <ion-radio item-start [value]="code.value"></ion-radio>
+                            <ion-label item-title>{{code.text}}</ion-label>
+                        </ion-item>
+                      </ion-col>
+                    </ion-row>
+                  </ion-list>
+                </ion-grid>
+
+              </ng-container>
+            </ng-template>
+            <ng-template #TU>
+              <ng-container *ngIf="digr02.facil_no.startsWith('TU');else UC">
+
+                <ion-grid no-padding>
+                  <ion-list radio-group [(ngModel)]="part_class">
+                    <ion-row>
+                      <ion-col col-6 col-md-4 col-lg-3 *ngFor="let code of part_codeList[facil_gbn]['part_class'].codeList; let i= index">
+                        <ion-item no-lines box-shadow>
+                            <ion-radio item-start [value]="code.value"></ion-radio>
+                            <ion-label item-title>{{code.text}}</ion-label>
+                        </ion-item>
+                      </ion-col>
+                    </ion-row>
+                  </ion-list>
+                </ion-grid>
+
+              </ng-container>
+            </ng-template>
+            <ng-template #UC>
+              <ng-container *ngIf="digr02.facil_no.startsWith('UC');else UR">
+
+                <ion-grid no-padding>
+                  <ion-list radio-group [(ngModel)]="part_class">
+                    <ion-row>
+                      <ion-col col-6 col-md-4 col-lg-3 *ngFor="let code of part_codeList[facil_gbn]['part_class'].codeList; let i= index">
+                        <ion-item no-lines box-shadow>
+                            <ion-radio item-start [value]="code.value"></ion-radio>
+                            <ion-label item-title>{{code.text}}</ion-label>
+                        </ion-item>
+                      </ion-col>
+                    </ion-row>
+                  </ion-list>
+                </ion-grid>
+
+              </ng-container>
+            </ng-template>
+            <ng-template #UR>
+              <ng-container *ngIf="digr02.facil_no.startsWith('UR');else WS">
+
+                <ion-grid no-padding>
+                  <ion-list radio-group [(ngModel)]="part_class">
+                    <ion-row>
+                      <ion-col col-6 col-md-4 col-lg-3 *ngFor="let code of part_codeList[facil_gbn]['part_class'].codeList; let i= index">
+                        <ion-item no-lines box-shadow>
+                            <ion-radio item-start [value]="code.value"></ion-radio>
+                            <ion-label item-title>{{code.text}}</ion-label>
+                        </ion-item>
+                      </ion-col>
+                    </ion-row>
+                  </ion-list>
+                </ion-grid>
+
+              </ng-container>
+            </ng-template>
+            <ng-template #WS>
+              <ng-container *ngIf="facil_gbn == 'WS';">
+
+                <ion-grid no-padding>
+                  <ion-list radio-group [(ngModel)]="part_class">
+                    <ion-row>
+                      <ion-col col-6 col-md-4 col-lg-3 *ngFor="let code of part_codeList[facil_gbn]['part_class'].codeList; let i= index">
+                        <ion-item no-lines box-shadow>
+                            <ion-radio item-start [value]="code.value"></ion-radio>
+                            <ion-label item-title>{{code.text}}</ion-label>
+                        </ion-item>
+                      </ion-col>
+                    </ion-row>
+                  </ion-list>
+                </ion-grid>
+
+              </ng-container>
+            </ng-template>
+
+            <h2 padding-top header-title text-capitalize>세부위치</h2>
+            <ion-row>
+                <ion-col col-12>
+                    <ion-item no-lines box-shadow>
+                        <ion-input no-margin type="text" placeholder="세부위치" [(ngModel)]="part_detail"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
               
-              <input type="radio" name="part_class" id="part_class_M" value="M">
-              <label style="width:calc( 95vw/6 - 10px);" for="part_class_M">기전설비</label>
-            </td>
-          </tr>
-        </ng-container>
-      </ng-template>
-      <ng-template #ED>
-        <ng-container *ngIf="facil_gbn == 'ED';else HL">
-          <tr>
-            <td colspan="2" style="width: 95vw; text-align: center;">
-              <input type="radio" name="part_class" id="part_class_A" value="A">
-              <label style="width:calc( 95vw/5 - 10px);" for="part_class_A">방조제</label>
-              
-              <input type="radio" name="part_class" id="part_class_B" value="B">
-              <label style="width:calc( 95vw/5 - 10px);" for="part_class_B">배수(갑)문</label>
-              
-              <input type="radio" name="part_class" id="part_class_C" value="C">
-              <label style="width:calc( 95vw/5 - 10px);" for="part_class_C">접속교량</label>
-              
-              <input type="radio" name="part_class" id="part_class_M" value="M">
-              <label style="width:calc( 95vw/5 - 10px);" for="part_class_M">기전설비</label>
-              
-              <input type="radio" name="part_class" id="part_class_Z" value="B">
-              <label style="width:calc( 95vw/5 - 10px);" for="part_class_Z">부대시설</label>
-            </td>
-          </tr>
-        </ng-container>
-      </ng-template>
-      <ng-template #HL>
-        <ng-container *ngIf="facil_gbn == 'HL';else RW">
-          <tr>
-            <td colspan="2" style="width: 95vw; text-align: center;">
-              <input type="radio" name="part_class" id="part_class_K" value="K">
-              <label style="width:calc( 95vw/3 - 10px);" for="part_class_K">갑거시설</label>
-              
-              <input type="radio" name="part_class" id="part_class_Z" value="Z">
-              <label style="width:calc( 95vw/3 - 10px);" for="part_class_Z">기타시설</label>
-              
-              <input type="radio" name="part_class" id="part_class_M" value="M">
-              <label style="width:calc( 95vw/3 - 10px);" for="part_class_M">기전설비</label>
-            </td>
-          </tr>
-        </ng-container>
-      </ng-template>
-      <ng-template #RW>
-        <ng-container *ngIf="facil_gbn == 'RW';else SL">
-          <tr>
-            <td colspan="2" style="width: 95vw; text-align: center;">
-                Span.<input type="hidden" name="part_class1" value="S">
-                <input type="text" name="part_class2" value="" maxlength="3" title="Span No"> 
-            </td>
-          </tr>
-        </ng-container>
-      </ng-template>
-      <ng-template #SL>
-        <ng-container *ngIf="facil_gbn == 'SL';else ST">
-          <tr>
-            <td colspan="2" style="width: 95vw; text-align: center;">
-                Span.<input type="hidden" name="part_class1" value="S">
-                <input type="text" name="part_class2" value="" maxlength="3" title="Span No"> 
-            </td>
-          </tr> 
-        </ng-container>
-      </ng-template>
-      <ng-template #ST>
-        <ng-container *ngIf="facil_gbn == 'ST';else TU">
-          <tr>
-            <td colspan="2" style="width: 95vw; text-align: center;">
-              <input type="radio" name="part_class" id="part_class_A" value="A">
-              <label style="width:calc( 95vw/3 - 10px);" for="part_class_A">토목구조물</label>
-              
-              <input type="radio" name="part_class" id="part_class_B" value="B">
-              <label style="width:calc( 95vw/3 - 10px);" for="part_class_B">건축구조물</label>
-              
-              <input type="radio" name="part_class" id="part_class_Z" value="Z">
-              <label style="width:calc( 95vw/3 - 10px);" for="part_class_Z">옹벽</label>
-            </td>
-          </tr>
-        </ng-container>
-      </ng-template>
-      <ng-template #TU>
-        <ng-container *ngIf="digr02.facil_no.startsWith('TU');else UC">
-          <tr>
-            <td colspan="2" style="width: 95vw; text-align: center;">
-              <input type="radio" name="part_class" id="part_class_L" value="L">
-              <label style="width:calc( 95vw/3 - 10px);" for="part_class_L">라이닝</label>
-              
-              <input type="radio" name="part_class" id="part_class_X" value="X">
-              <label style="width:calc( 95vw/3 - 10px);" for="part_class_X">터널주변</label>
-              
-              <input type="radio" name="part_class" id="part_class_Z" value="Z">
-              <label style="width:calc( 95vw/3 - 10px);" for="part_class_Z">부대시설</label>
-            </td>
-          </tr>
-        </ng-container>
-      </ng-template>
-      <ng-template #UC>
-        <ng-container *ngIf="digr02.facil_no.startsWith('UC');else UR">
-          <tr>
-            <td colspan="2" style="width: 95vw; text-align: center;">
-              <input type="radio" name="part_class" id="part_class_L" value="L">
-              <label style="width:calc( 95vw/3 - 10px);" for="part_class_L">공동구</label>
-              
-              <input type="radio" name="part_class" id="part_class_X" value="X">
-              <label style="width:calc( 95vw/3 - 10px);" for="part_class_X">공동구주변</label>
-              
-              <input type="radio" name="part_class" id="part_class_Z" value="Z">
-              <label style="width:calc( 95vw/3 - 10px);" for="part_class_Z">부대시설</label>
-            </td>
-          </tr>
-        </ng-container>
-      </ng-template>
-      <ng-template #UR>
-        <ng-container *ngIf="digr02.facil_no.startsWith('UR');else WS">
-          <tr>
-            <td colspan="2" style="width: 95vw; text-align: center;">
-              <input type="radio" name="part_class" id="part_class_L" value="L">
-              <label style="width:calc( 95vw/3 - 10px);" for="part_class_L">기본시설</label>
-              
-              <input type="radio" name="part_class" id="part_class_Z" value="Z">
-              <label style="width:calc( 95vw/3 - 10px);" for="part_class_Z">부대시설</label>
-            </td>
-          </tr>
-        </ng-container>
-      </ng-template>
-      <ng-template #WS>
-        <ng-container *ngIf="facil_gbn == 'WS';">
-          <tr>
-            <td colspan="2" style="width: 95vw; text-align: center;">
-              <input type="radio" name="part_class" id="part_class_A" value="A">
-              <label style="width:calc( 95vw/5 - 10px);" for="part_class_A">관로시설</label>
-              
-              <input type="radio" name="part_class" id="part_class_B" value="B">
-              <label style="width:calc( 95vw/5 - 10px);" for="part_class_B">토목구조물</label>
-              
-              <input type="radio" name="part_class" id="part_class_C" value="C">
-              <label style="width:calc( 95vw/5 - 10px);" for="part_class_C">건축구조물</label>
-              
-              <input type="radio" name="part_class" id="part_class_D" value="D">
-              <label style="width:calc( 95vw/5 - 10px);" for="part_class_D">수원지시설(댐)</label>
-              
-              <input type="radio" name="part_class" id="part_class_M" value="M">
-              <label style="width:calc( 95vw/5 - 10px);" for="part_class_M">기전설비</label>
-            </td>
-          </tr>
-        </ng-container>
-      </ng-template>
-      <tr>
-        <th class="w160">세부위치</th>
-        <td style="width:calc(95vw - 200px);">
-          <input type="text" name="part_detail" [(ngModel)]="part_detail" value="" maxlength="30"> 
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <!-- <ion-list>
-    <ion-item>
-      <ion-label color="primary">위치구분</ion-label>
-      <ion-select>
-        <ion-option>지상</ion-option>
-        <ion-option>지하</ion-option>
-        <ion-option>옥탑</ion-option>
-        <ion-option>지붕층</ion-option>
-        <ion-option>옥상층</ion-option>
-        <ion-option>외부</ion-option>
-        <ion-option>지반/기초</ion-option>
-        <ion-option>기타</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary">층</ion-label>
-      <ion-input type="text" placeholder="내용을 입력하세요."></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="primary">세부위치</ion-label>
-      <ion-input type="text" placeholder="내용을 입력하세요."></ion-input>
-    </ion-item>
-  </ion-list> -->
-  <ion-buttons end>
-    <button ion-button icon-start (click)="goSave()">
-      확인
-    </button>
-  </ion-buttons>
+          </ion-card>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
 </ion-content>

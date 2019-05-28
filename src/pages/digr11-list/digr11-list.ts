@@ -19,7 +19,7 @@ export class Digr11ListPage {
   digr01Group : DIGR01_GROUPDTO;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public utilService:UtilService,public modalCtrl: ModalController) {
-    this.digr01Group = navParams.data;
+    this.digr01Group = navParams.get('digr01Group');
   }
 
   goWrite(index:number){

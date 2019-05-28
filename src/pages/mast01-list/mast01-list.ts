@@ -1,10 +1,11 @@
 import { BASTB_MAST01DTO } from './../../model/BASTB_MAST01DTO';
 import { MANTB_DIGR01DTO } from './../../model/MANTB_DIGR01DTO';
-import { Component } from '@angular/core';
+import { Component, ApplicationRef } from '@angular/core';
 import { NavController, NavParams, ViewController, IonicPage } from 'ionic-angular';
 import { GlobalVars } from '../../services/GlobalVars';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { UtilService } from '../../services/UtilService';
+import { LoadingService } from '../../services/loading-service';
 
 /**
  * Generated class for the Mast01List page.
@@ -23,19 +24,25 @@ export class Mast01ListPage {
   page : number = 0;
   digr01Group : DIGR01_GROUPDTO;
   isPaging : boolean = true;
+  searchTerm : string;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public globalVars:GlobalVars
-    , public utilService : UtilService,public viewCtrl: ViewController ) {
+    , public utilService : UtilService,public viewCtrl: ViewController ,private loadingService:LoadingService
+    , private applicationRef : ApplicationRef
+    ) {
       this.digr01Group = navParams.data;
       this.bastbMast01List = new Array<any>();
       this.goSearch(null);
   }
 
   goSearch($event){
+    this.loadingService.show();
     let selectedIds = this.createSelectedIds();
     let that = this;
     let event = $event;
-    this.globalVars.db.bastbMast01.list001({"start":this.page,"pagCount":this.numberOfItemsToDisplay,"selectedIds":selectedIds}, (res) => {
+    let facil_nm = this.searchTerm ? this.searchTerm : '';
+    this.globalVars.db.bastbMast01.list001({"start":this.page,"pagCount":this.numberOfItemsToDisplay,
+    "selectedIds":selectedIds, facil_nm:facil_nm}, (res) => {
       if(res.length > 0) {
         that.bastbMast01List.push(...res);
         that.page = that.page + 1;
@@ -46,11 +53,18 @@ export class Mast01ListPage {
       if(event) {
         event.complete();
       }
+      that.loadingService.hide();
     });
   }
 
   selectItem(bastbMast01: any){
     bastbMast01.selected = !bastbMast01.selected;
+  }
+
+  findMast01List(){
+    this.bastbMast01List = new Array<any>();
+    this.page = 0;
+    this.goSearch(null);
   }
 
   createSelectedIds() : string {

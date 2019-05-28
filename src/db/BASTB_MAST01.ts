@@ -155,7 +155,11 @@ export class BASTB_MAST01 implements COMMON_DAO {
 			
 			if(params.selectedIds != ""){
 				sqlMain += " and facil_no not in ("+this.utilService.nvl(params.selectedIds,'')+") ";
-			}		
+			}
+
+			if(params.facil_nm != ""){
+				sqlMain += " and facil_nm like '%"+this.utilService.nvl(params.facil_nm,'')+"%' ";
+			}
 
 			if(params.page != "" && params.pagCount != "") {
 				let startCount = params.start * params.pagCount;

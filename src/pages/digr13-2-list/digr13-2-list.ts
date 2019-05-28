@@ -25,22 +25,53 @@ export class Digr13_2ListPage {
   digr13Array : Array<MANTB_DIGR13DTO>;
   dign1_checklist : Array<any>;
   dign1_checkObject : Object;
-  codeMap : { depth,array,data,code_prefix } = {
+  codeMap : { depth,array,data,code_prefix,indataCount,nodataCount } = {
     depth : "depth",
     array : "array",
     data : "data",
     code_prefix : "check_cd",
+    indataCount : "indataCount",
+    nodataCount : "nodataCount",
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.digr01Group = navParams.data.digr01Group;
-    this.index = navParams.data.index;
-    this.digr02 = navParams.data.digr02;
-    this.selectMast01 = navParams.data.selectMast01;
+    this.digr01Group = navParams.get('digr01Group');
+    this.index = navParams.get('index');
+    this.digr02 = navParams.get('digr02');
+    this.selectMast01 = navParams.get('selectMast01');
 
-    this.dign1_checkObject = navParams.data.dign1_checkObject;
-    this.dign1_checklist = navParams.data.dign1_checklist;
-    this.digr13Array = navParams.data.digr13Array;
+    this.dign1_checkObject = navParams.get('dign1_checkObject');
+    this.dign1_checklist = navParams.get('dign1_checklist');
+    this.digr13Array = navParams.get('digr13Array');
+  }
+
+  ionViewDidEnter(){
+    this.countDigr13();
+  }
+
+  countDigr13() {
+    let dign1_checkObject = this.dign1_checkObject;
+    let digr13Array = this.digr13Array;
+    let that = this;
+    
+    dign1_checkObject[this.codeMap.array].forEach(code2 => {
+      let code2Group = dign1_checkObject[code2];
+      let code2Array = code2Group[that.codeMap.array];
+      let code2Data = code2Group[that.codeMap.data];
+      let indataCount = 0;
+      let nodataCount = code2Data.length;
+
+      code2Data.forEach(data2 => {
+        let digr13Data = digr13Array[data2.index];
+        if(digr13Data.check_result != '') {
+          indataCount += 1;
+          nodataCount -= 1;
+        }
+      });
+
+      code2Group[that.codeMap.indataCount] = indataCount;
+      code2Group[that.codeMap.nodataCount] = nodataCount;
+    });
   }
   
   goNext(dign1_checkObject){

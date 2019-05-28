@@ -19,7 +19,7 @@ import { MenuService } from '../../services/menu-service';
   templateUrl: 'digr-group.html',
 })
 export class DigrGroupPage {
-  public digrGroupList : [{}];
+  public digrGroupList : Array<DIGR01_GROUPDTO>;
   public numberOfItemsToDisplay : number = 10;
   digr01GroupList : Array<DIGR01_GROUPDTO>;
   menuObject : Object;
@@ -29,27 +29,38 @@ export class DigrGroupPage {
     public globalVars: GlobalVars, public utilService: UtilService, private tempDataManage : TempDataManage,
     private transmissionService : TransmissionService, private menuService : MenuService) {
       this.digr01GroupList = tempDataManage.digr01GroupList;
+      this.digrGroupList = this.digr01GroupList;
       this.menuObject = menuService.getDigrGroupMenu();
-      //this.goSearch();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Digr');
-  }
+  findDigr01Group(){
+    let searchKey =this.searchTerm;
+    this.digrGroupList = this.digr01GroupList.filter((data,index) => {
+      let digr01 = data.digr01;
+      let name : string;
+      if(digr01.regular_gbn_nm) {
+        name = digr01.regular_gbn_nm + ' ' + digr01.dign_gbn_nm;
+      } else {
+        name = '정기안전점검 리스트 '+(index+1);
+      }
 
-  goSearch(){
-    this.globalVars.db.mantbDigr01.gorup_list001({pagCount:this.numberOfItemsToDisplay}, (res) => {
-      this.digrGroupList = res;
+      return name.includes(searchKey);
     });
   }
 
-  goView(item){
-    this.navCtrl.push("DigrTabWritePage", item);
+  goView(item : DIGR01_GROUPDTO){
+    let digr01Group = item;
+    if(item.transFlag) {
+      digr01Group = JSON.parse(JSON.stringify(item));
+    }
+    // (item.transFlag) ? Object.assign(digr01Group,item) : digr01Group = item;
+
+    this.navCtrl.push("DigrTabWritePage", {digr01Group:digr01Group,isCreate: false});
   }
 
   goWrite(){
-    let digr01Group : DIGR01_GROUPDTO = this.tempDataManage.createDigr01Group();
-    this.navCtrl.push("DigrTabWritePage",digr01Group);
+    let digr01Group : DIGR01_GROUPDTO = new DIGR01_GROUPDTO();
+    this.navCtrl.push("DigrTabWritePage",{digr01Group:digr01Group,isCreate: true});
   }
 
   removeItem(digrGroup,i){

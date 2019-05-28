@@ -24,7 +24,7 @@
 
           <div span-medium *ngIf="dign1_code.check_nm4">{{dign1_code.check_nm4}}</div>
           
-          <h2 padding-top header-title text-capitalize>점검결과</h2>
+          <h2 padding-top header-title text-capitalize>점검결과 <span class="text-red">*</span></h2>
           <ion-list radio-group [(ngModel)]="digr13Array[dign1_code.index].check_result">
             <ion-row>
               <ion-col col-4 *ngFor="let check_result of check_resultList;">

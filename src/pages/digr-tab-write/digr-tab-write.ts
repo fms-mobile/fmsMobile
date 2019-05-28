@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams, IonicPage, Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, IonicPage, Platform, AlertController, Navbar } from 'ionic-angular';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { TempDataManage } from '../../services/TempDataManage';
 import { UtilService } from '../../services/UtilService';
 import { TransmissionService } from '../../services/transmisson-service';
+import { Network } from '@ionic-native/network';
+import { GlobalVars } from '../../services/GlobalVars';
 
 /**
  * Generated class for the DigrTabWrite page.
@@ -17,20 +19,45 @@ import { TransmissionService } from '../../services/transmisson-service';
   templateUrl: 'digr-tab-write.html',
 })
 export class DigrTabWritePage {
+  @ViewChild(Navbar) navBar: Navbar;
   digr01Group : DIGR01_GROUPDTO;
+  isCreate : boolean;
+  connected;
+  disconnected;
+  isOnline : boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public tempDataManage: TempDataManage
-    , public utilService: UtilService, plaform :Platform,public transmissionService:TransmissionService ) {
-    this.digr01Group = navParams.data;
+    , public utilService: UtilService, plaform :Platform,public transmissionService:TransmissionService
+    , private alertCtrl : AlertController, private network : Network, private globalVars : GlobalVars,
+     ) {
+      this.isOnline = (network.type == 'unknown' || network.type == 'none') ? false : true;
+      this.digr01Group = navParams.get('digr01Group');
+      this.isCreate = navParams.get('isCreate');
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DigrTabWrite');
-  }
-
-  async ionViewCanLeave() {
+  /* async ionViewCanLeave() {
     const shouldLeave = await this.confirmLeave();
     return shouldLeave;
+  } */
+
+  ionViewDidEnter() {
+    this.connected = this.network.onConnect().subscribe(data => {
+      this.checkNetwork(data.type);
+    }, error => console.error(error));
+   
+    this.disconnected = this.network.onDisconnect().subscribe(data => {
+      this.checkNetwork(data.type);
+    }, error => console.error(error));
+  }
+
+  ionViewWillLeave(){
+    this.connected.unsubscribe();
+    this.disconnected.unsubscribe();
+  }
+
+  checkNetwork(connectionState:string){
+    if(connectionState.indexOf('online') > -1) this.isOnline = true;
+    if(connectionState.indexOf('offline') > -1) this.isOnline = false;
   }
 
   confirmLeave(){
@@ -53,11 +80,56 @@ export class DigrTabWritePage {
   }
 
   goSave(){
-    this.tempDataManage.localSave();
+    let validate = this.digr01Group.validateServerObject();
+
+    if(!validate["passFlag"]){
+        let alertTile = "검증 에러";
+        let alertMessage = validate["msg"];
+        let alert = this.alertCtrl.create({
+            title: alertTile ,
+            message: alertMessage,
+            cssClass : "alert-error",
+            buttons: [
+            {
+                text: '확인',
+                handler: () => {
+                }
+            }
+            ]
+        });
+        alert.present();
+    } else {
+      if(this.isCreate) {
+        this.tempDataManage.digr01GroupList.push(this.digr01Group);
+      }
+      this.tempDataManage.localSave();
+    }
   }
 
+
   goSend(){
-    this.tempDataManage.localSave();
-    this.transmissionService.saveData(this.digr01Group);
+    if(this.isOnline) {
+      this.tempDataManage.localSave();
+      this.transmissionService.saveData(this.digr01Group);
+    } else{
+      const alertTile = "전송 에러";
+      const alertMessage = '네트워크 연결여부를 확인해주세요.';
+      let alert = this.alertCtrl.create({
+          title: alertTile ,
+          message: alertMessage,
+          cssClass : "alert-error",
+          buttons: [
+          {
+              text: '확인',
+              handler: () => {
+              }
+          }
+          ]
+      });
+      alert.present();
+    }
   }
+
+  
+
 }

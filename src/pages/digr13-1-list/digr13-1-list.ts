@@ -6,6 +6,7 @@ import { BASTB_MAST01DTO } from '../../model/BASTB_MAST01DTO';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { UtilService } from '../../services/UtilService';
 import { GlobalVars } from '../../services/GlobalVars';
+import { LoadingService } from '../../services/loading-service';
 
 /**
  * Generated class for the Digr13_1ListPage page.
@@ -27,24 +28,27 @@ export class Digr13_1ListPage {
   digr13Array : Array<MANTB_DIGR13DTO>;
   dign1_checklist : Array<any>;
   dign1_checkObject : Object;
-  codeMap : { depth,array,data,code_prefix } = {
+  codeMap : { depth,array,data,code_prefix,indataCount,nodataCount } = {
     depth : "depth",
     array : "array",
     data : "data",
     code_prefix : "check_cd",
+    indataCount : "indataCount",
+    nodataCount : "nodataCount",
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,public globalVars: GlobalVars
-    ,public utilService : UtilService,public toastCtrl: ToastController) {
-    this.digr01Group = navParams.data.digr01Group;
-    this.index = navParams.data.index;
+    ,public utilService : UtilService,public toastCtrl: ToastController, private loadingService:LoadingService) {
+    this.digr01Group = navParams.get('digr01Group');
+    this.index = navParams.get('index');
     this.digr02 = this.digr01Group.digr02List[this.index];
     this.selectMast01 = this.digr01Group.selectedMast01List[this.index];
+    loadingService.show();
     this.searchList02();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Digr13_1ListPage');
+  ionViewDidEnter(){
+    this.countDigr13();
   }
 
   searchList02(){
@@ -79,6 +83,34 @@ export class Digr13_1ListPage {
       } else {
         that.digr13Array = tempArray;
       }
+    }).then(()=> {
+      that.countDigr13();
+      that.loadingService.hide();
+    });
+  }
+
+  countDigr13(){
+    let digr13Array = this.digr13Array;
+    let dign1_checkObject = this.dign1_checkObject;
+    let that = this;
+
+    dign1_checkObject[this.codeMap.array].forEach(code1 => {
+      let code1Group = dign1_checkObject[code1];
+      let code1Array = code1Group[that.codeMap.array];
+      let code1Data = code1Group[that.codeMap.data];
+      let indataCount = 0;
+      let nodataCount = code1Data.length;
+
+      code1Data.forEach(data1 => {
+        let digr13Data = digr13Array[data1.index];
+        if(digr13Data.check_result != '') {
+          indataCount += 1;
+          nodataCount -= 1;
+        }
+      });
+
+      code1Group[that.codeMap.indataCount] = indataCount;
+      code1Group[that.codeMap.nodataCount] = nodataCount;
     });
   }
 

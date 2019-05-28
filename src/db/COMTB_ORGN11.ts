@@ -38,27 +38,27 @@ export class COMTB_ORGN11 implements COMMON_DAO {
 			+ " , retire_ymd "
 			+ " , retire_yn "
     		+ " ) values ( "
-			+ " '"+this.utilService.nvl(params.group_cd,'')+"' "
-			+ " , '"+this.utilService.nvl(params.member_seq,'')+"' "
-			+ " , '"+this.utilService.nvl(params.member_nm,'')+"' "
-			+ " , '"+this.utilService.nvl(params.birth_ymd,'')+"' "
-			+ " , '"+this.utilService.nvl(params.sex,'')+"' "
-			+ " , '"+this.utilService.nvl(params.certi_field,'')+"' "
-			+ " , '"+this.utilService.nvl(params.tech_items,'')+"' "
-			+ " , '"+this.utilService.nvl(params.tech_items_etc,'')+"' "
-			+ " , '"+this.utilService.nvl(params.tech_field,'')+"' "
-			+ " , '"+this.utilService.nvl(params.school_career_cd,'')+"' "
-			+ " , '"+this.utilService.nvl(params.career_year,'')+"' "
-			+ " , '"+this.utilService.nvl(params.tech_grade,'')+"' "
-			+ " , '"+this.utilService.nvl(params.license_cd,'')+"' "
-			+ " , '"+this.utilService.nvl(params.license_no,'')+"' "
-			+ " , '"+this.utilService.nvl(params.certi_aqu_ymd,'')+"' "
-			+ " , '"+this.utilService.nvl(params.certi_mod_ymd,'')+"' "
-			+ " , '"+this.utilService.nvl(params.certi_ymd_from,'')+"' "
-			+ " , '"+this.utilService.nvl(params.certi_ymd_to,'')+"' "
-			+ " , '"+this.utilService.nvl(params.entry_ymd,'')+"' "
-			+ " , '"+this.utilService.nvl(params.retire_ymd,'')+"' "
-			+ " , '"+this.utilService.nvl(params.retire_yn,'')+"' "
+			+ " "+this.utilService.nvl2(params.group_cd)+" "
+			+ " , "+this.utilService.nvl2(params.member_seq)+" "
+			+ " , "+this.utilService.nvl2(params.member_nm)+" "
+			+ " , "+this.utilService.nvl2(params.birth_ymd)+" "
+			+ " , "+this.utilService.nvl2(params.sex)+" "
+			+ " , "+this.utilService.nvl2(params.certi_field)+" "
+			+ " , "+this.utilService.nvl2(params.tech_items)+" "
+			+ " , "+this.utilService.nvl2(params.tech_items_etc)+" "
+			+ " , "+this.utilService.nvl2(params.tech_field)+" "
+			+ " , "+this.utilService.nvl2(params.school_career_cd)+" "
+			+ " , "+this.utilService.nvl2(params.career_year)+" "
+			+ " , "+this.utilService.nvl2(params.tech_grade)+" "
+			+ " , "+this.utilService.nvl2(params.license_cd)+" "
+			+ " , "+this.utilService.nvl2(params.license_no)+" "
+			+ " , "+this.utilService.nvl2(params.certi_aqu_ymd)+" "
+			+ " , "+this.utilService.nvl2(params.certi_mod_ymd)+" "
+			+ " , "+this.utilService.nvl2(params.certi_ymd_from)+" "
+			+ " , "+this.utilService.nvl2(params.certi_ymd_to)+" "
+			+ " , "+this.utilService.nvl2(params.entry_ymd)+" "
+			+ " , "+this.utilService.nvl2(params.retire_ymd)+" "
+			+ " , "+this.utilService.nvl2(params.retire_yn)+" "
     		+" ) ";
             //console.log(sqlMain);
             txn.executeSql(sqlMain, [],
@@ -73,8 +73,8 @@ export class COMTB_ORGN11 implements COMMON_DAO {
         this.wsdb.transaction((txn) =>{
             var sqlMain = "delete from COMTB_ORGN11  "
             			+ " where 1=1 "
-				+ " and group_cd = '"+this.utilService.nvl(params.group_cd,'')+"' "
-				+ " and member_seq = '"+this.utilService.nvl(params.member_seq,'')+"' "
+				+ " and group_cd = "+this.utilService.nvl2(params.group_cd)+" "
+				+ " and member_seq = "+this.utilService.nvl2(params.member_seq)+" "
 
             //console.log(sqlMain);
             txn.executeSql(sqlMain, [],
@@ -144,18 +144,22 @@ export class COMTB_ORGN11 implements COMMON_DAO {
     public list002(params, okFunction) {
         this.wsdb.transaction((txn) =>{
             var sqlMain = ""
-						+ " select t1.group_cd as corp_cd, t2.group_nm as corp_nm,  "
+						+ " select t1.group_cd as corp_cd, t2.group_nm as corp_nm, t1.member_seq,  "
 						+ " 	   t1.member_nm, t1.birth_ymd, t1.sex, t1.tech_grade, "
 						+ " 	   t1.member_nm||'|'||t1.birth_ymd||'|'||t1.sex as reside_key, "
 						+ " 	   "+ this.utilService.codeConvertQuery({code_group:"tech_grade",code1:"t1.tech_grade"}) +" as tech_grade_nm, "
 						+ " 	   "+ this.utilService.codeConvertQuery({code_group:"certi_field",code1:"t1.certi_field"}) +" as certi_field_nm "
 						+ "   from COMTB_ORGN11 t1  "
 						+ " 	   inner join COMTB_ORGN01 t2 on t2.group_cd = t1.group_cd "
-						+ "  where t1.group_cd = '"+this.utilService.nvl(params.group_cd,'')+"' "
+						+ "  where t1.group_cd = "+this.utilService.nvl2(params.group_cd)+" "
 						+ "    and t1.member_nm like '%' || '"+this.utilService.nvl(params.member_nm,'')+"' || '%' "
-						+ "    and ('"+this.utilService.nvl(params.retire_yn,'')+"' = 'Y' or ifnull(t1.retire_yn,'N') = 'N') "
-						+ " order by t1.group_cd, t1.member_nm "
+						+ "    and ("+this.utilService.nvl2(params.retire_yn)+" = 'Y' or ifnull(t1.retire_yn,'N') = 'N') "
 					;
+
+					if(params.selectedIds != ""){
+						sqlMain += " and t1.member_seq not in ("+this.utilService.nvl(params.selectedIds,'')+") ";
+					}
+					sqlMain += " order by t1.group_cd, t1.member_nm ";
 
 					if(params.page != "" && params.pagCount != "") {
 						let startCount = params.start * params.pagCount;

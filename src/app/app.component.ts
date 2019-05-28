@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController, Nav, ModalController, ToastController } from 'ionic-angular';
+import { Platform, MenuController, Nav, ModalController, ToastController, App } from 'ionic-angular';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -16,6 +16,9 @@ import { AuthGuardService } from '../services/AuthGuardService';
 import { TempDataManage } from '../services/TempDataManage';
 import { TransmissionService } from '../services/transmisson-service';
 import { LoadingService } from '../services/loading-service';
+import { map, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { UrlHelperService } from '../services/url-helper-service';
 
 @Component({
     templateUrl: 'app.html',
@@ -31,6 +34,7 @@ export class MyApp {
     leftMenuTitle: string;
 
     constructor(
+        app : App,
         public platform: Platform,
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
@@ -46,6 +50,7 @@ export class MyApp {
         public transmissionService: TransmissionService,
         private toastCntrl :ToastController,
         private loadingService: LoadingService,
+        public urlHelperService: UrlHelperService,
         ) {
         this.initializeApp();
         this.pages = menuService.getAllThemes();
@@ -55,6 +60,15 @@ export class MyApp {
             if (AppSettings.SHOW_START_WIZARD) {
               this.presentProfileModal();
             }
+        });
+        app.viewWillLeave.pipe(
+          map(res=>{
+            if(menuService.getAutoSavePageList().map(data=>data.page).indexOf(res.instance.constructor.name) > -1) {
+              tempDataManage.autoSave();
+            }
+          }),
+          catchError(err => of([]))
+        ).subscribe(()=>{
         });
     }
 

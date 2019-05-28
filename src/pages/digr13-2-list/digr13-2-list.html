@@ -19,8 +19,8 @@
           <ion-item class="ion-line-item" *ngFor="let code2 of dign1_checkObject[codeMap.array]; let i = index;"
             (click)="goNext(dign1_checkObject[code2])">
             <h1 item-title class="item-title-big">{{dign1_checkObject[code2].data[i].check_nm2}}</h1>
-            <ion-badge margin-right color="primary">작성완료 11 건</ion-badge>
-            <ion-badge margin-right color="danger">미작성 11 건</ion-badge>
+            <ion-badge margin-right color="primary">작성완료 {{dign1_checkObject[code2][codeMap.indataCount]}} 건</ion-badge>
+            <ion-badge margin-right color="danger">미작성 {{dign1_checkObject[code2][codeMap.nodataCount]}} 건</ion-badge>
             <ion-icon item-end>
               <i class="icon icon-arrow-right-bold-circle"></i>
             </ion-icon>

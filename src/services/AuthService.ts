@@ -3,10 +3,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Storage } from '@ionic/storage';
-import { map, catchError , retry} from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
+import { map, catchError , retry, first } from 'rxjs/operators';
+import 'rxjs/add/operator/timeout';
+import 'rxjs/add/operator/catch';
+import { BehaviorSubject, empty } from 'rxjs';
 import { of } from 'rxjs/observable/of';
 import { GlobalVars } from './GlobalVars';
+import { LoadingService } from './loading-service';
  
 const TOKEN_KEY = 'access_token';
  
@@ -18,9 +21,12 @@ export class AuthService {
   url : string ;
   user = null;
   authenticationState = new BehaviorSubject(false);
+  tokenKey : string = '';
  
   constructor(private http: HttpClient, private helper: JwtHelperService, private storage: Storage,
-    private plt: Platform, private alertController: AlertController, private globalVars :GlobalVars) {
+    private plt: Platform, private alertController: AlertController, private globalVars :GlobalVars,
+    private loadingService : LoadingService,
+    ) {
     // this.url = globalVars.serverUrl;
 
     this.url = globalVars.webUrl+"mobile";
@@ -38,8 +44,10 @@ export class AuthService {
         if (!isExpired) {
           this.user = decoded;
           this.authenticationState.next(true);
+          this.tokenKey = token;
         } else {
           this.storage.remove(TOKEN_KEY);
+          this.tokenKey = '';
         }
       }
     });
@@ -58,19 +66,34 @@ export class AuthService {
     let headers = new HttpHeaders();
     headers = this.setHeader(headers);
 
-    return this.http.post(`${this.url}/api/login.do`, credentials,{ headers }).pipe(
-      retry(3),
+    this.loadingService.show();
+    return this.http.post(`${this.url}/api/login.do`, credentials,{ headers })
+    .timeout(3000)
+    .pipe(
+      first(),
       map(res => {
         if (!res) {
-          this.showAlert('서버의 응답이 없습니다.');            
+          this.showAlert('서버의 응답이 없습니다.');
         } else {
           this.storage.set(TOKEN_KEY, res['token']);
           this.user = this.helper.decodeToken(res['token']);
           this.authenticationState.next(true);
         }
+        this.loadingService.hide();            
         return res;
       }),
-      catchError(err => of([]))
+      catchError(err => {
+        let status = err.status;
+        let msg :string;
+        if (status === 403) {
+          msg = err.error.resultMsg
+        } else {
+          msg = '서버의 응답이 없습니다.';
+        }
+        this.showAlert(msg);
+        this.loadingService.hide();
+        return empty();
+      })
     );
   }
  
@@ -85,7 +108,8 @@ export class AuthService {
   }
  
   getSpecialData() {
-    return this.http.get(`${this.url}/api/special`).pipe(
+    return this.http.get(`${this.url}/api/special`)
+    .pipe(
       catchError(e => {
         let status = e.status;
         if (status === 401) {
@@ -105,7 +129,7 @@ export class AuthService {
     let alert = this.alertController.create({
       message: msg,
       title: 'Error',
-      buttons: ['OK']
+      buttons: ['확인']
     });
     alert.present();
   }

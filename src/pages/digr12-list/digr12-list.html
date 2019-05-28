@@ -7,49 +7,51 @@
 <div padding class="title-components">
   <span>중대결함</span>
   <div class="block-insert">
-    <button button-clear-outline outline round ion-button (click)="addDigr12WriteModal()">추가</button>
+    <button button-clear-outline outline round ion-button *ngIf="!digr01Group.transFlag" (click)="addDigr12WriteModal()">추가</button>
   </div>
 </div>
 
-<ion-row>
-  <ion-col col-12 col-md-12 col-lg-6 *ngFor="let digr12 of digr12Array; let i = index;">
-    <ion-item-sliding #slidingItem>
-      <ion-item no-lines no-padding>
-        <ion-card padding box-shadow text-right class="card" (click)="goDigr12WriteModal(digr12,i)">
-          <!--Card images-->
-          <div float-left class="card-img">
-            <img *ngIf="digr12.comtbFile01Array.length > 0; else elseBlock" [src]="digr12.comtbFile01Array[0].img_path" />
-            <ng-template #elseBlock>
-              <img src="assets/images/avatar/fms_img_no.png" />
-            </ng-template>
-          </div>
-          <!--Card-content-->
-          <ion-card-content>
-            <ion-card-title no-padding>
-              <!--Card title-->
-              <h1 card-title>부위/부재: {{digr12.facilPart.part_nm}}</h1>
-            </ion-card-title>
-            <!--Description-->
-            <h3 card-subtitle *ngIf="digr12.seriousDefectList.legnth > 0">중대결함: <span class="example-h3">{{digr12.seriousDefectList[0].data2}}</span></h3>
-          </ion-card-content>
-        </ion-card>
-      </ion-item>
-      <ion-item-options no-lines>
-        <!-- Button delete -->
-        <button (click)="removeItem(digr12,i)" transparent>
-          <!-- Icon delete -->
-          <ion-icon icon-medium>
-            <i class="icon icon-delete"></i>
-          </ion-icon>
-        </button>
-        <!-- Button undo -->
-        <button (click)="undo(slidingItem)" transparent>
-          <!-- Icon undo -->
-          <ion-icon icon-medium>
-            <i class="icon icon-undo-variant"></i>
-          </ion-icon>
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-col>
-</ion-row>
+<ion-list>
+  <ion-row>
+    <ion-col col-12 col-md-12 col-lg-6 *ngFor="let digr12 of digr12Array; let i = index;">
+      <ion-item-sliding #slidingItem>
+        <ion-item no-lines no-padding>
+          <ion-card padding box-shadow text-right class="card" (click)="goDigr12WriteModal(digr12,i)">
+            <!--Card images-->
+            <div float-left class="card-img">
+              <img *ngIf="digr12.comtbFile01Array.length > 0; else elseBlock" [src]="digr12.comtbFile01Array[0].img_path" />
+              <ng-template #elseBlock>
+                <img src="assets/images/avatar/fms_img_no.png" />
+              </ng-template>
+            </div>
+            <!--Card-content-->
+            <ion-card-content>
+              <ion-card-title no-padding>
+                <!--Card title-->
+                <h1 card-title *ngIf="digr12.facilPart">부위/부재: {{digr12.facilPart.part_nm}}</h1>
+              </ion-card-title>
+              <!--Description-->
+              <h3 card-subtitle *ngIf="digr12.seriousDefectList.length > 0">중대결함: <span class="example-h3">{{digr12.seriousDefectList[0].data2}}<span *ngIf="digr12.seriousDefectList.length > 1">...</span></span></h3>
+            </ion-card-content>
+          </ion-card>
+        </ion-item>
+        <ion-item-options no-lines>
+          <!-- Button delete -->
+          <button *ngIf="!digr01Group.transFlag" (click)="removeItem(digr12,i)" transparent>
+            <!-- Icon delete -->
+            <ion-icon icon-medium>
+              <i class="icon icon-delete"></i>
+            </ion-icon>
+          </button>
+          <!-- Button undo -->
+          <button (click)="undo(slidingItem)" transparent>
+            <!-- Icon undo -->
+            <ion-icon icon-medium>
+              <i class="icon icon-undo-variant"></i>
+            </ion-icon>
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-col>
+  </ion-row>
+</ion-list>

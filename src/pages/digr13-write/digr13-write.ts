@@ -45,14 +45,14 @@ export class Digr13WritePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,public globalVars: GlobalVars
     ,public utilService : UtilService,public toastCtrl: ToastController) {
-    this.digr01Group = navParams.data.digr01Group;
-    this.index = navParams.data.index;
-    this.digr02 = navParams.data.digr02;
-    this.selectMast01 = navParams.data.selectMast01;
+    this.digr01Group = navParams.get('digr01Group');
+    this.index = navParams.get('index');
+    this.digr02 = navParams.get('digr02');
+    this.selectMast01 = navParams.get('selectMast01');
 
-    this.dign1_checkObject = navParams.data.dign1_checkObject;
-    this.dign1_checklist = navParams.data.dign1_checklist;
-    this.digr13Array = navParams.data.digr13Array;
+    this.dign1_checkObject = navParams.get('dign1_checkObject');
+    this.dign1_checklist = navParams.get('dign1_checklist');
+    this.digr13Array = navParams.get('digr13Array');
   }
 
   /* goDigr02ListModal(){
@@ -72,7 +72,7 @@ export class Digr13WritePage {
   } */
 
   goSave(){
-    /* let prevView : ViewController = this.navParams.data.prevView;
+    /* let prevView : ViewController = this.navParams.get('prevView;
     let prevViewIndex = this.navCtrl.indexOf(prevView);
     this.navCtrl.remove(prevViewIndex,1); */
     this.navCtrl.pop();

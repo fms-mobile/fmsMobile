@@ -1,3 +1,31 @@
 page-digr12-list {
-
+    ion-card img {
+        width: 100px;
+    }
+    [card-title] {
+        font-size: 16px !important;
+    }
+    [card-subtitle] {
+        font-size: 13px !important;
+        font-weight: 400 !important;
+    }
+    .example-h3 {
+        font-size: 13px !important;
+        font-weight: 400 !important;
+    }
+    .title-components {
+        position: relative;
+    }
+    .block-insert {
+        position: absolute;
+        right: 10px;
+        margin: 0px;
+        top: 6px;
+    }
+    .item-md {
+        background-color: transparent;
+    }
+    .label-md {
+        margin: 0;
+    }
 }

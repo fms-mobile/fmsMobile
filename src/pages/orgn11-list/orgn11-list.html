@@ -20,10 +20,10 @@
     <ion-row>
       <!-- Header -->
       <ion-col col-12>
-        <ion-searchbar [(ngModel)]="searchTerm"></ion-searchbar>
+        <ion-searchbar [(ngModel)]="searchTerm" (ionBlur)="findOrgn11List()" placeholder="이름 검색" ></ion-searchbar>
       </ion-col>
       <!-- List -->
-      <ion-col col-12>
+      <ion-col col-12 *ngIf="comtbOrgn11List.length > 0;">
         <ion-list no-margin>
           <ion-item class="ion-line-item" *ngFor="let orgn11 of comtbOrgn11List; let i = index;" (click)="select(orgn11)">
             <!--Card images-->

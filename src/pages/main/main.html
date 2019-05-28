@@ -21,20 +21,25 @@
   </div>
   <!--Content-->
   <ion-grid no-padding *ngIf="mainPageMenu != null">
-    <div padding class="title-components">FMS 정기안전점검 주요기능</div>
-    <ion-list margin>
-      <ion-row>
-        <ion-col col-12 col-md-12 col-lg-6>
-          <button ion-button round outline block size="large" (click)="goDigrGroupPage()">목록 바로가기</button>
-        </ion-col>
-        <ion-col col-12 col-md-12 col-lg-6>
-          <button ion-button round outline block size="large" (click)="goWriteGroupPage()">등록 바로가기</button>
-        </ion-col>
-        <ion-col col-12 col-md-12 col-lg-6>
-          <button ion-button round outline block size="large" (click)="transmissionService.syncAllData(null,null)">데이터 동기화</button>
-        </ion-col>
-      </ion-row>
-    </ion-list>
+    <ng-container *ngIf="authGuardService.canActivate()">
+      <div padding class="title-components">FMS 정기안전점검 주요기능</div>
+      <ion-list margin>
+        <ion-row>
+          <ion-col col-12 col-md-12 col-lg-6>
+            <button ion-button round outline block size="large" (click)="goDigrGroupPage()">목록 바로가기</button>
+          </ion-col>
+          <ion-col col-12 col-md-12 col-lg-6>
+            <button ion-button round outline block size="large" (click)="goWriteGroupPage()">등록 바로가기</button>
+          </ion-col>
+          <ion-col col-12 col-md-12 col-lg-6>
+            <button ion-button round outline block size="large" (click)="goSyncData()">데이터 동기화</button>
+          </ion-col>
+          <ion-col col-12 col-md-12 col-lg-6>
+            <button ion-button round outline block size="large" (click)="goDigrGroupHistroyList()">이력 조회</button>
+          </ion-col>
+        </ion-row>
+      </ion-list>
+    </ng-container>
     <div padding class="title-components">FMS 시스템 소개</div>
     <ion-row>
       <ion-col col-12>
@@ -57,38 +62,3 @@
   </ion-grid>
 </ion-content>
 <!-- Fab Button -->
-<!-- <ion-fab #fab bottom right>
-    <button button-ion-fab ion-fab (click)="onEvent('onFab', data, $event)">
-    <ion-icon name="add"></ion-icon>
-  </button>
-</ion-fab> -->
-
-
-<!-- <ion-content>
-    <div class="main-visual"></div>
-    <div class="main-contents">
-        <div class="main-contents-box">
-          <div class="main-contents-title">시스템 주요 소개</div>
-          <ul class="main-app-btn">
-            <li (click)="goIframePage('/int01001.do','FMS 소개')"><span>FMS 소개</span></li>
-            <li (click)="goIframePage('/pub01001.do','시설물안전등급 정보공개')"><span>시설물안전등급 정보공개</span></li>
-            <li (click)="goIframePage('/dign_notify.do','점검진단도래시기 사전예고')"><span>점검진단도래시기 사전예고</span></li>
-            <li (click)="goIframePage('/coe01001.do','안전진단전문기관 현황')"><span>안전진단전문기관 현황</span></li>
-            <li (click)="goIframePage('/cof01001.do','시설물유지관리 업체현황')"><span>시설물유지관리 업체현황</span></li>
-            <li (click)="goIframePage('/pub02001.do','3종시설물 지정/해제')"><span>3종시설물 지정/해제</span></li>
-            <li (click)="goIframePage('/law01001.do','시설물 분류')"><span>시설물 분류</span></li>
-            <li (click)="goIframePage('/eqk01001_agree.do','내진설계 대상여부확인')"><span>내진설계 대상여부확인</span></li>
-            <li (click)="goDigrGroupPage()"><span>정기안전점검</span></li>
-          </ul>
-        </div>
-    </div>
-    
-</ion-content>
-<ion-footer>
-  <div class="footer footer-light">
-    <a href="#" class="footer-logo"></a>
-    <p class="small-text no-bottom center-text">Copyright ⓒ 2014 KISTEC. All Rights Reserved</p>
-    <p class="small-text no-bottom center-text">주소 : (우)52852 경상남도 진주시 충무공동 사들로 131 인재교육관 시설물정보 및 유지관리지원센터</p>
-    <p class="small-text no-bottom center-text">Tel : 055-771-1999 / Fax : 055-771-1950 / E-mail : kjlim@kistec.or.kr</p>
-  </div>
-</ion-footer> -->

@@ -5,9 +5,9 @@
   Ionic pages and navigation.
 -->
 <div padding class="title-components">
-  <span>참여기술자 목록</span>
+  <span>참여기술자 목록 <span class="text-red">*</span></span>
   <div class="block-insert">
-    <button button-clear-outline outline round ion-button (click)="addDigr11()">추가</button>
+    <button button-clear-outline outline round ion-button *ngIf="!digr01Group.transFlag" (click)="addDigr11()">추가</button>
   </div>
 </div>
 
@@ -37,7 +37,7 @@
         </ion-item>
         <ion-item-options no-lines>
           <!-- Button delete -->
-          <button (click)="removeItem(digr11,i)" transparent>
+          <button *ngIf="!digr01Group.transFlag" (click)="removeItem(digr11,i)" transparent>
             <!-- Icon delete -->
             <ion-icon icon-medium>
               <i class="icon icon-delete"></i>

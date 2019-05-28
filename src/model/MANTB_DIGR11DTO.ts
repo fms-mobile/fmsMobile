@@ -15,6 +15,7 @@ export class MANTB_DIGR11DTO {
     public parti_rate : number;
     public tech_grade : string;
     public tech_grade_nm : string;
+    public member_seq : number;
 
     constructor(){
         this.facil_no = "";
@@ -30,5 +31,6 @@ export class MANTB_DIGR11DTO {
         this.parti_rate = null;
         this.tech_grade = "";
         this.tech_grade_nm = "";
+        this.member_seq = null;
     }
 }

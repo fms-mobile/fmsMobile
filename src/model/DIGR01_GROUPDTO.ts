@@ -20,9 +20,11 @@ import { COMTB_FILE01DTO } from './COMTB_FILE01DTO';
 @Injectable()
 export class DIGR01_GROUPDTO {
     public uuid : string;
+    public transFlag : boolean = false;
     public digr01 : MANTB_DIGR01DTO;
     public digr02List : Array<MANTB_DIGR01DTO>;
     public digr11List : Array<MANTB_DIGR11DTO>;
+    responseObject : any;
     
     public selectedMast01List : Array<BASTB_MAST01DTO>;
 
@@ -58,13 +60,13 @@ export class DIGR01_GROUPDTO {
         returnObject["uuid"] = this.uuid;
         let digr01 = this.digr01;
         let digr02List : Array<MANTB_DIGR01DTO> = new Array<MANTB_DIGR01DTO>();
-        let digr11List : Array<MANTB_DIGR11DTO> = new Array<MANTB_DIGR11DTO>();
-        let digr12List : Array<MANTB_DIGR12DTO> = new Array<MANTB_DIGR12DTO>();
-        let digr13List : Array<MANTB_DIGR13DTO> = new Array<MANTB_DIGR13DTO>();
-        // let rept01List : Array<COMTB_REPT01DTO> = new Array<COMTB_REPT01DTO>();
         let file01List : Array<COMTB_FILE01DTO> = new Array<COMTB_FILE01DTO>();
 
         this.digr02List.forEach((data : MANTB_DIGR01DTO)=> {
+            let digr11List : Array<MANTB_DIGR11DTO> = new Array<MANTB_DIGR11DTO>();
+            let digr12List : Array<MANTB_DIGR12DTO> = new Array<MANTB_DIGR12DTO>();
+            let digr13List : Array<MANTB_DIGR13DTO> = new Array<MANTB_DIGR13DTO>();
+
             let tempData = Object.assign({}, data);
 
             let copyData = this.convertBoolean(tempData);
@@ -88,43 +90,43 @@ export class DIGR01_GROUPDTO {
             // 중대결함
             if(copyData.digr12Array) {
                 copyData.digr12Array.forEach((digr12)=> {
+                    digr12.comtbFile01Array.forEach((file01)=>{
+                        file01["facil_no"] = copyData.facil_no;
+                        file01["defect_cd"] = digr12.defect_cd;
+                        file01List.push(file01);
+                    });
                     digr12List.push(digr12);
-
-                    file01List.push(...digr12.comtbFile01Array);
                 });
                 delete copyData.digr12Array;
+                copyData["MANTB_DIGR12"] = digr12List;
             }
 
             // 정기점검표
             if(copyData.digr13Array){
-                digr13List.push(...copyData.digr13Array);
+                copyData.digr13Array.forEach((digr13)=> {
+                    digr13List.push(this.convertBoolean(digr13));
+                });
                 delete copyData.digr13Array;
+                copyData["MANTB_DIGR13"] = digr13List;
             }
 
-            /* if(copyData.comtbFile01Array) {
-                copyData.comtbFile01Array.forEach((file01)=>{
-                    file01List.push(file01);
-                });
-                delete copyData.comtbFile01Array;
-            } */
+            // 참여 기술자 -> 모든 시설물 정보에 바인딩됨
+            this.digr11List.forEach((data : MANTB_DIGR11DTO)=> {
+                let tempData = Object.assign({}, data);
+
+                if(tempData.rep_yn) {
+                    copyData.rep_engineer_nm = tempData.engineer_nm;
+                }
+    
+                let copydigr11Data = this.convertBoolean(tempData);
+                digr11List.push(copydigr11Data);
+            });
+            copyData["MANTB_DIGR11"] = digr11List;
 
             digr02List.push(copyData);
         });
 
-        this.digr11List.forEach((data : MANTB_DIGR11DTO)=> {
-            let tempData = Object.assign({}, data);
-
-            let copyData = this.convertBoolean(tempData);
-            
-
-            digr11List.push(copyData);
-        });
-
         returnObject["MANTB_DIGR01"] = digr02List;
-        returnObject["MANTB_DIGR11"] = digr11List;
-        returnObject["MANTB_DIGR12"] = digr12List;
-        returnObject["MANTB_DIGR13"] = digr13List;
-        // returnObject["COMTB_REPT01"] = rept01List;
         returnObject["COMTB_FILE01"] = file01List;
 
         return returnObject;
@@ -139,4 +141,70 @@ export class DIGR01_GROUPDTO {
         });
         return copyData;
     }
+
+    validateServerObject() : Object{
+        let returnObject = new Object();
+        let passFlag = true;
+        let msg = "";
+
+        // MANTB_DIGR01 체크
+        let digr01 = this.digr01;
+
+        while(true) {
+            if(!digr01.regular_gbn || digr01.regular_gbn == '') {
+                passFlag = false;
+                msg = '점검개요 > 기간구분을 입력해주세요.';
+                break;
+            }
+            if(!digr01.start_ymd || digr01.start_ymd == '') {
+                passFlag = false;
+                msg = '점검개요 > 점검진단 시작일을 입력해주세요.';
+                break;
+            }
+            if(!digr01.end_ymd || digr01.end_ymd == '') {
+                passFlag = false;
+                msg = '점검개요 > 점검진단 종료일을 입력해주세요.';
+                break;
+            }
+            if(!digr01.wrt_person_nm || digr01.wrt_person_nm == '') {
+                passFlag = false;
+                msg = '점검개요 > 작성자명을 입력해주세요.';
+                break;
+            }
+            let digr02List = this.digr02List;
+            if(digr02List.length < 1) {
+                passFlag = false;
+                msg = '대상시설물 목록 > 대상시설물을 최소 1개이상 입력해주세요.';
+                break;
+            }
+            digr02List.forEach((digr02 : MANTB_DIGR01DTO)=> {
+            });
+    
+            let digr11List = this.digr11List;
+            if(digr11List.length < 1) {
+                passFlag = false;
+                msg = '참여기술자 목록 > 참여기술자를 최소 1명이상 입력해주세요.';
+                break;
+            }
+    
+            let digr11_rep_yn = false;
+            digr11List.forEach((digr11 : MANTB_DIGR11DTO)=> {
+                if(digr11.rep_yn) {
+                    digr11_rep_yn = true;
+                }
+            });
+            if(!digr11_rep_yn) {
+                passFlag = false;
+                msg = '참여기술자 목록 > 책임 참여기술자를 최소 1명이상 입력해주세요.';
+                break;
+            }
+            break;
+        }
+
+
+        returnObject["passFlag"] = passFlag;
+        returnObject["msg"] = msg;
+        return returnObject;
+    }
+
 }

@@ -42,8 +42,8 @@ export class Digr11WritePage {
     ,private datePicker : DatePicker, private platform : Platform, private dateFormatPipe : DateFormatPipe,
     ) {
      
-    this.digr01Group = navParams.data.digr01Group;
-    this.index = navParams.data.index;
+    this.digr01Group = navParams.get('digr01Group');
+    this.index = navParams.get('index');
 
     this.digr11 = this.digr01Group.digr11List[this.index];
 
@@ -71,6 +71,7 @@ export class Digr11WritePage {
     orgn11ListPage.onWillDismiss((data: any ) => {
       if(data != null){
         this.digr11.engineer_nm = data.member_nm;
+        this.digr11.member_seq = data.member_seq;
         this.digr11.birth_ymd = data.birth_ymd;
         this.digr11.sex = data.sex;
         this.digr11.tech_grade = data.tech_grade;
@@ -85,9 +86,9 @@ export class Digr11WritePage {
   }
 
   goSave(){
-    if(!this.validateDigr11()) {
-      const alertTile = "알림";
-      const alertMessage = "기술자 필수정보를 입력하지 않았습니다.";
+    let validateObject = this.validateDigr11();
+    if(!validateObject.passFlag) {
+      const alertMessage = validateObject.msg;
       this.utilService.showToast(this.toastCtrl,alertMessage,() =>{
       });
       return ;
@@ -123,13 +124,39 @@ export class Digr11WritePage {
     return canLeave;
   }
 
-  validateDigr11() : boolean{
-    let isValidate = true;
-    if(this.digr11.engineer_nm == "") {
-      isValidate = false;
+  validateDigr11() : {passFlag : boolean ,msg: string} {
+    let returnObject : {passFlag : boolean ,msg: string} = {passFlag:true,msg:''};
+    let passFlag = true;
+    let msg = "";
+
+    let digr11 = this.digr11;
+    while (true) {
+      if(!digr11.engineer_nm || digr11.engineer_nm == '') {
+        passFlag = false;
+        msg = '기술자를 선택하지 않았습니다.';
+        break;
+      }
+      if(!digr11.start_ymd || digr11.start_ymd == '') {
+        passFlag = false;
+        msg = '참여기간 시작일을 입력하지 않았습니다.';
+        break;
+      }
+      if(!digr11.end_ymd || digr11.end_ymd == '') {
+        passFlag = false;
+        msg = '참여기간 종료일을 입력하지 않았습니다.';
+        break;
+      }
+      if(!digr11.parti_rate) {
+        passFlag = false;
+        msg = '참여율을 입력하지 않았습니다.';
+        break;
+      }
+      break;
     }
 
-    return isValidate;
+    returnObject.passFlag = passFlag;
+    returnObject.msg = msg;
+    return returnObject;
   }
 
   pickStart_ymd() {

@@ -44,8 +44,8 @@ export class Digr02WritePage {
     ,public globalVars:GlobalVars,public utilService : UtilService
     ,public modalCtrl: ModalController,public toastCtrl: ToastController
     , public viewCtrl: ViewController, ) {
-      this.digr01Group = navParams.data.digr01Group;
-      this.selectIndex = navParams.data.index;
+      this.digr01Group = navParams.get('digr01Group');
+      this.selectIndex = navParams.get('index');
 
       this.selectMast01 = this.digr01Group.selectedMast01List[this.selectIndex];
       this.digr02 = this.digr01Group.digr02List[this.selectIndex];
@@ -122,5 +122,65 @@ export class Digr02WritePage {
     let thisView : ViewController = this.navCtrl.last();
     this.navCtrl.push("Digr13_1ListPage",{"digr01Group":this.digr01Group,"index":this.selectIndex,"prevView":thisView});
   }
-  
+
+  async ionViewCanLeave() {
+    const shouldLeave = await this.confirmLeave();
+    return shouldLeave;
+  }
+
+  confirmLeave(){
+    let resolveLeaving;
+    const canLeave = new Promise<Boolean>(resolve => resolveLeaving = resolve);
+    let validate = this.validateDigr02();
+
+    if(validate.passFlag) {
+      const alertTile = "필수 입력 알림";
+      const alertMessage = validate.msg + '';
+      this.utilService.alertConfirm(alertTile,alertMessage,() => {
+        resolveLeaving(true);
+      },()=>{
+        resolveLeaving(false);
+      });
+    } else {
+      resolveLeaving(true);
+    }
+    return canLeave;
+  }
+
+  validateDigr02() : {passFlag : boolean ,msg: string} {
+    let returnObject : {passFlag : boolean ,msg: string} = {passFlag:true,msg:''};
+    let passFlag = true;
+    let msg = "";
+
+    // MANTB_DIGR01 체크
+    let digr02 = this.digr02;
+    while (true) {
+      if(!digr02.dign_content || digr02.dign_content == '') {
+          passFlag = false;
+          msg = '주요 점검진단결과를 입력하지 않았습니다.';
+          break;
+      }
+      if(!digr02.start_ymd || digr02.start_ymd == '') {
+          passFlag = false;
+          msg = '주요 보수보강(안)을 입력하지 않았습니다.';
+          break;
+      }
+      if(!digr02.dign_amt) {
+          passFlag = false;
+          msg = '비용을 입력하지 않았습니다.';
+          break;
+      }
+      if(!digr02.state_grade || digr02.state_grade == '') {
+          passFlag = false;
+          msg = '안전등급을 입력하지 않았습니다.';
+          break;
+      }
+      break;
+    }
+
+    returnObject["passFlag"] = passFlag;
+    returnObject["msg"] = msg;
+    return returnObject;
+
+  }
 }

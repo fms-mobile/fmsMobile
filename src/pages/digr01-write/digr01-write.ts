@@ -1,5 +1,5 @@
 import { MANTB_DIGR01DTO } from './../../model/MANTB_DIGR01DTO';
-import { Component, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage, Platform } from 'ionic-angular';
 import { GlobalVars, DatePickerCustomOptions } from '../../services/GlobalVars';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
@@ -7,6 +7,7 @@ import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { ModalController } from 'ionic-angular';
 import { DatePicker, DatePickerOptions } from '@ionic-native/date-picker';
 import { DateFormatPipe } from '../../pipes/date-format/date-format';
+import { LoadingService } from '../../services/loading-service';
 
 /**
  * Generated class for the Digr01Write page.
@@ -23,7 +24,7 @@ import { DateFormatPipe } from '../../pipes/date-format/date-format';
   ]
 })
 export class Digr01WritePage {
-  regular_gbnList : [{}];
+  regular_gbnList : Array<any> = new Array<any>();
   digr01 : MANTB_DIGR01DTO;
   digr01Group : DIGR01_GROUPDTO;
   start_ymd_input : any;
@@ -36,23 +37,22 @@ export class Digr01WritePage {
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams , globalVars: GlobalVars
-    , public modalCtrl: ModalController,private elementRef : ElementRef,
+    , public modalCtrl: ModalController,
     private datePicker : DatePicker, private dateFormatPipe : DateFormatPipe, private platform : Platform,
+    private loadingService : LoadingService
     ) {
-    this.digr01Group = navParams.data;
+    this.digr01Group = navParams.get('digr01Group');
     this.digr01 = this.digr01Group.digr01;
     this.digr01.dign_corp_cd = globalVars.userInfo.group_cd;
     this.digr01.dign_corp_nm = globalVars.userInfo.group_nm;
 
     this.datePickerOptions = new DatePickerCustomOptions();
 
+    this.loadingService.show();
     globalVars.db.comtbCode02.list002({code_group:"regular_gbn",}, (res) => {
       this.regular_gbnList = res;
+      this.loadingService.hide();
     });
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Digr01Write');
   }
 
   setRegular_gbn(event,regular_gbn){
@@ -106,7 +106,7 @@ export class Digr01WritePage {
       (date : Date) => {
         let dateString = this.dateFormatPipe.superTransform(date,'yyyyMMdd');
         this.digr01.end_ymd = dateString;
-        this.digr01.report_yy = this.dateFormatPipe.transform(date,'yyyy');
+        this.digr01.report_yy = Number(this.dateFormatPipe.transform(date,'yyyy')) + 1+'';
       },
       err => console.log(err)
     );

@@ -19,8 +19,8 @@ export class Digr13SelectModalPage {
   digr13 : MANTB_DIGR13DTO;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController) {
-    this.digr01Group = navParams.data.digr01Group;
-    this.digr13 = navParams.data.digr13;
+    this.digr01Group = navParams.get('digr01Group');
+    this.digr13 = navParams.get('digr13');
     
   }
 

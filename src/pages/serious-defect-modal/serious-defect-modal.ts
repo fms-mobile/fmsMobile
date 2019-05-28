@@ -26,30 +26,23 @@ export class SeriousDefectModalPage {
   digr02 : MANTB_DIGR01DTO;
   digr12 : MANTB_DIGR12DTO;
 
-  serious_defectList : [any];
+  serious_defectList : Array<any> = new Array<any>();
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController,public globalVars:GlobalVars,
     public utilService : UtilService) {
 
-    this.digr01Group = navParams.data.digr01Group;
-    this.selectIndex = navParams.data.index;
-    this.digr12 = navParams.data.digr12;
-    this.digr02 = navParams.data.digr02;
+    this.digr01Group = navParams.get('digr01Group');
+    this.selectIndex = navParams.get('index');
+    this.digr12 = navParams.get('digr12');
+    this.digr02 = navParams.get('digr02');
      
-    this.selectMast01 = navParams.data.selectMast01;
+    this.selectMast01 = navParams.get('selectMast01');
     let facil_gbn = this.selectMast01.facil_no.slice(0,2);
 
     globalVars.db.comtbCode02.list002({"code_group":"serious_defect","code1" :facil_gbn}, (res) => {
       this.serious_defectList = res;
       Object.assign(this.serious_defectList, this.digr12.seriousDefectList);
     });
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SeriousDefectModal');
-  }
-
-  ionViewDidEnter() {
   }
 
   nodeClick(serious_defect) {
@@ -63,6 +56,7 @@ export class SeriousDefectModalPage {
         this.digr12.seriousDefectList.push(serious_defect);
       }
     });
+    this.digr12.defect_cd = this.digr12.seriousDefectList.map(serious_defect => serious_defect.code2).join('|');
     this.viewCtrl.dismiss(this.digr12);
   }
 

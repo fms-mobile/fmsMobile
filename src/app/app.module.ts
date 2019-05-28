@@ -38,6 +38,7 @@ import { registerLocaleData } from '@angular/common';
 import localeKo from '@angular/common/locales/ko';
 import { PipesModule } from '../pipes/pipes.module';
 import { DateFormatPipe } from '../pipes/date-format/date-format';
+import { UrlHelperService } from '../services/url-helper-service';
 
 export function jwtOptionsFactory(storage) {
     return {
@@ -57,7 +58,7 @@ registerLocaleData(localeKo,'ko');
         DbInit, DbInitData,
         DatePicker, DateFormatPipe,
         { provide : LOCALE_ID, useValue:'ko'},
-        ToastService, LoadingService, AuthService, AuthGuardService, GlobalVars, UtilService, TempDataManage, TransmissionService,
+        ToastService, LoadingService, AuthService, AuthGuardService, GlobalVars, UtilService, TempDataManage, TransmissionService, UrlHelperService,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
     ],
     imports: [

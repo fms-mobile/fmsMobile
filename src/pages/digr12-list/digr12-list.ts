@@ -32,8 +32,8 @@ export class Digr12ListPage {
     ,public modalCtrl: ModalController,public toastCtrl: ToastController
     , public viewCtrl: ViewController,) {
 
-      this.digr01Group = navParams.data.digr01Group;
-      this.selectIndex = navParams.data.index;
+      this.digr01Group = navParams.get('digr01Group');
+      this.selectIndex = navParams.get('index');
 
       this.selectMast01 = this.digr01Group.selectedMast01List[this.selectIndex];
       this.digr02 = this.digr01Group.digr02List[this.selectIndex];

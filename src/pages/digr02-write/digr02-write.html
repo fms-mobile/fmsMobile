@@ -32,39 +32,39 @@
         <ion-card padding box-shadow class="card">
           <ion-grid no-padding>
 
-            <h2 padding-top header-title text-capitalize>주요 점검진단결과</h2>
+            <h2 padding-top header-title text-capitalize>주요 점검진단결과 <span class="text-red">*</span></h2>
             <ion-row>
               <ion-col col-12>
                 <ion-item no-lines box-shadow>
                   <ion-textarea no-margin type="text" [placeholder]="placeholder.dign_content"
-                    [(ngModel)]="digr02.dign_content" rows="6"></ion-textarea>
+                    [(ngModel)]="digr02.dign_content" rows="4"></ion-textarea>
                 </ion-item>
               </ion-col>
             </ion-row>
 
-            <h2 padding-top header-title text-capitalize>주요 보수보강(안)</h2>
+            <h2 padding-top header-title text-capitalize>주요 보수보강(안) <span class="text-red">*</span></h2>
             <ion-row>
               <ion-col col-12>
                 <ion-item no-lines box-shadow>
                   <ion-textarea no-margin type="text" [placeholder]="placeholder.amend_content"
-                    [(ngModel)]="digr02.amend_content" rows="6"></ion-textarea>
+                    [(ngModel)]="digr02.amend_content" rows="4"></ion-textarea>
                 </ion-item>
               </ion-col>
             </ion-row>
 
             
 
-            <h2 padding-top header-title text-capitalize>비용(천원)</h2>
+            <h2 padding-top header-title text-capitalize>비용(천원) <span class="text-red">*</span></h2>
             <ion-row>
               <ion-col col-12>
                 <ion-item no-lines box-shadow>
-                  <ion-input no-margin type="text" [placeholder]="placeholder.dign_amt" [(ngModel)]="digr02.dign_amt">
+                  <ion-input no-margin type="number" [placeholder]="placeholder.dign_amt" [(ngModel)]="digr02.dign_amt">
                   </ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
 
-            <h2 padding-top header-title text-capitalize>안전등급</h2>
+            <h2 padding-top header-title text-capitalize>안전등급 <span class="text-red">*</span></h2>
             <ion-list radio-group [(ngModel)]="digr02.state_grade">
               <ion-row>
                 <ion-col col-6 col-md-4 col-lg-3 *ngFor="let state_grade of state_gradeList; let i= index">

@@ -22,7 +22,7 @@ export class Digr02ListPage {
   defaultImg : string = 'assets/images/avatar/17.jpg';
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public globalVars:GlobalVars, public utilService:UtilService,public modalCtrl: ModalController) {
-    this.digr01Group = navParams.data;
+    this.digr01Group = navParams.get('digr01Group');
     this.selectedMast01List = this.digr01Group.selectedMast01List;
   }
 
@@ -63,5 +63,21 @@ export class Digr02ListPage {
 
   undo = (slidingItem: ItemSliding) => {
     slidingItem.close();
+  }
+
+  goViewTransDigr(event: Event,index :number){
+    event.stopPropagation();
+
+    const viewUrl = '/man32002_select.do';
+    const title = '서버 전송 데이터 조회';
+    let webUrl = this.globalVars.webUrl+"mobile";
+    let fullUrl = webUrl + viewUrl;
+    let transdata = this.digr01Group.responseObject[index];
+    let facil_no = transdata.facil_no;
+    let dign_seq = transdata.digr01rbox.bxmap.dign_seq;
+    fullUrl += '?facil_no='+facil_no;
+    fullUrl += '&dign_seq='+dign_seq;
+
+    this.navCtrl.push("Iframe",{"url":fullUrl,"title":title});
   }
 }

@@ -280,6 +280,14 @@ export class UtilService {
         }
     }
 
+    nvl2(v : string) {
+        if (v==undefined || v=="") {
+            return "NULL";
+        } else {
+            return "'"+v+"'";
+        }
+    }
+
     codeConvertQuery(param:any) {
         let queryStr = "";
 

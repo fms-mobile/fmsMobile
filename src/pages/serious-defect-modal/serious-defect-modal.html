@@ -19,9 +19,9 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
+  <ion-list *ngIf="serious_defectList.length > 0;">
     <ion-item *ngFor="let serious_defect of serious_defectList; let i = index" [ngClass]="{'selected': serious_defect.selected}" (click)="nodeClick(serious_defect)">
-      <ion-label color="primary">{{serious_defect.data2}}</ion-label>
+      <ion-label >{{serious_defect.data2}}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

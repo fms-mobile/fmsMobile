@@ -19,8 +19,8 @@
 
     <ion-row>
       <ion-col col-12 text-right>
-        <button ion-button medium (click)="goSave()">저장</button>
-        <button ion-button medium margin (click)="goSend()">제출</button>
+        <button ion-button medium *ngIf="!digr01Group.transFlag" (click)="goSave()">저장</button>
+        <button ion-button medium margin *ngIf="!digr01Group.transFlag" (click)="goSend()">제출</button>
       </ion-col>
     </ion-row>
   </ion-grid>

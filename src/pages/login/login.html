@@ -26,17 +26,16 @@
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label>자동로그인</ion-label>
-            <ion-checkbox [(ngModel)]="chkAutoLogin" (ionChange)="chgAutoLogin()"></ion-checkbox>
-          </ion-item>
-        </ion-col>
-
-        <ion-col>
-          <ion-item>
             <ion-label>ID저장</ion-label>
             <ion-checkbox [(ngModel)]="chkSaveUserId" (ionChange)="chgSaveId()"></ion-checkbox>
           </ion-item>
         </ion-col>
+        <!-- <ion-col>
+          <ion-item>
+            <ion-label>PW 저장</ion-label>
+            <ion-checkbox [(ngModel)]="chkSaveUserPW" (ionChange)="chgAutoLogin()"></ion-checkbox>
+          </ion-item>
+        </ion-col> -->
       </ion-row>
     </ion-grid>
   </ion-list>

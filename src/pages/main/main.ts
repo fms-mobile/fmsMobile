@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, AlertController } from 'ionic-angular';
 import { GlobalVars } from '../../services/GlobalVars';
 import { MenuService } from '../../services/menu-service';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { TempDataManage } from '../../services/TempDataManage';
 import { AuthGuardService } from '../../services/AuthGuardService';
 import { TransmissionService } from '../../services/transmisson-service';
+import { LoadingService } from '../../services/loading-service';
 
 /**
  * Generated class for the Main page.
@@ -26,7 +27,8 @@ export class MainPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController,public menuCtrl: MenuController
     ,public globalVars:GlobalVars, private menuService: MenuService, private tempDataManage : TempDataManage
-    , public authGuardService: AuthGuardService, public transmissionService:TransmissionService,
+    , public authGuardService: AuthGuardService, public transmissionService:TransmissionService, private alertCtrl : AlertController
+    , private loadingService :LoadingService
     ) {
     this.webUrl = globalVars.webUrl+"mobile";
     this.mainPageMenu = menuService.getMainPageMenu();
@@ -62,4 +64,39 @@ export class MainPage {
     }
   }
 
+  goSyncData(){
+    if(this.authGuardService.canActivate()) {
+      this.loadingService.show();
+      this.transmissionService.syncAllData(null,null);
+    } else{
+      const alertTile = "로그인 에러";
+      const alertMessage = "사용자 로그인을 먼저 해주세요.";
+
+      let alert = this.alertCtrl.create({
+        title: alertTile ,
+        message: alertMessage,
+        cssClass : "alert-warning",
+        buttons: [
+          {
+            text: '확인',
+            handler: () => {
+            }
+          }
+        ]
+      });
+      alert.present();
+    }
+  }
+
+  goDigrGroupHistroyList() {
+    if(this.authGuardService.canActivate()) {
+      const viewUrl = '/man21101_list.do';
+      const title = '정기안전점검 이력 조회';
+      let fullUrl = this.webUrl + viewUrl;
+
+      this.navCtrl.push("Iframe",{"url":fullUrl,"title":title});
+    } else {
+      this.goDigrGroupPage();
+    }
+  }
 }

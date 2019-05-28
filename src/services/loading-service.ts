@@ -8,7 +8,8 @@ export class LoadingService {
 
   show() {
     this.loading = this.loadingCtrl.create({
-        content: '잠시만 기다려주세요.'
+        content: '잠시만 기다려주세요.',
+        duration: 2000,
     });
     this.loading.present();
   }
