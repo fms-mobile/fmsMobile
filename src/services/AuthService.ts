@@ -10,6 +10,7 @@ import { BehaviorSubject, empty } from 'rxjs';
 import { of } from 'rxjs/observable/of';
 import { GlobalVars } from './GlobalVars';
 import { LoadingService } from './loading-service';
+import { Firebase } from '@ionic-native/firebase';
  
 const TOKEN_KEY = 'access_token';
  
@@ -25,7 +26,7 @@ export class AuthService {
  
   constructor(private http: HttpClient, private helper: JwtHelperService, private storage: Storage,
     private plt: Platform, private alertController: AlertController, private globalVars :GlobalVars,
-    private loadingService : LoadingService,
+    private loadingService : LoadingService, private firebase :Firebase
     ) {
     // this.url = globalVars.serverUrl;
 
@@ -45,9 +46,11 @@ export class AuthService {
           this.user = decoded;
           this.authenticationState.next(true);
           this.tokenKey = token;
+          this.firebase.subscribe(this.user.sub);
         } else {
           this.storage.remove(TOKEN_KEY);
           this.tokenKey = '';
+          this.firebase.unsubscribe(this.user.sub);
         }
       }
     });
@@ -77,9 +80,11 @@ export class AuthService {
         } else {
           this.storage.set(TOKEN_KEY, res['token']);
           this.user = this.helper.decodeToken(res['token']);
+          this.tokenKey = res['token'];
           this.authenticationState.next(true);
+          this.firebase.subscribe(this.user.sub);
         }
-        this.loadingService.hide();            
+        this.loadingService.hide();
         return res;
       }),
       catchError(err => {
@@ -100,6 +105,8 @@ export class AuthService {
   logout() {
     return this.storage.remove(TOKEN_KEY).then(() => {
       this.authenticationState.next(false);
+      this.tokenKey = '';
+      this.firebase.unsubscribe(this.user.sub);
     });
   }
 

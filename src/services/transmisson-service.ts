@@ -12,6 +12,7 @@ import { FilePath } from "@ionic-native/file-path";
 import { AlertController } from "ionic-angular";
 import { TempDataManage } from "./TempDataManage";
 import 'rxjs/add/operator/take';
+import { LoadingService } from "./loading-service";
 
 @Injectable()
 export class TransmissionService {
@@ -21,6 +22,7 @@ export class TransmissionService {
     constructor(private http: HttpClient, private globalVars :GlobalVars
         , private authService:AuthService,public file:File ,public filePath : FilePath
         , private alertCtrl : AlertController, private tempDataManage : TempDataManage
+        , private loadingService: LoadingService,
         ){
         this.url = globalVars.webUrl+"mobile";
     }
@@ -29,7 +31,7 @@ export class TransmissionService {
         return this.http.post(this.url+apiUrl,param,{ headers });
     }
 
-    syncAllData(param : any,token : any){
+    syncAllData(param : any,token? : any, alertYN? : boolean){
         this.authService.authHeader().then(headers => {
             if(token != null) {
                 headers = headers.set('Authorization', "Bearer "+token);
@@ -49,7 +51,26 @@ export class TransmissionService {
                     return res;
                 }),
                 catchError(err => of([]))
-            ).subscribe()
+            ).subscribe(res => {
+                if(alertYN) {
+                    this.loadingService.hide();
+                    let alertTile = "데이터 동기화";
+                    let alertMessage = '데이터 동기화가 완료 되었습니다.';
+                    let alert = this.alertCtrl.create({
+                        title: alertTile ,
+                        message: alertMessage,
+                        cssClass : "alert-info",
+                        buttons: [
+                        {
+                            text: '확인',
+                            handler: () => {
+                            }
+                        }
+                        ]
+                    });
+                    alert.present();
+                }
+            }) 
         });
     }
 

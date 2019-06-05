@@ -16,6 +16,7 @@ export class COMTB_FILE01DTO {
     public img_data : string;
     public img_data_security : SafeUrl;
     public img_path : string;
+    public source_type : any;
 
     constructor(){
         this.file_no = null;
@@ -31,5 +32,6 @@ export class COMTB_FILE01DTO {
         this.img_data = "";
         this.img_data_security = "";
         this.img_path = "";
+        this.source_type = "";
     }
 }

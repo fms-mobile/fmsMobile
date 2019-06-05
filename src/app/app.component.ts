@@ -18,7 +18,7 @@ import { TransmissionService } from '../services/transmisson-service';
 import { LoadingService } from '../services/loading-service';
 import { map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { UrlHelperService } from '../services/url-helper-service';
+import { Firebase } from '@ionic-native/firebase';
 
 @Component({
     templateUrl: 'app.html',
@@ -50,7 +50,7 @@ export class MyApp {
         public transmissionService: TransmissionService,
         private toastCntrl :ToastController,
         private loadingService: LoadingService,
-        public urlHelperService: UrlHelperService,
+        private firebase : Firebase,
         ) {
         this.initializeApp();
         this.pages = menuService.getAllThemes();
@@ -70,6 +70,7 @@ export class MyApp {
           catchError(err => of([]))
         ).subscribe(()=>{
         });
+        
     }
 
     presentProfileModal() {
@@ -78,13 +79,26 @@ export class MyApp {
     }
 
     initializeApp() {
-        this.platform.ready().then(() => {
-            // Okay, so the platform is ready and our plugins are available.
-            // Here you can do any higher level native things you might need.
-            this.statusBar.styleDefault();
-            this.splashScreen.hide();
-            localStorage.setItem("mailChimpLocal", "true");
-        });
+      this.platform.ready().then(() => {
+        // Okay, so the platform is ready and our plugins are available.
+        // Here you can do any higher level native things you might need.
+        this.statusBar.styleDefault();
+        this.splashScreen.hide();
+        localStorage.setItem("mailChimpLocal", "true");
+        
+        this.firebase.getToken()
+        .then(token => console.log(`The token is ${token}`)) 
+        .catch(error => console.error('Error getting token', error));
+        
+        this.firebase.subscribe("all");
+
+        this.firebase.onNotificationOpen()
+          .subscribe(data => console.log(`User opened a notification ${data}`));
+
+        this.firebase.onTokenRefresh()
+          .subscribe((token: string) => console.log(`Got a new token ${token}`));
+          
+      });
     }
 
     openPage(page) {

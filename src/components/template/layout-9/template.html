@@ -1,0 +1,48 @@
+<!--Themes Toggle - Simple 2 -->
+<ion-content>
+  <ion-grid no-padding>
+
+    <!-- List Section -->
+    <ion-list no-padding *ngIf="data.verLayout != null">
+      <div class="title-components" padding=""><span class="title-com-sub">{{data.verLayout.listTitle}}</span></div>
+      <ion-item class="ion-line-item" *ngFor="let item of data.verLayout.items; let i= index">
+        <!-- Item-title -->
+        <ion-label item-title>{{item.title}}</ion-label>
+        <!-- Item-subtitle -->
+        <ion-label item-end text-right item-title>{{item.subtitle}}</ion-label>
+      </ion-item>
+      <div padding-left padding-top no-margin item-subtitle class="label label-md">현재 정기안전정검앱의 최종버전을 표시합니다.</div>
+    </ion-list>
+
+    <!-- List Section -->
+    <ion-list no-padding *ngIf="data.listLayout1 != null">
+      <div class="title-components" padding=""><span class="title-com-sub">{{data.listLayout1.listTitle}}</span></div>
+      <ion-item class="ion-line-item" *ngFor="let item of data.listLayout1.items; let i= index">
+        <!-- Item-title -->
+        <ion-label item-title>{{item.title}}</ion-label>
+        <!-- Item-subtitle -->
+        <ion-label item-end text-right item-subtitle>{{item.subtitle}}</ion-label>
+        <!-- Toggle -->
+        <ion-toggle item-end [value]="item.id" (ionChange)="onEvent('onSelect',item)" [checked]="item.isChecked"></ion-toggle>
+      </ion-item>
+    </ion-list>
+
+    <!-- List Section -->
+    <ion-list no-padding *ngIf="data.listLayout2 != null">
+      <div class="title-components" padding=""><span class="title-com-sub">{{data.listLayout2.listTitle}}</span></div>
+      <ion-item class="ion-line-item" *ngFor="let item of data.listLayout2.items; let i= index">
+        <!-- Item-title -->
+        <ion-label item-title>{{item.title}}</ion-label>
+        <!-- Item-subtitle -->
+        <ion-label item-end *ngIf="item.subtitle != null" text-right item-subtitle>{{item.subtitle}}</ion-label>
+        <!-- Toggle -->
+        <ion-toggle item-end *ngIf="item.isChecked != null" [value]="item.id" (ionChange)="onEvent('onSelect',item)" [checked]="item.isChecked"></ion-toggle>
+        <!--Content Icon-->
+        <ion-icon icon-medium item-end>
+          <i class="icon {{item.icon}}"></i>
+        </ion-icon>
+      </ion-item>
+    </ion-list>
+
+  </ion-grid>
+</ion-content>

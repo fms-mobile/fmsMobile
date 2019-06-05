@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { Iframe } from './iframe';
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { Iframe } from './iframe';
   ],
   imports: [
     IonicPageModule.forChild(Iframe),
+    PipesModule
   ],
 })
 export class IframeModule {}

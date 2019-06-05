@@ -7,13 +7,12 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{title}}</ion-title>
+    <ion-title>{{title | newLinePipe:'unescape_space'}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <!-- <iframe *ngIf="externalLink" [src]="externalLink" width="100%" height="100%" frameborder="0" ></iframe> -->
-  <iframe *ngIf="externalLink" width="100%" height="100%" frameborder="0" [src]="externalLink" #iframe></iframe>
+  <iframe *ngIf="externalLink" style="width: 100%; height: 100%;" frameborder="0" [src]="externalLink" ></iframe>
 </ion-content>

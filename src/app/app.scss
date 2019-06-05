@@ -235,16 +235,14 @@ ion-header {
   .selected-list-dep7 {
     padding-left: 120px;
   }
-  .title-components{
-    color: theme-colors('mainColors', 'secondary-first');
-    font-size: 16px;
-    font-weight: normal;
-    clear: both;
-    display: block;
-    margin: 15px 0;
-    text-transform: uppercase;
-    border-bottom: 1px solid theme-colors('mainColors', 'secondary-first');
+  .title-components {
+    background: url(../../assets/images/background/bu_1dep.png) no-repeat 12px 16px;
+    padding-left: 40px !important;
   }
+  .title-components .title-com-sub {
+    color:#000;
+  }
+
   .example-h1 {
     font-size: $h1-font-size;
     color: theme-colors('textColors', 'primary');

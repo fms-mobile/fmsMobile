@@ -8,12 +8,13 @@ export const AppSettings = {
       "position": "buttom"
     },
     "FIREBASE_CONFIG": {
-        "apiKey": "AIzaSyCYOVrRscQ26G5lAmOSfwrBFncNidaCSOE",
-        "authDomain": "ionic3-blue-light.firebaseapp.com",
-        "databaseURL": "https://ionic3-blue-light.firebaseio.com",
-        "projectId": "ionic3-blue-light",
-        "storageBucket": "ionic3-blue-light.appspot.com",
-        "messagingSenderId": "519928359775"
+        apiKey: "AIzaSyAeDAIP3T1Nj8JLJDi2oqcX6JVb1m7fcHQ",
+        authDomain: "fms-mobile-firebase.firebaseapp.com",
+        databaseURL: "https://fms-mobile-firebase.firebaseio.com",
+        projectId: "fms-mobile-firebase",
+        storageBucket: "fms-mobile-firebase.appspot.com",
+        messagingSenderId: "750161674832",
+        appId: "1:750161674832:web:45707cf1517d9b7f"
     },
     "MAP_KEY": {
         "apiKey": 'AIzaSyA4-GoZzOqYTvxMe52YQZch5JaCFN6ACLg'

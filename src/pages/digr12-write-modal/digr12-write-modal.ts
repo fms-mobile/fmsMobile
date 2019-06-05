@@ -151,6 +151,7 @@ export class Digr12WriteModalPage {
         that.file.copyFile(correctPath, currentName, this.file.dataDirectory, this.createFileName()).then(success => {
           let comtbFile01 : COMTB_FILE01DTO = new COMTB_FILE01DTO();
           comtbFile01.img_data = imagePath;
+          comtbFile01.source_type = sourceType;
           comtbFile01.img_path = that.pathForImage(success.nativeURL);
           comtbFile01.file_nm = currentName;
           that.digr12.comtbFile01Array.push(comtbFile01);
@@ -160,6 +161,18 @@ export class Digr12WriteModalPage {
       });
     }, (err) => {
      // Handle error
+    });
+  }
+
+  deletePhoto(comtbFile01 : COMTB_FILE01DTO, index : number){
+    const alertTile = "삭제 알림";
+    const alertMessage = "선택한 첨부 사진정보를 삭제 하시겠습니까?";
+    this.utilService.alertConfirm(alertTile,alertMessage,() => {
+      this.digr12.comtbFile01Array.splice(index,1);
+      if(comtbFile01.source_type == this.camera.PictureSourceType.CAMERA) {
+        this.file.removeFile(comtbFile01.img_data.replace(comtbFile01.file_nm,''),comtbFile01.file_nm);
+      }
+    },()=>{
     });
   }
 }

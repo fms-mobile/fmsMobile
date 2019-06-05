@@ -38,7 +38,7 @@ import { registerLocaleData } from '@angular/common';
 import localeKo from '@angular/common/locales/ko';
 import { PipesModule } from '../pipes/pipes.module';
 import { DateFormatPipe } from '../pipes/date-format/date-format';
-import { UrlHelperService } from '../services/url-helper-service';
+import { Firebase } from '@ionic-native/firebase';
 
 export function jwtOptionsFactory(storage) {
     return {
@@ -55,10 +55,10 @@ registerLocaleData(localeKo,'ko');
     declarations: [MyApp],
     providers: [
         StatusBar, SplashScreen, BarcodeScanner, Camera, Network, File, FilePath, Transfer, WebView,
-        DbInit, DbInitData,
+        DbInit, DbInitData, Firebase,
         DatePicker, DateFormatPipe,
         { provide : LOCALE_ID, useValue:'ko'},
-        ToastService, LoadingService, AuthService, AuthGuardService, GlobalVars, UtilService, TempDataManage, TransmissionService, UrlHelperService,
+        ToastService, LoadingService, AuthService, AuthGuardService, GlobalVars, UtilService, TempDataManage, TransmissionService, 
         { provide: ErrorHandler, useClass: IonicErrorHandler },
     ],
     imports: [

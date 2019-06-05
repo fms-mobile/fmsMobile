@@ -1,0 +1,155 @@
+<!--- Theme Parallax Basic -->
+<!--- Header Big Image-->
+<ion-content>
+    
+    <!-- Content -->
+    <ion-grid no-padding *ngIf="data != null">
+        
+        <div padding class="title-components">부위부재 종류 선택</div>
+        <ion-row>
+            <ion-col col-12>
+                <ion-card padding box-shadow class="card">  
+                    <ion-grid no-padding class="selected-grid" *ngIf="data.selectedLayout1 != null">
+                        <ion-list radio-group class="selected-group" [(ngModel)]="data.selectedLayout1.selectedItem">
+                            <!-- Header Title Top -->
+                            <ion-row>
+                                <ion-col col-6 col-md-4 col-lg-3 *ngFor="let item of data.selectedLayout1.items; let i= index">
+                                    <!--Content -->
+                                    <ion-item no-lines box-shadow class="item-sm">
+                                        <ion-radio item-start [value]="item.id" (ionSelect)="onEvent('onSelect',item)"></ion-radio>
+                                        <!--Content Title-->
+                                        <ion-label item-title>{{item.title}}</ion-label>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                        </ion-list>
+                    </ion-grid>
+                    
+                    <ion-grid no-padding class="selected-grid" *ngIf="data.selectedLayout2 != null">
+                        <ion-list radio-group class="selected-group" [(ngModel)]="data.selectedLayout2.selectedItem">
+                            <ion-list-header class="ios hydrated selected-header selected-dep1">
+                                제목 - 1뎁스
+                            </ion-list-header>
+                            <ion-list-header class="ios hydrated selected-header selected-dep2">
+                                <ion-icon name="return-right"></ion-icon>
+                                제목 - 2뎁스
+                            </ion-list-header>
+                            <ion-list-header class="ios hydrated selected-header selected-dep3">
+                                <ion-icon name="return-right"></ion-icon>
+                                제목 - 3뎁스
+                            </ion-list-header>
+                            <!-- Header Title Top -->
+                            <!-- <h2 padding-top header-title class="radio-title-dep1">보</h2> -->
+                            <ion-row class="selected-list-dep3">
+                                <ion-col col-6 col-md-4 col-lg-3 *ngFor="let item of data.selectedLayout2.items; let i= index">
+                                    <!--Content -->
+                                    <ion-item no-lines box-shadow class="item-sm">
+                                        <ion-radio item-start [value]="item.id" (ionSelect)="onEvent('onSelect',item)"></ion-radio>
+                                        <!--Content Title-->
+                                        <ion-label item-title>{{item.title}}</ion-label>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                            
+                            <ion-list-header class="ios hydrated selected-header selected-dep3">
+                                <ion-icon name="return-right"></ion-icon>
+                                제목 - 3뎁스
+                            </ion-list-header>
+                            <!-- Header Title Top -->
+                            <!-- <h2 padding-top header-title class="radio-title-dep1">보</h2> -->
+                            <ion-row class="selected-list-dep3">
+                                <ion-col col-6 col-md-4 col-lg-3 *ngFor="let item of data.selectedLayout2.items; let i= index">
+                                    <!--Content -->
+                                    <ion-item no-lines box-shadow class="item-sm">
+                                        <ion-radio item-start [value]="item.id" (ionSelect)="onEvent('onSelect',item)"></ion-radio>
+                                        <!--Content Title-->
+                                        <ion-label item-title>{{item.title}}</ion-label>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                        </ion-list>
+                    </ion-grid>
+                    <ion-grid no-padding class="selected-grid" *ngIf="data.selectedLayout3 != null">
+                        <ion-list radio-group class="selected-group" [(ngModel)]="data.selectedLayout3.selectedItem">
+                            <ion-list-header class="ios hydrated selected-header selected-dep1">
+                                제목 - 1뎁스
+                            </ion-list-header>
+                            <!-- Header Title Top -->
+                            <!-- <h2 padding-top header-title class="radio-title-dep1">슬래브</h2> -->
+                            <ion-row>
+                                <ion-col col-6 col-md-4 col-lg-3 *ngFor="let item of data.selectedLayout3.items; let i= index">
+                                    <!--Content -->
+                                    <ion-item no-lines box-shadow class="item-sm">
+                                        <ion-radio item-start [value]="item.id" (ionSelect)="onEvent('onSelect',item)"></ion-radio>
+                                        <!--Content Title-->
+                                        <ion-label item-title>{{item.title}}</ion-label>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                        </ion-list>
+                    </ion-grid>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+        <div padding class="title-components">
+            <span>부위부재 세부사항</span>
+        </div>
+
+        <ion-row>
+            <ion-col col-12>
+                <ion-card padding box-shadow class="card">  
+
+                    <h2 padding-top header-title>위치구분 <span class="text-red">*</span></h2>
+                    <ion-grid no-padding *ngIf="data.selectedLayout4 != null">
+                        <ion-list radio-group [(ngModel)]="data.selectedLayout4.selectedItem">
+                            <ion-row>
+                                <ion-col col-6 col-md-4 col-lg-3 *ngFor="let item of data.selectedLayout4.items; let i= index">
+                                    <!--Content -->
+                                    <ion-item no-lines box-shadow>
+                                        <ion-radio item-start [value]="item.id" (ionSelect)="onEvent('onSelect',item)"></ion-radio>
+                                        <!--Content Title-->
+                                        <ion-label item-title>{{item.title}}</ion-label>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                        </ion-list>
+                    </ion-grid>
+
+                    <h2 padding-top header-title>층 <span class="text-red">*</span></h2>
+                    <ion-row>
+                        <ion-col col-12>
+                            <ion-item no-lines box-shadow>
+                                <ion-input no-margin type="text" [placeholder]="data.startDate" [(ngModel)]="startDate"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+
+                    <h2 padding-top header-title text-capitalize>세부위치 <span class="text-red">*</span></h2>
+                    <ion-row>
+                        <ion-col col-12>
+                            <ion-item no-lines box-shadow>
+                                <ion-input no-margin type="text" [placeholder]="data.userName" [(ngModel)]="userName"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col col-12 text-right>
+
+                <button ion-button medium margin>제출</button>
+
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+</ion-content>
+<!-- Fab Button -->
+<ion-fab #fab bottom right>
+    <button button-ion-fab ion-fab (click)="onEvent('onFab', data, $event)">
+    <ion-icon name="add"></ion-icon>
+  </button>
+</ion-fab>

@@ -99,22 +99,25 @@
         <button button-clear-outline outline round ion-button *ngIf="!digr01Group.transFlag" (click)="takePhoto(camera.PictureSourceType.PHOTOLIBRARY);">앨범에서 추가</button>
       </div>
     </div>
+
     <ion-row *ngIf="digr12.comtbFile01Array.length > 0">
       <ion-col col-12 align-self-start text-center>
         <ion-slides pager="true">
-          <ion-slide text-center *ngFor="let comtbFile01 of digr12.comtbFile01Array" >
+          <ion-slide text-center *ngFor="let comtbFile01 of digr12.comtbFile01Array; let i = index;" >
             <ion-card padding box-shadow>
               <div class="card-img">
                 <img [src]="comtbFile01.img_path" />
               </div>
               <ion-row>
-                <ion-col col-12>
+                <ion-col col-10>
                   <ion-item no-lines box-shadow>
-                    <ion-textarea no-margin placeholder="메모" [(ngModel)]="comtbFile01.etc_remark"></ion-textarea>
+                    <ion-input no-margin placeholder="메모" [(ngModel)]="comtbFile01.etc_remark"></ion-input>
                   </ion-item>
                 </ion-col>
+                <ion-col col-2>
+                  <button *ngIf="!digr01Group.transFlag" ion-button medium margin (click)="deletePhoto(comtbFile01,i)">삭제</button>
+                </ion-col>
               </ion-row>
-              <!-- <button ion-button medium margin>임시저장</button> -->
             </ion-card>
           </ion-slide>
         </ion-slides>
