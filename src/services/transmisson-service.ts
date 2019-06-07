@@ -199,4 +199,11 @@ export class TransmissionService {
         });
     }
     
+    getApiData(url : any, param? : any) {
+        return this.sendPost(url,param,this.authService.getHeader())
+            .pipe(
+                first(),
+                catchError(err => of([]))
+            )
+    }
 }

@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TransmissionService } from '../../services/transmisson-service';
 
 /**
- * Generated class for the Man21001ListPage page.
+ * Generated class for the Man23001ListPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,11 +11,11 @@ import { TransmissionService } from '../../services/transmisson-service';
 
 @IonicPage()
 @Component({
-  selector: 'page-man21001-list',
-  templateUrl: 'man21001-list.html',
+  selector: 'page-man23001-list',
+  templateUrl: 'man23001-list.html',
 })
-export class Man21001ListPage {
-  man21001List : Array<any> = new Array<any>();
+export class Man23001ListPage {
+  man23001List : Array<any> = new Array<any>();
   isPaging : boolean = true;
   page : number = 1;
   unit_count : number = 10;
@@ -27,11 +27,16 @@ export class Man21001ListPage {
   }
 
   goSearch(event?) {
-    this.transmissionService.getApiData('/api/man21001_list.do',{page_count:this.page,unit_count:this.unit_count}).subscribe((res : Array<any>)=> {
+    this.transmissionService.getApiData('/api/man23001_list.do',
+    {
+      page_count:this.page,
+      unit_count:this.unit_count,
+    })
+    .subscribe((res : Array<any>)=> {
 
       setTimeout(() => {
         if(res.length > 0) {
-          this.man21001List.push(...res);
+          this.man23001List.push(...res);
           this.page = this.page + 1;
         } else{
           this.isPaging = false;  
@@ -42,9 +47,5 @@ export class Man21001ListPage {
         }
       },200);
     });
-  }
-
-  goManMain(man21001){
-    this.navCtrl.push("ManMainPage",{man21001:man21001});
   }
 }

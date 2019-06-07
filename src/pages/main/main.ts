@@ -128,4 +128,12 @@ export class MainPage {
       this.goDigrGroupPage();
     }
   }
+
+  goMan23001List() {
+    if(this.authGuardService.canActivate()) {
+      this.navCtrl.setRoot("Man23001ListPage");
+    } else {
+      this.goDigrGroupPage();
+    }
+  }
 }

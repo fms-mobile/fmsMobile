@@ -23,6 +23,7 @@ export class AuthService {
   user = null;
   authenticationState = new BehaviorSubject(false);
   tokenKey : string = '';
+  headers :HttpHeaders = new HttpHeaders();
  
   constructor(private http: HttpClient, private helper: JwtHelperService, private storage: Storage,
     private plt: Platform, private alertController: AlertController, private globalVars :GlobalVars,
@@ -33,6 +34,7 @@ export class AuthService {
     this.url = globalVars.webUrl+"mobile";
     this.plt.ready().then(() => {
       this.checkToken();
+      this.initHeader();
     });
   }
  
@@ -46,11 +48,15 @@ export class AuthService {
           this.user = decoded;
           this.authenticationState.next(true);
           this.tokenKey = token;
-          this.firebase.subscribe(this.user.sub);
+          if(this.user) {
+            this.firebase.subscribe(this.user.sub);
+          }
         } else {
           this.storage.remove(TOKEN_KEY);
           this.tokenKey = '';
-          this.firebase.unsubscribe(this.user.sub);
+          if(this.user) {
+            this.firebase.unsubscribe(this.user.sub);
+          }
         }
       }
     });
@@ -82,7 +88,9 @@ export class AuthService {
           this.user = this.helper.decodeToken(res['token']);
           this.tokenKey = res['token'];
           this.authenticationState.next(true);
-          this.firebase.subscribe(this.user.sub);
+          if(this.user) {
+            this.firebase.subscribe(this.user.sub);
+          }
         }
         this.loadingService.hide();
         return res;
@@ -106,7 +114,9 @@ export class AuthService {
     return this.storage.remove(TOKEN_KEY).then(() => {
       this.authenticationState.next(false);
       this.tokenKey = '';
-      this.firebase.unsubscribe(this.user.sub);
+      if(this.user){
+        this.firebase.unsubscribe(this.user.sub);
+      }
     });
   }
 
@@ -145,6 +155,10 @@ export class AuthService {
     return this.storage.get(TOKEN_KEY);
   }
 
+  initHeader() {
+    this.headers = this.setHeader(this.headers);
+  }
+
   setHeader(headers : HttpHeaders) {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Access-Control-Allow-Origin' , '*');
@@ -172,5 +186,13 @@ export class AuthService {
     headers = headers.append('Authorization', "Bearer "+token);
 
     return headers;
+  }
+
+  getHeader() : HttpHeaders {
+    let returnHeaders = this.headers;
+    if(this.tokenKey != '') {
+      returnHeaders = returnHeaders.append('Authorization', "Bearer "+this.tokenKey);
+    }
+    return returnHeaders;
   }
 }

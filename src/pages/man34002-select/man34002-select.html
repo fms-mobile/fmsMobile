@@ -1,0 +1,101 @@
+<!--
+  Generated template for the Man34002SelectPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-content padding>
+  <ion-grid no-padding>
+    <ion-list no-padding *ngIf="amdr01">
+
+      <ion-item class="ion-line-item">
+        <ion-label item-title>공사명</ion-label>
+        <ion-label item-end text-right item-title>{{amdr01.bxmap.const_nm}}</ion-label>
+      </ion-item>
+
+      <ion-item class="ion-line-item">
+        <ion-label item-title>공사구분</ion-label>
+        <ion-label item-end text-right item-title>{{amdr01.bxmap.amend_gbn_nm}}</ion-label>
+      </ion-item>
+
+      <ion-item class="ion-line-item">
+        <ion-label item-title>공사기간</ion-label>
+        <ion-label item-end text-right item-title>{{amdr01.bxmap.start_ymd | dateFormatPipe:'YYYYMMDD':'longDate'}} ~ {{amdr01.bxmap.end_ymd | dateFormatPipe:'YYYYMMDD':'longDate'}}</ion-label>
+      </ion-item>
+
+      <ion-item class="ion-line-item">
+        <ion-label item-title>관련점검진단</ion-label>
+        <ion-label item-end text-right item-title>{{amdr01.bxmap.dign_seq_nm}}</ion-label>
+      </ion-item>
+
+      <ion-item class="ion-line-item">
+        <ion-label item-title>계약방법</ion-label>
+        <ion-label item-end text-right item-title>{{amdr01.bxmap.bid_method_nm}}</ion-label>
+      </ion-item>
+
+      <ion-item class="ion-line-item">
+        <ion-label item-title>설계자</ion-label>
+        <ion-label item-end text-right item-title>{{amdr01.bxmap.designer_nm}}</ion-label>
+      </ion-item>
+
+      <ion-item class="ion-line-item">
+        <ion-label item-title>시공자</ion-label>
+        <ion-label item-end text-right item-title>{{amdr01.bxmap.constractor_nm}}</ion-label>
+      </ion-item>
+
+      <ion-item class="ion-line-item">
+        <ion-label item-title>책임기술자</ion-label>
+        <ion-label item-end text-right item-title>{{amdr01.bxmap.rep_engineer_nm}}</ion-label>
+      </ion-item>
+
+      <ion-item class="ion-line-item">
+        <ion-label item-title>공사감독</ion-label>
+        <ion-label item-end text-right item-title>{{amdr01.bxmap.const_spvsr_nm}}</ion-label>
+      </ion-item>
+
+      <ion-item class="ion-line-item">
+        <ion-label item-title>부위</ion-label>
+        <ion-label item-end text-right item-title>{{amdr01.bxmap.amend_part}}</ion-label>
+      </ion-item>
+
+      <ion-item class="ion-line-item">
+        <ion-label item-title>공사내역</ion-label>
+        <ion-label item-end text-right item-title>{{amdr01.bxmap.amend_detail}}</ion-label>
+      </ion-item>
+
+      <ion-item class="ion-line-item">
+        <ion-label item-title>공사비</ion-label>
+        <ion-label item-end text-right item-title>{{amdr01.bxmap.amend_cost}} 천원(VAT포함)</ion-label>
+      </ion-item>
+
+      <ion-item class="ion-line-item">
+        <ion-label item-title>작성자</ion-label>
+        <ion-label item-end text-right item-title>{{amdr01.bxmap.wrt_person_nm}}</ion-label>
+      </ion-item>
+
+      <ion-item class="ion-line-item">
+        <ion-label item-title>작성일</ion-label>
+        <ion-label item-end text-right item-title>{{amdr01.bxmap.wrt_ymd}}</ion-label>
+      </ion-item>
+
+      <ion-item class="ion-line-item">
+        <ion-label item-title>승인상태</ion-label>
+        <ion-label item-end text-right item-title>{{amdr01.bxmap.sign_status_nm}}</ion-label>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-list *ngIf="amdr11List">
+      <div class="title-components" padding=""><span class="title-com-sub">공사세부내역</span></div>
+      <ion-item class="ion-line-item" *ngFor="let amdr11 of amdr11List" >
+        <h2 item-subtitle>{{amdr11.bxmap.part_nm}}</h2>
+        <h2 item-subtitle>{{amdr11.bxmap.part_detail}}</h2>
+        <h2 item-subtitle>{{amdr11.bxmap.method_nm}}</h2>
+        <h2 item-subtitle>{{amdr11.bxmap.amend_qty}}</h2>
+        <h2 item-subtitle>{{amdr11.bxmap.amend_unit}}</h2>
+        <h2 item-subtitle>{{amdr11.bxmap.amend_cost}}</h2>
+      </ion-item>
+    </ion-list>
+  </ion-grid>
+</ion-content>

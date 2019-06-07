@@ -1,0 +1,18 @@
+<!--
+  Generated template for the ManMainPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{man21001.bxmap.facil_nm}} 관리</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-tabs tabsPlacement="top">
+  <ion-tab tabTitle="점검진단실적" [root]="Man32001ListPage" [rootParams]="{'man21001':man21001}"></ion-tab>
+  <ion-tab tabTitle="보수보강실적" [root]="Man32004ListPage" [rootParams]="{'man21001':man21001}"></ion-tab>
+</ion-tabs>

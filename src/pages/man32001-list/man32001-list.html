@@ -1,30 +1,23 @@
 <!--
-  Generated template for the Man21001ListPage page.
+  Generated template for the Man32001ListPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon class="icon-menu" name="menu"></ion-icon>
-    </button>
-    <ion-title>시설물 조회</ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content>
+<ion-content #Man32001ListPage>
   <ion-grid no-padding>
     <ion-row>
       <!-- List -->
       <ion-col col-12>
         <ion-list no-margin>
-          <ion-item class="ion-line-item" *ngFor="let man21001 of man21001List" (click)="goManMain(man21001)">
+          <ion-item class="ion-line-item" *ngFor="let man32001 of man32001List" (click)="goMan32002Select(man32001)" >
             <ion-icon item-end>
               <i class="icon icon-arrow-right-bold-circle"></i>
             </ion-icon>
-            <h1 item-title>{{man21001.bxmap.facil_nm}}</h1>
-            <h2 item-subtitle>{{man21001.bxmap.facil_class_nm}} , {{man21001.bxmap.state_grade_nm}}등급</h2>
+            <h1 item-title>{{man32001.bxmap.dign_gbn_nm}}<span *ngIf="man32001.bxmap.regular_gbn_nm">({{man32001.bxmap.regular_gbn_nm}})</span></h1>
+            <h2 item-subtitle>{{man32001.bxmap.dign_amt }} (천원), {{man32001.bxmap.state_grade_nm}}</h2>
+            <h2 item-subtitle>{{man32001.bxmap.start_ymd | dateFormatPipe:'YYYYMMDD':'longDate'}} ~ {{man32001.bxmap.end_ymd | dateFormatPipe:'YYYYMMDD':'longDate'}}</h2>
+            <h2 item-subtitle>{{man32001.bxmap.rep_engineer_nm }}</h2>
           </ion-item>
         </ion-list>
         <ion-infinite-scroll threshold="100px" (ionInfinite)="goSearch($event)" *ngIf="isPaging">
