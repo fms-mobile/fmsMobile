@@ -1,14 +1,14 @@
 {
-  "name": "FMS 모바일",
+  "name": "fms-mobile",
   "version": "0.0.7",
-  "author": "CSFORM",
-  "homepage": "http://csform.com/",
+  "author": "FMS mobile",
+  "homepage": "http://www.fms.or.kr/",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
-    "ionic:build": "ionic-app-scripts build",
+    "ionic:build": "node --max_old_space_size=8192 --optimize_for_size node_modules/@ionic/app-scripts/bin/ionic-app-scripts.js build",
     "ionic:serve": "ionic-app-scripts serve"
   },
   "dependencies": {
@@ -76,7 +76,6 @@
     "ionicons": "3.0.0",
     "moment": "^2.24.0",
     "ngx-clipboard": "9.0.1",
-    "phonegap-plugin-barcodescanner": "^8.0.1",
     "promise-polyfill": "8.0.0",
     "rxjs": "6.2.2",
     "rxjs-compat": "6.2.2",

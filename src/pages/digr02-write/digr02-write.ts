@@ -119,8 +119,14 @@ export class Digr02WritePage {
   }
 
   goNext(){
-    let thisView : ViewController = this.navCtrl.last();
-    this.navCtrl.push("Digr13_1ListPage",{"digr01Group":this.digr01Group,"index":this.selectIndex,"prevView":thisView});
+    let prevView = this.navParams.get('prevView');
+    let prevViewIndex = this.navCtrl.indexOf(prevView);
+    this.navCtrl.popTo(prevView);
+
+    /* let thisView : ViewController = this.navCtrl.last();
+
+
+    this.navCtrl.push("Digr13_1ListPage",{"digr01Group":this.digr01Group,"index":this.selectIndex,"prevView":thisView}); */
   }
 
   async ionViewCanLeave() {

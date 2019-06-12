@@ -1,0 +1,48 @@
+<!--
+  Generated template for the Noti01002SelectPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>알림 상세</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-grid no-padding>
+    <ion-list no-padding *ngIf="noti01002">
+
+      <ion-item class="ion-line-item">
+        <ion-label item-title>제목</ion-label>
+        <ion-label item-end text-right item-title>{{noti01002.bxmap.subject}}</ion-label>
+      </ion-item>
+
+      <ion-item class="ion-line-item">
+        <ion-label item-title>내용</ion-label>
+        <ion-label item-end text-right item-title>{{noti01002.bxmap.contents}}</ion-label>
+      </ion-item>
+
+      <ion-item class="ion-line-item">
+        <ion-label item-title>전송 일시</ion-label>
+        <ion-label item-end text-right item-title>{{noti01002.bxmap.send_date | dateFormatPipe:'YYYYMMDDHHmmss':'medium'}}</ion-label>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-list no-padding *ngIf="mesg01List">
+      <div class="title-components" padding=""><span class="title-com-sub">관련 결재 목록</span></div>
+      <ion-item class="ion-line-item" *ngFor="let mesg01 of mesg01List" >
+        <h2 item-subtitle>제목 : {{mesg01.bxmap.subject}}</h2>
+        <h2 item-subtitle>세부 내용 : {{mesg01.bxmap.msg_detail}}</h2>
+        <h2 item-subtitle>결재 상태 : {{mesg01.bxmap.sign_status_nm}}</h2>
+        <h2 item-subtitle *ngIf="mesg01.bxmap.sign_user_nm">승인자 : {{mesg01.bxmap.sign_user_nm}}</h2>
+        <h2 item-subtitle>요청자 : {{mesg01.bxmap.send_user_nm}}</h2>
+        <h2 item-subtitle>요청일자 : {{mesg01.bxmap.send_date | dateFormatPipe:'YYYYMMDDHHmmss':'medium'}}</h2>
+      </ion-item>
+    </ion-list>
+  </ion-grid>
+</ion-content>

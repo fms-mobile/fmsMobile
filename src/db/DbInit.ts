@@ -18,7 +18,6 @@ import { MANTB_DIGR01 } from './MANTB_DIGR01';
 import { MANTB_DIGR11 } from './MANTB_DIGR11';
 import { MANTB_DIGR12 } from './MANTB_DIGR12';
 import { MANTB_DIGR13 } from './MANTB_DIGR13';
-import { LOCTB_DATA01 } from './LOCTB_DATA01';
 
 @Injectable()
 export class DbInit {
@@ -34,7 +33,6 @@ export class DbInit {
     public mantbDigr11 : MANTB_DIGR11;
     public mantbDigr12 : MANTB_DIGR12;
     public mantbDigr13 : MANTB_DIGR13;
-    public loctbData01 : LOCTB_DATA01;
     public wsdb;
     public daoMap;
 
@@ -60,7 +58,6 @@ export class DbInit {
             this.comtbUser01 = new COMTB_USER01(globalVars, utilService, this.wsdb);
             this.comtbOrgn01 = new COMTB_ORGN01(globalVars, utilService, this.wsdb);
             this.comtbOrgn11 = new COMTB_ORGN11(globalVars, utilService, this.wsdb);
-            this.loctbData01 = new LOCTB_DATA01(globalVars, utilService, this.wsdb);
 
             this.daoMap = {
                 "BASTB_META01" : this.bastbMeta01,
@@ -347,21 +344,6 @@ export class DbInit {
                 this.dbInitData.insertCOMTB_REPT01(txn);
             }
             });
-            // 디바이스 데이터
-            txn.executeSql(" create table if not exists LOCTB_DATA01 "
-                    + "  ( "
-                    + "    user_id          text, "
-                    + "    object_id        text, "
-                    + "    object_contents  text, "
-                    + "    sort_order       integer, "
-                    + "    send_yn          char(1), "
-                    + "    send_result      text, "
-                    + "    sys_reg_id       text, "
-                    + "    sys_reg_date     text, "
-                    + "    sys_upd_id       text, "
-                    + "    sys_upd_date     text, "
-                    + "    primary key(user_id,object_id)"
-                    + "  ) ");
         });
     }
 

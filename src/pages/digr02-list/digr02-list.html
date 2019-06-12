@@ -16,12 +16,8 @@
   <ion-row>
     <ion-col col-12 col-md-12 col-lg-6 *ngFor="let mast01 of digr01Group.selectedMast01List; let i = index;">
       <ion-item-sliding #slidingItem>
-        <ion-item no-lines no-padding (click)="goWrite(digr01Group,i)">
-          <ion-card padding box-shadow text-right class="card">
-            <!--Card images-->
-            <!-- <div float-left class="card-img">
-              <img src="assets/images/avatar/fms_img_no.png" />
-            </div> -->
+        <ion-item no-lines no-padding (click)="goWrite(mast01,i)">
+          <ion-card padding box-shadow class="card">
             <!--Card-content-->
             <ion-card-content>
               <ion-card-title no-padding>

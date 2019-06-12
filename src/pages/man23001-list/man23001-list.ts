@@ -18,7 +18,7 @@ export class Man23001ListPage {
   man23001List : Array<any> = new Array<any>();
   isPaging : boolean = true;
   page : number = 1;
-  unit_count : number = 10;
+  unit_count : number = 20;
 
   constructor(public navCtrl: NavController, public navParams: NavParams
     , private transmissionService : TransmissionService,

@@ -85,13 +85,13 @@ export class MenuService implements IService {
       "iconFavorite": "icon-heart",
       "iconShare": "icon-share-variant",
       "menus": [
-        {
+        /* {
           "id": 1,
           "title": "공지게시판",
           "url": "/int01001.do",
           "img" : "../../assets/images/background/main_btn_icon_05.png",
           "icon": "icon-cloud-download",
-        },
+        }, */
         {
           "id": 2,
           "title": "시설물안전등급<br>정보공개",

@@ -7,12 +7,32 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>noti01001List</ion-title>
+    <ion-title>알림메시지</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-grid no-padding>
+    <ion-row>
+      <!-- List -->
+      <ion-col col-12>
+        <ion-list no-margin>
+          <ion-item class="ion-line-item" *ngFor="let noti01001 of noti01001List" (click)="goNoti01002Select(noti01001)">
+            <ion-icon item-end>
+              <i class="icon icon-arrow-right-bold-circle"></i>
+            </ion-icon>
+            <h1 item-title>{{noti01001.bxmap.subject}}</h1>
+            <h2 item-subtitle>{{noti01001.bxmap.contents}}</h2>
+            <h2 item-subtitle>{{noti01001.bxmap.send_date | dateFormatPipe:'YYYYMMDDHHmmss':'medium'}}</h2>
+          </ion-item>
+        </ion-list>
+        <ion-infinite-scroll threshold="100px" (ionInfinite)="goSearch($event)" *ngIf="isPaging">
+          <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="데이터 가져오는 중...">
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

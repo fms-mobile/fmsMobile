@@ -3,8 +3,6 @@ import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { AuthGuardService } from '../../services/AuthGuardService';
 import { AuthService } from '../../services/AuthService';
-import { UrlHelperService } from '../../services/url-helper-service';
-import { CustomInterceptor } from '../../interceptor/custom-interceptor';
 
 /**
  * Generated class for the Iframe page.

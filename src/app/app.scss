@@ -242,6 +242,89 @@ ion-header {
   .title-components .title-com-sub {
     color:#000;
   }
+  .selected-header .block-insert,
+  .example-h1 .block-insert {
+    position: absolute;
+    right: 10px;
+    margin: 0px;
+    top: 4px;
+  }
+  .selected-header .block-insert .button-md,
+  .example-h1 .block-insert .button-md {
+    height: 1rem;
+    padding: 10px 25px !important;
+  }
+
+  .step-tab {
+    position: relative;
+  }
+  .step-tab::after {
+    content: "";
+    position: absolute;
+    top:50%;
+    left:0px;
+    height: 3px;
+    width: 50%;
+    background-color: #d4d4d4;
+    z-index: -1;
+  }
+  .step-tab:first-child::after {
+    display: none;
+  }
+  .step-tab::before {
+    content: "";
+    position: absolute;
+    top:50%;
+    right:0px;
+    height: 3px;
+    width: 50%;
+    background-color: #d4d4d4;
+    z-index: -1;
+  }
+  .step-tab:last-child::before {
+    display: none;
+  }
+  .step-tab .button {
+    border-width: 3px !important;
+    height: 5.6rem;
+    padding: 10px 10px !important;
+    font-size: 13px !important;
+    margin: 0px;
+    background-color: #fff;
+  }
+  .step-tab .button:hover {
+    background-color: #f1f1f1;
+  }
+  .step-tab .button .button-inner {
+    -webkit-box-align: left;
+    -webkit-align-items: left;
+    -ms-flex-align: left;
+    align-items: left;
+    -webkit-box-pack: left;
+    -webkit-justify-content: left;
+    -ms-flex-pack: left;
+    justify-content: left;
+  }
+  .step-no {
+    display: block;
+    padding: 10px;
+    background-color: #00addd;
+    color: #fff;
+    border-radius: 60px;
+  }
+  .step-title {
+    margin-left: 10px;
+  }
+
+  .step-tab .button.disable {
+    border: 3px solid #d4d4d4 !important;
+  }
+  .step-tab .button.disable .step-no {
+    background-color: #d4d4d4;
+  }
+  .step-tab .button.disable .step-title {
+    color:#b7b7b7;
+  }
 
   .example-h1 {
     font-size: $h1-font-size;

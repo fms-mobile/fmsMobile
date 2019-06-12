@@ -114,24 +114,31 @@ export class MainPage {
     } */
 
     if(this.authGuardService.canActivate()) {
-      this.navCtrl.setRoot("Man21001ListPage");
+      this.navCtrl.push("Man21001ListPage");
     } else {
       this.goDigrGroupPage();
     }
   }
 
   goAppSetting(){
+    this.navCtrl.push("AppSettingPage");
+  }
+
+  goMan23001List() {
     if(this.authGuardService.canActivate()) {
-      let digr01Group : DIGR01_GROUPDTO = this.tempDataManage.createDigr01Group();
-      this.navCtrl.push("AppSettingPage",digr01Group);
+      this.navCtrl.push("Man23001ListPage");
     } else {
       this.goDigrGroupPage();
     }
   }
 
-  goMan23001List() {
+  goInf01001List() {
+    this.navCtrl.push("Inf01001ListPage");
+  }
+
+  goNoti01001List(){
     if(this.authGuardService.canActivate()) {
-      this.navCtrl.setRoot("Man23001ListPage");
+      this.navCtrl.push("Noti01001ListPage");
     } else {
       this.goDigrGroupPage();
     }

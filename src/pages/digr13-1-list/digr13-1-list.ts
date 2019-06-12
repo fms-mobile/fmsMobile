@@ -290,6 +290,7 @@ export class Digr13_1ListPage {
       dign1_checkObject: dign1_checkObject,
       dign1_checklist: this.dign1_checklist,
       digr13Array: this.digr13Array,
+      prevView:this.navCtrl.last(),
     });
   }
 }

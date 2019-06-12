@@ -83,7 +83,12 @@ export class Digr13_2ListPage {
       dign1_checkObject: dign1_checkObject,
       dign1_checklist: this.dign1_checklist,
       digr13Array: this.digr13Array,
+      prevView:this.navParams.get('prevView'),
     });
+  }
+
+  gePrev() {
+    this.navCtrl.pop();
   }
 
 }

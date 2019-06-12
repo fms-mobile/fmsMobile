@@ -10,7 +10,7 @@
 
 <ion-content>
   <ion-list>
-    <div background-size [ngStyle]="{'background-image': 'url(' + 'assets/images/logo/logo_top.png' + ')', 'height' : '80px'}"></div>
+    <div background-size [ngStyle]="{'background-image': 'url(' + 'assets/images/logo/logo_top.png' + ')', 'height' : '80px', 'min-width' : '320px' }"></div>
 
     <ion-item>
       <ion-input type="text" placeholder="Username" [hidden]="isAutoLogin" [(ngModel)]="ui.user_id"></ion-input>

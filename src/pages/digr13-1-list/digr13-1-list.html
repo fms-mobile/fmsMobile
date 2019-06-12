@@ -4,18 +4,18 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<!-- <ion-header>
   <ion-navbar>
     <ion-title (click)="goDigr02ListModal()"> 정기점검표</ion-title>
   </ion-navbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content>
   <ion-grid no-padding>
     <div padding class="title-components">
       <span>정기점검표 작성 목록 선택</span>
       <div class="block-insert">
-        <button button-clear-outline outline round ion-button *ngIf="!digr01Group.transFlag" >신규 추가</button>
+        <button button-clear-outline outline round ion-button *ngIf="!digr01Group.transFlag && false" >신규 추가</button>
       </div>
     </div>
     <ion-row *ngIf="dign1_checkObject != null">

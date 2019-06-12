@@ -26,7 +26,7 @@
     </ion-list>
 
     <!-- List Section -->
-    <ion-list no-padding >
+    <ion-list no-padding *ngIf="authGuardService.canActivate()">
       <div class="title-components" padding=""><span class="title-com-sub">푸시 알림 설정</span></div>
       <ion-item class="ion-line-item" >
         <!-- Item-title -->

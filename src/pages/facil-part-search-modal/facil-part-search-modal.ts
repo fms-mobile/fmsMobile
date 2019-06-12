@@ -25,8 +25,8 @@ export class FacilPartSearchModalPage {
   selectIndex : number;
   digr01Group : DIGR01_GROUPDTO;
   selectMast01 : BASTB_MAST01DTO;
-  digr02 : MANTB_DIGR01DTO;
-  digr12 : MANTB_DIGR12DTO;
+  // digr02 : MANTB_DIGR01DTO;
+  // digr12 : MANTB_DIGR12DTO;
   selectFacilPart : any;
 
   facil_partList : Array<any>;
@@ -191,19 +191,19 @@ export class FacilPartSearchModalPage {
 
     this.digr01Group = navParams.get('digr01Group');
     this.selectIndex = navParams.get('index');
-    this.digr12 = navParams.get('digr12');
-    this.selectFacilPart = this.digr12.facilPart ? this.digr12.facilPart : {};
+    // this.digr12 = navParams.get('digr12');
+    this.selectFacilPart = navParams.get('facilPart') ? navParams.get('facilPart') : {};
     
-    if(this.selectFacilPart.part_cd == 'new') {
+    if(navParams.get('facilPart')) {
       this.isPartNmUser = true;
-      this.part_nm_user = this.selectFacilPart.part_nm;
+      //this.part_nm_user = this.selectFacilPart.part_nm;
     }
 
     this.part_class = (this.selectFacilPart.part_class) ? this.selectFacilPart.part_class : null;
     this.part_class1 = (this.selectFacilPart.part_class1) ? this.selectFacilPart.part_class1 : null;
     this.part_class2 = (this.selectFacilPart.part_class2) ? this.selectFacilPart.part_class2 : null;
     this.part_detail = (this.selectFacilPart.part_detail) ? this.selectFacilPart.part_detail : "";
-    this.digr02 = navParams.get('digr02');
+    // this.digr02 = navParams.get('digr02');
     this.selectMast01 = navParams.get('selectMast01');
     let facil_gbn = this.selectMast01.facil_no.slice(0,2);
 
@@ -453,8 +453,7 @@ export class FacilPartSearchModalPage {
     } else {
       this.makePart_nm();
       this.selectFacilPart.part_detail = this.part_detail;
-      this.digr12.facilPart = this.selectFacilPart;
-      this.viewCtrl.dismiss(null);
+      this.viewCtrl.dismiss({facilPart:this.selectFacilPart});
     }
 
   }
@@ -463,7 +462,7 @@ export class FacilPartSearchModalPage {
     // 기존로직 적용
     let facil_form_cd = this.facil_gbn;
     let part_class : string;
-    let part_nm : string;
+    let part_nm : string = '';
 
     if(this.isPartNmUser) {
       part_nm = this.part_nm_user;
@@ -515,7 +514,7 @@ export class FacilPartSearchModalPage {
     this.selectFacilPart.part_class2 = this.part_class2;
     this.selectFacilPart.part_class = part_class;
     this.selectFacilPart.part_nm = part_nm;
-    this.digr12.object_no = part_nm;
+    // this.selectFacilPart.part_detail;
   }
 
   dismiss(){

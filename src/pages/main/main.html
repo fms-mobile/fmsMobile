@@ -15,7 +15,7 @@
       <button button-clear clear ion-button class="header-btn header-icon-reset" *ngIf="authGuardService.canActivate()"
         (click)="goSyncData()"></button>
       <button button-clear clear ion-button class="header-btn header-icon-setting" (click)="goAppSetting()"></button>
-      <button button-clear clear ion-button class="header-btn header-icon-bell" *ngIf="authGuardService.canActivate()">
+      <button button-clear clear ion-button class="header-btn header-icon-bell" *ngIf="authGuardService.canActivate()" (click)="goNoti01001List()">
         <div class="bell-count">24</div>
       </button>
     </div>
@@ -26,23 +26,6 @@
 <ion-content elastic-header *ngIf="mainPageMenu != null" class="main-content">
   <div background-size id="elastic-header" class="main-visual"></div>
   <ion-grid no-padding>
-    <div padding class="title-components">정보 <span class="title-com-sub">관리</span></div>
-    <ion-list margin-left margin-right>
-      <ion-row>
-        <ion-col col-6>
-          <button default-button round ion-button class="main-con-top-btn btn-color-01">
-            <img class="main-btn-icon" src="../../assets/images/background/main_btn_icon_01.png" alt="icon">
-            <span class="main-btn-text">의무이행</span>
-          </button>
-        </ion-col>
-        <ion-col col-6>
-          <button default-button round ion-button class="main-con-top-btn btn-color-03">
-            <img class="main-btn-icon" src="../../assets/images/background/main_btn_icon_02.png" alt="icon">
-            <span class="main-btn-text">제도관리</span>
-          </button>
-        </ion-col>
-      </ion-row>
-    </ion-list>
     <div padding class="title-components">시설물 <span class="title-com-sub">관리</span></div>
     <ion-list margin-left margin-right>
       <ion-row>
@@ -70,11 +53,18 @@
           </ion-col>
       </ion-row>
     </ion-list>
-    <div padding class="title-components">관련 <span class="title-com-sub">관리</span></div>
+    <div padding class="title-components">정보 <span class="title-com-sub">공개</span></div>
     <ion-list margin-left margin-right>
       <ion-row>
+        <ion-col col-4 col-md-3 col-sm-4>
+          <button default-button round ion-button class="main-con-btn btn-color-01"
+          (click)="goInf01001List()">
+            <img class="main-btn-icon" src="../../assets/images/background/main_btn_icon_05.png" alt="icon">
+            <span class="main-btn-text" >공지게시판</span>
+          </button>
+        </ion-col>
         <ion-col col-4 col-md-3 col-sm-4 *ngFor="let item of mainPageMenu.menus;let i = index">
-          <button default-button round ion-button class="main-con-btn btn-color-{{i + 1 | number:'2.'}}"
+          <button default-button round ion-button class="main-con-btn btn-color-{{i + 2 | number:'2.'}}"
             (click)="goIframePage(item.url,item.title)">
             <img class="main-btn-icon" [src]="item.img" alt="icon">
             <span class="main-btn-text" [innerHtml]="item.title"></span>
@@ -94,43 +84,5 @@
       </button>
     </ion-list>
   </ion-grid>
-  <!-- <ion-grid no-padding *ngIf="mainPageMenu != null">
-    <ng-container *ngIf="authGuardService.canActivate()">
-      <div padding class="title-components">FMS 정기안전점검 주요기능</div>
-      <ion-list margin>
-        <ion-row>
-          <ion-col col-12 col-md-12 col-lg-6>
-            <button ion-button round outline block size="large" (click)="goDigrGroupPage()">목록 바로가기</button>
-          </ion-col>
-          <ion-col col-12 col-md-12 col-lg-6>
-            <button ion-button round outline block size="large" (click)="goWriteGroupPage()">등록 바로가기</button>
-          </ion-col>
-          <ion-col col-12 col-md-12 col-lg-6>
-            <button ion-button round outline block size="large" (click)="goSyncData()">데이터 동기화</button>
-          </ion-col>
-          <ion-col col-12 col-md-12 col-lg-6>
-            <button ion-button round outline block size="large" (click)="goDigrGroupHistroyList()">이력 조회</button>
-          </ion-col>
-        </ion-row>
-      </ion-list>
-    </ng-container>
-    <div padding class="title-components">FMS 시스템 소개</div>
-    <ion-row>
-      <ion-col col-12>
-        <ion-list margin>
-          <ion-row>
-            <ion-col col-12 col-md-6 col-lg-4 *ngFor="let item of mainPageMenu.menus;let i = index">
-              <ion-item no-lines box-shadow margin-top (click)="goIframePage(item.url,item.title)">
-                <h2 item-title>{{item.title}}</h2>
-                <ion-icon icon-medium item-end>
-                  <i class="icon icon-arrow-right-bold-circle"></i>
-                </ion-icon>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-  </ion-grid> -->
 </ion-content>
 <!-- Fab Button -->

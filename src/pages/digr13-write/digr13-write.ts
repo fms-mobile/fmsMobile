@@ -31,6 +31,7 @@ export class Digr13WritePage {
     {value:"1",name:"양호"},
     {value:"2",name:"보통"},
     {value:"3",name:"불량"},
+    {value:"",name:"해당없음"},
   ];
   placeholder : Object = {
     amend_need_yn : "보수필요 여부",
@@ -55,31 +56,42 @@ export class Digr13WritePage {
     this.digr13Array = navParams.get('digr13Array');
   }
 
-  /* goDigr02ListModal(){
-    let digr02ListModal = this.modalCtrl.create("Digr02ListModalPage", this.digr01Group);
-    digr02ListModal.present();
-
-    let that = this;
-
-    digr02ListModal.onWillDismiss((data: { digr01Group : DIGR01_GROUPDTO, index:number }) => {
-      if(data != null){
-        that.index = data.index;
-        that.selectMast01 = data.digr01Group.selectedMast01List[that.index];
-        that.digr02 = data.digr01Group.digr02List[that.index];
-        that.searchList02();
-      }
-    });
-  } */
-
   goSave(){
     /* let prevView : ViewController = this.navParams.get('prevView;
     let prevViewIndex = this.navCtrl.indexOf(prevView);
     this.navCtrl.remove(prevViewIndex,1); */
-    this.navCtrl.pop();
+    let prevView : ViewController = this.navParams.get('prevView');
+    this.navCtrl.push("Digr02WritePage",{"digr01Group":this.digr01Group,"index":this.index, prevView: prevView});
   }
 
   goPrev(){
     this.navCtrl.pop();
+  }
+
+  goExit(){
+    this.navCtrl.popToRoot();
+  }
+
+  goFacilPartSerachModal(digr13 : MANTB_DIGR13DTO, index:number) {
+    let facilPartSearchModalPage = this.modalCtrl.create("FacilPartSearchModalPage", {
+      "digr01Group": this.digr01Group,
+      "index": index,
+      "facilPart": null,
+      "selectMast01": this.selectMast01,
+    });
+    facilPartSearchModalPage.present();
+
+    facilPartSearchModalPage.onWillDismiss((data: { facilPart: any }) => {
+      if (data != null) {
+        let facilPartObj = { check_result :'', action_content:'' };
+        facilPartObj['facilPart'] = data.facilPart;
+        digr13.facilPartList.push(facilPartObj);
+      }
+    });
+  }
+
+  removeFacilPartObj(facilPartList : Array<any>,index:number){
+    facilPartList.slice(index,1);
   }
 
 }

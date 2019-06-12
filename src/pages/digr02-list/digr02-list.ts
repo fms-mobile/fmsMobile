@@ -1,7 +1,7 @@
 import { GlobalVars } from './../../services/GlobalVars';
 import { UtilService } from './../../services/UtilService';
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, IonicPage, ItemSliding, ModalOptions } from 'ionic-angular';
+import { NavController, NavParams, ModalController, IonicPage, ItemSliding, ModalOptions, ViewController } from 'ionic-angular';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { BASTB_MAST01DTO } from '../../model/BASTB_MAST01DTO';
 
@@ -26,15 +26,12 @@ export class Digr02ListPage {
     this.selectedMast01List = this.digr01Group.selectedMast01List;
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Digr02List');
-  }
-
-  goWrite(digr01Group : DIGR01_GROUPDTO, index: number){
-    /* let mast01ListPageModal = this.modalCtrl.create(Digr02WritePage, {"digr01Group":this.digr01Group,"index":index});
-    mast01ListPageModal.present(); */
-    let digr02WritePageModal = this.modalCtrl.create("Digr02WritePage", {"digr01Group":this.digr01Group,"index":index});
-    digr02WritePageModal.present();
+  goWrite(mast01 : BASTB_MAST01DTO, index: number){
+    /* let digr02WritePageModal = this.modalCtrl.create("Digr02WritePage", {"digr01Group":this.digr01Group,"index":index});
+    digr02WritePageModal.present(); */
+    let thisView : ViewController = this.navCtrl.last();
+    // this.navCtrl.push("Digr13_1ListPage",{"digr01Group":this.digr01Group,"index":index,"prevView":thisView});
+    this.navCtrl.push("FacilMainPage",{"digr01Group":this.digr01Group,"mast01":mast01,"index":index,"prevView":thisView});
   }
 
   async addMast01(){

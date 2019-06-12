@@ -10,6 +10,7 @@ export class MANTB_DIGR13DTO {
     public check_result : string;
     public amend_need_yn : boolean;
     public dign_opinion : string;
+    public facilPartList :Array<any>;
 
     constructor(){
         this.facil_no = "";
@@ -20,5 +21,6 @@ export class MANTB_DIGR13DTO {
         this.check_result = "";
         this.amend_need_yn = false;
         this.dign_opinion = "";
+        this.facilPartList = Array<any>();
     }
 }
