@@ -68,7 +68,10 @@ registerLocaleData(localeKo,'ko');
         AngularFireDatabaseModule, AngularFireAuthModule,
         PipesModule,
         PipesModule.forRoot(),
-        IonicStorageModule.forRoot(),
+        IonicStorageModule.forRoot({
+          name: 'fmsmb',
+          driverOrder: ['indexeddb', 'sqlite', 'websql'],
+        }),
         IonicModule.forRoot(MyApp),
         JwtModule.forRoot({
           jwtOptionsProvider: {

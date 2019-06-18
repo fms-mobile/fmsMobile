@@ -23,7 +23,7 @@ export class DbInitData {
     public insertMANTB_DIGR01(txn) {
     }
 
-    public insertMANTB_DIGR11(txn) {
+    public insertMANTB_ENGR01(txn) {
     }
 
     public insertMANTB_DIGR12(txn) {

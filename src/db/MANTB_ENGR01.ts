@@ -3,7 +3,7 @@ import { GlobalVars } from '../services/GlobalVars';
 import { UtilService } from '../services/UtilService';
 import { COMMON_DAO } from './COMMON_DAO';
 
-export class MANTB_DIGR11 implements COMMON_DAO {
+export class MANTB_ENGR01 implements COMMON_DAO {
     public wsdb : any;
     public utilService : UtilService;
     public globalVars : GlobalVars;
@@ -16,7 +16,7 @@ export class MANTB_DIGR11 implements COMMON_DAO {
     }
     public insert(params, okFunction) {
         this.wsdb.transaction((txn) =>{
-            var sqlMain = "insert into MANTB_DIGR11 ( "
+            var sqlMain = "insert into MANTB_ENGR01 ( "
 			+ " facil_no "
     		+ " , engineer_nm "
     		+ " , start_ymd "
@@ -54,7 +54,7 @@ export class MANTB_DIGR11 implements COMMON_DAO {
     }
     public delete(params, okFunction) {
         this.wsdb.transaction((txn) =>{
-            var sqlMain = "delete from MANTB_DIGR11  "
+            var sqlMain = "delete from MANTB_ENGR01  "
             			+ " where 1=1 "
 				+ " and facil_no = '"+this.utilService.nvl(params.facil_no,'')+"' "
 
@@ -70,7 +70,7 @@ export class MANTB_DIGR11 implements COMMON_DAO {
 
     public deleteAll(params, okFunction) {
         this.wsdb.transaction((txn) =>{
-            var sqlMain = "delete from MANTB_DIGR11 "
+            var sqlMain = "delete from MANTB_ENGR01 "
 
             //console.log(sqlMain);
             txn.executeSql(sqlMain, [],
@@ -97,7 +97,7 @@ export class MANTB_DIGR11 implements COMMON_DAO {
 			    		+ "  , t1.parti_rate "
 			    		+ "  , t1.end_ymd "
 			    		+ "  , t1.parti_days "
-			            + "  from MANTB_DIGR11 t1 "
+			            + "  from MANTB_ENGR01 t1 "
 			        + " where 1=1 "
 			        ;
 

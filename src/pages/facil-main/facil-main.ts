@@ -34,7 +34,7 @@ export class FacilMainPage {
   }
 
   ionViewDidLoad(){
-    this.goTree01List();
+    this.goDigr11List();
   }
 
   initStep() {
@@ -49,10 +49,10 @@ export class FacilMainPage {
     this.facilNav.setRoot('Digr02WritePage',{"digr01Group":this.digr01Group,"index":this.index,"prevView":this.prevView});
   }
 
-  goTree01List() {
+  goDigr11List() {
     this.initStep();
     this.isStep1 = true;
-    this.facilNav.setRoot('Tree01ListPage',{"digr01Group":this.digr01Group,"index":this.index,"prevView":this.prevView});
+    this.facilNav.setRoot('Digr11ListPage',{"digr01Group":this.digr01Group,"index":this.index,"prevView":this.prevView});
   }
 
   goDigr13List(){

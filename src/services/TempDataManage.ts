@@ -19,7 +19,7 @@ export class TempDataManage {
      *  uuid string => 임시키
      *  digr01 MANTB_DIGR01DTO => 점검개요
      *  digr02List Array<MANTB_DIGR01DTO> => 대상 시설물 
-     *  digr11List Array<MANTB_DIGR11DTO> => 참여기술자
+     *  engr01List Array<MANTB_ENGR01DTO> => 참여기술자
      *  selectedMast01List Array<BASTB_MAST01DTO> => 선택 시설물 기본현황
      * }
      */

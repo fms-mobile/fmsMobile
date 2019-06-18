@@ -1,147 +1,138 @@
 <!--
-  Generated template for the Digr11Write page.
+  Generated template for the Digr11WritePage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-  <ion-navbar>
-    <ion-buttons left>
-      <button ion-button icon-only (click)="dismiss()">
-        <ion-icon name="backspace"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-title>참여기술자 정보 등록</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-start (click)="goSave()">
-        저장
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
-
 <ion-content>
-  <!-- Content -->
-  <ion-card padding box-shadow class="card">
-    <ion-grid>
-      <h2 padding-top header-title text-capitalize>성명 <span class="text-red">*</span></h2>
-      <ion-row>
-        <ng-container *ngIf="!digr01Group.transFlag;else elseBlock">
-          <ion-col col-10>
-            <ion-item no-lines box-shadow >
-              <ion-input no-margin type="text" [placeholder]="placeholder.engineer_nm" [(ngModel)]="digr11.engineer_nm" (ionFocus)="goOigr11List()"
-                readonly></ion-input>
-            </ion-item>
-          </ion-col>
-          <ion-col col-2>
-            <ion-buttons right>
-              <button ion-button icon-only (click)="goOigr11List()">
-                <ion-icon name="search"></ion-icon>
-              </button>
-            </ion-buttons>
-          </ion-col>
-        </ng-container>
-        <ng-template #elseBlock>
-          <ion-col col-12>
-            <ion-item no-lines box-shadow >
-              <ion-input no-margin type="text" [placeholder]="placeholder.engineer_nm" [(ngModel)]="digr11.engineer_nm"
-                readonly></ion-input>
-            </ion-item>
-          </ion-col>
-        </ng-template>
-      </ion-row>
+  <ion-grid no-padding>
+    <ion-row>
 
-      <h2 padding-top header-title text-capitalize>생년월일</h2>
-      <ion-row>
+      <div col-12 padding class="title-components">
+        <span>결함 및 손상 상세 입력</span>
+        <div class="block-insert">
+          <button button-clear-outline outline round ion-button (click)="goDigr11List()">이전</button>
+          <button button-clear-outline outline round ion-button (click)="goSave()">저장</button>
+        </div>
+      </div>
+
+      <ion-card padding margin-bottom box-shadow class="card">
+        <div span-medium>부재 선택</div>
+        <bastb-tree01 no-padding col-12 *ngIf="selectMast01" [facil_no]="selectMast01.facil_no"></bastb-tree01>
+
         <ion-col col-12>
-          <ion-item no-lines box-shadow>
-            <ion-input no-margin type="text" [placeholder]="placeholder.birth_ymd" value="{{digr11.birth_ymd | dateFormatPipe:'YYYYMMDD':'longDate'}}" readonly>
-            </ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+          <h2 padding-top header-title text-capitalize>세부위치</h2>
+          <ion-row>
+            <ion-col col-12>
+              <ion-item no-lines box-shadow>
+                <ion-input no-margin type="text" [(ngModel)]="digr11.buwee_nm"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-      <h2 padding-top header-title text-capitalize>성별</h2>
-      <ion-list radio-group [(ngModel)]="digr11.sex">
-        <ion-row>
-          <ion-col col-6 col-md-6 col-lg-6>
-            <!--Content -->
-            <ion-item no-lines box-shadow class="item-sm">
-              <ion-radio item-start value="M" disabled="true"></ion-radio>
-              <!--Content Title-->
-              <ion-label item-title>남</ion-label>
-            </ion-item>
-          </ion-col>
-          <ion-col col-6 col-md-6 col-lg-6>
-            <!--Content -->
-            <ion-item no-lines box-shadow class="item-sm">
-              <ion-radio item-start value="F" disabled="true"></ion-radio>
-              <!--Content Title-->
-              <ion-label item-title>여</ion-label>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </ion-list>
+          <ion-row>
+            <ion-col col-12>
+              <ion-item *ngIf="defectCdList">
+                <ion-label item-title>손상내용</ion-label>
+                <ion-select  multiple="false" interface="action-sheet">
+                  <ion-option *ngFor="let defectCd of defectCdList;" [value]="defectCd.code">{{defectCd.data}}</ion-option>
+                  <ion-option value=''>해당없음</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-      <h2 padding-top header-title text-capitalize>책임기술자 여부</h2>
-      <ion-row>
-        <ion-col col-12>
-          <ion-item no-lines box-shadow class="item-sm">
-            <ion-label item-title>{{placeholder.rep_yn}}</ion-label>
-            <ion-checkbox [(ngModel)]="digr11.rep_yn"></ion-checkbox>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+          <h2 padding-top header-title text-capitalize>손상크기</h2>
+          <ion-row>
+            <ion-col col-12>
+              <ion-item no-lines box-shadow>
+                <ion-input no-margin type="text"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-      <h2 padding-top header-title text-capitalize>참여기간 <span class="text-red">*</span></h2>
-      <ion-row>
-        <ion-col col-6>
-          <ion-item no-lines box-shadow>
-            <ion-input no-margin type="text" [placeholder]="placeholder.start_ymd" value="{{digr11.start_ymd | dateFormatPipe:'YYYYMMDD':'longDate'}}" (ionFocus)="pickStart_ymd()">
-            </ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col col-6>
-          <ion-item no-lines box-shadow>
-            <ion-input no-margin type="text" [placeholder]="placeholder.end_ymd" value="{{digr11.end_ymd | dateFormatPipe:'YYYYMMDD':'longDate'}}" (ionFocus)="pickEnd_ymd()">
-            </ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+          <h2 padding-top header-title text-capitalize>중대결함</h2>
+          <ion-row>
+            <ion-col col-10>
+              <ion-item no-lines box-shadow>
+                <ion-input no-margin *ngIf="digr11.serious_defect == null" type="text" (ionFocus)="goSeriousDefectModal()" readonly ></ion-input>
+                <ion-input no-margin *ngIf="digr11.serious_defect != null" type="text" (ionFocus)="goSeriousDefectModal()" [value]="digr11.serious_defect.data2" readonly></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col col-2>
+              <ion-buttons right>
+                <button ion-button icon-only (click)="goSeriousDefectModal()">
+                  <ion-icon name="search"></ion-icon>
+                </button>
+              </ion-buttons>
+            </ion-col>
+          </ion-row>
 
-      <h2 padding-top header-title text-capitalize>참여일수</h2>
-      <ion-row>
-        <ion-col col-12>
-          <ion-item no-lines box-shadow>
-            <ion-input no-margin type="text" [placeholder]="placeholder.parti_days" [(ngModel)]="digr11.parti_days" readonly>
-            </ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+          <ion-row>
+            <ion-col col-12>
+              <ion-item *ngIf="causeCdList">
+                <ion-label item-title>발생원인</ion-label>
+                <ion-select [(ngModel)]="digr11.cause_cd" multiple="false" interface="action-sheet">
+                  <ion-option *ngFor="let causeCd of causeCdList;" [value]="causeCd.code">{{causeCd.data | codeListEscape:'@':'&nbsp;&nbsp;'}}</ion-option>
+                  <ion-option value=''>해당없음</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-      <h2 padding-top header-title text-capitalize>참여율(%) <span class="text-red">*</span></h2>
-      <ion-row>
-        <ion-col col-12>
-          <ion-item no-lines box-shadow>
-            <ion-input no-margin type="number" min="0" max="100" [placeholder]="placeholder.parti_rate" [(ngModel)]="digr11.parti_rate">
-            </ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+          <ion-row>
+            <ion-col col-12>
+              <ion-item *ngIf="amendCdList">
+                <ion-label item-title>보수보강방안</ion-label>
+                <ion-select [(ngModel)]="digr11.amend_cd" multiple="false" interface="action-sheet">
+                  <ion-option *ngFor="let amendCd of amendCdList;" [value]="amendCd.code">{{amendCd.data | codeListEscape:'@':'&nbsp;&nbsp;'}}</ion-option>
+                  <ion-option value=''>해당없음</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
 
-      <h2 padding-top header-title text-capitalize>기술등급</h2>
-      <ion-list radio-group [(ngModel)]="digr11.tech_grade">
-        <ion-row>
-          <ion-col col-6 col-md-4 col-lg-3 *ngFor="let tech_grade of tech_gradeList; let i=index">
-            <!--Content -->
-            <ion-item no-lines box-shadow>
-              <ion-radio item-start [value]="tech_grade.code1" disabled="true"></ion-radio>
-              <!--Content Title-->
-              <ion-label item-title>{{tech_grade.data1}}</ion-label>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </ion-list>
-    </ion-grid>
-  </ion-card>
+          <h2 padding-top header-title text-capitalize>조사자 의견</h2>
+          <ion-row>
+            <ion-col col-12>
+              <ion-item no-lines box-shadow>
+                  <ion-textarea no-margin type="text" [(ngModel)]="digr11.etc_remark" rows="4"></ion-textarea>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <div col-12 relative>
+            <h2 padding-top header-title text-capitalize>첨부사진</h2>
+            <div class="block-insert">
+              <button button-clear-outline outline round ion-button *ngIf="!digr01Group.transFlag" (click)="takePhoto(camera.PictureSourceType.CAMERA);">촬영해서 추가</button>
+              <button button-clear-outline outline round ion-button *ngIf="!digr01Group.transFlag" (click)="takePhoto(camera.PictureSourceType.PHOTOLIBRARY);">앨범에서 추가</button>
+            </div>  
+          </div>
+          <ion-row *ngIf="digr11.comtbFile01Array.length > 0">
+            <ion-col col-12 align-self-start text-center>
+              <ion-slides pager="true">
+                <ion-slide text-center *ngFor="let comtbFile01 of digr11.comtbFile01Array; let i = index;" >
+                  <ion-card padding box-shadow>
+                    <div class="card-img">
+                      <img [src]="comtbFile01.img_path" />
+                    </div>
+                    <ion-row>
+                      <ion-col col-10>
+                        <ion-item no-lines box-shadow>
+                          <ion-input no-margin placeholder="메모" [(ngModel)]="comtbFile01.etc_remark"></ion-input>
+                        </ion-item>
+                      </ion-col>
+                      <ion-col col-2>
+                        <button *ngIf="!digr01Group.transFlag" ion-button medium margin (click)="deletePhoto(comtbFile01,i)">삭제</button>
+                      </ion-col>
+                    </ion-row>
+                  </ion-card>
+                </ion-slide>
+              </ion-slides>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
 </ion-content>

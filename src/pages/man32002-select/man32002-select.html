@@ -76,14 +76,14 @@
 
     <ion-list *ngIf="digr12List">
       <div class="title-components" padding=""><span class="title-com-sub">책임(참여)기술자 현황</span></div>
-      <ion-item class="ion-line-item" *ngFor="let digr11 of digr11List" >
-        <h2 item-subtitle>책임기술자 여부 : {{ (digr11.bxmap.rep_yn == 'Y') ? '예':'아니오' }}</h2>
-        <h2 item-subtitle>성명 : {{digr11.bxmap.engineer_nm}}</h2>
+      <ion-item class="ion-line-item" *ngFor="let engr01 of engr01List" >
+        <h2 item-subtitle>책임기술자 여부 : {{ (engr01.bxmap.rep_yn == 'Y') ? '예':'아니오' }}</h2>
+        <h2 item-subtitle>성명 : {{engr01.bxmap.engineer_nm}}</h2>
 
-        <!-- <h3 card-subtitle>책임기술자 여부 : <span class="example-h3">{{digr11.rep_yn | questionableBooleanPipe}}</span></h3>
-        <h3 card-subtitle>참여일수 : <span class="example-h3">{{digr11.parti_days}} 일</span></h3>
-        <h3 card-subtitle>참여율 : <span class="example-h3">{{digr11.parti_rate}} %</span></h3>
-        <h3 card-subtitle>기술등급 : <span class="example-h3">{{digr11.tech_grade_nm}}</span></h3> -->
+        <!-- <h3 card-subtitle>책임기술자 여부 : <span class="example-h3">{{engr01.rep_yn | questionableBooleanPipe}}</span></h3>
+        <h3 card-subtitle>참여일수 : <span class="example-h3">{{engr01.parti_days}} 일</span></h3>
+        <h3 card-subtitle>참여율 : <span class="example-h3">{{engr01.parti_rate}} %</span></h3>
+        <h3 card-subtitle>기술등급 : <span class="example-h3">{{engr01.tech_grade_nm}}</span></h3> -->
       </ion-item>
     </ion-list>
   </ion-grid>

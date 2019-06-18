@@ -4,7 +4,7 @@ import { DigrTabWritePage } from './digr-tab-write';
 import { PipesModule } from '../../pipes/pipes.module';
 import { Digr01WritePageModule } from '../digr01-write/digr01-write.module';
 import { Digr02ListPageModule } from '../digr02-list/digr02-list.module';
-import { Digr11ListPageModule } from '../digr11-list/digr11-list.module';
+import { Engr01ListPageModule } from '../engr01-list/engr01-list.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import { Digr11ListPageModule } from '../digr11-list/digr11-list.module';
     IonicPageModule.forChild(DigrTabWritePage),
     Digr01WritePageModule,
     Digr02ListPageModule,
-    Digr11ListPageModule,
+    Engr01ListPageModule,
     PipesModule,
   ],
 })

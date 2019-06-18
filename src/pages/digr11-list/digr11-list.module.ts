@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { Digr11ListPage } from './digr11-list';
-import { PipesModule } from '../../pipes/pipes.module';
+import { BastbTree01ComponentModule } from '../../components/bastb-tree01/bastb-tree01.module';
 
 @NgModule({
   declarations: [
@@ -9,9 +9,8 @@ import { PipesModule } from '../../pipes/pipes.module';
   ],
   imports: [
     IonicPageModule.forChild(Digr11ListPage),
-    PipesModule,
+    BastbTree01ComponentModule,
   ],
-  exports:[Digr11ListPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class Digr11ListPageModule {}

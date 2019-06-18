@@ -1,57 +1,58 @@
 <!--
-  Generated template for the Digr11List page.
+  Generated template for the Digr11ListPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<div padding class="title-components">
-  <span>참여기술자 목록 <span class="text-red">*</span></span>
-  <div class="block-insert">
-    <button button-clear-outline outline round ion-button *ngIf="!digr01Group.transFlag" (click)="addDigr11()">추가</button>
-  </div>
-</div>
 
-<ion-list padding-bottom>
-  <ion-row padding-bottom>
-    <ion-col col-12 col-md-12 col-lg-6 *ngFor="let digr11 of digr01Group.digr11List; let i = index;">
-      <ion-item-sliding #slidingItem>
-        <ion-item no-lines no-padding>
-          <ion-card padding box-shadow text-right class="card" (click)="goWrite(i)">
-            <!--Card images-->
-            <div float-left class="card-img">
-              <img images-filter src="assets/images/avatar/fms_avatar_01.png" />
-            </div>
-            <!--Card-content-->
-            <ion-card-content>
-              <ion-card-title no-padding>
-                <!--Card title-->
-                <h1 card-title>{{digr11.engineer_nm}}</h1>
-              </ion-card-title>
-              <!--Description-->
-              <h3 card-subtitle>책임기술자 여부 : <span class="example-h3">{{digr11.rep_yn | questionableBooleanPipe}}</span></h3>
-              <h3 card-subtitle>참여일수 : <span class="example-h3">{{digr11.parti_days}} 일</span></h3>
-              <h3 card-subtitle>참여율 : <span class="example-h3">{{digr11.parti_rate}} %</span></h3>
-              <h3 card-subtitle>기술등급 : <span class="example-h3">{{digr11.tech_grade_nm}}</span></h3>
-            </ion-card-content>
-          </ion-card>
-        </ion-item>
-        <ion-item-options no-lines>
-          <!-- Button delete -->
-          <button *ngIf="!digr01Group.transFlag" (click)="removeItem(digr11,i)" transparent>
-            <!-- Icon delete -->
-            <ion-icon icon-medium>
-              <i class="icon icon-delete"></i>
-            </ion-icon>
-          </button>
-          <!-- Button undo -->
-          <button (click)="undo(slidingItem)" transparent>
-            <!-- Icon undo -->
-            <ion-icon icon-medium>
-              <i class="icon icon-undo-variant"></i>
-            </ion-icon>
-          </button>
-        </ion-item-options>
-      </ion-item-sliding>
-    </ion-col>
-  </ion-row>
-</ion-list>
+<ion-content>
+  <ion-grid no-padding class="selected-grid">
+    <ion-row>
+      
+      <div col-12 padding class="title-components" >
+        <span>개별부재에서 발견된 결함 및 손상</span>
+        <div class="block-insert">
+          <button button-clear-outline outline round ion-button (click)="goDigr11Write()">결함 및 손상 추가</button>
+        </div>
+      </div>
+      
+      <ion-card padding margin-bottom box-shadow class="card">
+
+        <div span-medium>부재 선택</div>
+        <bastb-tree01 no-padding col-12 *ngIf="selectMast01" [facil_no]="selectMast01.facil_no"></bastb-tree01>
+
+        <ion-col col-12>
+          <div span-medium>결함 및 손상 목록</div>
+          <ion-item-sliding #slidingItem>
+            <ion-list no-margin *ngIf="digr11List">
+              <ion-item class="ion-line-item">
+                <ion-icon item-end>
+                  <i class="icon icon-arrow-right-bold-circle"></i>
+                </ion-icon>
+                <!-- <h1 item-title>{{noti01001.bxmap.subject}}</h1>
+                <h2 item-subtitle>{{noti01001.bxmap.contents}}</h2>
+                <h2 item-subtitle>{{noti01001.bxmap.send_date | dateFormatPipe:'YYYYMMDDHHmmss':'medium'}}</h2> -->
+              </ion-item>
+            </ion-list>
+            <ion-item-options no-lines>
+              <!-- Button delete -->
+              <button *ngIf="!digr01Group.transFlag" (click)="removeItem(engr01,i)" transparent>
+                <!-- Icon delete -->
+                <ion-icon icon-medium>
+                  <i class="icon icon-delete"></i>
+                </ion-icon>
+              </button>
+              <!-- Button undo -->
+              <button (click)="undo(slidingItem)" transparent>
+                <!-- Icon undo -->
+                <ion-icon icon-medium>
+                  <i class="icon icon-undo-variant"></i>
+                </ion-icon>
+              </button>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-col>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+</ion-content>

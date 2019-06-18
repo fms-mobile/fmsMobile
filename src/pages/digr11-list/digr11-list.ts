@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, IonicPage, ItemSliding, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
+import { BASTB_MAST01DTO } from '../../model/BASTB_MAST01DTO';
+import { MANTB_DIGR01DTO } from '../../model/MANTB_DIGR01DTO';
 import { MANTB_DIGR11DTO } from '../../model/MANTB_DIGR11DTO';
-import { UtilService } from './../../services/UtilService';
 
 /**
- * Generated class for the Digr11List page.
+ * Generated class for the Digr11ListPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -17,32 +18,23 @@ import { UtilService } from './../../services/UtilService';
 })
 export class Digr11ListPage {
   digr01Group : DIGR01_GROUPDTO;
+  selectMast01 : BASTB_MAST01DTO;
+  selectIndex : number;
+  digr02 : MANTB_DIGR01DTO;
+  digr11List : Array<MANTB_DIGR11DTO>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public utilService:UtilService,public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams
+  ) {
     this.digr01Group = navParams.get('digr01Group');
+    this.selectIndex = navParams.get('index');
+
+    this.selectMast01 = this.digr01Group.selectedMast01List[this.selectIndex];
+    this.digr02 = this.digr01Group.digr02List[this.selectIndex];
+
+    this.digr11List = this.digr02.digr11Array;
   }
 
-  goWrite(index:number){
-    let digr11WritePageeModal = this.modalCtrl.create("Digr11WritePage", {"digr01Group":this.digr01Group,"index":index});
-    digr11WritePageeModal.present();
-  }
-
-  addDigr11(){
-    let digr11WritePageeModal = this.modalCtrl.create("Digr11WritePage", {"digr01Group":this.digr01Group});
-    digr11WritePageeModal.present();
-  }
-
-  removeItem(digr11:MANTB_DIGR11DTO, i: number){
-    const alertTile = "삭제 알림";
-    const alertMessage = "선택한 기술자 정보를 삭제 하시겠습니까?";
-    this.utilService.alertConfirm(alertTile,alertMessage,() => {
-      this.digr01Group.digr11List.splice(i, 1);
-    },()=>{
-
-    });
-  }
-
-  undo = (slidingItem: ItemSliding) => {
-    slidingItem.close();
+  goDigr11Write() {
+    this.navCtrl.push('Digr11WritePage',{digr01Group :this.digr01Group,index:this.selectIndex });
   }
 }

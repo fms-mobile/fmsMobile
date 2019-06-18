@@ -28,7 +28,8 @@ export class LoginPage {
 
   ui: any = {
     //user_id: "chonju",
-    user_id: 'arch2team',
+    // user_id: 'arch2team',
+    user_id: 'kijang1',
     pswd: "1",
   }; // 사용자 정보 
   chkAutoLogin: boolean = false;

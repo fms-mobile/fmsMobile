@@ -1,6 +1,6 @@
 import { BASTB_MAST01DTO } from './../../model/BASTB_MAST01DTO';
 import { MANTB_DIGR01DTO } from './../../model/MANTB_DIGR01DTO';
-import { Component, ApplicationRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, IonicPage } from 'ionic-angular';
 import { GlobalVars } from '../../services/GlobalVars';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
@@ -27,8 +27,7 @@ export class Mast01ListPage {
   searchTerm : string;
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public globalVars:GlobalVars
-    , public utilService : UtilService,public viewCtrl: ViewController ,private loadingService:LoadingService
-    , private applicationRef : ApplicationRef
+    , public utilService : UtilService,public viewCtrl: ViewController ,private loadingService:LoadingService,
     ) {
       this.digr01Group = navParams.data;
       this.bastbMast01List = new Array<any>();

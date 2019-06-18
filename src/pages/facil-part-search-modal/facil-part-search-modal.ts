@@ -1,4 +1,4 @@
-import { Component, ApplicationRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, IonicPage } from 'ionic-angular';
 import { UtilService } from '../../services/UtilService';
 
@@ -6,9 +6,6 @@ import { GlobalVars } from '../../services/GlobalVars';
 
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { BASTB_MAST01DTO } from '../../model/BASTB_MAST01DTO';
-import { MANTB_DIGR01DTO } from '../../model/MANTB_DIGR01DTO';
-import { MANTB_DIGR12DTO } from '../../model/MANTB_DIGR12DTO';
-import { BrowserPlatformLocation } from '@angular/platform-browser/src/browser/location/browser_platform_location';
 import { LoadingService } from '../../services/loading-service';
 /**
  * Generated class for the FacilPartSearchModal page.
@@ -186,7 +183,7 @@ export class FacilPartSearchModalPage {
   inputNList : Array<any> = new Array<any>();
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public viewCtrl: ViewController,public globalVars:GlobalVars,
-    public utilService : UtilService, private applicationRef : ApplicationRef, private loadingService : LoadingService
+    public utilService : UtilService, private loadingService : LoadingService
     ) {
 
     this.digr01Group = navParams.get('digr01Group');

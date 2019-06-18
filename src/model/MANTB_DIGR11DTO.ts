@@ -1,36 +1,78 @@
 import { Injectable } from '@angular/core';
+import { MANTB_DIGR12DTO } from './MANTB_DIGR12DTO';
+import { BASTB_TREE01DTO } from './BASTB_TREE01DTO';
+import { COMTB_FILE01DTO } from './COMTB_FILE01DTO';
 
 @Injectable()
 export class MANTB_DIGR11DTO {
     public facil_no : string;
     public dign_seq : number;
-    public engineer_seq : number;
-    public engineer_nm : string;
-    public birth_ymd : string;
-    public sex : string;
-    public rep_yn : boolean;
-    public start_ymd : string;
-    public end_ymd : string;
-    public parti_days : number;
-    public parti_rate : number;
-    public tech_grade : string;
-    public tech_grade_nm : string;
-    public member_seq : number;
+    public record_no : number;
+    public record_type : string;
+    public object_no : string;
+    public entity_id : string;
+    public buwee_cd : string;
+    public defect_cd : string;
+    public cause_cd : string;
+    public amend_cd : string;
+    public space_nm : string;
+    public object_nm : string;
+    public object_path : string;
+    public buwee_nm : string;
+    public serious_cd : string;
+    public defect_nm : string;
+    public defect_size : string;
+    public defect_val1 : string;
+    public defect_val2 : string;
+    public defect_val3 : string;
+    public area_rate : string;
+    public cause_nm : string;
+    public amend_nm : string;
+    public eval_item_cd : string;
+    public eval_grade : string;
+    public eval_score : number;
+    public defect_lvl : string;
+    public inf_coef : number;
+    public etc_remark : string;
+
+    public serious_defect : any;
+    public comtbFile01Array :Array<COMTB_FILE01DTO>;
+    // public digr12 : MANTB_DIGR12DTO;
+    public tree01 : BASTB_TREE01DTO;
 
     constructor(){
         this.facil_no = "";
         this.dign_seq = null;
-        this.engineer_seq = null;
-        this.engineer_nm = "";
-        this.birth_ymd = "";
-        this.sex = "";
-        this.rep_yn = false;
-        this.start_ymd = "";
-        this.end_ymd = "";
-        this.parti_days = null;
-        this.parti_rate = null;
-        this.tech_grade = "";
-        this.tech_grade_nm = "";
-        this.member_seq = null;
+        this.record_no = null;
+        this.record_type = "";
+        this.object_no = "";
+        this.entity_id = "";
+        this.buwee_cd = "";
+        this.defect_cd = "";
+        this.cause_cd = "";
+        this.amend_cd = "";
+        this.space_nm = "";
+        this.object_nm = "";
+        this.object_path = "";
+        this.buwee_nm = "";
+        this.serious_cd = "";
+        this.defect_nm = "";
+        this.defect_size = "";
+        this.defect_val1 = "";
+        this.defect_val2 = "";
+        this.defect_val3 = "";
+        this.area_rate = "";
+        this.cause_nm = "";
+        this.amend_nm = "";
+        this.eval_item_cd = "";
+        this.eval_grade = "";
+        this.eval_score = null;
+        this.defect_lvl = "";
+        this.inf_coef = null;
+        this.etc_remark = "";
+
+        this.serious_defect = null;
+        this.comtbFile01Array = new Array<COMTB_FILE01DTO>();
+        // this.digr12 = new MANTB_DIGR12DTO();
     }
 }

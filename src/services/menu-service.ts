@@ -23,9 +23,7 @@ export class MenuService implements IService {
       { "title": "점검진단도래시기 사전예고", "theme": "/dign_notify.do", "icon": "icon-headset", "listView": false, "component": "", "iframe": true },
       { "title": "안전진단전문기관 현황", "theme": "/coe01001.do", "icon": "icon-presentation", "listView": false, "component": "", "iframe": true },
       { "title": "시설물유지관리 업체현황", "theme": "/cof01001.do", "icon": "icon-poll-box", "listView": false, "component": "", "iframe": true },
-      { "title": "3종시설물 지정/해제", "theme": "/pub02001.do", "icon": "icon-map-marker-radius", "listView": false, "component": "", "iframe": true },
       { "title": "시설물 분류", "theme": "/law01001.do", "icon": "icon-format-list-numbers", "listView": false, "component": "", "iframe": true },
-      { "title": "내진설계 대상여부확인", "theme": "/eqk01001_agree.do", "icon": "icon-comment-check", "listView": false, "component": "", "iframe": true },
       { "title": "정기안전점검", "theme": "LoginPage", "icon": "icon-pocket", "listView": false, "component": "", "iframe": false },
     ];
   };
@@ -92,13 +90,13 @@ export class MenuService implements IService {
           "img" : "../../assets/images/background/main_btn_icon_05.png",
           "icon": "icon-cloud-download",
         }, */
-        {
+        /* {
           "id": 2,
           "title": "시설물안전등급<br>정보공개",
           "url": "/pub01001.do",
           "img" : "../../assets/images/background/main_btn_icon_06.png",
           "icon": "icon-cloud-download",
-        },
+        }, */
         {
           "id": 3,
           "title": "점검진단도래시기<br>사전예고",
@@ -106,7 +104,7 @@ export class MenuService implements IService {
           "img" : "../../assets/images/background/main_btn_icon_07.png",
           "icon": "icon-cloud-download",
         },
-        {
+        /* {
 
           "id": 4,
           "title": "안전진단전문기관<br>현황",
@@ -120,14 +118,14 @@ export class MenuService implements IService {
           "url": "/cof01001.do",
           "img" : "../../assets/images/background/main_btn_icon_09.png",
           "icon": "icon-cloud-download",
-        },
-        {
+        }, */
+        /* {
           "id": 6,
           "title": "3종시설물<br>지정/해제",
           "url": "/pub02001.do",
           "img" : "../../assets/images/background/main_btn_icon_10.png",
           "icon": "icon-cloud-download",
-        },
+        }, */
         {
           "id": 7,
           "title": "시설물 분류",
@@ -135,13 +133,13 @@ export class MenuService implements IService {
           "img" : "../../assets/images/background/main_btn_icon_11.png",
           "icon": "icon-cloud-download",
         },
-        {
+        /* {
           "id": 8,
           "title": "내진설계<br>대상여부확인",
           "url": "/eqk01001_agree.do",
           "img" : "../../assets/images/background/main_btn_icon_12.png",
           "icon": "icon-cloud-download",
-        },
+        }, */
       ]
     }
   }
@@ -157,7 +155,7 @@ export class MenuService implements IService {
       {"page":"DigrGroupPage"},
       {"page":"DigrTabWritePage"},
       {"page":"Digr02WritePage"},
-      {"page":"Digr11WritePage"},
+      {"page":"Engr01WritePage"},
       {"page":"Digr12WriteModalPage"},
       {"page":"Digr13WritePage"},
       {"page":"Mast01ListPage"},

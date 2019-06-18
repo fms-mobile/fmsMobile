@@ -37,7 +37,7 @@ export class Digr12ListPage {
 
       this.selectMast01 = this.digr01Group.selectedMast01List[this.selectIndex];
       this.digr02 = this.digr01Group.digr02List[this.selectIndex];
-      this.digr12Array = this.digr02.digr12Array;
+      // this.digr12Array = this.digr02.digr12Array;
   }
 
   addDigr12WriteModal(){

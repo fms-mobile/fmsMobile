@@ -1,10 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { MANTB_DIGR01DTO } from '../../model/MANTB_DIGR01DTO';
-import { MANTB_DIGR12DTO } from '../../model/MANTB_DIGR12DTO';
-import { MANTB_DIGR11DTO } from '../../model/MANTB_DIGR11DTO';
 import { TransmissionService } from '../../services/transmisson-service';
-import { stringify } from '@angular/core/src/util';
 import { DateFormatPipe } from '../../pipes/date-format/date-format';
 
 /**
@@ -23,7 +19,7 @@ export class Man32002SelectPage {
   man21001 : any;
   man32001 : any;
   digr01 : any = {bxmap:{}};
-  digr11List : Array<any> = new Array<any>();
+  engr01List : Array<any> = new Array<any>();
   digr12List : Array<any> = new Array<any>();
   isVent : boolean = false;
   ventArray : Array<String> = new Array<String>();
@@ -44,9 +40,9 @@ export class Man32002SelectPage {
       facil_no:this.man32001.bxmap.facil_no,
       dign_seq:this.man32001.bxmap.dign_seq,
     })
-    .subscribe((res : {MANTB_DIGR01 : any, MANTB_DIGR11_LIST : Array<any>, MANTB_DIGR12_LIST: Array<any>})=> {
+    .subscribe((res : {MANTB_DIGR01 : any, MANTB_ENGR01_LIST : Array<any>, MANTB_DIGR12_LIST: Array<any>})=> {
       that.digr01 = res.MANTB_DIGR01;
-      that.digr11List = res.MANTB_DIGR11_LIST;
+      that.engr01List = res.MANTB_ENGR01_LIST;
       that.digr12List = res.MANTB_DIGR12_LIST;
 
       // 기존로직 사용

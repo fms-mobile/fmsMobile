@@ -17,14 +17,22 @@ export class COMTB_CODE02 implements COMMON_DAO {
     public insert(params, okFunction) { 
         this.wsdb.transaction((txn) =>{
             var sqlMain = "insert into COMTB_CODE02 ( code_group, code1, code2, code3, data1, data2, data3, data4, data5, data6, data7, etc_yn, use_yn, sort_order ) "
-                        + " values ( '"+this.utilService.nvl(params.code_group,'')+"', '"+this.utilService.nvl(params.code1,'')+"', '"+
-                        + " 		 '"+this.utilService.nvl(params.code2,'')+"', '"+this.utilService.nvl(params.code3,'')+"', '"+
-                        + " 		 '"+this.utilService.nvl(params.data1,'')+"', '"+this.utilService.nvl(params.data2f1,'')+"', '"+
-                        + " 		 '"+this.utilService.nvl(params.data3,'')+"', '"+this.utilService.nvl(params.data4,'')+"', '"+
-                        + " 		 '"+this.utilService.nvl(params.data5,'')+"', '"+this.utilService.nvl(params.data6,'')+"', '"+
-                        + " 		 '"+this.utilService.nvl(params.data7,'')+"', '"+this.utilService.nvl(params.etc_yn,'')+"', '"+
-                        + " 		 '"+this.utilService.nvl(params.use_yn,'')+"', '"+this.utilService.nvl(params.sort_order,'')
-                        +"' ) ";
+                        + " values ( "
+                        + " '"+this.utilService.nvl(params.code_group,'')+"' "
+                        + " , '"+this.utilService.nvl(params.code1,'')+"' "
+                        + " , '"+this.utilService.nvl(params.code2,'')+"' "
+                        + " , '"+this.utilService.nvl(params.code3,'')+"' "
+                        + " , '"+this.utilService.nvl(params.data1,'')+"' "
+                        + " , '"+this.utilService.nvl(params.data2,'')+"' "
+                        + " , '"+this.utilService.nvl(params.data3,'')+"' "
+                        + " , '"+this.utilService.nvl(params.data4,'')+"' "
+                        + " , '"+this.utilService.nvl(params.data5,'')+"' "
+                        + " , '"+this.utilService.nvl(params.data6,'')+"' "
+                        + " , '"+this.utilService.nvl(params.data7,'')+"' "
+                        + " , '"+this.utilService.nvl(params.etc_yn,'')+"' "
+                        + " , '"+this.utilService.nvl(params.use_yn,'')+"' "
+                        + " , '"+this.utilService.nvl(params.sort_order,'')+"' "
+                        +" ) ";
 
             //console.log(sqlMain);
             txn.executeSql(sqlMain, [],

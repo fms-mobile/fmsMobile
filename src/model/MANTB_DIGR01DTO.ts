@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { MANTB_DIGR12DTO } from './MANTB_DIGR12DTO';
 import { MANTB_DIGR13DTO } from './MANTB_DIGR13DTO';
+import { MANTB_DIGR11DTO } from './MANTB_DIGR11DTO';
 
 /**
  * 데이터 구조
@@ -40,8 +40,9 @@ export class MANTB_DIGR01DTO {
     public local_yn : string;
     
     // public comtbRept01 : COMTB_REPT01DTO;
-    public digr12Array : Array<MANTB_DIGR12DTO>;
+    // public digr12Array : Array<MANTB_DIGR12DTO>;
     public digr13Array : Array<MANTB_DIGR13DTO>;
+    public digr11Array : Array<MANTB_DIGR11DTO>;
 
     constructor(){
         this.facil_no = "";
@@ -71,8 +72,8 @@ export class MANTB_DIGR01DTO {
         this.local_yn = "";
 
         // this.comtbRept01 = new COMTB_REPT01DTO();
-        this.digr12Array = new Array<MANTB_DIGR12DTO>();
+        // this.digr12Array = new Array<MANTB_DIGR12DTO>();
         this.digr13Array = new Array<MANTB_DIGR13DTO>();
-        
+        this.digr11Array = new Array<MANTB_DIGR11DTO>();
     }
 }

@@ -4,7 +4,7 @@ import { GlobalVars } from '../../services/GlobalVars';
 
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { BASTB_MAST01DTO } from '../../model/BASTB_MAST01DTO';
-import { MANTB_DIGR11DTO } from '../../model/MANTB_DIGR11DTO';
+import { MANTB_ENGR01DTO } from '../../model/MANTB_ENGR01DTO';
 import { AuthService } from '../../services/AuthService';
 import { LoadingService } from '../../services/loading-service';
 
@@ -23,7 +23,7 @@ export class Orgn11ListPage {
   selectIndex : number;
   digr01Group : DIGR01_GROUPDTO;
   selectMast01 : BASTB_MAST01DTO;
-  digr11 : MANTB_DIGR11DTO;
+  engr01 : MANTB_ENGR01DTO;
   numberOfItemsToDisplay : number = 20;
   page : number = 0;
   isPaging : boolean = true;
@@ -37,7 +37,7 @@ export class Orgn11ListPage {
      ) {
     this.digr01Group = navParams.get('digr01Group');
     this.selectIndex = navParams.get('index');
-    this.digr11 = this.digr01Group.digr11List[this.selectIndex];
+    this.engr01 = this.digr01Group.engr01List[this.selectIndex];
     this.comtbOrgn11List = Array<any>();
     this.goSearch(null);
   }
@@ -65,7 +65,7 @@ export class Orgn11ListPage {
   }
 
   createSelectedIds(){
-    let selectedList : Array<MANTB_DIGR11DTO> = this.digr01Group.digr11List;
+    let selectedList : Array<MANTB_ENGR01DTO> = this.digr01Group.engr01List;
     return selectedList.map(data => "'"+data.member_seq+"'").join(",");
   }
 

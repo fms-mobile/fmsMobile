@@ -3,17 +3,20 @@ import { QuestionableBooleanPipe } from './questionable-boolean/questionable-boo
 import { DateFormatPipe } from './date-format/date-format';
 import { SecurePipe } from './secure/secure';
 import { NewLinePipe } from './new-line/new-line';
+import { CodeListEscapePipe } from './code-list-escape/code-list-escape';
 @NgModule({
     declarations: [QuestionableBooleanPipe,
     DateFormatPipe,
     SecurePipe,
     NewLinePipe,
+    CodeListEscapePipe,
     ],
 	imports: [],
 	exports: [QuestionableBooleanPipe,
     DateFormatPipe,
     SecurePipe,
     NewLinePipe,
+    CodeListEscapePipe,
     ]
 })
 export class PipesModule {

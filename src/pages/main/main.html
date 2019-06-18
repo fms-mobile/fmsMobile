@@ -63,8 +63,29 @@
             <span class="main-btn-text" >공지게시판</span>
           </button>
         </ion-col>
+        <ion-col col-4 col-md-3 col-sm-4>
+          <button default-button round ion-button class="main-con-btn btn-color-02"
+          (click)="goPub01001List()">
+            <img class="main-btn-icon" src="../../assets/images/background/main_btn_icon_06.png" alt="icon">
+            <span class="main-btn-text" >시설물안전등급 정보공개</span>
+          </button>
+        </ion-col>
+        <ion-col col-4 col-md-3 col-sm-4>
+          <button default-button round ion-button class="main-con-btn btn-color-03"
+          (click)="goCoe01001List()">
+            <img class="main-btn-icon" src="../../assets/images/background/main_btn_icon_08.png" alt="icon">
+            <span class="main-btn-text" >안전진단전문기관 현황</span>
+          </button>
+        </ion-col>
+        <ion-col col-4 col-md-3 col-sm-4>
+          <button default-button round ion-button class="main-con-btn btn-color-04"
+          (click)="goCof01001List()">
+            <img class="main-btn-icon" src="../../assets/images/background/main_btn_icon_09.png" alt="icon">
+            <span class="main-btn-text" >시설물유지관리 업체현황</span>
+          </button>
+        </ion-col>
         <ion-col col-4 col-md-3 col-sm-4 *ngFor="let item of mainPageMenu.menus;let i = index">
-          <button default-button round ion-button class="main-con-btn btn-color-{{i + 2 | number:'2.'}}"
+          <button default-button round ion-button class="main-con-btn btn-color-{{i + 5 | number:'2.'}}"
             (click)="goIframePage(item.url,item.title)">
             <img class="main-btn-icon" [src]="item.img" alt="icon">
             <span class="main-btn-text" [innerHtml]="item.title"></span>

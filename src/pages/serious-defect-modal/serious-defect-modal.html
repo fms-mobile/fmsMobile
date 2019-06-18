@@ -4,24 +4,34 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<!-- <ion-header>
   <ion-navbar color="primary">
-    <ion-buttons left>
-      <button ion-button icon-only (click)="dismiss()"><ion-icon name="backspace"></ion-icon></button>
-    </ion-buttons>
     <ion-title>중대결함 선택</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-start (click)="goSave()">
-        확인
-      </button>
-    </ion-buttons>
   </ion-navbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content padding>
-  <ion-list *ngIf="serious_defectList.length > 0;">
-    <ion-item *ngFor="let serious_defect of serious_defectList; let i = index" [ngClass]="{'selected': serious_defect.selected}" (click)="nodeClick(serious_defect)">
-      <ion-label >{{serious_defect.data2}}</ion-label>
-    </ion-item>
-  </ion-list>
+<ion-content>
+  <ion-grid no-padding>
+    <ion-row>
+
+      <div col-12 padding class="title-components">
+        <span>중대결함 선택</span>
+        <div class="block-insert">
+          <button button-clear-outline outline round ion-button (click)="goTree01Write()">이전</button>
+        </div>
+      </div>
+
+      <ion-col col-12>
+        <ion-list *ngIf="serious_defectList.length > 0;">
+          <ion-item *ngFor="let serious_defect of serious_defectList; let i = index"
+            [ngClass]="{'selected': serious_defect.selected}" (click)="nodeClick(serious_defect)">
+            <ion-label>{{serious_defect.data2}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label (click)="nodeClick(null)">해당없음</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

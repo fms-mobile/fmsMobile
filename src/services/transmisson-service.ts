@@ -13,6 +13,7 @@ import { AlertController } from "ionic-angular";
 import { TempDataManage } from "./TempDataManage";
 import 'rxjs/add/operator/take';
 import { LoadingService } from "./loading-service";
+import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class TransmissionService {
@@ -22,7 +23,7 @@ export class TransmissionService {
     constructor(private http: HttpClient, private globalVars :GlobalVars
         , private authService:AuthService,public file:File ,public filePath : FilePath
         , private alertCtrl : AlertController, private tempDataManage : TempDataManage
-        , private loadingService: LoadingService,
+        , private loadingService: LoadingService, private storage : Storage
         ){
         this.url = globalVars.webUrl+"mobile";
     }
@@ -45,7 +46,13 @@ export class TransmissionService {
                     } else {
                         for (const key in res) {
                             let dao : COMMON_DAO = this.globalVars.db.daoMap[key];
-                            this.syncTableDB(dao,res[key]);
+
+                            if(dao){
+                                this.syncTableDB(dao,res[key]);
+                            } else {
+                                this.storage.remove(key);
+                                this.storage.set(key,res[key]);
+                            }
                         }
                     }
                     return res;

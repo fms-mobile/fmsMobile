@@ -38,7 +38,8 @@ export class Digr02WritePage {
     vent_amend_yn : "환기구 보수 필요 여부",
     vent_chk_result : "환기구 점검 결과 입력",
   };
-  
+
+  isFacilClass : boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams
     ,public globalVars:GlobalVars,public utilService : UtilService
@@ -61,6 +62,8 @@ export class Digr02WritePage {
       globalVars.db.comtbCode02.list002({code_group:"state_grade",data5 :data5}, (res) => {
         this.state_gradeList = res;
       });
+
+      this.isFacilClass = ('1,2'.includes(this.selectMast01.facil_class)) ? true : false;
       
   }
 

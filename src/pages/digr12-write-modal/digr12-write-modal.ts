@@ -46,10 +46,6 @@ export class Digr12WriteModalPage {
     this.digr12.facil_no = (this.digr12.facil_no) ? null : this.digr02.facil_no;
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Digr12WriteModal');
-  }
-
   goFacilPartSerachModal() {
     let facilPartSearchModalPage = this.modalCtrl.create("FacilPartSearchModalPage", {
       "digr01Group": this.digr01Group,
@@ -90,7 +86,7 @@ export class Digr12WriteModalPage {
 
   goSave() {
     if (this.isCreate) {
-      this.digr02.digr12Array.push(this.digr12);
+      // this.digr02.digr12Array.push(this.digr12);
     }
     this.viewCtrl.dismiss(null);
   }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BASTB_MAST01DTO } from './BASTB_MAST01DTO';
 import { MANTB_DIGR01DTO } from './MANTB_DIGR01DTO';
-import { MANTB_DIGR11DTO } from './MANTB_DIGR11DTO';
+import { MANTB_ENGR01DTO } from './MANTB_ENGR01DTO';
 import { UUID } from 'angular2-uuid';
 import { MANTB_DIGR12DTO } from './MANTB_DIGR12DTO';
 import { MANTB_DIGR13DTO } from './MANTB_DIGR13DTO';
@@ -13,7 +13,7 @@ import { COMTB_FILE01DTO } from './COMTB_FILE01DTO';
  *  uuid string => 임시키
  *  digr01 MANTB_DIGR01DTO => 점검개요
  *  digr02List Array<MANTB_DIGR01DTO> => 대상 시설물 
- *  digr11List Array<MANTB_DIGR11DTO> => 참여기술자
+ *  engr01List Array<MANTB_ENGR01DTO> => 참여기술자
  *  selectedMast01List Array<BASTB_MAST01DTO> => 선택 시설물 기본현황
  * }
  */
@@ -23,7 +23,7 @@ export class DIGR01_GROUPDTO {
     public transFlag : boolean = false;
     public digr01 : MANTB_DIGR01DTO;
     public digr02List : Array<MANTB_DIGR01DTO>;
-    public digr11List : Array<MANTB_DIGR11DTO>;
+    public engr01List : Array<MANTB_ENGR01DTO>;
     responseObject : any;
     
     public selectedMast01List : Array<BASTB_MAST01DTO>;
@@ -32,7 +32,7 @@ export class DIGR01_GROUPDTO {
         this.uuid = UUID.UUID();
         this.digr01 = new MANTB_DIGR01DTO();
         this.digr02List = new Array<MANTB_DIGR01DTO>();
-        this.digr11List = new Array<MANTB_DIGR11DTO>();
+        this.engr01List = new Array<MANTB_ENGR01DTO>();
         this.selectedMast01List = new Array<BASTB_MAST01DTO>();
     }
     
@@ -63,7 +63,7 @@ export class DIGR01_GROUPDTO {
         let file01List : Array<COMTB_FILE01DTO> = new Array<COMTB_FILE01DTO>();
 
         this.digr02List.forEach((data : MANTB_DIGR01DTO)=> {
-            let digr11List : Array<MANTB_DIGR11DTO> = new Array<MANTB_DIGR11DTO>();
+            let engr01List : Array<MANTB_ENGR01DTO> = new Array<MANTB_ENGR01DTO>();
             let digr12List : Array<MANTB_DIGR12DTO> = new Array<MANTB_DIGR12DTO>();
             let digr13List : Array<MANTB_DIGR13DTO> = new Array<MANTB_DIGR13DTO>();
 
@@ -111,17 +111,17 @@ export class DIGR01_GROUPDTO {
             }
 
             // 참여 기술자 -> 모든 시설물 정보에 바인딩됨
-            this.digr11List.forEach((data : MANTB_DIGR11DTO)=> {
+            this.engr01List.forEach((data : MANTB_ENGR01DTO)=> {
                 let tempData = Object.assign({}, data);
 
                 if(tempData.rep_yn) {
                     copyData.rep_engineer_nm = tempData.engineer_nm;
                 }
     
-                let copydigr11Data = this.convertBoolean(tempData);
-                digr11List.push(copydigr11Data);
+                let copyengr01Data = this.convertBoolean(tempData);
+                engr01List.push(copyengr01Data);
             });
-            copyData["MANTB_DIGR11"] = digr11List;
+            copyData["MANTB_ENGR01"] = engr01List;
 
             digr02List.push(copyData);
         });
@@ -180,20 +180,20 @@ export class DIGR01_GROUPDTO {
             digr02List.forEach((digr02 : MANTB_DIGR01DTO)=> {
             });
     
-            let digr11List = this.digr11List;
-            if(digr11List.length < 1) {
+            let engr01List = this.engr01List;
+            if(engr01List.length < 1) {
                 passFlag = false;
                 msg = '참여기술자 목록 > 참여기술자를 최소 1명이상 입력해주세요.';
                 break;
             }
     
-            let digr11_rep_yn = false;
-            digr11List.forEach((digr11 : MANTB_DIGR11DTO)=> {
-                if(digr11.rep_yn) {
-                    digr11_rep_yn = true;
+            let engr01_rep_yn = false;
+            engr01List.forEach((engr01 : MANTB_ENGR01DTO)=> {
+                if(engr01.rep_yn) {
+                    engr01_rep_yn = true;
                 }
             });
-            if(!digr11_rep_yn) {
+            if(!engr01_rep_yn) {
                 passFlag = false;
                 msg = '참여기술자 목록 > 책임 참여기술자를 최소 1명이상 입력해주세요.';
                 break;

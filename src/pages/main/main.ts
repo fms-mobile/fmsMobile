@@ -20,37 +20,37 @@ import { AuthService } from '../../services/AuthService';
 @Component({
   selector: 'page-main',
   templateUrl: 'main.html',
-  providers: [GlobalVars,MenuService],
+  providers: [GlobalVars, MenuService],
 })
 export class MainPage {
-  url : string;
-  webUrl : string;
-  mainPageMenu : any;
+  url: string;
+  webUrl: string;
+  mainPageMenu: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController,public menuCtrl: MenuController
-    ,public globalVars:GlobalVars, private menuService: MenuService, private tempDataManage : TempDataManage
-    , public authGuardService: AuthGuardService, public transmissionService:TransmissionService, private alertCtrl : AlertController
-    , private loadingService :LoadingService, private utilService :UtilService, private authService :AuthService, 
-    ) {
-    this.webUrl = globalVars.webUrl+"mobile";
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, public menuCtrl: MenuController
+    , public globalVars: GlobalVars, private menuService: MenuService, private tempDataManage: TempDataManage
+    , public authGuardService: AuthGuardService, public transmissionService: TransmissionService, private alertCtrl: AlertController
+    , private loadingService: LoadingService, private utilService: UtilService, private authService: AuthService,
+  ) {
+    this.webUrl = globalVars.webUrl + "mobile";
     this.mainPageMenu = menuService.getMainPageMenu();
     // this.webUrl = globalVars.serverUrl;
   }
 
-  logout(){
+  logout() {
     const title = "로그 아웃";
     const content = "로그 아웃 하시겠습니까?";
-    this.utilService.alertConfirm(title,content,()=>{
+    this.utilService.alertConfirm(title, content, () => {
       this.loadingService.show(10000);
-      this.authService.logout().then(()=>{
+      this.authService.logout().then(() => {
         this.loadingService.hide();
         this.navCtrl.setRoot("MainPage");
       });
-    },()=>{
+    }, () => {
     });
   }
 
-  login(){
+  login() {
     this.navCtrl.setRoot("LoginPage");
   }
 
@@ -59,10 +59,10 @@ export class MainPage {
     this.menu.open('custom');
   }
 
-  goIframePage(url :string, title : string){
+  goIframePage(url: string, title: string) {
     let fullUrl = this.webUrl + url;
 
-    this.navCtrl.push("Iframe",{"url":fullUrl,"title":title});
+    this.navCtrl.push("Iframe", { "url": fullUrl, "title": title });
   }
 
   goDigrGroupPage() {
@@ -70,26 +70,26 @@ export class MainPage {
   }
 
   goWriteGroupPage() {
-    if(this.authGuardService.canActivate()) {
-      let digr01Group : DIGR01_GROUPDTO = this.tempDataManage.createDigr01Group();
-      this.navCtrl.push("DigrTabWritePage",digr01Group);
+    if (this.authGuardService.canActivate()) {
+      let digr01Group: DIGR01_GROUPDTO = this.tempDataManage.createDigr01Group();
+      this.navCtrl.push("DigrTabWritePage", digr01Group);
     } else {
       this.goDigrGroupPage();
     }
   }
 
-  goSyncData(){
-    if(this.authGuardService.canActivate()) {
+  goSyncData() {
+    if (this.authGuardService.canActivate()) {
       this.loadingService.show(10000);
-      this.transmissionService.syncAllData(null,null,true);
-    } else{
+      this.transmissionService.syncAllData(null, null, true);
+    } else {
       const alertTile = "로그인 에러";
       const alertMessage = "사용자 로그인을 먼저 해주세요.";
 
       let alert = this.alertCtrl.create({
-        title: alertTile ,
+        title: alertTile,
         message: alertMessage,
-        cssClass : "alert-warning",
+        cssClass: "alert-warning",
         buttons: [
           {
             text: '확인',
@@ -113,19 +113,19 @@ export class MainPage {
       this.goDigrGroupPage();
     } */
 
-    if(this.authGuardService.canActivate()) {
+    if (this.authGuardService.canActivate()) {
       this.navCtrl.push("Man21001ListPage");
     } else {
       this.goDigrGroupPage();
     }
   }
 
-  goAppSetting(){
+  goAppSetting() {
     this.navCtrl.push("AppSettingPage");
   }
 
   goMan23001List() {
-    if(this.authGuardService.canActivate()) {
+    if (this.authGuardService.canActivate()) {
       this.navCtrl.push("Man23001ListPage");
     } else {
       this.goDigrGroupPage();
@@ -136,11 +136,23 @@ export class MainPage {
     this.navCtrl.push("Inf01001ListPage");
   }
 
-  goNoti01001List(){
-    if(this.authGuardService.canActivate()) {
+  goNoti01001List() {
+    if (this.authGuardService.canActivate()) {
       this.navCtrl.push("Noti01001ListPage");
     } else {
       this.goDigrGroupPage();
     }
+  }
+
+  goPub01001List() {
+    this.navCtrl.push("Pub01001ListPage");
+  }
+
+  goCoe01001List() {
+    this.navCtrl.push("Coe01001ListPage");
+  }
+
+  goCof01001List() {
+    this.navCtrl.push("Cof01001ListPage");
   }
 }

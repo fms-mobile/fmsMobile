@@ -15,7 +15,7 @@ import { COMTB_ORGN11 } from './COMTB_ORGN11';
 import { COMTB_USER01 } from './COMTB_USER01';
 import { BASTB_MAST01 } from './BASTB_MAST01';
 import { MANTB_DIGR01 } from './MANTB_DIGR01';
-import { MANTB_DIGR11 } from './MANTB_DIGR11';
+import { MANTB_ENGR01 } from './MANTB_ENGR01';
 import { MANTB_DIGR12 } from './MANTB_DIGR12';
 import { MANTB_DIGR13 } from './MANTB_DIGR13';
 
@@ -30,7 +30,7 @@ export class DbInit {
     public comtbUser01 : COMTB_USER01;
     public bastbMast01 : BASTB_MAST01;
     public mantbDigr01 : MANTB_DIGR01;
-    public mantbDigr11 : MANTB_DIGR11;
+    public mantbengr01 : MANTB_ENGR01;
     public mantbDigr12 : MANTB_DIGR12;
     public mantbDigr13 : MANTB_DIGR13;
     public wsdb;
@@ -65,6 +65,7 @@ export class DbInit {
                 "COMTB_ORGN11" : this.comtbOrgn11,
                 "BASTB_MAST01" : this.bastbMast01,
                 "COMTB_USER01" : this.comtbUser01,
+                "COMTB_CODE02" : this.comtbCode02,
             }
     }
 
@@ -275,7 +276,7 @@ export class DbInit {
             }
             });
             // 점검진단실적_참여기술자
-            txn.executeSql(" create table MANTB_DIGR11 "
+            txn.executeSql(" create table MANTB_ENGR01 "
                     + " ( "
                     + "   facil_no      text, "
                     + "   dign_seq      integer, "
@@ -290,10 +291,10 @@ export class DbInit {
                     + "   parti_rate    real, "
                     + "   tech_grade    text "
                     + " ) ");
-            txn.executeSql("select count(*) as cnt from MANTB_DIGR11", [],  
+            txn.executeSql("select count(*) as cnt from MANTB_ENGR01", [],  
             (transaction, resultSet) => {
             if (resultSet.rows.item(0).cnt == 0) {
-                this.dbInitData.insertMANTB_DIGR11(txn);
+                this.dbInitData.insertMANTB_ENGR01(txn);
             }
             });
             // 점검진단실적_중대결함
