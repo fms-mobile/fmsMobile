@@ -20,118 +20,227 @@
         <div span-medium>부재 선택</div>
         <bastb-tree01 no-padding col-12 *ngIf="selectMast01" [facil_no]="selectMast01.facil_no"></bastb-tree01>
 
-        <ion-col col-12>
-          <h2 padding-top header-title text-capitalize>세부위치</h2>
-          <ion-row>
+        <ng-container *ngIf="bastbTree01Component">
+          <ng-container *ngIf="bastbTree01Component.isTree01Last()">
             <ion-col col-12>
-              <ion-item no-lines box-shadow>
-                <ion-input no-margin type="text" [(ngModel)]="digr11.buwee_nm"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-
-          <ion-row>
-            <ion-col col-12>
-              <ion-item *ngIf="defectCdList">
-                <ion-label item-title>손상내용</ion-label>
-                <ion-select  multiple="false" interface="action-sheet">
-                  <ion-option *ngFor="let defectCd of defectCdList;" [value]="defectCd.code">{{defectCd.data}}</ion-option>
-                  <ion-option value=''>해당없음</ion-option>
-                </ion-select>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-
-          <h2 padding-top header-title text-capitalize>손상크기</h2>
-          <ion-row>
-            <ion-col col-12>
-              <ion-item no-lines box-shadow>
-                <ion-input no-margin type="text"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-
-          <h2 padding-top header-title text-capitalize>중대결함</h2>
-          <ion-row>
-            <ion-col col-10>
-              <ion-item no-lines box-shadow>
-                <ion-input no-margin *ngIf="digr11.serious_defect == null" type="text" (ionFocus)="goSeriousDefectModal()" readonly ></ion-input>
-                <ion-input no-margin *ngIf="digr11.serious_defect != null" type="text" (ionFocus)="goSeriousDefectModal()" [value]="digr11.serious_defect.data2" readonly></ion-input>
-              </ion-item>
-            </ion-col>
-            <ion-col col-2>
-              <ion-buttons right>
-                <button ion-button icon-only (click)="goSeriousDefectModal()">
-                  <ion-icon name="search"></ion-icon>
-                </button>
-              </ion-buttons>
-            </ion-col>
-          </ion-row>
-
-          <ion-row>
-            <ion-col col-12>
-              <ion-item *ngIf="causeCdList">
-                <ion-label item-title>발생원인</ion-label>
-                <ion-select [(ngModel)]="digr11.cause_cd" multiple="false" interface="action-sheet">
-                  <ion-option *ngFor="let causeCd of causeCdList;" [value]="causeCd.code">{{causeCd.data | codeListEscape:'@':'&nbsp;&nbsp;'}}</ion-option>
-                  <ion-option value=''>해당없음</ion-option>
-                </ion-select>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-
-          <ion-row>
-            <ion-col col-12>
-              <ion-item *ngIf="amendCdList">
-                <ion-label item-title>보수보강방안</ion-label>
-                <ion-select [(ngModel)]="digr11.amend_cd" multiple="false" interface="action-sheet">
-                  <ion-option *ngFor="let amendCd of amendCdList;" [value]="amendCd.code">{{amendCd.data | codeListEscape:'@':'&nbsp;&nbsp;'}}</ion-option>
-                  <ion-option value=''>해당없음</ion-option>
-                </ion-select>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-
-          <h2 padding-top header-title text-capitalize>조사자 의견</h2>
-          <ion-row>
-            <ion-col col-12>
-              <ion-item no-lines box-shadow>
-                  <ion-textarea no-margin type="text" [(ngModel)]="digr11.etc_remark" rows="4"></ion-textarea>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-
-          <div col-12 relative>
-            <h2 padding-top header-title text-capitalize>첨부사진</h2>
-            <div class="block-insert">
-              <button button-clear-outline outline round ion-button *ngIf="!digr01Group.transFlag" (click)="takePhoto(camera.PictureSourceType.CAMERA);">촬영해서 추가</button>
-              <button button-clear-outline outline round ion-button *ngIf="!digr01Group.transFlag" (click)="takePhoto(camera.PictureSourceType.PHOTOLIBRARY);">앨범에서 추가</button>
-            </div>  
-          </div>
-          <ion-row *ngIf="digr11.comtbFile01Array.length > 0">
-            <ion-col col-12 align-self-start text-center>
-              <ion-slides pager="true">
-                <ion-slide text-center *ngFor="let comtbFile01 of digr11.comtbFile01Array; let i = index;" >
-                  <ion-card padding box-shadow>
-                    <div class="card-img">
-                      <img [src]="comtbFile01.img_path" />
-                    </div>
-                    <ion-row>
-                      <ion-col col-10>
+              <h2 padding-top header-title text-capitalize>세부위치</h2>
+              <ion-row>
+                <ion-col col-12>
+                  <ion-item no-lines box-shadow>
+                    <ion-input no-margin type="text" [(ngModel)]="digr11.buwee_nm"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+    
+              <ion-row>
+                <ion-col col-12>
+                  <ion-item *ngIf="defectCd1List">
+                    <ion-label item-title>손상내용</ion-label>
+                    <ion-select [(ngModel)]="digr11.defect_cd1" (ionChange)="changeDefectCd1($event)"  multiple="false" interface="action-sheet">
+                      <ion-option *ngFor="let defectCd1 of defectCd1List;" [value]="defectCd1">{{defectCd1.data}}</ion-option>
+                      <ion-option value=''>해당없음</ion-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+                <ion-col col-12>
+                  <ion-item *ngIf="defectCd2List">
+                    <ion-label item-title>손상 상세 내용</ion-label>
+                    <ion-select [(ngModel)]="digr11.defect_cd2" (ionChange)="changeDefectCd2($event)" multiple="false" interface="action-sheet">
+                      <ion-option *ngFor="let defectCd2 of defectCd2List;" [value]="defectCd2">{{defectCd2.data}}</ion-option>
+                      <ion-option value=''>해당없음</ion-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+                <ion-col col-12 *ngIf="digr11.defect_cd2.code == 'x'">
+                  <ion-item>
+                    <ion-input no-margin type="text" placeholder="직접입력" [(ngModel)]="digr11.defect_nm"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+    
+              <h2 padding-top header-title text-capitalize>손상크기</h2>
+              <ng-container *ngIf="digr11.defect_cd1.optkey == 'CRACK'; else AREA">
+                <ion-row>
+                  <ion-col col-6>
+                    <h2 padding-top header-title text-capitalize>폭(㎜)</h2>
+                    <ion-item no-lines box-shadow>
+                      <ion-input no-margin type="number" [(ngModel)]="digr11.defect_val1"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col col-6>
+                    <h2 padding-top header-title text-capitalize>길이(m)</h2>
+                    <ion-item no-lines box-shadow>
+                      <ion-input no-margin type="number" [(ngModel)]="digr11.defect_val2"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ng-container>
+              <ng-template #AREA>
+                <ng-container *ngIf="digr11.defect_cd1.optkey == 'AREA'; else ENV1">
+                  <ion-row>
+                      <ion-col col-4>
+                        <h2 padding-top header-title text-capitalize>가로(m)</h2>
                         <ion-item no-lines box-shadow>
-                          <ion-input no-margin placeholder="메모" [(ngModel)]="comtbFile01.etc_remark"></ion-input>
+                          <ion-input no-margin type="number" [(ngModel)]="digr11.defect_val1" ></ion-input>
                         </ion-item>
                       </ion-col>
-                      <ion-col col-2>
-                        <button *ngIf="!digr01Group.transFlag" ion-button medium margin (click)="deletePhoto(comtbFile01,i)">삭제</button>
+                      <ion-col col-4>
+                        <h2 padding-top header-title text-capitalize>세로(m)</h2>
+                        <ion-item no-lines box-shadow>
+                          <ion-input no-margin type="number" [(ngModel)]="digr11.defect_val2"></ion-input>
+                        </ion-item>
+                      </ion-col>
+                      <ion-col col-4>
+                        <h2 padding-top header-title text-capitalize>면적(㎡)</h2>
+                        <ion-item no-lines box-shadow>
+                          <ion-input no-margin type="number" [(ngModel)]="digr11.defect_val3"></ion-input>
+                        </ion-item>
                       </ion-col>
                     </ion-row>
-                  </ion-card>
-                </ion-slide>
-              </ion-slides>
+                </ng-container>
+              </ng-template>
+              <ng-template #ENV1>
+                <ng-container *ngIf="digr11.defect_cd1.optkey == 'ENV1'; else elseBlock">
+                  <ion-row>
+                    <ion-col col-12>
+                      <ion-item no-lines box-shadow>
+                        <ion-input no-margin type="text" placeholder="손상크기" [(ngModel)]="digr11.defect_size"></ion-input>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col col-12>
+                      <ion-item>
+                        <ion-label item-title>부식환경</ion-label>
+                        <ion-select [(ngModel)]="digr11.defect_val3" multiple="false" interface="action-sheet">
+                          <ion-option value="1">건조</ion-option>
+                          <ion-option value="2">습윤</ion-option>
+                          <ion-option value="3">부식성</ion-option>
+                          <ion-option value="4">고부식성</ion-option>
+                          <ion-option value=''>해당없음</ion-option>
+                        </ion-select>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                </ng-container>
+              </ng-template>
+              <ng-template #elseBlock>
+                <ion-row>
+                  <ion-col col-12>
+                    <ion-item no-lines box-shadow>
+                      <ion-input no-margin type="text" [(ngModel)]="digr11.defect_size"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ng-template>
+              
+              <h2 padding-top header-title text-capitalize>등급</h2>
+              <ion-row>
+                <ion-col col-10>
+                  <ion-item no-lines box-shadow>
+                    <ion-input no-margin type="text" (ionFocus)="goInspectGradeList()" [value]="digr11.eval_grade" readonly></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col col-2>
+                  <ion-buttons right>
+                    <button ion-button icon-only (click)="goInspectGradeList()">
+                      <ion-icon name="search"></ion-icon>
+                    </button>
+                  </ion-buttons>
+                </ion-col>
+              </ion-row>
+
+              <h2 padding-top header-title text-capitalize>중대결함</h2>
+              <ion-row>
+                <ion-col col-10>
+                  <ion-item no-lines box-shadow>
+                    <ion-input no-margin *ngIf="!digr11.serious_cd" type="text" (ionFocus)="goSeriousDefectModal()" readonly ></ion-input>
+                    <ion-input no-margin *ngIf="digr11.serious_cd" type="text" (ionFocus)="goSeriousDefectModal()" [value]="digr11.serious_defect.data2" readonly></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col col-2>
+                  <ion-buttons right>
+                    <button ion-button icon-only (click)="goSeriousDefectModal()">
+                      <ion-icon name="search"></ion-icon>
+                    </button>
+                  </ion-buttons>
+                </ion-col>
+              </ion-row>
+    
+              <ion-row>
+                <ion-col col-12>
+                  <ion-item *ngIf="causeCdList">
+                    <ion-label item-title>발생원인</ion-label>
+                    <ion-select [(ngModel)]="digr11.cause_cd" multiple="false" interface="action-sheet">
+                      <ion-option *ngFor="let causeCd of causeCdList;" [value]="causeCd.code">{{causeCd.data | codeListEscape:'@':'&nbsp;&nbsp;'}}</ion-option>
+                      <ion-option value=''>해당없음</ion-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+                <ion-col col-12 *ngIf="digr11.cause_cd == 'x'">
+                  <ion-item>
+                    <ion-input no-margin type="text" placeholder="직접입력"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+    
+              <ion-row>
+                <ion-col col-12>
+                  <ion-item *ngIf="amendCdList">
+                    <ion-label item-title>보수보강방안</ion-label>
+                    <ion-select [(ngModel)]="digr11.amend_cd" multiple="false" interface="action-sheet">
+                      <ion-option *ngFor="let amendCd of amendCdList;" [value]="amendCd.code">{{amendCd.data | codeListEscape:'@':'&nbsp;&nbsp;'}}</ion-option>
+                      <ion-option value=''>해당없음</ion-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+                <ion-col col-12 *ngIf="digr11.amend_cd == 'x'">
+                  <ion-item>
+                    <ion-input no-margin type="text" placeholder="직접입력"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+    
+              <h2 padding-top header-title text-capitalize>조사자 의견</h2>
+              <ion-row>
+                <ion-col col-12>
+                  <ion-item no-lines box-shadow>
+                      <ion-textarea no-margin type="text" [(ngModel)]="digr11.etc_remark" rows="4"></ion-textarea>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+    
+              <div col-12 relative>
+                <h2 padding-top header-title text-capitalize>첨부사진</h2>
+                <div class="block-insert">
+                  <button button-clear-outline outline round ion-button *ngIf="!digr01Group.transFlag" (click)="takePhoto(camera.PictureSourceType.CAMERA);">촬영해서 추가</button>
+                  <button button-clear-outline outline round ion-button *ngIf="!digr01Group.transFlag" (click)="takePhoto(camera.PictureSourceType.PHOTOLIBRARY);">앨범에서 추가</button>
+                </div>  
+              </div>
+              <ion-row *ngIf="digr11.comtbFile01Array.length > 0">
+                <ion-col col-12 align-self-start text-center>
+                  <ion-slides pager="true">
+                    <ion-slide text-center *ngFor="let comtbFile01 of digr11.comtbFile01Array; let i = index;" >
+                      <ion-card padding box-shadow>
+                        <div class="card-img">
+                          <img [src]="comtbFile01.img_path" />
+                        </div>
+                        <ion-row>
+                          <ion-col col-10>
+                            <ion-item no-lines box-shadow>
+                              <ion-input no-margin placeholder="메모" [(ngModel)]="comtbFile01.etc_remark"></ion-input>
+                            </ion-item>
+                          </ion-col>
+                          <ion-col col-2>
+                            <button *ngIf="!digr01Group.transFlag" ion-button medium margin (click)="deletePhoto(comtbFile01,i)">삭제</button>
+                          </ion-col>
+                        </ion-row>
+                      </ion-card>
+                    </ion-slide>
+                  </ion-slides>
+                </ion-col>
+              </ion-row>
             </ion-col>
-          </ion-row>
-        </ion-col>
+          </ng-container>
+        </ng-container>
       </ion-card>
     </ion-row>
   </ion-grid>

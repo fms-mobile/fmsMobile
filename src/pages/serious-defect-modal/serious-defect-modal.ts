@@ -63,7 +63,7 @@ export class SeriousDefectModalPage {
     this.navCtrl.pop();
   }
 
-  goTree01Write(){
+  goDigr11Write(){
     this.navCtrl.pop();
   }
   

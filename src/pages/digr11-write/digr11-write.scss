@@ -1,67 +1,71 @@
 page-digr11-write {
-    ion-card img {
-        width: 100px;
-        display: inline;
+  ion-card img {
+      width: 100px;
+      display: inline;
+    }
+    [card-title] {
+        font-size: 16px !important;
+    }
+    [card-subtitle] {
+        font-size: 13px !important;
+        font-weight: 400 !important;
+    }
+    .example-h3 {
+        font-size: 13px !important;
+        font-weight: 400 !important;
+    }
+    .title-components {
+        position: relative;
+    }
+    .block-insert {
+        position: absolute;
+        right: 10px;
+        margin: 0px;
+        top: 6px;
+    }
+    [profile] {
+      img{
+        border-radius: 50%;
+        height: 120px;
+        width: 120px;
+        margin: 0 auto;
       }
-      [card-title] {
-          font-size: 16px !important;
-      }
-      [card-subtitle] {
-          font-size: 13px !important;
-          font-weight: 400 !important;
-      }
-      .example-h3 {
-          font-size: 13px !important;
-          font-weight: 400 !important;
-      }
-      .title-components {
-          position: relative;
-      }
-      .block-insert {
-          position: absolute;
-          right: 10px;
-          margin: 0px;
-          top: 6px;
-      }
-      [profile] {
-        img{
-          border-radius: 50%;
-          height: 120px;
-          width: 120px;
-          margin: 0 auto;
-        }
-      }
-  
-      .swiper-slide {
-        img {
-          width: auto;
-          max-width: 50%;
-          height: auto;
-          max-height: 50%;
-        }
-      }
-    
-      .swiper-container {
-          padding-bottom: 20px;
-      }
-      .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets {
-        bottom: 0 !important;
-      }
-    
-      .swiper-pagination-bullet.swiper-pagination-bullet-active {
-        background: theme-colors('mainColors', 'primary') !important;
-      }
-    
-      [small-font] {
-        clear: both;
-        display: block;
-      }
-    
-      .active {
-        color: theme-colors('textColors', 'primary');
-      }
+    }
 
-      [relative] {
-          position: relative;
+    .swiper-slide {
+      img {
+        width: auto;
+        max-width: 50%;
+        height: auto;
+        max-height: 50%;
       }
+    }
+  
+    .swiper-container {
+        padding-bottom: 20px;
+    }
+    .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets {
+      bottom: 0 !important;
+    }
+  
+    .swiper-pagination-bullet.swiper-pagination-bullet-active {
+      background: theme-colors('mainColors', 'primary') !important;
+    }
+  
+    [small-font] {
+      clear: both;
+      display: block;
+    }
+  
+    .active {
+      color: theme-colors('textColors', 'primary');
+    }
+
+    [relative] {
+        position: relative;
+    }
+    
+    .item-select .label-md {
+      color: #455b65 !important;
+  }
 }

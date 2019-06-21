@@ -21,16 +21,11 @@
 <ion-content>
   <ion-grid no-padding>
     <ion-row>
-      <!-- Header -->
       <ion-col col-12>
         <ion-searchbar [(ngModel)]="searchTerm" (ionBlur)="findMast01List()" placeholder="시설물 명칭 검색"></ion-searchbar>
       </ion-col>
-      <!-- List -->
       <ion-col col-12 *ngIf="bastbMast01List.length > 0;">
         <ion-list no-margin>
-          <!-- <ion-item *ngFor="let bastbMast01 of bastbMast01List" (click)="selectItem(bastbMast01)" [ngClass]="{'selected': bastbMast01.selected}" >
-            <ion-label>{{bastbMast01.facil_nm}}</ion-label>
-          </ion-item> -->
           <ion-item no-lines box-shadow *ngFor="let bastbMast01 of bastbMast01List">
             <ion-label item-title>{{bastbMast01.facil_nm}}</ion-label>
             <ion-checkbox [(ngModel)]="bastbMast01.selected"></ion-checkbox>

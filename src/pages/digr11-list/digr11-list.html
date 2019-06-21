@@ -23,34 +23,37 @@
 
         <ion-col col-12>
           <div span-medium>결함 및 손상 목록</div>
-          <ion-item-sliding #slidingItem>
-            <ion-list no-margin *ngIf="digr11List">
-              <ion-item class="ion-line-item">
-                <ion-icon item-end>
-                  <i class="icon icon-arrow-right-bold-circle"></i>
-                </ion-icon>
-                <!-- <h1 item-title>{{noti01001.bxmap.subject}}</h1>
-                <h2 item-subtitle>{{noti01001.bxmap.contents}}</h2>
-                <h2 item-subtitle>{{noti01001.bxmap.send_date | dateFormatPipe:'YYYYMMDDHHmmss':'medium'}}</h2> -->
-              </ion-item>
-            </ion-list>
-            <ion-item-options no-lines>
-              <!-- Button delete -->
-              <button *ngIf="!digr01Group.transFlag" (click)="removeItem(engr01,i)" transparent>
-                <!-- Icon delete -->
-                <ion-icon icon-medium>
-                  <i class="icon icon-delete"></i>
-                </ion-icon>
-              </button>
-              <!-- Button undo -->
-              <button (click)="undo(slidingItem)" transparent>
-                <!-- Icon undo -->
-                <ion-icon icon-medium>
-                  <i class="icon icon-undo-variant"></i>
-                </ion-icon>
-              </button>
-            </ion-item-options>
-          </ion-item-sliding>
+          <ion-list *ngIf="digr11List">
+            <ion-row>
+              <ion-col col-12 *ngFor="let digr11 of digr11List">
+                <ion-item-sliding #slidingItem >
+                  <ion-item  class="ion-line-item" (click)="goDigr11Write(digr11)">
+                    <ion-icon item-end>
+                      <i class="icon icon-arrow-right-bold-circle"></i>
+                    </ion-icon>
+                    <h1 item-title>{{digr11.object_nm}}</h1>
+                    <h2 item-subtitle>{{digr11.defect_nm}}</h2>
+                  </ion-item>
+                  <ion-item-options no-lines>
+                    <!-- Button delete -->
+                    <button *ngIf="!digr01Group.transFlag" (click)="removeItem(digr11,i)" transparent>
+                      <!-- Icon delete -->
+                      <ion-icon icon-medium>
+                        <i class="icon icon-delete"></i>
+                      </ion-icon>
+                    </button>
+                    <!-- Button undo -->
+                    <button (click)="undo(slidingItem)" transparent>
+                      <!-- Icon undo -->
+                      <ion-icon icon-medium>
+                        <i class="icon icon-undo-variant"></i>
+                      </ion-icon>
+                    </button>
+                  </ion-item-options>
+                </ion-item-sliding>
+              </ion-col>
+            </ion-row>
+          </ion-list>
         </ion-col>
       </ion-card>
     </ion-row>

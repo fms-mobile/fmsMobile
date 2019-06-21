@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ItemSliding } from 'ionic-angular';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { BASTB_MAST01DTO } from '../../model/BASTB_MAST01DTO';
 import { MANTB_DIGR01DTO } from '../../model/MANTB_DIGR01DTO';
 import { MANTB_DIGR11DTO } from '../../model/MANTB_DIGR11DTO';
+import { UtilService } from '../../services/UtilService';
 
 /**
  * Generated class for the Digr11ListPage page.
@@ -24,6 +25,7 @@ export class Digr11ListPage {
   digr11List : Array<MANTB_DIGR11DTO>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams
+    , private utilService : UtilService,
   ) {
     this.digr01Group = navParams.get('digr01Group');
     this.selectIndex = navParams.get('index');
@@ -34,7 +36,22 @@ export class Digr11ListPage {
     this.digr11List = this.digr02.digr11Array;
   }
 
-  goDigr11Write() {
-    this.navCtrl.push('Digr11WritePage',{digr01Group :this.digr01Group,index:this.selectIndex });
+  goDigr11Write(digr11) {
+    let param = {digr01Group :this.digr01Group,index:this.selectIndex };
+    if(digr11)  param['digr11'] = digr11;
+    this.navCtrl.push('Digr11WritePage',param);
+  }
+
+  removeItem(digr11: MANTB_DIGR11DTO,i: number){
+    const alertTile = "삭제 알림";
+    const alertMessage = "선택한 결함 및 손상 정보를 삭제 하시겠습니까?";
+    this.utilService.alertConfirm(alertTile,alertMessage,() => {
+      this.digr11List.splice(i, 1);
+    },()=>{
+    });
+  }
+
+  undo = (slidingItem: ItemSliding) => {
+    slidingItem.close();
   }
 }

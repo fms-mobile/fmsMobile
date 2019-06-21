@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MANTB_DIGR12DTO } from './MANTB_DIGR12DTO';
 import { BASTB_TREE01DTO } from './BASTB_TREE01DTO';
 import { COMTB_FILE01DTO } from './COMTB_FILE01DTO';
 
@@ -13,6 +12,9 @@ export class MANTB_DIGR11DTO {
     public entity_id : string;
     public buwee_cd : string;
     public defect_cd : string;
+    public defect_cd1 : any;
+    public defect_cd2 : any;
+    public defect_cd3 : any;
     public cause_cd : string;
     public amend_cd : string;
     public space_nm : string;
@@ -37,8 +39,9 @@ export class MANTB_DIGR11DTO {
 
     public serious_defect : any;
     public comtbFile01Array :Array<COMTB_FILE01DTO>;
-    // public digr12 : MANTB_DIGR12DTO;
     public tree01 : BASTB_TREE01DTO;
+    public objectArray : Array<any>;
+    public inspectGrade : any;
 
     constructor(){
         this.facil_no = "";
@@ -49,6 +52,9 @@ export class MANTB_DIGR11DTO {
         this.entity_id = "";
         this.buwee_cd = "";
         this.defect_cd = "";
+        this.defect_cd1 = {};
+        this.defect_cd2 = {};
+        this.defect_cd3 = {};
         this.cause_cd = "";
         this.amend_cd = "";
         this.space_nm = "";
@@ -73,6 +79,7 @@ export class MANTB_DIGR11DTO {
 
         this.serious_defect = null;
         this.comtbFile01Array = new Array<COMTB_FILE01DTO>();
-        // this.digr12 = new MANTB_DIGR12DTO();
+        this.objectArray = new Array<any>();
+        this.inspectGrade = null;
     }
 }

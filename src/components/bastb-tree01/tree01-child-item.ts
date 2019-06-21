@@ -18,7 +18,7 @@ export interface ChildComponentIterface {
   template: `
     <ion-item *ngIf="treeList">
       <ion-label item-title>부재선택 {{treeList[0].ranking}}</ion-label>
-      <ion-select (ionChange)="changeSearchTree01.call(parentTree,$event, treeList)" multiple="false" interface="action-sheet">
+      <ion-select (ionChange)="changeSearchTree01.call(parentTree, $event, treeList)" multiple="false" interface="action-sheet">
         <ion-label>부재선택 {{treeList[0].ranking}}</ion-label>
         <ion-option *ngFor="let treeObj of treeList;" [value]="treeObj.object_no">{{treeObj.object_nm}}</ion-option>
         <ion-option value=''>해당없음</ion-option>
