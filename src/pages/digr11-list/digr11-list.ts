@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, ItemSliding } from 'ionic-angular';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { BASTB_MAST01DTO } from '../../model/BASTB_MAST01DTO';
 import { MANTB_DIGR01DTO } from '../../model/MANTB_DIGR01DTO';
 import { MANTB_DIGR11DTO } from '../../model/MANTB_DIGR11DTO';
 import { UtilService } from '../../services/UtilService';
+import { BastbTree01Component, SearchData } from '../../components/bastb-tree01/bastb-tree01';
 
 /**
  * Generated class for the Digr11ListPage page.
@@ -17,12 +18,14 @@ import { UtilService } from '../../services/UtilService';
   selector: 'page-digr11-list',
   templateUrl: 'digr11-list.html',
 })
-export class Digr11ListPage {
+export class Digr11ListPage implements AfterViewInit {
   digr01Group : DIGR01_GROUPDTO;
   selectMast01 : BASTB_MAST01DTO;
   selectIndex : number;
   digr02 : MANTB_DIGR01DTO;
   digr11List : Array<MANTB_DIGR11DTO>;
+
+  @ViewChild (BastbTree01Component) bastbTree01Component :BastbTree01Component;
 
   constructor(public navCtrl: NavController, public navParams: NavParams
     , private utilService : UtilService,
@@ -34,6 +37,12 @@ export class Digr11ListPage {
     this.digr02 = this.digr01Group.digr02List[this.selectIndex];
 
     this.digr11List = this.digr02.digr11Array;
+  }
+  
+  ngAfterViewInit() {
+    this.bastbTree01Component.changeEmitter.subscribe((res : SearchData) => {
+      
+    });
   }
 
   goDigr11Write(digr11) {

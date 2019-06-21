@@ -12,13 +12,18 @@
         <span>결함 및 손상 상세 입력</span>
         <div class="block-insert">
           <button button-clear-outline outline round ion-button (click)="goDigr11List()">이전</button>
-          <button button-clear-outline outline round ion-button (click)="goSave()">저장</button>
+          <button button-clear-outline outline round ion-button *ngIf="!digr01Group.transFlag" (click)="goSave()">저장</button>
         </div>
       </div>
 
       <ion-card padding margin-bottom box-shadow class="card">
         <div span-medium>부재 선택</div>
-        <bastb-tree01 no-padding col-12 *ngIf="selectMast01" [facil_no]="selectMast01.facil_no"></bastb-tree01>
+        <ng-container *ngIf="!isCreate; else createBlock;">
+          <bastb-tree01 no-padding col-12 *ngIf="selectMast01" [facil_no]="selectMast01.facil_no" [objectArray]="digr11.objectArray"></bastb-tree01>
+        </ng-container>
+        <ng-template #createBlock>
+          <bastb-tree01 no-padding col-12 *ngIf="selectMast01" [facil_no]="selectMast01.facil_no"></bastb-tree01>
+        </ng-template>
 
         <ng-container *ngIf="bastbTree01Component">
           <ng-container *ngIf="bastbTree01Component.isTree01Last()">
@@ -37,7 +42,7 @@
                   <ion-item *ngIf="defectCd1List">
                     <ion-label item-title>손상내용</ion-label>
                     <ion-select [(ngModel)]="digr11.defect_cd1" (ionChange)="changeDefectCd1($event)"  multiple="false" interface="action-sheet">
-                      <ion-option *ngFor="let defectCd1 of defectCd1List;" [value]="defectCd1">{{defectCd1.data}}</ion-option>
+                      <ion-option *ngFor="let defectCd1 of defectCd1List;" [value]="defectCd1.code">{{defectCd1.data}}</ion-option>
                       <ion-option value=''>해당없음</ion-option>
                     </ion-select>
                   </ion-item>
@@ -46,12 +51,12 @@
                   <ion-item *ngIf="defectCd2List">
                     <ion-label item-title>손상 상세 내용</ion-label>
                     <ion-select [(ngModel)]="digr11.defect_cd2" (ionChange)="changeDefectCd2($event)" multiple="false" interface="action-sheet">
-                      <ion-option *ngFor="let defectCd2 of defectCd2List;" [value]="defectCd2">{{defectCd2.data}}</ion-option>
+                      <ion-option *ngFor="let defectCd2 of defectCd2List;" [value]="defectCd2.code">{{defectCd2.data}}</ion-option>
                       <ion-option value=''>해당없음</ion-option>
                     </ion-select>
                   </ion-item>
                 </ion-col>
-                <ion-col col-12 *ngIf="digr11.defect_cd2.code == 'x'">
+                <ion-col col-12 *ngIf="digr11.defect_cd2 == 'x'">
                   <ion-item>
                     <ion-input no-margin type="text" placeholder="직접입력" [(ngModel)]="digr11.defect_nm"></ion-input>
                   </ion-item>

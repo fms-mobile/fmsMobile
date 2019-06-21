@@ -27,10 +27,7 @@ export class Digr02ListPage {
   }
 
   goWrite(mast01 : BASTB_MAST01DTO, index: number){
-    /* let digr02WritePageModal = this.modalCtrl.create("Digr02WritePage", {"digr01Group":this.digr01Group,"index":index});
-    digr02WritePageModal.present(); */
     let thisView : ViewController = this.navCtrl.last();
-    // this.navCtrl.push("Digr13_1ListPage",{"digr01Group":this.digr01Group,"index":index,"prevView":thisView});
     this.navCtrl.push("FacilMainPage",{"digr01Group":this.digr01Group,"mast01":mast01,"index":index,"prevView":thisView});
   }
 
@@ -65,7 +62,7 @@ export class Digr02ListPage {
   goViewTransDigr(event: Event,index :number){
     event.stopPropagation();
 
-    const viewUrl = '/man32002_select.do';
+    /* const viewUrl = '/man32002_select.do';
     const title = '서버 전송 데이터 조회';
     let webUrl = this.globalVars.webUrl+"mobile";
     let fullUrl = webUrl + viewUrl;
@@ -75,6 +72,8 @@ export class Digr02ListPage {
     fullUrl += '?facil_no='+facil_no;
     fullUrl += '&dign_seq='+dign_seq;
 
-    this.navCtrl.push("Iframe",{"url":fullUrl,"title":title});
+    this.navCtrl.push("Iframe",{"url":fullUrl,"title":title}); */
+
+    this.navCtrl.push("Man32002SelectPage",{man21001:this.man21001,man32001:man32001});
   }
 }

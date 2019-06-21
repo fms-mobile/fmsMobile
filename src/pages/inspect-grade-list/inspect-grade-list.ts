@@ -57,7 +57,7 @@ export class InspectGradeListPage {
       facil_no:this.digr02.facil_no,
       object_no:this.digr11.object_no,
       entity_id:this.digr11.entity_id,
-      defect_cd:this.digr11.defect_cd1.code,
+      defect_cd:this.digr11.defect_cd1,
       buwee_cd:this.digr11.buwee_cd,
     })
     .subscribe((res : Array<any>)=> {

@@ -12,9 +12,12 @@ export class MANTB_DIGR11DTO {
     public entity_id : string;
     public buwee_cd : string;
     public defect_cd : string;
-    public defect_cd1 : any;
-    public defect_cd2 : any;
-    public defect_cd3 : any;
+    public defect_cd1 : string;
+    public defect_cd1Obj : any;
+    public defect_cd2 : string;
+    public defect_cd2Obj : any;
+    public defect_cd3 : string;
+    public defect_cd3Obj : any;
     public cause_cd : string;
     public amend_cd : string;
     public space_nm : string;
@@ -39,7 +42,7 @@ export class MANTB_DIGR11DTO {
 
     public serious_defect : any;
     public comtbFile01Array :Array<COMTB_FILE01DTO>;
-    public tree01 : BASTB_TREE01DTO;
+    public recursiveTreeList : Array<any>;
     public objectArray : Array<any>;
     public inspectGrade : any;
 
@@ -47,14 +50,17 @@ export class MANTB_DIGR11DTO {
         this.facil_no = "";
         this.dign_seq = null;
         this.record_no = null;
-        this.record_type = "";
+        this.record_type = "1";
         this.object_no = "";
         this.entity_id = "";
         this.buwee_cd = "";
         this.defect_cd = "";
-        this.defect_cd1 = {};
-        this.defect_cd2 = {};
-        this.defect_cd3 = {};
+        this.defect_cd1 = "";
+        this.defect_cd1Obj = {};
+        this.defect_cd2 = "";
+        this.defect_cd2Obj = {};
+        this.defect_cd3 = "";
+        this.defect_cd3Obj = {};
         this.cause_cd = "";
         this.amend_cd = "";
         this.space_nm = "";
@@ -79,6 +85,7 @@ export class MANTB_DIGR11DTO {
 
         this.serious_defect = null;
         this.comtbFile01Array = new Array<COMTB_FILE01DTO>();
+        this.recursiveTreeList = new Array<any>();
         this.objectArray = new Array<any>();
         this.inspectGrade = null;
     }

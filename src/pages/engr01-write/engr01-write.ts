@@ -59,10 +59,6 @@ export class Engr01WritePage {
     });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad engr01Write');
-  }
-
   goOigr11List() {
     this.isOigr11 = true;
     let orgn11ListPage = this.modalCtrl.create("Orgn11ListPage",{"digr01Group":this.digr01Group,"index":this.index});
@@ -98,30 +94,6 @@ export class Engr01WritePage {
       this.index = this.digr01Group.engr01List.length;
     }
     this.viewCtrl.dismiss(null);
-  }
-
-  /* async ionViewCanLeave() {
-    const shouldLeave = await this.confirmLeave();
-    return shouldLeave;
-  } */
-
-  confirmLeave(){
-    let resolveLeaving;
-    const canLeave = new Promise<Boolean>(resolve => resolveLeaving = resolve);
-
-    if(!this.validateengr01() && !this.isOigr11) {
-      const alertTile = "삭제 알림";
-      const alertMessage = "기술자 필수정보를 입력하지 않아 기술자 정보 데이터가 삭제됩니다. 삭제하시겠습니까?";
-      this.utilService.alertConfirm(alertTile,alertMessage,() => {
-        this.digr01Group.engr01List.pop();
-        resolveLeaving(true);
-      },()=>{
-        resolveLeaving(false);
-      });
-    } else {
-      resolveLeaving(true);
-    }
-    return canLeave;
   }
 
   validateengr01() : {passFlag : boolean ,msg: string} {

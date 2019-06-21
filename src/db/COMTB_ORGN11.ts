@@ -151,7 +151,7 @@ export class COMTB_ORGN11 implements COMMON_DAO {
 						+ " 	   "+ this.utilService.codeConvertQuery({code_group:"certi_field",code1:"t1.certi_field"}) +" as certi_field_nm "
 						+ "   from COMTB_ORGN11 t1  "
 						+ " 	   inner join COMTB_ORGN01 t2 on t2.group_cd = t1.group_cd "
-						+ "  where t1.group_cd = "+this.utilService.nvl2(params.group_cd)+" "
+						+ "  where 1=1 "
 						+ "    and t1.member_nm like '%' || '"+this.utilService.nvl(params.member_nm,'')+"' || '%' "
 						+ "    and ("+this.utilService.nvl2(params.retire_yn)+" = 'Y' or ifnull(t1.retire_yn,'N') = 'N') "
 					;
@@ -159,6 +159,11 @@ export class COMTB_ORGN11 implements COMMON_DAO {
 					if(params.selectedIds != ""){
 						sqlMain += " and t1.member_seq not in ("+this.utilService.nvl(params.selectedIds,'')+") ";
 					}
+
+					if(params.group_cd != '') {
+						sqlMain += "  and t1.group_cd = "+this.utilService.nvl2(params.group_cd)+" "
+					}
+
 					sqlMain += " order by t1.group_cd, t1.member_nm ";
 
 					if(params.page != "" && params.pagCount != "") {

@@ -79,10 +79,6 @@ export class Orgn11ListPage {
     this.viewCtrl.dismiss(null);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Orgn11List');
-  }
-
   select(orgn11 : any){
     this.viewCtrl.dismiss(orgn11);
   }

@@ -57,9 +57,6 @@ export class Digr13WritePage {
   }
 
   goSave(){
-    /* let prevView : ViewController = this.navParams.get('prevView;
-    let prevViewIndex = this.navCtrl.indexOf(prevView);
-    this.navCtrl.remove(prevViewIndex,1); */
     let prevView : ViewController = this.navParams.get('prevView');
     this.navCtrl.push("Digr02WritePage",{"digr01Group":this.digr01Group,"index":this.index, prevView: prevView});
   }
@@ -70,28 +67,6 @@ export class Digr13WritePage {
 
   goExit(){
     this.navCtrl.popToRoot();
-  }
-
-  goFacilPartSerachModal(digr13 : MANTB_DIGR13DTO, index:number) {
-    let facilPartSearchModalPage = this.modalCtrl.create("FacilPartSearchModalPage", {
-      "digr01Group": this.digr01Group,
-      "index": index,
-      "facilPart": null,
-      "selectMast01": this.selectMast01,
-    });
-    facilPartSearchModalPage.present();
-
-    facilPartSearchModalPage.onWillDismiss((data: { facilPart: any }) => {
-      if (data != null) {
-        let facilPartObj = { check_result :'', action_content:'' };
-        facilPartObj['facilPart'] = data.facilPart;
-        digr13.facilPartList.push(facilPartObj);
-      }
-    });
-  }
-
-  removeFacilPartObj(facilPartList : Array<any>,index:number){
-    facilPartList.slice(index,1);
   }
 
 }

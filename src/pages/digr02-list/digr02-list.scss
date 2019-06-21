@@ -5,4 +5,13 @@ page-digr02-list {
     .label-md {
         margin: 0;
     }
+
+    .card-content{
+        position: relative;    
+        .server-check {
+            position: absolute;
+            bottom: 1px;
+            right: -6px;
+        }
+    }
 }

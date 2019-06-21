@@ -44,6 +44,7 @@ export class Digr11WritePage implements AfterViewInit{
 
   isCreate : boolean = false;
   digr11 : MANTB_DIGR11DTO
+  backupDigr11 : MANTB_DIGR11DTO
   facil_kind : string;
   causeCdList : Array<any>;
   amendCdList : Array<any>;
@@ -68,7 +69,8 @@ export class Digr11WritePage implements AfterViewInit{
       this.digr11List = this.digr02.digr11Array;
       
       this.isCreate = navParams.get('digr11') ? false : true;
-      this.digr11 = navParams.get('digr11') ? navParams.get('digr11') : new MANTB_DIGR11DTO();
+      this.backupDigr11 = (!this.isCreate) ? navParams.get('digr11') :  null;
+      this.digr11 = (!this.isCreate) ? JSON.parse(JSON.stringify(this.backupDigr11)) : new MANTB_DIGR11DTO();
 
       // 기존로직 적용
       this.facil_kind = this.selectMast01.facil_no.substr(0,2);
@@ -76,20 +78,27 @@ export class Digr11WritePage implements AfterViewInit{
 
       this.storage.get(CAUSE_CD_LIST).then(res => this.causeCdList = res[this.facil_kind]);
       this.storage.get(AMEND_CD_LIST).then(res => this.amendCdList = res[this.facil_kind]);
-      this.storage.get(DEFECT_CD_LIST).then(res => this.defectCd1List = res[this.facil_kind]);
-      
+      this.storage.get(DEFECT_CD_LIST).then(res => this.defectCd1List = res[this.facil_kind])
+      .then(() => {
+        if(!this.isCreate) {
+          this.defectCd2List = this.defectCd1List.find(item => item.code == this.digr11.defect_cd1).childCodeList;
+        }
+      });
   }
 
   ngAfterViewInit(){
     this.bastbTree01Component.changeEmitter.subscribe((res : SearchData) => {
-      this.digr11.objectArray = res.parentList;
-      this.digr11.objectArray.push(res.data);
-      if(res.isLast){
-        this.digr11.object_no = res.data.object_no;
-        this.digr11.entity_id = res.data.entity_id;
-        this.setDefectOption(this.digr11.entity_id,this.digr11.defect_cd);
-      } else {
-        this.initDigr11();
+      if(!res.isFirstBind) {
+        this.digr11.recursiveTreeList = res.recursiveTreeList;
+        this.digr11.objectArray = res.parentList.reverse();
+        this.digr11.objectArray.push(res.data);
+        if(res.isLast){
+          this.digr11.object_no = res.data.object_no;
+          this.digr11.entity_id = res.data.entity_id;
+          this.setDefectOption(this.digr11.entity_id,this.digr11.defect_cd);
+        } else {
+          this.initDigr11();
+        }
       }
     });
   }
@@ -100,34 +109,42 @@ export class Digr11WritePage implements AfterViewInit{
 
   goSave() {
     // 기존 로직
-    if(this.digr11.defect_cd2) { 
-      this.digr11.defect_cd = this.digr11.defect_cd1.code;
-      this.digr11.defect_nm = this.digr11.defect_cd1.data.trim();
+    if(this.digr11.defect_cd2 == "") { 
+      this.digr11.defect_cd = this.digr11.defect_cd1Obj.code;
+      this.digr11.defect_nm = this.digr11.defect_cd1Obj.data.trim();
     } else if(this.digr11.defect_cd2 == 'x') {
-      this.digr11.defect_cd = this.digr11.defect_cd1.code + 'x';;
+      this.digr11.defect_cd = this.digr11.defect_cd1Obj.code + 'x';;
     }else { 
-      this.digr11.defect_cd = this.digr11.defect_cd2.code;
-      this.digr11.defect_nm = this.digr11.defect_cd2.data.trim();
+      this.digr11.defect_cd = this.digr11.defect_cd2Obj.code;
+      this.digr11.defect_nm = this.digr11.defect_cd2Obj.data.trim();
     }
-    if(this.digr11.cause_cd.length > 1) { this.digr11.cause_nm = this.causeCdList.find(item => item.code == this.digr11.cause_cd).data.trim(); }
-    if(this.digr11.amend_cd.length > 1) { this.digr11.amend_nm = this.amendCdList.find(item => item.code == this.digr11.amend_cd).data.trim(); }
+    if(this.digr11.cause_cd.length > 1) { this.digr11.cause_nm = this.causeCdList.find(item => item.code == this.digr11.cause_cd).data.replace('@','').trim(); }
+    if(this.digr11.amend_cd.length > 1) { this.digr11.amend_nm = this.amendCdList.find(item => item.code == this.digr11.amend_cd).data.replace('@','').trim(); }
     
     this.digr11.object_path = this.digr11.objectArray.map(item => item.object_nm).join("|");
     this.digr11.object_nm = this.digr11.objectArray.map(item => item.object_nm).join(" > ");
 
     if(this.isCreate) {
       this.digr11List.push(this.digr11);
+    } else {
+      Object.assign(this.backupDigr11,this.digr11);
     }
     this.navCtrl.pop();
   }
 
   changeDefectCd1(defectCd1) {
-    this.digr11.defect_cd1 = defectCd1;
-    this.defectCd2List = defectCd1.childCodeList;
+    this.digr11.defect_cd1Obj = this.defectCd1List.find(item => item.code == defectCd1);
+    this.defectCd2List = this.digr11.defect_cd1Obj.childCodeList;
+
+    // initDefectCd2
+    this.digr11.defect_cd2Obj = {};
+    this.digr11.defect_cd2 = '';
+    this.digr11.defect_nm = '';
   }
 
   changeDefectCd2(defectCd2) {
-    this.digr11.defect_cd2 = defectCd2;
+    this.digr11.defect_cd2Obj = this.defectCd2List.find(item => item.code == defectCd2);
+    this.digr11.defect_nm = '';
   }
 
   ionViewDidEnter() {

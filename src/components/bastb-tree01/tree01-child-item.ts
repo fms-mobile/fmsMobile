@@ -11,6 +11,7 @@ export interface ChildComponentIterface {
   treeList : any;
   changeSearchTree01 : Function;
   parentTree : any;
+  selectData : any;
 }
 
 @Component({
@@ -18,7 +19,7 @@ export interface ChildComponentIterface {
   template: `
     <ion-item *ngIf="treeList">
       <ion-label item-title>부재선택 {{treeList[0].ranking}}</ion-label>
-      <ion-select (ionChange)="changeSearchTree01.call(parentTree, $event, treeList)" multiple="false" interface="action-sheet">
+      <ion-select [(ngModel)]="selectData" (ionChange)="changeSearchTree01.call(parentTree, $event, treeList)" multiple="false" interface="action-sheet">
         <ion-label>부재선택 {{treeList[0].ranking}}</ion-label>
         <ion-option *ngFor="let treeObj of treeList;" [value]="treeObj.object_no">{{treeObj.object_nm}}</ion-option>
         <ion-option value=''>해당없음</ion-option>
@@ -26,10 +27,14 @@ export interface ChildComponentIterface {
     </ion-item>
   `,
 })
-export class Tree01ChildComponent implements ChildComponentIterface{
+export class Tree01ChildComponent implements ChildComponentIterface {
   @Input('treeList') treeList;
   @Input('changeSearchTree01') changeSearchTree01;
   @Input('parent') parentTree;
+  @Input('selectData') selectData;
   
-  constructor() {}
+  constructor() {
+    
+  }
+
 }

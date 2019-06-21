@@ -15,6 +15,8 @@ export class SearchData {
   data : any;
   isLast : boolean;
   parentList : Array<any>;
+  recursiveTreeList : Array<any>;
+  isFirstBind : boolean = false;
 }
 
 @IonicPage()
@@ -24,6 +26,7 @@ export class SearchData {
 })
 export class BastbTree01Component implements OnInit {
   @Input('facil_no') facil_no: string;
+  @Input('objectArray') objectArray: Array<any>;
   @ViewChild('treeList',{ read : ViewContainerRef }) treeList : ViewContainerRef;
   @ViewChildren(Tree01ChildComponent) treeChildren : QueryList<Tree01ChildComponent>;
   
@@ -46,12 +49,23 @@ export class BastbTree01Component implements OnInit {
       this.tree01List = res[this.facil_no];
     }).then(() => {
       let tree01List = this.tree01List;
-
-      if(tree01List.length > 0) {
+      if(this.objectArray) {
         this.recursiveTreeList = tree01List.filter(item => item.ranking == '1');
         this.recursiveSearch(this.recursiveTreeList);
-        this.createItem(this.recursiveTreeList);
+
+        this.createItem(this.recursiveTreeList,this.objectArray[0].object_no);
+        this.objectArray.reduce((prevItem:any,currItem:any,index:number)=> {
+          this.createItem(prevItem.children,currItem.object_no);
+          this.changeSearchTree01(currItem.object_no,prevItem.children,true);
+        });
+      } else {
+        if(tree01List.length > 0) {
+          this.recursiveTreeList = tree01List.filter(item => item.ranking == '1');
+          this.recursiveSearch(this.recursiveTreeList);
+          this.createItem(this.recursiveTreeList);
+        }
       }
+
     });
   }
 
@@ -69,7 +83,7 @@ export class BastbTree01Component implements OnInit {
     });
   }
 
-  changeSearchTree01(object_no, treeList){
+  changeSearchTree01(object_no, treeList, isFirstBind?){
     if(object_no) {
       this.searchTree01 = treeList.find(item => item.object_no == object_no);
       if(this.searchTree01.children.length > 0) {
@@ -95,11 +109,13 @@ export class BastbTree01Component implements OnInit {
     let parentList = [];
     this.recursiveParentTree01(this.searchTree01,parentList);
     searchData.parentList = parentList
+    searchData.recursiveTreeList = this.recursiveTreeList;
+    searchData.isFirstBind = isFirstBind;
     
     this.changeEmitter.emit(searchData);
   }
 
-  createItem(children) {
+  createItem(children,selectData?) {
     const childComponentFactory = this.factoryResolver
                         .resolveComponentFactory(Tree01ChildComponent);
 
@@ -107,6 +123,11 @@ export class BastbTree01Component implements OnInit {
     (<ChildComponentIterface>childComponent.instance).treeList = children;
     (<ChildComponentIterface>childComponent.instance).changeSearchTree01 = this.changeSearchTree01;
     (<ChildComponentIterface>childComponent.instance).parentTree = this;
+    if(selectData) {
+      (<ChildComponentIterface>childComponent.instance).selectData = selectData;
+    } else {
+      (<ChildComponentIterface>childComponent.instance).selectData = '';
+    }
     this.components.push(childComponent);
   }
 
@@ -128,7 +149,11 @@ export class BastbTree01Component implements OnInit {
   }
 
   getParentTree01(tree01) {
-    return this.tree01List.find(item => item.object_no == tree01.upper_no);
+    let returnParentTree01 = null;
+    if(typeof tree01 == 'object') {
+      returnParentTree01 = this.tree01List.find(item => item.object_no == tree01.upper_no);
+    }
+    return returnParentTree01;
   }
 
   recursiveParentTree01(tree01, array :Array<any>) {
@@ -139,5 +164,6 @@ export class BastbTree01Component implements OnInit {
     }
   }
 
-}
 
+  
+}

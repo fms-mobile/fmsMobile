@@ -3,7 +3,7 @@ import { BASTB_MAST01DTO } from './BASTB_MAST01DTO';
 import { MANTB_DIGR01DTO } from './MANTB_DIGR01DTO';
 import { MANTB_ENGR01DTO } from './MANTB_ENGR01DTO';
 import { UUID } from 'angular2-uuid';
-import { MANTB_DIGR12DTO } from './MANTB_DIGR12DTO';
+import { MANTB_DIGR11DTO } from './MANTB_DIGR11DTO';
 import { MANTB_DIGR13DTO } from './MANTB_DIGR13DTO';
 import { COMTB_FILE01DTO } from './COMTB_FILE01DTO';
 
@@ -64,7 +64,8 @@ export class DIGR01_GROUPDTO {
 
         this.digr02List.forEach((data : MANTB_DIGR01DTO)=> {
             let engr01List : Array<MANTB_ENGR01DTO> = new Array<MANTB_ENGR01DTO>();
-            let digr12List : Array<MANTB_DIGR12DTO> = new Array<MANTB_DIGR12DTO>();
+            let digr11List : Array<MANTB_DIGR11DTO> = new Array<MANTB_DIGR11DTO>();
+            // let digr12List : Array<MANTB_DIGR12DTO> = new Array<MANTB_DIGR12DTO>();
             let digr13List : Array<MANTB_DIGR13DTO> = new Array<MANTB_DIGR13DTO>();
 
             let tempData = Object.assign({}, data);
@@ -88,17 +89,41 @@ export class DIGR01_GROUPDTO {
             }
             
             // 중대결함
-            if(copyData.digr12Array) {
-                copyData.digr12Array.forEach((digr12)=> {
-                    digr12.comtbFile01Array.forEach((file01)=>{
+            // if(copyData.digr12Array) {
+            //     copyData.digr12Array.forEach((digr12)=> {
+            //         digr12.comtbFile01Array.forEach((file01)=>{
+            //             file01["facil_no"] = copyData.facil_no;
+            //             file01["defect_cd"] = digr12.defect_cd;
+            //             file01List.push(file01);
+            //         });
+            //         digr12List.push(digr12);
+            //     });
+            //     delete copyData.digr12Array;
+            //     copyData["MANTB_DIGR12"] = digr12List;
+            // }
+
+            // 외관조사
+            if(copyData.digr11Array) {
+                copyData.digr11Array.forEach((digr11)=> {
+                    digr11.comtbFile01Array.forEach((file01)=>{
                         file01["facil_no"] = copyData.facil_no;
-                        file01["defect_cd"] = digr12.defect_cd;
+                        file01["defect_cd"] = digr11.defect_cd;
                         file01List.push(file01);
                     });
-                    digr12List.push(digr12);
+
+                    let tmpDigr11 = this.convertBoolean(digr11);
+                    delete tmpDigr11.defect_cd1Obj;
+                    delete tmpDigr11.defect_cd2Obj;
+                    delete tmpDigr11.inspectGrade;
+                    delete tmpDigr11.recursiveTreeList;
+                    delete tmpDigr11.objectArray;
+                    delete tmpDigr11.serious_defect;
+
+                    tmpDigr11.facil_no = copyData.facil_no;
+                    digr11List.push(this.convertBoolean(tmpDigr11));
                 });
-                delete copyData.digr12Array;
-                copyData["MANTB_DIGR12"] = digr12List;
+                delete copyData.digr11Array;
+                copyData["MANTB_DIGR11"] = digr11List;
             }
 
             // 정기점검표
