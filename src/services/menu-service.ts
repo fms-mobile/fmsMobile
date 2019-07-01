@@ -18,13 +18,13 @@ export class MenuService implements IService {
   getAllThemes = (): Array<any> => {
     return [
       { "title": "메인화면", "theme": "MainPage", "icon": "icon-home", "listView": false, "component": "", "iframe": false },
-      { "title": "FMS 소개", "theme": "/int01001.do", "icon": "icon-laptop-windows", "listView": false, "component": "", "iframe": true },
-      { "title": "시설물안전등급 정보공개", "theme": "/pub01001.do", "icon": "icon-library-books", "listView": false, "component": "", "iframe": true },
+      { "title": "공지사항", "theme": "Inf01001ListPage", "icon": "icon-laptop-windows", "listView": false, "component": "", "iframe": false },
+      { "title": "시설물안전등급 정보공개", "theme": "Pub01001ListPage", "icon": "icon-library-books", "listView": false, "component": "", "iframe": false },
       { "title": "점검진단도래시기 사전예고", "theme": "/dign_notify.do", "icon": "icon-headset", "listView": false, "component": "", "iframe": true },
-      { "title": "안전진단전문기관 현황", "theme": "/coe01001.do", "icon": "icon-presentation", "listView": false, "component": "", "iframe": true },
-      { "title": "시설물유지관리 업체현황", "theme": "/cof01001.do", "icon": "icon-poll-box", "listView": false, "component": "", "iframe": true },
+      { "title": "안전진단전문기관 현황", "theme": "Coe01001ListPage", "icon": "icon-presentation", "listView": false, "component": "", "iframe": false },
+      { "title": "시설물유지관리 업체현황", "theme": "Cof01001ListPage", "icon": "icon-poll-box", "listView": false, "component": "", "iframe": false },
       { "title": "시설물 분류", "theme": "/law01001.do", "icon": "icon-format-list-numbers", "listView": false, "component": "", "iframe": true },
-      { "title": "정기안전점검", "theme": "LoginPage", "icon": "icon-pocket", "listView": false, "component": "", "iframe": false },
+      { "title": "정기안전점검", "theme": "DigrGroupPage", "icon": "icon-pocket", "listView": false, "component": "", "iframe": false },
     ];
   };
 
@@ -152,11 +152,13 @@ export class MenuService implements IService {
 
   getAutoSavePageList() {
     return [
-      {"page":"DigrGroupPage"},
       {"page":"DigrTabWritePage"},
       {"page":"Digr02WritePage"},
       {"page":"Engr01WritePage"},
-      {"page":"Digr12WriteModalPage"},
+      {"page":"Digr11WritePage"},
+      {"page":"FacilMainPage"},
+      {"page":"Digr13_1ListPage"},
+      {"page":"Digr13_2ListPage"},
       {"page":"Digr13WritePage"},
       {"page":"Mast01ListPage"},
       {"page":"Orgn11ListPage"},

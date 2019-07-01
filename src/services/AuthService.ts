@@ -3,11 +3,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Storage } from '@ionic/storage';
-import { map, catchError , retry, first } from 'rxjs/operators';
+import { map, catchError, first } from 'rxjs/operators';
 import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/catch';
 import { BehaviorSubject, empty } from 'rxjs';
-import { of } from 'rxjs/observable/of';
 import { GlobalVars } from './GlobalVars';
 import { LoadingService } from './loading-service';
 import { Firebase } from '@ionic-native/firebase';
@@ -24,6 +23,7 @@ export class AuthService {
   authenticationState = new BehaviorSubject(false);
   tokenKey : string = '';
   headers :HttpHeaders = new HttpHeaders();
+  formheaders :HttpHeaders = new HttpHeaders();
  
   constructor(private http: HttpClient, private helper: JwtHelperService, private storage: Storage,
     private plt: Platform, private alertController: AlertController, private globalVars :GlobalVars,
@@ -31,7 +31,7 @@ export class AuthService {
     ) {
     // this.url = globalVars.serverUrl;
 
-    this.url = globalVars.webUrl+"mobile";
+    this.url = globalVars.appServerRestUrl;
     this.plt.ready().then(() => {
       this.checkToken();
       this.initHeader();
@@ -63,7 +63,7 @@ export class AuthService {
   }
  
   register(credentials) {
-    return this.http.post(`${this.url}/api/register`, credentials).pipe(
+    return this.http.post(`${this.url}api/register`, credentials).pipe(
       catchError(e => {
         this.showAlert(e.error.msg);
         throw new Error(e);
@@ -76,7 +76,7 @@ export class AuthService {
     headers = this.setHeader(headers);
 
     this.loadingService.show();
-    return this.http.post(`${this.url}/api/login.do`, credentials,{ headers })
+    return this.http.post(`${this.url}api/login.do`, credentials,{ headers })
     .timeout(3000)
     .pipe(
       first(),
@@ -125,7 +125,7 @@ export class AuthService {
   }
  
   getSpecialData() {
-    return this.http.get(`${this.url}/api/special`)
+    return this.http.get(`${this.url}api/special`)
     .pipe(
       catchError(e => {
         let status = e.status;
@@ -177,10 +177,11 @@ export class AuthService {
   }
 
   async authFormHeader() : Promise<HttpHeaders> {
-    let headers = new HttpHeaders();
+    let headers = this.formheaders;
     const token = await this.getToken();
 
-    // headers = this.setHeader(headers);
+    headers = headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+    headers = headers.append('Access-Control-Allow-Origin' , '*');
     // headers = headers.set('Content-Type', 'application/x-www-form-urlencoded');
     // headers = headers.set('Content-Type', 'multipart/form-data');
     headers = headers.append('Authorization', "Bearer "+token);

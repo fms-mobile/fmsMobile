@@ -28,9 +28,9 @@
             </ion-icon>
             <h1 item-title>{{man23001.bxmap.facil_nm}}</h1>
             <h2 item-subtitle >{{man23001.bxmap.facil_class_nm}}</h2>
-            <h2 item-subtitle *ngIf="man23001.bxmap.next_dign_ymd1">정기점검 : 실시기한 {{man23001.bxmap.next_dign_ymd1 | dateFormatPipe:'YYYYMMDD':'longDate'}} / 비용 {{man23001.bxmap.next_dign_amt1}} (천원)</h2>
-            <h2 item-subtitle *ngIf="man23001.bxmap.next_dign_ymd2">정밀점검 : 실시기한 {{man23001.bxmap.next_dign_ymd2 | dateFormatPipe:'YYYYMMDD':'longDate'}} / 비용  {{man23001.bxmap.next_dign_amt2}} (천원)</h2>
-            <h2 item-subtitle *ngIf="man23001.bxmap.next_dign_ymd3">정밀안전진단 : 실시기한 {{man23001.bxmap.next_dign_ymd3 | dateFormatPipe:'YYYYMMDD':'longDate'}} / 비용  {{man23001.bxmap.next_dign_amt3}} (천원)</h2>
+            <h2 item-subtitle *ngIf="man23001.bxmap.next_dign_ymd1">정기점검 : 실시기한 {{man23001.bxmap.next_dign_ymd1 | dateFormatPipe:'YYYYMMDD':'longDate'}} / 비용 {{man23001.bxmap.next_dign_amt1 | number:'.0'}} (천원)</h2>
+            <h2 item-subtitle *ngIf="man23001.bxmap.next_dign_ymd2">정밀점검 : 실시기한 {{man23001.bxmap.next_dign_ymd2 | dateFormatPipe:'YYYYMMDD':'longDate'}} / 비용  {{man23001.bxmap.next_dign_amt2 | number:'.0'}} (천원)</h2>
+            <h2 item-subtitle *ngIf="man23001.bxmap.next_dign_ymd3">정밀안전진단 : 실시기한 {{man23001.bxmap.next_dign_ymd3 | dateFormatPipe:'YYYYMMDD':'longDate'}} / 비용  {{man23001.bxmap.next_dign_amt3 | number:'.0'}} (천원)</h2>
           </ion-item>
         </ion-list>
         <ion-infinite-scroll threshold="100px" (ionInfinite)="goSearch($event)" *ngIf="isPaging">

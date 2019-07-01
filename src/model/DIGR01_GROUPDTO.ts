@@ -104,10 +104,12 @@ export class DIGR01_GROUPDTO {
 
             // 외관조사
             if(copyData.digr11Array) {
-                copyData.digr11Array.forEach((digr11)=> {
+                copyData.digr11Array.forEach((digr11,index:number)=> {
+                    let digr11Index = index;
                     digr11.comtbFile01Array.forEach((file01)=>{
                         file01["facil_no"] = copyData.facil_no;
                         file01["defect_cd"] = digr11.defect_cd;
+                        file01["digr11Index"] = digr11Index;
                         file01List.push(file01);
                     });
 

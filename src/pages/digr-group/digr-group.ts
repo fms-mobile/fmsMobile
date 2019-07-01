@@ -28,9 +28,15 @@ export class DigrGroupPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public globalVars: GlobalVars, public utilService: UtilService, private tempDataManage : TempDataManage,
     private transmissionService : TransmissionService, private menuService : MenuService) {
-      this.digr01GroupList = tempDataManage.digr01GroupList;
-      this.digrGroupList = this.digr01GroupList;
       this.menuObject = menuService.getDigrGroupMenu();
+
+      this.tempDataManage.loadLoctbData01().then(()=>{
+        this.digr01GroupList = tempDataManage.digr01GroupList;
+        this.digrGroupList = this.digr01GroupList;
+        this.navCtrl.viewWillLeave.subscribe(()=>{
+          this.tempDataManage.autoSave();
+        });
+      });
   }
 
   findDigr01Group(){
@@ -82,4 +88,6 @@ export class DigrGroupPage {
   undo = (slidingItem: ItemSliding) => {
     slidingItem.close();
   }
+
+  
 }

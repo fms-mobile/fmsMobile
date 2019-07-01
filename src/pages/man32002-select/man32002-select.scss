@@ -5,3 +5,21 @@ page-man32002-select {
         }
     }
 }
+// Parallax Title
+[parallax-item-title] {
+    color: theme-colors('textColors', 'accent') !important;
+    font-size: $h2-font-size !important;
+    font-weight: bold !important;
+    margin-bottom: 7px !important;
+    text-transform: capitalize;
+}
+// Parallax Title
+[parallax-item-subtitle] {
+    color: theme-colors('textColors', 'accent') !important;
+    font-size: $h5-font-size !important;
+    text-transform: capitalize;
+}
+
+[text-wrap] {
+    white-space: pre-line !important;
+}

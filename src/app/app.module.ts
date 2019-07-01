@@ -16,7 +16,6 @@ import { LoadingService } from '../services/loading-service'
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { File } from '@ionic-native/file';
 import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
@@ -39,6 +38,8 @@ import localeKo from '@angular/common/locales/ko';
 import { PipesModule } from '../pipes/pipes.module';
 import { DateFormatPipe } from '../pipes/date-format/date-format';
 import { Firebase } from '@ionic-native/firebase';
+import { NotificationService } from '../services/notification-service';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 export function jwtOptionsFactory(storage) {
     return {
@@ -54,11 +55,12 @@ registerLocaleData(localeKo,'ko');
 @NgModule({
     declarations: [MyApp],
     providers: [
-        StatusBar, SplashScreen, BarcodeScanner, Camera, Network, File, FilePath, Transfer, WebView,
-        DbInit, DbInitData, Firebase,
+        StatusBar, SplashScreen, Camera, Network, File, FilePath, Transfer, WebView,
+        DbInit, DbInitData, Firebase, InAppBrowser,
         DatePicker, DateFormatPipe,
         { provide : LOCALE_ID, useValue:'ko'},
-        ToastService, LoadingService, AuthService, AuthGuardService, GlobalVars, UtilService, TempDataManage, TransmissionService, 
+        ToastService, LoadingService, AuthService, AuthGuardService, GlobalVars, UtilService, TempDataManage, TransmissionService,
+        NotificationService,
         { provide: ErrorHandler, useClass: IonicErrorHandler },
     ],
     imports: [

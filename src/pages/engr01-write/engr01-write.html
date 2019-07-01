@@ -88,7 +88,7 @@
         <ion-col col-12>
           <ion-item no-lines box-shadow class="item-sm">
             <ion-label item-title>{{placeholder.rep_yn}}</ion-label>
-            <ion-checkbox [(ngModel)]="engr01.rep_yn"></ion-checkbox>
+            <ion-checkbox [(ngModel)]="engr01.rep_yn" (ionChange)="repYnChange($event)"></ion-checkbox>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -123,7 +123,7 @@
       <ion-row>
         <ion-col col-12>
           <ion-item no-lines box-shadow>
-            <ion-input no-margin type="number" min="0" max="100" [placeholder]="placeholder.parti_rate" [(ngModel)]="engr01.parti_rate">
+            <ion-input no-margin type="number" [min]="0" [max]="100" [placeholder]="placeholder.parti_rate" [(ngModel)]="engr01.parti_rate">
             </ion-input>
           </ion-item>
         </ion-col>

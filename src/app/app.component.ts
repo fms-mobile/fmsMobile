@@ -107,13 +107,27 @@ export class MyApp {
     if (page.iframe) {
         this.menu.open();
         this.nav.push("Iframe", {
-          "url": this.globalVars.webUrl+ "mobile"+page.theme,
+          "url": this.globalVars.appServerUrl+ "mobile"+page.theme,
           "title":this.getTitle(page.theme)
         });
     } else {
-      this.nav.setRoot(this.getPageForOpen(page.theme), {
-        componentName: page.theme
-      });
+      if(page.theme == 'DigrGroupPage') {
+        if(this.authGuardService.canActivate()) {
+          this.nav.setRoot(this.getPageForOpen(page.theme), {
+            componentName: page.theme
+          });
+        } else {
+          this.nav.setRoot('LoginPage');
+        }
+      } else if(page.theme == 'MainPage')  {
+        this.nav.setRoot(this.getPageForOpen(page.theme), {
+          componentName: page.theme
+        });
+      } else {
+        this.nav.push(this.getPageForOpen(page.theme), {
+          componentName: page.theme
+        });
+      }
     }
   }
   

@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, IonicPage, AlertController } from 'ionic-angular';
+import { NavController, LoadingController, IonicPage, AlertController, NavParams } from 'ionic-angular';
 import { AuthService } from '../../services/AuthService';
 import { AuthGuardService } from '../../services/AuthGuardService';
 import { ToastService } from '../../services/toast-service';
 import { TransmissionService } from '../../services/transmisson-service';
 import { UtilService } from '../../services/UtilService';
 import { GlobalVars } from '../../services/GlobalVars';
-import { TempDataManage } from '../../services/TempDataManage';
 import { LoadingService } from '../../services/loading-service';
 import { Network } from '@ionic-native/network';
 import 'rxjs/add/operator/take';
 import { Subscription } from 'rxjs';
+import { Page } from 'ionic-angular/umd/navigation/nav-util';
 
 /**
  * Generated class for the LoginPage page.
@@ -39,8 +39,10 @@ export class LoginPage {
   connected : Subscription;
   disconnected : Subscription;
   isOnline : boolean = false;
+  nextPage : string | Page
 
   constructor(public navCtrl: NavController,
+    private navParams : NavParams,
     public loadingCtrl: LoadingController,
     public toastService: ToastService,
     public authService: AuthService,
@@ -48,11 +50,11 @@ export class LoginPage {
     public transmissionService: TransmissionService,
     public utilService: UtilService,
     public globalVars:GlobalVars,
-    public tempDataManage : TempDataManage,
     public loadingService :LoadingService,
     private alertCtrl :  AlertController,
     private network : Network,
   ) {
+    this.nextPage = navParams.get('NextPage');
 
     this.isOnline = (network.type == 'unknown' || network.type == 'none') ? false : true;
 
@@ -67,12 +69,12 @@ export class LoginPage {
       globalVars.db.comtbUser01.list001({"user_id":authService.user.sub},(res) => {
         globalVars.setUserInfo(res[0]);
       });
-      this.tempDataManage.loadLoctbData01().then(()=>{
-        this.navCtrl.viewWillLeave.subscribe(()=>{
-          this.tempDataManage.autoSave();
-        });
-      });
-      this.navCtrl.setRoot("DigrGroupPage");
+
+      if(this.nextPage) {
+        this.navCtrl.setRoot(this.nextPage);
+      } else {
+        this.navCtrl.setRoot('MainPage');
+      }
       
     }
   }
@@ -133,8 +135,12 @@ export class LoginPage {
           if(that.utilService.isOnline) {
             that.transmissionService.syncAllData(null,res["token"]);
           }
-          that.tempDataManage.loadLoctbData01();
-          that.navCtrl.setRoot("DigrGroupPage");
+          
+          if(this.nextPage) {
+            this.navCtrl.setRoot(this.nextPage);
+          } else {
+            this.navCtrl.setRoot('MainPage');
+          }
         }
       });
     } else {

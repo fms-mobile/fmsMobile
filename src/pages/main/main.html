@@ -16,7 +16,7 @@
         (click)="goSyncData()"></button>
       <button button-clear clear ion-button class="header-btn header-icon-setting" (click)="goAppSetting()"></button>
       <button button-clear clear ion-button class="header-btn header-icon-bell" *ngIf="authGuardService.canActivate()" (click)="goNoti01001List()">
-        <div class="bell-count">24</div>
+        <div class="bell-count">{{notCheckCount}}</div>
       </button>
     </div>
   </ion-navbar>

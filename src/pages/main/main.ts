@@ -9,6 +9,7 @@ import { TransmissionService } from '../../services/transmisson-service';
 import { LoadingService } from '../../services/loading-service';
 import { UtilService } from '../../services/UtilService';
 import { AuthService } from '../../services/AuthService';
+import { NotificationService } from '../../services/notification-service';
 
 /**
  * Generated class for the Main page.
@@ -26,15 +27,33 @@ export class MainPage {
   url: string;
   webUrl: string;
   mainPageMenu: any;
+  notCheckCount : any = 0;
+  intervalFunction : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menu: MenuController, public menuCtrl: MenuController
     , public globalVars: GlobalVars, private menuService: MenuService, private tempDataManage: TempDataManage
     , public authGuardService: AuthGuardService, public transmissionService: TransmissionService, private alertCtrl: AlertController
-    , private loadingService: LoadingService, private utilService: UtilService, private authService: AuthService,
+    , private loadingService: LoadingService, private utilService: UtilService, private authService: AuthService, private notificationService : NotificationService
   ) {
-    this.webUrl = globalVars.webUrl + "mobile";
+    this.webUrl = globalVars.appServerUrl + "mobile";
     this.mainPageMenu = menuService.getMainPageMenu();
-    // this.webUrl = globalVars.serverUrl;
+  }
+
+  ionViewDidLoad(){
+    this.notiRefresh();
+    this.intervalFunction = setInterval(() => {
+      this.notiRefresh();
+    },10000);
+  }
+
+  ionViewWillLeave(){
+    clearInterval(this.intervalFunction);
+  }
+
+  notiRefresh() {
+    this.notificationService.notCheckNotificationCount((res)=> {
+      this.notCheckCount = res;
+    });
   }
 
   logout() {
@@ -65,8 +84,16 @@ export class MainPage {
     this.navCtrl.push("Iframe", { "url": fullUrl, "title": title });
   }
 
-  goDigrGroupPage() {
+  goLoginPage() {
     this.navCtrl.setRoot("LoginPage");
+  }
+
+  goDigrGroupPage() {
+    if (this.authGuardService.canActivate()) {
+      this.navCtrl.setRoot("DigrGroupPage");
+    } else {
+      this.navCtrl.setRoot("LoginPage",{NextPage : "DigrGroupPage"});
+    }
   }
 
   goWriteGroupPage() {
@@ -74,7 +101,7 @@ export class MainPage {
       let digr01Group: DIGR01_GROUPDTO = this.tempDataManage.createDigr01Group();
       this.navCtrl.push("DigrTabWritePage", digr01Group);
     } else {
-      this.goDigrGroupPage();
+      this.goLoginPage();
     }
   }
 
@@ -103,20 +130,10 @@ export class MainPage {
   }
 
   goDigrGroupHistroyList() {
-    /* if(this.authGuardService.canActivate()) {
-      const viewUrl = '/man21001_list.do';
-      const title = '정기안전점검 이력 조회';
-      let fullUrl = this.webUrl + viewUrl;
-
-      this.navCtrl.push("Iframe",{"url":fullUrl,"title":title});
-    } else {
-      this.goDigrGroupPage();
-    } */
-
     if (this.authGuardService.canActivate()) {
       this.navCtrl.push("Man21001ListPage");
     } else {
-      this.goDigrGroupPage();
+      this.goLoginPage();
     }
   }
 
@@ -128,7 +145,7 @@ export class MainPage {
     if (this.authGuardService.canActivate()) {
       this.navCtrl.push("Man23001ListPage");
     } else {
-      this.goDigrGroupPage();
+      this.goLoginPage();
     }
   }
 
@@ -140,7 +157,7 @@ export class MainPage {
     if (this.authGuardService.canActivate()) {
       this.navCtrl.push("Noti01001ListPage");
     } else {
-      this.goDigrGroupPage();
+      this.goLoginPage();
     }
   }
 

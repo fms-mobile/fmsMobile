@@ -13,14 +13,20 @@ export class GlobalVars {
     public db : DbInit;    //   DB
      
     public appName : string = "";
-    public mainCopyRight : string = "Copyright<span style='font-size:0.5rem;'>(C)</span> 2018 (주) 신진아이티컨설팅";
 	//public serverUrl : string = "http://61.252.208.165:8080/";
 	public serverUrl : string = "/mobile";
 
-	public webUrl : string = "http://112.171.195.152:28080/";
-	// public webUrl : string = "https://112.171.195.152:28443/";
+	// public appServerUrl : string = "http://112.171.195.152:28082/";
+	public appServerUrl : string = "http://112.171.195.152:28080/";
+	// public appServerUrl : string = "https://112.171.195.152:28443/";
+	// public appServerUrl : string = "http://app.fms.or.kr/";
+	public appServerRestUrl : string = this.appServerUrl+"rest/";
+	// public webUrl : string = "http://www.fms.or.kr/";
+	public webUrl : string = "http://112.171.195.152:28081/";
+	// public webUrl : string = "https://112.171.195.152:28453/";
+	
 
-	public isLogin: boolean = false;  // 로그인여부 
+	public isLogin: boolean = false;  // 로그인여부
 	public isScan: boolean = false; // 스캔여부
 
     public userInfo : COMTB_USER01DTO = new COMTB_USER01DTO();

@@ -81,6 +81,17 @@ export class Engr01WritePage {
     this.viewCtrl.dismiss(null);
   }
 
+  repYnChange(checkBox) {
+    /* if(checkBox.checked) {
+      let repYnData = this.digr01Group.engr01List.find(data => data.rep_yn == true);
+      if(repYnData) {
+        const alertMessage = '책임기술자가 이미 존재합니다.';
+        this.utilService.showToast(this.toastCtrl,alertMessage,() =>{
+        });
+      }
+    } */
+  }
+
   goSave(){
     let validateObject = this.validateengr01();
     if(!validateObject.passFlag) {

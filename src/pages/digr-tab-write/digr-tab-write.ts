@@ -130,6 +130,13 @@ export class DigrTabWritePage {
     }
   }
 
-  
+  test() {
+    let fileFormData = new FormData();
+    const jsondata = '[{"file_no":null,"file_nm":"20190517_133910.jpg","file_path":"","file_desc":"","file_type":"","file_size":null,"download_cnt":null,"ref_table":"","ref_pk":"","etc_remark":"","img_data":"file:///storage/emulated/0/Android/data/kr.or.fms.mobile/cache/20190517_133910.jpg?1561685892608","img_data_security":"","img_path":"http://localhost:8080/_app_file_/data/user/0/kr.or.fms.mobile/files/1561685892614.jpg","source_type":0,"facil_no":"RW2013-0000181","defect_cd":"D012","digr11Index":0}]';
+    let file01List : Array<any> = JSON.parse(jsondata);
+    let res = JSON.parse('{"uuid":"31f0a770-8e13-feaf-dd2e-e67baf0ea0a1","result":"success","MANTB_DIGR01":[{"facil_no":"RW2013-0000181","msg":"","digr01rbox":{"dign_seq":"15","project_no":"A00001607764"},"digr11rsWrapper":[{"record_no":"1"}]}]}');
+
+    this.transmissionService.saveFileRequest(fileFormData,res,file01List);
+  }
 
 }

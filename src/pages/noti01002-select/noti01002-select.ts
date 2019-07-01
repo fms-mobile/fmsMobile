@@ -26,8 +26,7 @@ export class Noti01002SelectPage {
       this.goSearch();
   }
 
-  goSearch(event?) {
-    let that = this;
+  goSearch() {
     this.transmissionService.getApiData('/api/noti01002_select.do',
     {
       notice_no:this.noti01001.bxmap.notice_no,

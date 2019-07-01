@@ -1,9 +1,10 @@
 import { GlobalVars } from './../../services/GlobalVars';
 import { UtilService } from './../../services/UtilService';
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, IonicPage, ItemSliding, ModalOptions, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, IonicPage, ItemSliding, ViewController } from 'ionic-angular';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { BASTB_MAST01DTO } from '../../model/BASTB_MAST01DTO';
+import { InAppBrowserOptions, InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 /**
  * Generated class for the Digr02List page.
@@ -15,13 +16,19 @@ import { BASTB_MAST01DTO } from '../../model/BASTB_MAST01DTO';
 @Component({
   selector: 'page-digr02-list',
   templateUrl: 'digr02-list.html',
+  providers: [
+    InAppBrowser,
+  ]
 })
 export class Digr02ListPage {
   selectedMast01List : Array<BASTB_MAST01DTO>;
   digr01Group : DIGR01_GROUPDTO;
   defaultImg : string = 'assets/images/avatar/17.jpg';
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, public globalVars:GlobalVars, public utilService:UtilService,public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams
+    , public globalVars:GlobalVars, public utilService:UtilService,public modalCtrl: ModalController
+    , private inAppBrowser : InAppBrowser
+    ) {
     this.digr01Group = navParams.get('digr01Group');
     this.selectedMast01List = this.digr01Group.selectedMast01List;
   }
@@ -62,18 +69,27 @@ export class Digr02ListPage {
   goViewTransDigr(event: Event,index :number){
     event.stopPropagation();
 
-    /* const viewUrl = '/man32002_select.do';
-    const title = '서버 전송 데이터 조회';
-    let webUrl = this.globalVars.webUrl+"mobile";
-    let fullUrl = webUrl + viewUrl;
     let transdata = this.digr01Group.responseObject[index];
     let facil_no = transdata.facil_no;
-    let dign_seq = transdata.digr01rbox.bxmap.dign_seq;
-    fullUrl += '?facil_no='+facil_no;
-    fullUrl += '&dign_seq='+dign_seq;
+    let dign_seq = transdata.digr01rbox.dign_seq;
 
-    this.navCtrl.push("Iframe",{"url":fullUrl,"title":title}); */
+    let man32001 = { bxmap: {}};
+    man32001.bxmap["dign_gbn_nm"]= transdata.dign_gbn_nm;
+    man32001.bxmap["regular_gbn_nm"] = transdata.regular_gbn_nm;
+    man32001.bxmap["facil_no"] = facil_no;
+    man32001.bxmap["dign_seq"] = dign_seq;
+    
+    this.navCtrl.push("Man32002SelectPage",{man32001:man32001,isViewHeader:true});
+  }
 
-    this.navCtrl.push("Man32002SelectPage",{man21001:this.man21001,man32001:man32001});
+  test(event: Event,index :number) {
+    event.stopPropagation();
+    let man32001 = { bxmap: {}};
+    man32001.bxmap["dign_gbn_nm"]= "정기안전점검";
+    man32001.bxmap["regular_gbn_nm"] = "상반기";
+    man32001.bxmap["facil_no"] = "RW2013-0000181";
+    man32001.bxmap["dign_seq"] = "15";
+    
+    this.navCtrl.push("Man32002SelectPage",{man32001:man32001,isViewHeader:true});
   }
 }

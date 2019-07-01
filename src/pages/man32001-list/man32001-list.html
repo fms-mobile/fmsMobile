@@ -15,7 +15,7 @@
               <i class="icon icon-arrow-right-bold-circle"></i>
             </ion-icon>
             <h1 item-title>{{man32001.bxmap.dign_gbn_nm}}<span *ngIf="man32001.bxmap.regular_gbn_nm">({{man32001.bxmap.regular_gbn_nm}})</span></h1>
-            <h2 item-subtitle>{{man32001.bxmap.dign_amt }} (천원), {{man32001.bxmap.state_grade_nm}}</h2>
+            <h2 item-subtitle>{{man32001.bxmap.dign_amt | number:'.0'}} (천원), {{man32001.bxmap.state_grade_nm}}</h2>
             <h2 item-subtitle>{{man32001.bxmap.start_ymd | dateFormatPipe:'YYYYMMDD':'longDate'}} ~ {{man32001.bxmap.end_ymd | dateFormatPipe:'YYYYMMDD':'longDate'}}</h2>
             <h2 item-subtitle>{{man32001.bxmap.rep_engineer_nm }}</h2>
           </ion-item>

@@ -16,6 +16,7 @@
 <ion-content>
   <ion-grid no-padding>
     <ion-row>
+      <!-- <search-box no-padding col-12 [title]="" [subTitle]="" [searchDataList]="[]"></search-box> -->
       <!-- List -->
       <ion-col col-12>
         <ion-list no-margin>
@@ -23,7 +24,7 @@
             <ion-icon item-end>
               <i class="icon icon-arrow-right-bold-circle"></i>
             </ion-icon>
-            <h1 item-title>{{inf01001.bxmap.board_no}}. {{inf01001.bxmap.board_head}}</h1>
+            <h1 item-title [innerHTML]="inf01001.bxmap.board_no + '. ' + inf01001.bxmap.board_head | unescape"></h1>
             <h2 item-subtitle>{{inf01001.bxmap.sys_upd_date | dateFormatPipe:'YYYYMMDD':'longDate'}}</h2>
             <h2 item-subtitle>{{inf01001.bxmap.sys_reg_nm}}</h2>
           </ion-item>

@@ -25,7 +25,7 @@
                 <h1 card-title>{{mast01.facil_nm}}</h1>
               </ion-card-title>
               <!--Description-->
-              <h3 card-subtitle>비용: <span class="example-h3">{{digr01Group.digr02List[i].dign_amt}} 천원</span></h3>
+              <h3 card-subtitle>비용: <span class="example-h3">{{digr01Group.digr02List[i].dign_amt | number:'.0'}} 천원</span></h3>
               <h3 card-subtitle>안전등급: <span class="example-h3">{{digr01Group.digr02List[i].state_grade_nm}}</span></h3>
               <h3 card-subtitle>정밀인전진단 필요여부 : <span class="example-h3">{{digr01Group.digr02List[i].dign4_need_yn | questionableBooleanPipe}}</span></h3>
               <button ion-button medium margin *ngIf="digr01Group.transFlag" (click)="goViewTransDigr($event,i)" class="server-check">서버 데이터 확인</button>

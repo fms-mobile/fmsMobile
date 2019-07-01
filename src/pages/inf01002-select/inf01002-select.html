@@ -14,24 +14,24 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
     <ion-grid no-padding>
        
       <ion-list no-padding *ngIf="inf01001">
 
         <ion-item class="ion-line-item">
-          <ion-label item-title>제목</ion-label>
-          <ion-label item-end text-right item-title>{{inf01001.bxmap.board_head}}</ion-label>
+          <h2 parallax-item-title text-wrap>제목</h2>
+          <h3 parallax-item-subtitle text-wrap [innerHTML]="inf01001.bxmap.board_head | unescape"></h3>
         </ion-item>
   
         <ion-item class="ion-line-item">
-          <ion-label item-title>내용</ion-label>
-          <ion-label item-end text-right item-title>{{inf01001.bxmap.board_body}}</ion-label>
+          <h2 parallax-item-title text-wrap>내용</h2>
+          <div parallax-item-subtitle text-wrap [innerHTML]="inf01001.bxmap.board_body | unescape"></div>
         </ion-item>
   
         <ion-item class="ion-line-item">
-          <ion-label item-title>공지대상</ion-label>
-          <ion-label item-end text-right item-title>{{inf01001.bxmap.group_arr_nm}}</ion-label>
+          <h2 parallax-item-title text-wrap>공지대상</h2>
+          <h3 parallax-item-subtitle text-wrap>{{inf01001.bxmap.group_arr_nm}}</h3>
         </ion-item>
 
         <ion-item class="ion-line-item">

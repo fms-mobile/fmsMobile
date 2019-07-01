@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AppVersion } from '@ionic-native/app-version/ngx';
+import { AppVersion } from '@ionic-native/app-version';
 import { AuthGuardService } from '../../services/AuthGuardService';
 
 /**
@@ -20,11 +20,17 @@ import { AuthGuardService } from '../../services/AuthGuardService';
 })
 export class AppSettingPage {
   appVersionCode: string|number;
+  appName : any;
+  appVersionNumber : any;
+  appPackageName : any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private appVersion: AppVersion
     , private authGuardService : AuthGuardService
     ) {
-    // appVersion.getVersionCode().then(version => this.appVersionCode = version);
+      appVersion.getAppName().then(appName => this.appName = appName);
+      appVersion.getPackageName().then(appPackageName => this.appPackageName = appPackageName);
+      appVersion.getVersionCode().then(version => this.appVersionCode = version);
+      appVersion.getVersionNumber().then(appVersionNumber => this.appVersionNumber = appVersionNumber);
   }
 
 }
