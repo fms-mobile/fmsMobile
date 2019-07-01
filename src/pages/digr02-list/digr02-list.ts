@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, IonicPage, ItemSliding, ViewController } from 'ionic-angular';
 import { DIGR01_GROUPDTO } from '../../model/DIGR01_GROUPDTO';
 import { BASTB_MAST01DTO } from '../../model/BASTB_MAST01DTO';
-import { InAppBrowserOptions, InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 /**
  * Generated class for the Digr02List page.
@@ -16,9 +15,6 @@ import { InAppBrowserOptions, InAppBrowser } from '@ionic-native/in-app-browser/
 @Component({
   selector: 'page-digr02-list',
   templateUrl: 'digr02-list.html',
-  providers: [
-    InAppBrowser,
-  ]
 })
 export class Digr02ListPage {
   selectedMast01List : Array<BASTB_MAST01DTO>;
@@ -27,7 +23,6 @@ export class Digr02ListPage {
   
   constructor(public navCtrl: NavController, public navParams: NavParams
     , public globalVars:GlobalVars, public utilService:UtilService,public modalCtrl: ModalController
-    , private inAppBrowser : InAppBrowser
     ) {
     this.digr01Group = navParams.get('digr01Group');
     this.selectedMast01List = this.digr01Group.selectedMast01List;

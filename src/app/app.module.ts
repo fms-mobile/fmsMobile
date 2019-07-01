@@ -39,7 +39,6 @@ import { PipesModule } from '../pipes/pipes.module';
 import { DateFormatPipe } from '../pipes/date-format/date-format';
 import { Firebase } from '@ionic-native/firebase';
 import { NotificationService } from '../services/notification-service';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 export function jwtOptionsFactory(storage) {
     return {
@@ -56,7 +55,7 @@ registerLocaleData(localeKo,'ko');
     declarations: [MyApp],
     providers: [
         StatusBar, SplashScreen, Camera, Network, File, FilePath, Transfer, WebView,
-        DbInit, DbInitData, Firebase, InAppBrowser,
+        DbInit, DbInitData, Firebase,
         DatePicker, DateFormatPipe,
         { provide : LOCALE_ID, useValue:'ko'},
         ToastService, LoadingService, AuthService, AuthGuardService, GlobalVars, UtilService, TempDataManage, TransmissionService,
